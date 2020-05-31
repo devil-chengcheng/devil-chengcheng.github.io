@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="vue中watch监听的各属性watch监听数据变化的使用方法(1)通过watch监听data数据的变化 123456watch: &amp;#123;    data(newVal,oldVal) &amp;#123;        console.log(newVal)        console.log(oldVal)    &amp;#125;&amp;#125;  (2)通过watch监听docData数据的变化，数">
+<meta name="description" content="什么时候是undefined  变量声明且未赋值 获取变量中不存在的属性 函数有形参但没有实参时，形参的值是undefined 函数调用没有返回值或者return后没有数据，接受函数返回的变量是undefined  什么时候是null  对象不存在就是null null的数据类型返回的是个object，JavaScript创始人为考虑空的情况，是错误的设计">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue中watch监听的各属性">
-<meta property="og:url" content="http://yoursite.com/2020/05/08/vue中watch监听的各属性/index.html">
+<meta property="og:title" content="null,undefinde区别">
+<meta property="og:url" content="http://yoursite.com/2020/05/31/null,undefinde区别/index.html">
 <meta property="og:site_name" content="小二、上酒">
-<meta property="og:description" content="vue中watch监听的各属性watch监听数据变化的使用方法(1)通过watch监听data数据的变化 123456watch: &amp;#123;    data(newVal,oldVal) &amp;#123;        console.log(newVal)        console.log(oldVal)    &amp;#125;&amp;#125;  (2)通过watch监听docData数据的变化，数">
+<meta property="og:description" content="什么时候是undefined  变量声明且未赋值 获取变量中不存在的属性 函数有形参但没有实参时，形参的值是undefined 函数调用没有返回值或者return后没有数据，接受函数返回的变量是undefined  什么时候是null  对象不存在就是null null的数据类型返回的是个object，JavaScript创始人为考虑空的情况，是错误的设计">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-08T08:01:24.236Z">
+<meta property="og:updated_time" content="2020-05-31T09:31:29.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue中watch监听的各属性">
-<meta name="twitter:description" content="vue中watch监听的各属性watch监听数据变化的使用方法(1)通过watch监听data数据的变化 123456watch: &amp;#123;    data(newVal,oldVal) &amp;#123;        console.log(newVal)        console.log(oldVal)    &amp;#125;&amp;#125;  (2)通过watch监听docData数据的变化，数">
+<meta name="twitter:title" content="null,undefinde区别">
+<meta name="twitter:description" content="什么时候是undefined  变量声明且未赋值 获取变量中不存在的属性 函数有形参但没有实参时，形参的值是undefined 函数调用没有返回值或者return后没有数据，接受函数返回的变量是undefined  什么时候是null  对象不存在就是null null的数据类型返回的是个object，JavaScript创始人为考虑空的情况，是错误的设计">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/08/vue中watch监听的各属性/">
+  <link rel="canonical" href="http://yoursite.com/2020/05/31/null,undefinde区别/">
 
 
 
 
 
-  <title>vue中watch监听的各属性 | 小二、上酒</title>
+  <title>null,undefinde区别 | 小二、上酒</title>
   
 
 
@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/vue中watch监听的各属性/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/31/null,undefinde区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="朱程程">
@@ -269,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vue中watch监听的各属性</h1>
+          <h1 class="post-title" itemprop="name headline">null,undefinde区别</h1>
         
 
         <div class="post-meta">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-08T15:59:54+08:00">
-                2020-05-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-31T17:24:16+08:00">
+                2020-05-31
               </time>
             
 
@@ -304,8 +304,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
                   </a>
                 </span>
 
@@ -341,25 +341,18 @@
       
 
       
-        <h1 id="vue中watch监听的各属性"><a href="#vue中watch监听的各属性" class="headerlink" title="vue中watch监听的各属性"></a>vue中watch监听的各属性</h1><h2 id="watch监听数据变化的使用方法"><a href="#watch监听数据变化的使用方法" class="headerlink" title="watch监听数据变化的使用方法"></a>watch监听数据变化的使用方法</h2><p>(1)通过watch监听data数据的变化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    data(newVal,oldVal) &#123;</span><br><span class="line">        console.log(newVal)</span><br><span class="line">        console.log(oldVal)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>(2)通过watch监听docData数据的变化，数据发生变化时，this.change_num++（使用深度监听）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    docData: &#123;</span><br><span class="line">        handler(newVal) &#123;</span><br><span class="line">            this.change_num++</span><br><span class="line">        &#125;,</span><br><span class="line">        deep: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>(3)通过watch监听data数据的变化，数据发生变化时,执行handlechangeData方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    data： &apos;handlechangeData&apos; // 值可以为methods的方法名</span><br><span class="line">&#125;，</span><br><span class="line">methods: &#123;</span><br><span class="line">    handlechangeData(newVal,oldVal)&#123;</span><br><span class="line">　　　conosle.log(newVal,oldVal)</span><br><span class="line">　 &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="watch中的immediate、handler和deep属性"><a href="#watch中的immediate、handler和deep属性" class="headerlink" title="watch中的immediate、handler和deep属性"></a>watch中的immediate、handler和deep属性</h2><p>(1)immediate和handler<br>watch有一个特点，当值第一次绑定时，不会执行监听函数，只有值发生改变时才会执行。如果需要在最初绑定值的时候也执行函数，则需要用到immediate属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    docData: &#123;</span><br><span class="line">        handler(newVal) &#123;</span><br><span class="line">            this.change_num++</span><br><span class="line">        &#125;,</span><br><span class="line">        immediate: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>(2)deep<br>当需要监听一个对象的改变时，普通的watch方法无法监听到对象内部属性的改变，此时就需要deep属性对对象进行深度监听。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">data（） &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        docData: &#123;</span><br><span class="line">            &apos;doc_id&apos;: 1,</span><br><span class="line">            &apos;tpl_data&apos;: &apos;abc&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;，</span><br><span class="line">watch: &#123;</span><br><span class="line">    docData: &#123;</span><br><span class="line">        handler(newVal) &#123;</span><br><span class="line">            this.change_num++</span><br><span class="line">        &#125;,</span><br><span class="line">    deep: true</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>设置deep:true则可以监听到docData.doc_id的变化，此时会给docData的所有属性都加上这个监听器，当对象属性较多时，每个属性值的变化都会执行handler。如果只需要监听对象中的一个属性值，则可以做以下优化：使用字符串的形式监听对象属性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">data（） &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        docData: &#123;</span><br><span class="line">            &apos;doc_id&apos;: 1,</span><br><span class="line">            &apos;tpl_data&apos;: &apos;abc&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;，</span><br><span class="line">watch: &#123;</span><br><span class="line">    &apos;docData.doc_id&apos;: &#123;</span><br><span class="line">        handler(newVal, oldVal) &#123;</span><br><span class="line">             ......</span><br><span class="line">        &#125;,</span><br><span class="line">    deep: true</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样只会给对象的某个特定的属性加监听器<br>数组（一维、多维）的变化不需要通过深度监听，对象数组中对象的属性变化则需要deep深度监听。</p>
+        <p>什么时候是undefined</p>
+<ol>
+<li>变量声明且未赋值</li>
+<li>获取变量中不存在的属性</li>
+<li>函数有形参但没有实参时，形参的值是undefined</li>
+<li>函数调用没有返回值或者return后没有数据，接受函数返回的变量是undefined</li>
+</ol>
+<p>什么时候是null</p>
+<ol>
+<li>对象不存在就是null</li>
+<li>null的数据类型返回的是个object，JavaScript创始人为考虑空的情况，是错误的设计</li>
+</ol>
 
       
     </div>
@@ -384,8 +377,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/08/echarts中的事件和行为/" rel="next" title="echarts中事件和行为">
-                <i class="fa fa-chevron-left"></i> echarts中事件和行为
+              <a href="/2020/05/31/如何对JavaScript进行类型检查/" rel="next" title="如何对JavaScript进行类型检查">
+                <i class="fa fa-chevron-left"></i> 如何对JavaScript进行类型检查
               </a>
             
           </div>
@@ -393,10 +386,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/09/动态规划/" rel="prev" title="动态规划算法">
-                动态规划算法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -448,17 +437,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -521,22 +501,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue中watch监听的各属性"><span class="nav-number">1.</span> <span class="nav-text">vue中watch监听的各属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#watch监听数据变化的使用方法"><span class="nav-number">1.1.</span> <span class="nav-text">watch监听数据变化的使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch中的immediate、handler和deep属性"><span class="nav-number">1.2.</span> <span class="nav-text">watch中的immediate、handler和deep属性</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

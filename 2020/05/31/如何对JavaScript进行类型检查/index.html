@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="vue中watch监听的各属性watch监听数据变化的使用方法(1)通过watch监听data数据的变化 123456watch: &amp;#123;    data(newVal,oldVal) &amp;#123;        console.log(newVal)        console.log(oldVal)    &amp;#125;&amp;#125;  (2)通过watch监听docData数据的变化，数">
+<meta name="description" content="js 轻量化、弱类型当业务逻辑越复杂、逻辑交互越多、维护周期越长，弱类型使开发成本变高有了类型检查，编辑器会提醒我们类型信息，甚至进行代码补全。   类型检查需要 好的编辑器：VS code进行代码补全和错误提示，默认不会对js文件进行类型检查、需要手动配置开启对于标记代码中的变量类型，vscode可识别两种方式  JsDoc：API文档生成器，可根据代码中的注释，自动的产生文档。 d.ts结尾的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vue中watch监听的各属性">
-<meta property="og:url" content="http://yoursite.com/2020/05/08/vue中watch监听的各属性/index.html">
+<meta property="og:title" content="如何对JavaScript进行类型检查">
+<meta property="og:url" content="http://yoursite.com/2020/05/31/如何对JavaScript进行类型检查/index.html">
 <meta property="og:site_name" content="小二、上酒">
-<meta property="og:description" content="vue中watch监听的各属性watch监听数据变化的使用方法(1)通过watch监听data数据的变化 123456watch: &amp;#123;    data(newVal,oldVal) &amp;#123;        console.log(newVal)        console.log(oldVal)    &amp;#125;&amp;#125;  (2)通过watch监听docData数据的变化，数">
+<meta property="og:description" content="js 轻量化、弱类型当业务逻辑越复杂、逻辑交互越多、维护周期越长，弱类型使开发成本变高有了类型检查，编辑器会提醒我们类型信息，甚至进行代码补全。   类型检查需要 好的编辑器：VS code进行代码补全和错误提示，默认不会对js文件进行类型检查、需要手动配置开启对于标记代码中的变量类型，vscode可识别两种方式  JsDoc：API文档生成器，可根据代码中的注释，自动的产生文档。 d.ts结尾的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-08T08:01:24.236Z">
+<meta property="og:updated_time" content="2020-05-31T09:22:23.050Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vue中watch监听的各属性">
-<meta name="twitter:description" content="vue中watch监听的各属性watch监听数据变化的使用方法(1)通过watch监听data数据的变化 123456watch: &amp;#123;    data(newVal,oldVal) &amp;#123;        console.log(newVal)        console.log(oldVal)    &amp;#125;&amp;#125;  (2)通过watch监听docData数据的变化，数">
+<meta name="twitter:title" content="如何对JavaScript进行类型检查">
+<meta name="twitter:description" content="js 轻量化、弱类型当业务逻辑越复杂、逻辑交互越多、维护周期越长，弱类型使开发成本变高有了类型检查，编辑器会提醒我们类型信息，甚至进行代码补全。   类型检查需要 好的编辑器：VS code进行代码补全和错误提示，默认不会对js文件进行类型检查、需要手动配置开启对于标记代码中的变量类型，vscode可识别两种方式  JsDoc：API文档生成器，可根据代码中的注释，自动的产生文档。 d.ts结尾的">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/05/08/vue中watch监听的各属性/">
+  <link rel="canonical" href="http://yoursite.com/2020/05/31/如何对JavaScript进行类型检查/">
 
 
 
 
 
-  <title>vue中watch监听的各属性 | 小二、上酒</title>
+  <title>如何对JavaScript进行类型检查 | 小二、上酒</title>
   
 
 
@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/vue中watch监听的各属性/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/31/如何对JavaScript进行类型检查/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="朱程程">
@@ -269,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">vue中watch监听的各属性</h1>
+          <h1 class="post-title" itemprop="name headline">如何对JavaScript进行类型检查</h1>
         
 
         <div class="post-meta">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-08T15:59:54+08:00">
-                2020-05-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-31T17:22:40+08:00">
+                2020-05-31
               </time>
             
 
@@ -304,8 +304,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
                   </a>
                 </span>
 
@@ -341,25 +341,40 @@
       
 
       
-        <h1 id="vue中watch监听的各属性"><a href="#vue中watch监听的各属性" class="headerlink" title="vue中watch监听的各属性"></a>vue中watch监听的各属性</h1><h2 id="watch监听数据变化的使用方法"><a href="#watch监听数据变化的使用方法" class="headerlink" title="watch监听数据变化的使用方法"></a>watch监听数据变化的使用方法</h2><p>(1)通过watch监听data数据的变化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    data(newVal,oldVal) &#123;</span><br><span class="line">        console.log(newVal)</span><br><span class="line">        console.log(oldVal)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>js 轻量化、弱类型<br>当业务逻辑越复杂、逻辑交互越多、维护周期越长，弱类型使开发成本变高<br>有了类型检查，编辑器会提醒我们类型信息，甚至进行代码补全。  </p>
+<h2 id="类型检查需要"><a href="#类型检查需要" class="headerlink" title="类型检查需要"></a>类型检查需要</h2><ul>
+<li><p>好的编辑器：VS code<br>进行代码补全和错误提示，默认不会对js文件进行类型检查、需要手动配置开启<br>对于标记代码中的变量类型，vscode可识别两种方式</p>
+<ul>
+<li>JsDoc：API文档生成器，可根据代码中的注释，自动的产生文档。</li>
+<li>d.ts结尾的文件：TS中的定义文件，专门用来进行类型定义的。通过定义文件，我们可以声明全局的类型，并且可以对类型进行操作产生新的类型。</li>
+</ul>
+</li>
+<li><p>类型标注的方法</p>
+</li>
+</ul>
+<h3 id="使用vscode、d-ts、JSDoc对代码进行类型检查"><a href="#使用vscode、d-ts、JSDoc对代码进行类型检查" class="headerlink" title="使用vscode、d.ts、JSDoc对代码进行类型检查"></a>使用vscode、d.ts、JSDoc对代码进行类型检查</h3><ol>
+<li><p>在项目根目录创建一个jsconfig.json文件<br>和tsconfig.json类似，相当于把tsconfig.json中的allowjs选项设置为true。  </p>
+</li>
+<li><p>在jsconfig.json中将checkJs设置为true<br>checkJs选项表示让vs code对js文件进行检查</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;compolerOptions&quot;: &#123;</span><br><span class="line">        &quot;checkJs&quot;: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用JSDoc对代码进行注释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* add</span><br><span class="line">* @param &#123;number&#125; a number a</span><br><span class="line">* @param &#123;number&#125; b number b</span><br><span class="line">*/</span><br><span class="line">function add(a,b) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>(2)通过watch监听docData数据的变化，数据发生变化时，this.change_num++（使用深度监听）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    docData: &#123;</span><br><span class="line">        handler(newVal) &#123;</span><br><span class="line">            this.change_num++</span><br><span class="line">        &#125;,</span><br><span class="line">        deep: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>除了函数，也可以对变量值进行类型声明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/** @type &#123;number&#125; */</span><br><span class="line">let aaa;</span><br></pre></td></tr></table></figure>
 
-<p>(3)通过watch监听data数据的变化，数据发生变化时,执行handlechangeData方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    data： &apos;handlechangeData&apos; // 值可以为methods的方法名</span><br><span class="line">&#125;，</span><br><span class="line">methods: &#123;</span><br><span class="line">    handlechangeData(newVal,oldVal)&#123;</span><br><span class="line">　　　conosle.log(newVal,oldVal)</span><br><span class="line">　 &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="定义结构化数据"><a href="#定义结构化数据" class="headerlink" title="定义结构化数据"></a>定义结构化数据</h4><h5 id="可以使用typedef来定义一个结构化的数据，不过较麻烦，且功能有限"><a href="#可以使用typedef来定义一个结构化的数据，不过较麻烦，且功能有限" class="headerlink" title="可以使用typedef来定义一个结构化的数据，不过较麻烦，且功能有限"></a>可以使用typedef来定义一个结构化的数据，不过较麻烦，且功能有限</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* @typedef someType</span><br><span class="line">* @property &#123;number&#125; a</span><br><span class="line">* @property &#123;number&#125; b</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">/** @type &#123;someType&#125; */</span><br><span class="line">let val;</span><br><span class="line"></span><br><span class="line">val.a</span><br><span class="line">val.b</span><br></pre></td></tr></table></figure>
 
-<h2 id="watch中的immediate、handler和deep属性"><a href="#watch中的immediate、handler和deep属性" class="headerlink" title="watch中的immediate、handler和deep属性"></a>watch中的immediate、handler和deep属性</h2><p>(1)immediate和handler<br>watch有一个特点，当值第一次绑定时，不会执行监听函数，只有值发生改变时才会执行。如果需要在最初绑定值的时候也执行函数，则需要用到immediate属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">    docData: &#123;</span><br><span class="line">        handler(newVal) &#123;</span><br><span class="line">            this.change_num++</span><br><span class="line">        &#125;,</span><br><span class="line">        immediate: true</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="使用d-ts文件来进行结构化数据的声明"><a href="#使用d-ts文件来进行结构化数据的声明" class="headerlink" title="使用d.ts文件来进行结构化数据的声明"></a>使用d.ts文件来进行结构化数据的声明</h5><p>新建一个index.d.ts文件，在其中定义一下someType类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">interface someType &#123;</span><br><span class="line">    a: number;</span><br><span class="line">    b: string;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 声明一个组合类型</span><br><span class="line">type unionType = someType | string</span><br><span class="line"></span><br><span class="line">// 声明一个枚举类型，他的值是someType 存在的key</span><br><span class="line">// keysOfSomeType = keyof someType = &quot;a&quot; | &quot;b&quot; | &quot;c&quot;</span><br><span class="line">type keysOfSomeType = keyof someType;</span><br><span class="line"></span><br><span class="line">// 使用TS提供的工具类型 Exclude,可以帮助我们筛选出符合某个类型，但不符合另一种类型的类型</span><br><span class="line">// otherType = &quot;b&quot; | &quot;c&quot; 将a排除</span><br><span class="line">type otherType = Exclude&lt;keysOfSomeType, &apos;a&apos;&gt;;</span><br></pre></td></tr></table></figure>
 
-<p>(2)deep<br>当需要监听一个对象的改变时，普通的watch方法无法监听到对象内部属性的改变，此时就需要deep属性对对象进行深度监听。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">data（） &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        docData: &#123;</span><br><span class="line">            &apos;doc_id&apos;: 1,</span><br><span class="line">            &apos;tpl_data&apos;: &apos;abc&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;，</span><br><span class="line">watch: &#123;</span><br><span class="line">    docData: &#123;</span><br><span class="line">        handler(newVal) &#123;</span><br><span class="line">            this.change_num++</span><br><span class="line">        &#125;,</span><br><span class="line">    deep: true</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在index.js文件中使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/** @type &#123;someType&#125; */</span><br></pre></td></tr></table></figure>
 
-<p>设置deep:true则可以监听到docData.doc_id的变化，此时会给docData的所有属性都加上这个监听器，当对象属性较多时，每个属性值的变化都会执行handler。如果只需要监听对象中的一个属性值，则可以做以下优化：使用字符串的形式监听对象属性：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">data（） &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        docData: &#123;</span><br><span class="line">            &apos;doc_id&apos;: 1,</span><br><span class="line">            &apos;tpl_data&apos;: &apos;abc&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;，</span><br><span class="line">watch: &#123;</span><br><span class="line">    &apos;docData.doc_id&apos;: &#123;</span><br><span class="line">        handler(newVal, oldVal) &#123;</span><br><span class="line">             ......</span><br><span class="line">        &#125;,</span><br><span class="line">    deep: true</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样只会给对象的某个特定的属性加监听器<br>数组（一维、多维）的变化不需要通过深度监听，对象数组中对象的属性变化则需要deep深度监听。</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>vs code文档中说，如果没有jsconfig.json文件，vscode默认排除node_modules目录的，而创建了jsconfig.json后则需要自己将node_modules排除</p>
 
       
     </div>
@@ -384,8 +399,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/08/echarts中的事件和行为/" rel="next" title="echarts中事件和行为">
-                <i class="fa fa-chevron-left"></i> echarts中事件和行为
+              <a href="/2020/05/31/关于echarts自定义工具图标不显示问题/" rel="next" title="关于echarts自定义工具图标不显示问题">
+                <i class="fa fa-chevron-left"></i> 关于echarts自定义工具图标不显示问题
               </a>
             
           </div>
@@ -394,8 +409,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/05/09/动态规划/" rel="prev" title="动态规划算法">
-                动态规划算法 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/05/31/null,undefinde区别/" rel="prev" title="null,undefinde区别">
+                null,undefinde区别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -531,7 +546,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vue中watch监听的各属性"><span class="nav-number">1.</span> <span class="nav-text">vue中watch监听的各属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#watch监听数据变化的使用方法"><span class="nav-number">1.1.</span> <span class="nav-text">watch监听数据变化的使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch中的immediate、handler和deep属性"><span class="nav-number">1.2.</span> <span class="nav-text">watch中的immediate、handler和deep属性</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类型检查需要"><span class="nav-number">1.</span> <span class="nav-text">类型检查需要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用vscode、d-ts、JSDoc对代码进行类型检查"><span class="nav-number">1.1.</span> <span class="nav-text">使用vscode、d.ts、JSDoc对代码进行类型检查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义结构化数据"><span class="nav-number">1.1.1.</span> <span class="nav-text">定义结构化数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可以使用typedef来定义一个结构化的数据，不过较麻烦，且功能有限"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">可以使用typedef来定义一个结构化的数据，不过较麻烦，且功能有限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用d-ts文件来进行结构化数据的声明"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">使用d.ts文件来进行结构化数据的声明</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">1.1.2.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
