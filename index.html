@@ -252,6 +252,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/11/v-if和v-show区别/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/11/v-if和v-show区别/" itemprop="url">v-if和v-show区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-11T00:30:05+08:00">
+                2020-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天在做项目时候遇到一个bug，苦苦寻找半天，知道大致原因，但是没有实际解决。最终发现v-if和v-show的问题（vue官方文档没有深入理解，有待继续学习）。记录一下v-if和v-show区别以及使用。  </p>
+<h4 id="v-if和v-show的相同点"><a href="#v-if和v-show的相同点" class="headerlink" title="v-if和v-show的相同点"></a>v-if和v-show的相同点</h4><p>我们知道，v-if和v-show都可以实现指定内容的显示和隐藏操作的效果。</p>
+<h4 id="v-if和v-show的区别"><a href="#v-if和v-show的区别" class="headerlink" title="v-if和v-show的区别"></a>v-if和v-show的区别</h4><ul>
+<li>手段：v-if在每次完成显示和隐藏功能的时候，需要不断的在dom树上完成节点的创建和删除操作。v-show则是直接通过修改display样式的属性值来完成（block为显示，none为隐藏）。即v-show变化不刷新，而v-if变化进行刷新。</li>
+<li>编译过程：v-if有一个局部编译/卸载的过程，切换过程中合适的销毁和重建内部事件监听和子组件；v-show只是简单的基于css切换；</li>
+<li>编译条件：v-if是惰性的，如果初始条件为假，则什么也不做；只有在条件第一次变为真时才开始局部编译（编译被缓存后，然后再进行切换时进行局部卸载）；v-show是在任何条件下（首次条件是否为真）都被编译，然后被缓存，而且dom元素保留；</li>
+<li>性能消耗：v-if有更高的切换消耗；v-show有更高的初始渲染消耗；</li>
+</ul>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>若是使用过程中需要频繁的进行切换，则使用v-show较好；如果使用过程中条件很少改变，则用v-if较好。当元素在响应式网页的操作过程中，根据不同用户的需求，可能永远不会被显示或者被隐藏，则选择使用v-if</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>v-if判断是否加载，可以减轻服务器的压力，在需要时加载，但有更高的切换开销；v-show调整dom元素的css的display属性，可以使客户端操作更加流畅，但有更高的初始渲染开销。如果需要非常频繁的切换，使用v-shoe较好；如果在运行条件很少改变，则使用v-if较好。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/vue前端中导出数据及数据量很大时的导出/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1621,187 +1772,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/09/动态规划/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="朱程程">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/first.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小二、上酒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/09/动态规划/" itemprop="url">动态规划算法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-09T11:08:35+08:00">
-                2020-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="动态规划的基本概念"><a href="#动态规划的基本概念" class="headerlink" title="动态规划的基本概念"></a>动态规划的基本概念</h2><p>动态规划（Dynamic programming，简称DP），动态规划是求解多阶段决策过程的最优化问题的一种方法。  </p>
-<p>所谓多阶段决策过程是指这样一类决策过程：可以把一个复杂问题按时间或空间分成若干个阶段，每个阶段都需要作出决策，以便得到过程的最优结局。由于在每阶段采取的决策是与时间有关的而且前一阶段采取的决策如何，不但与该阶段的经济效果有关，还影响后面各阶段的经济效果，可见这类多阶段决策问题是一个动态问题，因此，处理的方法称为动态规划方法。然而，动态规划也可以处理一些本来与时间没有关系的静态模型，这只要在静态模型中人为的引入“时间”因素，分成时段，就可以把它看作是多阶段动态模型，用动态规划方法去处理。  </p>
-<p>多阶段决策过程指这样一类特殊活动过程：问题可按时间顺序分解成若干相互联系的阶段，在每一阶段都要做出决策，全部过程的决策是一个决策序列。  </p>
-<p>例：（最短路线问题）从A至E有一批货物需要调运。各节点之间有运输距离，为使总运费最少，必须找出一条由A至E总里程最短的路线。<br><img src="https://img-blog.csdnimg.cn/20191027161855864.png#pic_center" alt="image"><br>为了找到由A至E的最短线路，可以将该问题分成A—B—C—D—E4个阶段，在每个阶段都需要作出决策，即在A点需决策下一步到B1还是到B2或B3；同样，若到达第二阶段某个状态，比如B1 ，需决定走向C1还是C2 ；依次类推，可以看出：各个阶段的决策不同，由A至E的路线就不同，当从某个阶段的某个状态出发作出一个决策，则这个决策不仅影响到下一个阶段的距离，而且直接影响后面各阶段的行进线路。所以这类问题要求在各个阶段选择一个恰当的决策，使这些决策序列所决定的一条路线对应的总路程最短。  </p>
-<h2 id="动态规划算法的基本思想"><a href="#动态规划算法的基本思想" class="headerlink" title="动态规划算法的基本思想"></a>动态规划算法的基本思想</h2><p>动态规划算法与分治法类似，其基本思想也是将带求解问题分解成若干个子问题。但是经分解的子问题往往不是独立的。不同子问题的数目常常只有多项式量级。在用分治法求解时，有些子问题被重复计算了许多次。如果能够保存已解决的子问题的答案，而在需要时再找出已求得的答案，就可以避免大量重复计算，从而得到多项式时间算法。</p>
-<h2 id="动态规划的求解步骤"><a href="#动态规划的求解步骤" class="headerlink" title="动态规划的求解步骤"></a>动态规划的求解步骤</h2><ol>
-<li>划分状态，即划分子问题。每一步的最优解是全部的最优解的子问题</li>
-<li>状态表示，即如何让计算机理解问题。</li>
-<li>状态转移，即父问题如何由子问题推导出来。</li>
-<li>确定边界，确定初始状态是什么？最小的子问题？最终状态又是什么</li>
-</ol>
-<h2 id="动态规划算法的基本要素"><a href="#动态规划算法的基本要素" class="headerlink" title="动态规划算法的基本要素"></a>动态规划算法的基本要素</h2><ul>
-<li>最优子结构<br>矩阵连乘计算次序问题的最优解包含着其子问题的最优解。这种性质称为最优子结构性质<br>最优解肯定是有最优的子解转移推导而来，子解必定也是子问题的最优解。<br>最优子结构是问题能用动态规划算法求解的前提。</li>
-<li>重叠子问题<br>递归算法求解问题时，每次产生的子问题并不总是新问题，有些子问题被反复计算多次。这种性质称为子问题的重叠性质。  </li>
-</ul>
-<p>动态规划算法，对每一个子问题只解一次，而后将其解保存在一个表格中，当再次需要解此子问题时，只是简单地用常数时间查看一下结果。  </p>
-<p>通常不同的子问题个数随问题的大小呈多项式增长。因此用动态规划算法只需要多项式时间，从而获得较高的解题效率。  </p>
-<h2 id="经典模型"><a href="#经典模型" class="headerlink" title="经典模型"></a>经典模型</h2><ol>
-<li>线性模型<br>经典的问题是斐波那切数列，每个数的值都是一个状态，可以用F[i]表示表示第i个数的值是多少。每个数都是由F[i-1]+F[i-2]转移而来。  </li>
-</ol>
-<p>另一个经典的问题就是最长上升自序列（LIS），有一串序列，要求找出它的一串子序列，这串子序列可以不连续，但必须满足它是严格的单调递増的且为最长的。把这个长度输出。示例：1 7 3 5 9 4 8 结果为4。  </p>
-<p>线性模型还可以拓展成二维问题，例如背包问题，用f[i][j]表示前i个物品，凑成大小为j的背包，最大价值是多少。  </p>
-<p>这类问题非常多，但思路无非就是从左往右，从上到下，从低维到高维进行转移。</p>
-<ol start="2">
-<li><p>区间模型<br>对于每个问题，都是由子区间推导过来的，称之为区间模型。</p>
-</li>
-<li><p>树状模型<br>在数据结构树上面进行最求最优解、最大值等问题，</p>
-</li>
-</ol>
-<h2 id="实现套路"><a href="#实现套路" class="headerlink" title="实现套路"></a>实现套路</h2><p>实现动态规划算法，常用的是两个实现套路，一个是自底向上，另外一个是自顶向下。无论哪种方式，都要明确动态规划的过程，把状态表示、状态转移、边界都考虑好。</p>
-<ol>
-<li>自底向上<br>根据初始化状态，逐步推导到最终状态，而这个转移的过程，必须是一个拓扑序。  </li>
-</ol>
-<p>自底向上一般用来解决什么问题呢？那就是可以轻松确定拓扑序的问题，例如线性模型，都是从左往右进行转移，区间模型，一般都是从小区间推导到大区间。自底向上的一个经典实现是斐波那楔数列的递推实现，即F[i] = F[i - 1] + F[i - 2] 。</p>
-<ol start="2">
-<li>自顶向下<br>从最终状态出发，如果遇到一个子问题还未求解，那么就先求解子问题。如果子问题已经求解，那么直接使用子问题的解，所以自顶向下动态规划又有一个形象生动的名字，叫做记忆化搜索，一般采用递归的方式进行求解。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">long getF(int x)&#123;</span><br><span class="line">    if(f[x] != -1) &#123; // 这个状态没有扩展过</span><br><span class="line">        return f[x];</span><br><span class="line">    &#125;</span><br><span class="line">    return getF(x-1) + getF(x-2); // 找到到大这个状态的状态 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<p>自顶向下，我们一般用在树上面，因为我们根据父亲结点，很容易找到所有的子问题，也就是所有的子结点，而自底向上的话，我们要去统计这个结点的所有兄弟结点是否已经实现。会稍微复杂一点，而且比较难理解。<br>无论是自顶向下还是自底向上，都只是代码实现的一种套路，随便你采用哪一个，都是可以解的，只是看你的选择而已。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1854,7 +1824,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
