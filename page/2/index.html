@@ -252,6 +252,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/20/js中获取一个对象的属性和值的方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/05/20/js中获取一个对象的属性和值的方法/" itemprop="url">js中获取一个对象的属性的方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-20T23:25:05+08:00">
+                2020-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="js中获取一个对象的属性的方法"><a href="#js中获取一个对象的属性的方法" class="headerlink" title="js中获取一个对象的属性的方法"></a>js中获取一个对象的属性的方法</h1><ol>
+<li>获得属性值<br>对象内置属性方法:<strong>Object.keys()</strong>：该方法返回一个数组，数组内包括对象内可枚举属性以及方法名称。数组中属性名的排列顺序和使用 for…in 遍历该对象时返回的顺序一致。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 通过调用Object.keys()方法，获取对象上已定义(可枚举)的属性和方法</span><br><span class="line">var keys= Object.keys(Obj);</span><br><span class="line">　　console.log(keys); // 输出 keys [&quot;&quot;, &quot;&quot;, &quot;&quot;]属性列表</span><br><span class="line">　　</span><br><span class="line">console.log(Object.keys(chartData[0])[0]) //得到chartData数组第一个对象的第一个属性名</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>Object.getOwnPropertyNames():方法返回一个指定对象所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var keys = Object.getOwnPropertyNames(Obj);</span><br><span class="line">　　console.log(keys);　　// 输出 keys [&quot;&quot;, &quot;&quot;, &quot;&quot;]属性列表</span><br></pre></td></tr></table></figure>
+
+<p>除了以上两个外，还有最原始的 for…in 循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var keys =[];</span><br><span class="line">　　for(var i in Obj)&#123;</span><br><span class="line">    　　keys.push(i);</span><br><span class="line">　　&#125;</span><br><span class="line">　　console.log(keys);   // keys [&quot;&quot;, &quot;&quot;, &quot;&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>三者的区别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">var testObj = Object.create(&#123;&#125;, &#123;</span><br><span class="line">    getFoo: &#123;</span><br><span class="line">        value: function () &#123;</span><br><span class="line">            return this.foo;</span><br><span class="line">        &#125;,</span><br><span class="line">        enumerable: false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">testObj.name = &quot;shangguan&quot;;</span><br><span class="line">testObj.age = 25;</span><br><span class="line">testObj.action = function()&#123;</span><br><span class="line">  return this.name;</span><br><span class="line">&#125;;</span><br><span class="line">function getKeys() &#123;</span><br><span class="line">    // 获取对象可枚举和不可枚举的属性</span><br><span class="line">    console.log(Object.getOwnPropertyNames(testObj));   //输出:[&quot;getFoo&quot;, &quot;name&quot;, &quot;age&quot;, &quot;action&quot;]</span><br><span class="line">    // 获取对象可枚举的属性</span><br><span class="line">    console.log(Object.keys(testObj));  //输出:[&quot;name&quot;, &quot;age&quot;, &quot;action&quot;]</span><br><span class="line">    // 获取对象可枚举的属性</span><br><span class="line">    for (var i in testObj) &#123;</span><br><span class="line">        console.log(i);     //输出 name,age,action</span><br><span class="line">    &#125;</span><br><span class="line">    //返回直接定义在该对象上的可枚举属性，非继承。通过hasOwnProperty()方法可以将那些属性是对象自身(非继承)属性筛选出来，从而将不可枚举属性排除出去</span><br><span class="line">    //obj.hasOwnProperty(prop): prop要检测的属性,字符串 名称或者 Symbol。     返回值:用来判断某个对象是否含有指定的属性 的Boolean值</span><br><span class="line">    for (var i in testObj) &#123;</span><br><span class="line">        if(testObj.hasOwnProperty(i)) &#123;</span><br><span class="line">            console.log(i);</span><br><span class="line">        &#125;    //输出 name,age,action</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结：如果只需要获取可枚举属性，那么Object.keys()或for…in循环迭代即可（Object.getOwnPropertyNames()也可以获取到原型链上的可枚举属性，不过需要通过hasOwnProperty()方法过滤掉不可枚举属性）。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/20/vue中axios的request拦截器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1730,153 +1886,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/06/电脑连上网却上不了网问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="朱程程">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/first.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小二、上酒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/06/电脑连上网却上不了网问题/" itemprop="url">电脑连上网却上不了网问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-06T23:50:13+08:00">
-                2019-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>连着两次用迅雷下电影断网，开机重启并没有奏效，尝试了很多种办法，最后找到简单的实现办法：  </p>
-<ol>
-<li>首先通过cmd打开命令框</li>
-<li>然后输入ipconfig/release释放IP地址</li>
-<li>接着利用ipconfig/flushdns来重建本地DNS缓存<br>这样，再去网页就可以上网了</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1929,7 +1938,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
