@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="canvas更适合绘制图形数据量非常大的图表，比如热力图、地理坐标系，也利于实现某些视觉效果。svg内存占有更低（适合移动端）、渲染性能高、并且用户使用浏览器内置的缩放功能不会模糊。   如何选择渲染器 在软硬件环境较好，数据量不大的场景下，两种均可使用； 在创建很多实例，且浏览器易崩溃的时候，可以使用svg渲染器进行改善； 数据量很大且较多交互时，可以使用canvas渲染器。  代码： 1234">
+<meta name="description" content="1、v-if 、v-else、 v-show、v-else-if这些指令用于显示和隐藏各类元素注意：v-if和v-show区别：    v-if：切换过程中条件块内的事件监听器和子组件适当的被销毁和重建，开销较高，在运行时条件很少改变时使用。 v-show：调整css dispaly属性，开销较小，在常频繁地切换时使用。详细文章：v-if和v-show区别  2、v-for基本用法12345678">
 <meta property="og:type" content="article">
-<meta property="og:title" content="echarts中的canvas渲染和svg渲染">
-<meta property="og:url" content="http://yoursite.com/2020/06/07/echarts中的canvas渲染和svg渲染/index.html">
+<meta property="og:title" content="vue内部指令">
+<meta property="og:url" content="http://yoursite.com/2020/06/28/vue内部指令/index.html">
 <meta property="og:site_name" content="小二、上酒">
-<meta property="og:description" content="canvas更适合绘制图形数据量非常大的图表，比如热力图、地理坐标系，也利于实现某些视觉效果。svg内存占有更低（适合移动端）、渲染性能高、并且用户使用浏览器内置的缩放功能不会模糊。   如何选择渲染器 在软硬件环境较好，数据量不大的场景下，两种均可使用； 在创建很多实例，且浏览器易崩溃的时候，可以使用svg渲染器进行改善； 数据量很大且较多交互时，可以使用canvas渲染器。  代码： 1234">
+<meta property="og:description" content="1、v-if 、v-else、 v-show、v-else-if这些指令用于显示和隐藏各类元素注意：v-if和v-show区别：    v-if：切换过程中条件块内的事件监听器和子组件适当的被销毁和重建，开销较高，在运行时条件很少改变时使用。 v-show：调整css dispaly属性，开销较小，在常频繁地切换时使用。详细文章：v-if和v-show区别  2、v-for基本用法12345678">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-01T15:32:36.316Z">
+<meta property="og:updated_time" content="2020-06-24T15:04:30.318Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="echarts中的canvas渲染和svg渲染">
-<meta name="twitter:description" content="canvas更适合绘制图形数据量非常大的图表，比如热力图、地理坐标系，也利于实现某些视觉效果。svg内存占有更低（适合移动端）、渲染性能高、并且用户使用浏览器内置的缩放功能不会模糊。   如何选择渲染器 在软硬件环境较好，数据量不大的场景下，两种均可使用； 在创建很多实例，且浏览器易崩溃的时候，可以使用svg渲染器进行改善； 数据量很大且较多交互时，可以使用canvas渲染器。  代码： 1234">
+<meta name="twitter:title" content="vue内部指令">
+<meta name="twitter:description" content="1、v-if 、v-else、 v-show、v-else-if这些指令用于显示和隐藏各类元素注意：v-if和v-show区别：    v-if：切换过程中条件块内的事件监听器和子组件适当的被销毁和重建，开销较高，在运行时条件很少改变时使用。 v-show：调整css dispaly属性，开销较小，在常频繁地切换时使用。详细文章：v-if和v-show区别  2、v-for基本用法12345678">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/06/07/echarts中的canvas渲染和svg渲染/">
+  <link rel="canonical" href="http://yoursite.com/2020/06/28/vue内部指令/">
 
 
 
 
 
-  <title>echarts中的canvas渲染和svg渲染 | 小二、上酒</title>
+  <title>vue内部指令 | 小二、上酒</title>
   
 
 
@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/echarts中的canvas渲染和svg渲染/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/vue内部指令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="朱程程">
@@ -269,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">echarts中的canvas渲染和svg渲染</h1>
+          <h1 class="post-title" itemprop="name headline">vue内部指令</h1>
         
 
         <div class="post-meta">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-07T21:33:23+08:00">
-                2020-06-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-28T23:43:41+08:00">
+                2020-06-28
               </time>
             
 
@@ -304,8 +304,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue-echarts/" itemprop="url" rel="index">
-                    <span itemprop="name">vue-echarts</span>
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
                   </a>
                 </span>
 
@@ -341,14 +341,40 @@
       
 
       
-        <p>canvas更适合绘制图形数据量非常大的图表，比如热力图、地理坐标系，也利于实现某些视觉效果。<br>svg内存占有更低（适合移动端）、渲染性能高、并且用户使用浏览器内置的缩放功能不会模糊。  </p>
-<h4 id="如何选择渲染器"><a href="#如何选择渲染器" class="headerlink" title="如何选择渲染器"></a>如何选择渲染器</h4><ol>
-<li>在软硬件环境较好，数据量不大的场景下，两种均可使用；</li>
-<li>在创建很多实例，且浏览器易崩溃的时候，可以使用svg渲染器进行改善；</li>
-<li>数据量很大且较多交互时，可以使用canvas渲染器。</li>
-</ol>
-<p>代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// echarts默认使用canvas渲染</span><br><span class="line">var chart = echarts.init(containerDom)</span><br><span class="line"></span><br><span class="line">// 使用canvas渲染</span><br><span class="line">var chart = echarts.init(containerDom, null, &#123; render: &apos;svg&apos; &#125;)</span><br></pre></td></tr></table></figure>
+        <h3 id="1、v-if-、v-else、-v-show、v-else-if"><a href="#1、v-if-、v-else、-v-show、v-else-if" class="headerlink" title="1、v-if 、v-else、 v-show、v-else-if"></a>1、v-if 、v-else、 v-show、v-else-if</h3><p>这些指令用于显示和隐藏各类元素<br>注意：v-if和v-show区别：  </p>
+<ul>
+<li>v-if：切换过程中条件块内的事件监听器和子组件适当的被销毁和重建，开销较高，在运行时条件很少改变时使用。</li>
+<li>v-show：调整css dispaly属性，开销较小，在常频繁地切换时使用。<br>详细文章：<a href="https://devil-chengcheng.github.io/2020/06/11/v-if%E5%92%8Cv-show%E5%8C%BA%E5%88%AB/" target="_blank" rel="noopener">v-if和v-show区别</a></li>
+</ul>
+<h3 id="2、v-for"><a href="#2、v-for" class="headerlink" title="2、v-for"></a>2、v-for</h3><h5 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 模板 --&gt;</span><br><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li v-for=&quot;item in items&quot;&gt;</span><br><span class="line">            &#123;&#123;item&#125;&#125;</span><br><span class="line">        &lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--JS代码 --&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    var app=new Vue(&#123;</span><br><span class="line">        el:&apos;#app&apos;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            items:[20,23,18,65]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="对象遍历"><a href="#对象遍历" class="headerlink" title="对象遍历"></a>对象遍历</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v-for=&quot;(value, key, index) in object</span><br></pre></td></tr></table></figure>
+
+<p>参数: 第一个为值，第二个为键名，第三个为索引</p>
+<h3 id="3、v-text-、v-html"><a href="#3、v-text-、v-html" class="headerlink" title="3、v-text 、v-html"></a>3、v-text 、v-html</h3><h5 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h5>取值有个弊端，当网速很慢或javascript出错时，会在页面显示，Vue提供的v-text可以解决这个问题
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;&#123;&#123; message &#125;&#125;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;div v-text=&quot;message&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h5><p>用于输出html代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span v-html=&quot;msgHtml&quot;&gt;&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、v-on"><a href="#4、v-on" class="headerlink" title="4、v-on"></a>4、v-on</h3><p>绑定事件<br>详细用法：<a href="https://cn.vuejs.org/v2/api/#v-on" target="_blank" rel="noopener">v-on官方API</a></p>
+<h3 id="5、v-model"><a href="#5、v-model" class="headerlink" title="5、v-model"></a>5、v-model</h3><p>实现数据的双向绑定，在data中声明。</p>
+<ul>
+<li>input</li>
+<li>textarea</li>
+<li>checkbox</li>
+<li>radio</li>
+<li>select</li>
+</ul>
+<h3 id="6、v-bind"><a href="#6、v-bind" class="headerlink" title="6、v-bind"></a>6、v-bind</h3><p>用于处理html标签的动态属性，即动态赋值。<br>详细用法： <a href="https://cn.vuejs.org/v2/api/#v-bind" target="_blank" rel="noopener">v-bind官方API</a></p>
+<h3 id="7、v-pre、v-cloak、v-once"><a href="#7、v-pre、v-cloak、v-once" class="headerlink" title="7、v-pre、v-cloak、v-once"></a>7、v-pre、v-cloak、v-once</h3><h5 id="v-pre"><a href="#v-pre" class="headerlink" title="v-pre"></a>v-pre</h5><p>在模板中跳过vue的编译，直接输出原始值，在标签中加入v-pre就不会输出vue中的data值了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-pre&gt;&#123;&#123;message&#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="v-cloak"><a href="#v-cloak" class="headerlink" title="v-cloak"></a>v-cloak</h5><p>在vue渲染完指定的整个DOM后才进行显示。必须和CSS样式一起使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// css</span><br><span class="line">[v-cloak] &#123;</span><br><span class="line">    display: none;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// html</span><br><span class="line">&lt;div v-cloak&gt;&#123;&#123;message&#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="v-once"><a href="#v-once" class="headerlink" title="v-once"></a>v-once</h5><p>只显示DOM第一次渲染的值，以后不改变了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div v-once&gt;第一次绑定的值：&#123;&#123;message&#125;&#125;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -372,8 +398,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/31/null,undefinde区别/" rel="next" title="null,undefinde区别">
-                <i class="fa fa-chevron-left"></i> null,undefinde区别
+              <a href="/2020/06/27/关于vue/" rel="next" title="关于vue一些特点、特性">
+                <i class="fa fa-chevron-left"></i> 关于vue一些特点、特性
               </a>
             
           </div>
@@ -382,8 +408,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/06/07/vue前端中导出数据及数据量很大时的导出/" rel="prev" title="前端vue中导出数据及数据量很大时的导出">
-                前端vue中导出数据及数据量很大时的导出 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/06/28/Vue生命周期(1)/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -519,7 +545,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何选择渲染器"><span class="nav-number">1.</span> <span class="nav-text">如何选择渲染器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、v-if-、v-else、-v-show、v-else-if"><span class="nav-number">1.</span> <span class="nav-text">1、v-if 、v-else、 v-show、v-else-if</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、v-for"><span class="nav-number">2.</span> <span class="nav-text">2、v-for</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本用法"><span class="nav-number">2.0.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对象遍历"><span class="nav-number">2.0.2.</span> <span class="nav-text">对象遍历</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#3、v-text-、v-html"><span class="nav-number">3.</span> <span class="nav-text">3、v-text 、v-html</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#v-text"><span class="nav-number">3.0.1.</span> <span class="nav-text">v-text</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#v-html"><span class="nav-number">3.0.2.</span> <span class="nav-text">v-html</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、v-on"><span class="nav-number">4.</span> <span class="nav-text">4、v-on</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、v-model"><span class="nav-number">5.</span> <span class="nav-text">5、v-model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、v-bind"><span class="nav-number">6.</span> <span class="nav-text">6、v-bind</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、v-pre、v-cloak、v-once"><span class="nav-number">7.</span> <span class="nav-text">7、v-pre、v-cloak、v-once</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#v-pre"><span class="nav-number">7.0.1.</span> <span class="nav-text">v-pre</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#v-cloak"><span class="nav-number">7.0.2.</span> <span class="nav-text">v-cloak</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#v-once"><span class="nav-number">7.0.3.</span> <span class="nav-text">v-once</span></a></li></ol></li></div>
             
 
           </div>
