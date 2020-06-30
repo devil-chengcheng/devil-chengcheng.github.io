@@ -252,6 +252,311 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/30/vue组件基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/30/vue组件基础/" itemprop="url">vue组件基础</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-30T22:59:01+08:00">
+                2020-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1、组件注册"><a href="#1、组件注册" class="headerlink" title="1、组件注册"></a>1、组件注册</h3><h5 id="全局注册"><a href="#全局注册" class="headerlink" title="全局注册"></a>全局注册</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;button-counter&apos;, &#123;</span><br><span class="line">    data: function() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            count: 0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template: &apos;&lt;button v-on:click=&quot;count++&quot;&gt;全局组件显示： &#123;&#123; count &#125;&#125;&lt;/button&gt;&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">    el: #app</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// html使用</span><br><span class="line">&lt;button-counter&gt;&lt;/button-counter&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="局部注册"><a href="#局部注册" class="headerlink" title="局部注册"></a>局部注册</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    components:&#123;</span><br><span class="line">        &quot;button-inner&quot;:&#123;</span><br><span class="line">            data: function() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    inner: 0</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            template: &apos;&lt;button v-on:click=&quot;inner++&quot;&gt;局部组件显示： &#123;&#123; inner &#125;&#125;&lt;/button&gt;&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// html使用</span><br><span class="line">&lt;button-inner&gt;&lt;/button-inner&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、props属性传值"><a href="#2、props属性传值" class="headerlink" title="2、props属性传值"></a>2、props属性传值</h3><h5 id="属性取值"><a href="#属性取值" class="headerlink" title="属性取值"></a>属性取值</h5><p>如果属性带“-”，</p>
+<h5 id="在构造器向组件传值（v-bind）"><a href="#在构造器向组件传值（v-bind）" class="headerlink" title="在构造器向组件传值（v-bind）"></a>在构造器向组件传值（v-bind）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">        el: &apos;#app&apos;,</span><br><span class="line">        data: &#123;</span><br><span class="line">            message: &apos;hello&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        components:&#123;</span><br><span class="line">            &quot;button-props&quot;:&#123;</span><br><span class="line">                template:`&lt;div style=&quot;color:red;&quot;&gt;参数1： &#123;&#123; here &#125;&#125;:---参数2： &#123;&#123;fromHere&#125;&#125;&lt;/div&gt;`,</span><br><span class="line">                props:[&apos;here&apos;, &apos;fromHere&apos;]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">// html使用</span><br><span class="line">&lt;button-props v-bind:here=&quot;message&quot; :from-here=&quot;message&quot;&gt;&lt;/button-props&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、父子组件"><a href="#3、父子组件" class="headerlink" title="3、父子组件"></a>3、父子组件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// 子组件</span><br><span class="line">var city = &#123;</span><br><span class="line">    template:`&lt;div&gt;Sichuan of China&lt;/div&gt;`</span><br><span class="line">&#125;</span><br><span class="line">// 父组件</span><br><span class="line">var parent = &#123;</span><br><span class="line">    template:</span><br><span class="line">        `&lt;div&gt;</span><br><span class="line">            &lt;p&gt; Panda from China!&lt;/p&gt;</span><br><span class="line">            &lt;city&gt;&lt;/city&gt;</span><br><span class="line">        &lt;/div&gt;`,</span><br><span class="line">    components:&#123;</span><br><span class="line">        &quot;city&quot;: city</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实例化</span><br><span class="line">new Vue(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    // 定义局部组件</span><br><span class="line">    components:&#123;</span><br><span class="line">        // 组件注册</span><br><span class="line">        &quot;parent&quot;: parent</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// html使用</span><br><span class="line">&lt;parent&gt;&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/30/vue自定义指令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/30/vue自定义指令/" itemprop="url">vue自定义指令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-30T22:58:40+08:00">
+                2020-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>vue中的自定义指令通过Vue.directive来实现，主要完成内置指令不能完成的一些事情。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;title&gt;Vue入门之自定义指令&lt;/title&gt;</span><br><span class="line">  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;div v-test=&quot;color&quot;&gt;</span><br><span class="line">      &#123;&#123; num &#125;&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;button @click=&quot;handleUnbind&quot;&gt;解绑&lt;/button&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">  // 解绑</span><br><span class="line">    function handleUnbind() &#123;</span><br><span class="line">      app.$destroy();</span><br><span class="line">    &#125;</span><br><span class="line">    // 自定义指令</span><br><span class="line">    Vue.directive(&quot;test&quot;, &#123;</span><br><span class="line">      //1-被绑定</span><br><span class="line">      bind: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;1-bind 被绑定&quot;);</span><br><span class="line">        console.log(&quot;el:&quot;, el);</span><br><span class="line">        console.log(&quot;binding:&quot;, binding);</span><br><span class="line">        console.log(&quot;vnode:&quot;, vnode);</span><br><span class="line">        el.style.color = binding.value;</span><br><span class="line">      &#125;,</span><br><span class="line">      //2-被插入</span><br><span class="line">      inserted: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;2-inserted 被插入&quot;);</span><br><span class="line">      &#125;,</span><br><span class="line">      //3-更新</span><br><span class="line">      update: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;3-update 更新&quot;);</span><br><span class="line">      &#125;,</span><br><span class="line">      //4-更新完成</span><br><span class="line">      componentUpdated: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;4-componentUpdated 更新完成&quot;);</span><br><span class="line">      &#125;,</span><br><span class="line">      //5-解绑</span><br><span class="line">      unbind: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;5-unbind 解绑&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    var app = new Vue(&#123;</span><br><span class="line">      el: &apos;#app&apos;,</span><br><span class="line">      data: &#123;</span><br><span class="line">        num: 123,</span><br><span class="line">        color: &apos;red&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li>el: 指令所绑定的元素，可以用来直接操作DOM</li>
+<li>binding：一个对象，包含指令的很多东西</li>
+<li>vnode：Vue编译生成的虚拟节点</li>
+</ul>
+<h3 id="声明周期"><a href="#声明周期" class="headerlink" title="声明周期"></a>声明周期</h3><p>自定义指令有五个生命周期（也叫钩子函数），分别是bind、inserted、update、componentUpdated、unbind，说明如下：</p>
+<ol>
+<li>bind：只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个绑定时执行一次的初始化动作。</li>
+<li>inserted：被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于document中）</li>
+<li>update：用于绑定于元素所在的模板更新时调用，而无论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新。</li>
+<li>componentUpdated：被绑定元素所在模板完成一次更新周期时调用。</li>
+<li>unbind：只调用一次，指令与元素解绑时调用</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/29/vue实例事件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -577,7 +882,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/06/28/Vue生命周期(1)/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2020/06/28/Vue生命周期(1)/" itemprop="url">Vue生命周期</a></h1>
         
 
         <div class="post-meta">
@@ -599,6 +904,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1557,305 +1884,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/11/v-if和v-show区别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="朱程程">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/first.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小二、上酒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/11/v-if和v-show区别/" itemprop="url">v-if和v-show区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-11T00:30:05+08:00">
-                2020-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天在做项目时候遇到一个bug，苦苦寻找半天，知道大致原因，但是没有实际解决。最终发现v-if和v-show的问题（vue官方文档没有深入理解，有待继续学习）。记录一下v-if和v-show区别以及使用。  </p>
-<h4 id="v-if和v-show的相同点"><a href="#v-if和v-show的相同点" class="headerlink" title="v-if和v-show的相同点"></a>v-if和v-show的相同点</h4><p>我们知道，v-if和v-show都可以实现指定内容的显示和隐藏操作的效果。</p>
-<h4 id="v-if和v-show的区别"><a href="#v-if和v-show的区别" class="headerlink" title="v-if和v-show的区别"></a>v-if和v-show的区别</h4><ul>
-<li>手段：v-if在每次完成显示和隐藏功能的时候，需要不断的在dom树上完成节点的创建和删除操作。v-show则是直接通过修改display样式的属性值来完成（block为显示，none为隐藏）。即v-show变化不刷新，而v-if变化进行刷新。</li>
-<li>编译过程：v-if有一个局部编译/卸载的过程，切换过程中合适的销毁和重建内部事件监听和子组件；v-show只是简单的基于css切换；</li>
-<li>编译条件：v-if是惰性的，如果初始条件为假，则什么也不做；只有在条件第一次变为真时才开始局部编译（编译被缓存后，然后再进行切换时进行局部卸载）；v-show是在任何条件下（首次条件是否为真）都被编译，然后被缓存，而且dom元素保留；</li>
-<li>性能消耗：v-if有更高的切换消耗；v-show有更高的初始渲染消耗；</li>
-</ul>
-<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><p>若是使用过程中需要频繁的进行切换，则使用v-show较好；如果使用过程中条件很少改变，则用v-if较好。当元素在响应式网页的操作过程中，根据不同用户的需求，可能永远不会被显示或者被隐藏，则选择使用v-if</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>v-if判断是否加载，可以减轻服务器的压力，在需要时加载，但有更高的切换开销；v-show调整dom元素的css的display属性，可以使客户端操作更加流畅，但有更高的初始渲染开销。如果需要非常频繁的切换，使用v-shoe较好；如果在运行条件很少改变，则使用v-if较好。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/vue前端中导出数据及数据量很大时的导出/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="朱程程">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/first.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小二、上酒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/07/vue前端中导出数据及数据量很大时的导出/" itemprop="url">前端vue中导出数据及数据量很大时的导出</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-07T21:33:43+08:00">
-                2020-06-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>数据量不大时的导出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">let str = &apos;x轴,y轴\n&apos;</span><br><span class="line">for (let i = 0; i &lt; item.timeData.length; i++) &#123;</span><br><span class="line">    str += item.timeData[i] + &apos;\t,&apos; + item.sigData[i]</span><br><span class="line">    str += &apos;\n&apos;</span><br><span class="line">&#125;</span><br><span class="line">// encodeURIComponent解决中文乱码</span><br><span class="line">const uri = &apos;data:text/csv;charset=utf-8,\ufeff&apos; + encodeURIComponent(str)</span><br><span class="line"></span><br><span class="line">// 通过创建a标签实现</span><br><span class="line">const link = document.createElement(&apos;a&apos;)</span><br><span class="line">link.href = uri</span><br><span class="line"></span><br><span class="line">// 对下载的文件命名</span><br><span class="line">link.download = item.title + &apos;.csv&apos;</span><br><span class="line">link.click()</span><br></pre></td></tr></table></figure>
-
-<p>在实际应用是，项目数据量是非常大的，这就导致了出现下载失败，报网络错误。百度的解决方法是用URL.createObjectURL()方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">link.href = URL.createObjectURL(uri)</span><br></pre></td></tr></table></figure>
-
-<p>这样浏览器就会报错，最新版本的浏览器已经不支持了.最终选择使用Blob类来进行实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let str = &apos;x轴,y轴\n&apos;</span><br><span class="line">for (let i = 0; i &lt; item.timeData.length; i++) &#123;</span><br><span class="line">str += item.timeData[i] + &apos;\t,&apos; + item.sigData[i]</span><br><span class="line">str += &apos;\n&apos;</span><br><span class="line">&#125;</span><br><span class="line">// const uri = &apos;data:text/csv;charset=utf-8,\ufeff&apos; + encodeURIComponent(str)</span><br><span class="line">const uri = &apos;\ufeff&apos; + str</span><br><span class="line">// 通过创建a标签实现</span><br><span class="line">const link = document.createElement(&apos;a&apos;)</span><br><span class="line">// link.id = &apos;export&apos;</span><br><span class="line">// link.href = URL.createObjectURL(uri)</span><br><span class="line"></span><br><span class="line">const blob = new Blob([uri, &#123; type: &apos;data:text/csv;charset=utf-8&apos; &#125;])</span><br><span class="line">link.href = URL.createObjectURL(blob) // 解决由于数据量太大导致chrome导出出现网络错误（由于url长度限制）</span><br><span class="line">// 对下载的文件命名</span><br><span class="line">link.download = item.title + &apos;.csv&apos;</span><br><span class="line">link.click()</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1908,7 +1936,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

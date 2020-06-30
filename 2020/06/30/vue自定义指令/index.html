@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="数据量不大时的导出 123456789101112131415let str = &amp;apos;x轴,y轴\n&amp;apos;for (let i = 0; i &amp;lt; item.timeData.length; i++) &amp;#123;    str += item.timeData[i] + &amp;apos;\t,&amp;apos; + item.sigData[i]    str += &amp;apos;\n&amp;a">
+<meta name="description" content="vue中的自定义指令通过Vue.directive来实现，主要完成内置指令不能完成的一些事情。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&amp;quot;en&amp;q">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端vue中导出数据及数据量很大时的导出">
-<meta property="og:url" content="http://yoursite.com/2020/06/07/vue前端中导出数据及数据量很大时的导出/index.html">
+<meta property="og:title" content="vue自定义指令">
+<meta property="og:url" content="http://yoursite.com/2020/06/30/vue自定义指令/index.html">
 <meta property="og:site_name" content="小二、上酒">
-<meta property="og:description" content="数据量不大时的导出 123456789101112131415let str = &amp;apos;x轴,y轴\n&amp;apos;for (let i = 0; i &amp;lt; item.timeData.length; i++) &amp;#123;    str += item.timeData[i] + &amp;apos;\t,&amp;apos; + item.sigData[i]    str += &amp;apos;\n&amp;a">
+<meta property="og:description" content="vue中的自定义指令通过Vue.directive来实现，主要完成内置指令不能完成的一些事情。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&amp;quot;en&amp;q">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-06-07T13:32:24.665Z">
+<meta property="og:updated_time" content="2020-06-24T15:04:30.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端vue中导出数据及数据量很大时的导出">
-<meta name="twitter:description" content="数据量不大时的导出 123456789101112131415let str = &amp;apos;x轴,y轴\n&amp;apos;for (let i = 0; i &amp;lt; item.timeData.length; i++) &amp;#123;    str += item.timeData[i] + &amp;apos;\t,&amp;apos; + item.sigData[i]    str += &amp;apos;\n&amp;a">
+<meta name="twitter:title" content="vue自定义指令">
+<meta name="twitter:description" content="vue中的自定义指令通过Vue.directive来实现，主要完成内置指令不能完成的一些事情。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&amp;quot;en&amp;q">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/06/07/vue前端中导出数据及数据量很大时的导出/">
+  <link rel="canonical" href="http://yoursite.com/2020/06/30/vue自定义指令/">
 
 
 
 
 
-  <title>前端vue中导出数据及数据量很大时的导出 | 小二、上酒</title>
+  <title>vue自定义指令 | 小二、上酒</title>
   
 
 
@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/vue前端中导出数据及数据量很大时的导出/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/30/vue自定义指令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="朱程程">
@@ -269,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">前端vue中导出数据及数据量很大时的导出</h1>
+          <h1 class="post-title" itemprop="name headline">vue自定义指令</h1>
         
 
         <div class="post-meta">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-07T21:33:43+08:00">
-                2020-06-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-30T22:58:40+08:00">
+                2020-06-30
               </time>
             
 
@@ -341,14 +341,23 @@
       
 
       
-        <p>数据量不大时的导出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">let str = &apos;x轴,y轴\n&apos;</span><br><span class="line">for (let i = 0; i &lt; item.timeData.length; i++) &#123;</span><br><span class="line">    str += item.timeData[i] + &apos;\t,&apos; + item.sigData[i]</span><br><span class="line">    str += &apos;\n&apos;</span><br><span class="line">&#125;</span><br><span class="line">// encodeURIComponent解决中文乱码</span><br><span class="line">const uri = &apos;data:text/csv;charset=utf-8,\ufeff&apos; + encodeURIComponent(str)</span><br><span class="line"></span><br><span class="line">// 通过创建a标签实现</span><br><span class="line">const link = document.createElement(&apos;a&apos;)</span><br><span class="line">link.href = uri</span><br><span class="line"></span><br><span class="line">// 对下载的文件命名</span><br><span class="line">link.download = item.title + &apos;.csv&apos;</span><br><span class="line">link.click()</span><br></pre></td></tr></table></figure>
+        <p>vue中的自定义指令通过Vue.directive来实现，主要完成内置指令不能完成的一些事情。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;title&gt;Vue入门之自定义指令&lt;/title&gt;</span><br><span class="line">  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;div v-test=&quot;color&quot;&gt;</span><br><span class="line">      &#123;&#123; num &#125;&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;button @click=&quot;handleUnbind&quot;&gt;解绑&lt;/button&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">  // 解绑</span><br><span class="line">    function handleUnbind() &#123;</span><br><span class="line">      app.$destroy();</span><br><span class="line">    &#125;</span><br><span class="line">    // 自定义指令</span><br><span class="line">    Vue.directive(&quot;test&quot;, &#123;</span><br><span class="line">      //1-被绑定</span><br><span class="line">      bind: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;1-bind 被绑定&quot;);</span><br><span class="line">        console.log(&quot;el:&quot;, el);</span><br><span class="line">        console.log(&quot;binding:&quot;, binding);</span><br><span class="line">        console.log(&quot;vnode:&quot;, vnode);</span><br><span class="line">        el.style.color = binding.value;</span><br><span class="line">      &#125;,</span><br><span class="line">      //2-被插入</span><br><span class="line">      inserted: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;2-inserted 被插入&quot;);</span><br><span class="line">      &#125;,</span><br><span class="line">      //3-更新</span><br><span class="line">      update: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;3-update 更新&quot;);</span><br><span class="line">      &#125;,</span><br><span class="line">      //4-更新完成</span><br><span class="line">      componentUpdated: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;4-componentUpdated 更新完成&quot;);</span><br><span class="line">      &#125;,</span><br><span class="line">      //5-解绑</span><br><span class="line">      unbind: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;5-unbind 解绑&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    var app = new Vue(&#123;</span><br><span class="line">      el: &apos;#app&apos;,</span><br><span class="line">      data: &#123;</span><br><span class="line">        num: 123,</span><br><span class="line">        color: &apos;red&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
 
-<p>在实际应用是，项目数据量是非常大的，这就导致了出现下载失败，报网络错误。百度的解决方法是用URL.createObjectURL()方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">link.href = URL.createObjectURL(uri)</span><br></pre></td></tr></table></figure>
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li>el: 指令所绑定的元素，可以用来直接操作DOM</li>
+<li>binding：一个对象，包含指令的很多东西</li>
+<li>vnode：Vue编译生成的虚拟节点</li>
+</ul>
+<h3 id="声明周期"><a href="#声明周期" class="headerlink" title="声明周期"></a>声明周期</h3><p>自定义指令有五个生命周期（也叫钩子函数），分别是bind、inserted、update、componentUpdated、unbind，说明如下：</p>
+<ol>
+<li>bind：只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个绑定时执行一次的初始化动作。</li>
+<li>inserted：被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于document中）</li>
+<li>update：用于绑定于元素所在的模板更新时调用，而无论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新。</li>
+<li>componentUpdated：被绑定元素所在模板完成一次更新周期时调用。</li>
+<li>unbind：只调用一次，指令与元素解绑时调用</li>
+</ol>
 
-<p>这样浏览器就会报错，最新版本的浏览器已经不支持了.最终选择使用Blob类来进行实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">let str = &apos;x轴,y轴\n&apos;</span><br><span class="line">for (let i = 0; i &lt; item.timeData.length; i++) &#123;</span><br><span class="line">str += item.timeData[i] + &apos;\t,&apos; + item.sigData[i]</span><br><span class="line">str += &apos;\n&apos;</span><br><span class="line">&#125;</span><br><span class="line">// const uri = &apos;data:text/csv;charset=utf-8,\ufeff&apos; + encodeURIComponent(str)</span><br><span class="line">const uri = &apos;\ufeff&apos; + str</span><br><span class="line">// 通过创建a标签实现</span><br><span class="line">const link = document.createElement(&apos;a&apos;)</span><br><span class="line">// link.id = &apos;export&apos;</span><br><span class="line">// link.href = URL.createObjectURL(uri)</span><br><span class="line"></span><br><span class="line">const blob = new Blob([uri, &#123; type: &apos;data:text/csv;charset=utf-8&apos; &#125;])</span><br><span class="line">link.href = URL.createObjectURL(blob) // 解决由于数据量太大导致chrome导出出现网络错误（由于url长度限制）</span><br><span class="line">// 对下载的文件命名</span><br><span class="line">link.download = item.title + &apos;.csv&apos;</span><br><span class="line">link.click()</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -372,8 +381,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/06/07/echarts中的canvas渲染和svg渲染/" rel="next" title="echarts中的canvas渲染和svg渲染">
-                <i class="fa fa-chevron-left"></i> echarts中的canvas渲染和svg渲染
+              <a href="/2020/06/29/vue实例事件/" rel="next" title="vue实例事件">
+                <i class="fa fa-chevron-left"></i> vue实例事件
               </a>
             
           </div>
@@ -382,8 +391,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/06/11/v-if和v-show区别/" rel="prev" title="v-if和v-show区别">
-                v-if和v-show区别 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/06/30/vue组件基础/" rel="prev" title="vue组件基础">
+                vue组件基础 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -436,8 +445,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -500,6 +518,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数说明"><span class="nav-number">1.</span> <span class="nav-text">参数说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明周期"><span class="nav-number">2.</span> <span class="nav-text">声明周期</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
