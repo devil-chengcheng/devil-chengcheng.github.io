@@ -252,6 +252,330 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/18/JavaScript中对象（Objects）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/18/JavaScript中对象（Objects）/" itemprop="url">JavaScript中对象（Objects）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-18T23:44:27+08:00">
+                2020-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>JavaScript简单的数据类型包括数字、字符串、布尔值、null值和undefined值。其他所有值都是对象。数字、字符串、布尔值“貌似”对象，因为它们拥有方法，但是他们是不可变的。在JavaScript中，数组是对象、函数是对象、正则表达式是对象，对象也是对象。  </p>
+<p>对象是属性的容器。属性包含属性名和值。属性名可以是包含空字符串在内的任意字符串，属性值可以是除了undefined之外的任何值。  </p>
+<p>JavaScript对象是无类型的。对新属性的名字和属性的值没有限制。对象中可以包含其他对象，适合用于汇集和管理数据。  </p>
+<p>JavaScript包含一种原型链的特性，允许对象继承另一个对象属性。正确使用可以减少对象初始化时消耗的时间和内存。</p>
+<h4 id="对象字面量"><a href="#对象字面量" class="headerlink" title="对象字面量"></a>对象字面量</h4><p>对象字面量提供了非常方便创建新对象值的方法。对象字面量可出现在任何字面量可以出现的地方。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;&#125;;</span><br><span class="line">var obj2 = &#123;</span><br><span class="line">    &quot;first-name&quot; : &quot;zhangsan&quot;,</span><br><span class="line">    &quot;second-name&quot; : &quot;lisi&quot;</span><br><span class="line">&#125;</span><br><span class="line">var obj3 = &#123;</span><br><span class="line">    first_name : &quot;zhangsan&quot;,</span><br><span class="line">    second_name : &quot;lisi&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果属性名是一个合法的JavaScript标识符且不是保留字，并不强制要求用引号括住属性名</p>
+<h4 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h4><p>要检索对象中包含的值，可以用在[]中括住一个字符串表达式的方式。如果字符串表达式是一个字符串字面量，而且是一个合法的字符串标识符且不是保留字，也可以用 . 表示法代替。推荐用 .</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj[name]</span><br><span class="line">obj.name</span><br></pre></td></tr></table></figure>
+
+<p>如果检索一个不存在的值则会返回undefined。<br>||运算符可以用来填充默认值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var name = obj.name || &quot;zhangsan&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><p>对象中的值可以通过赋值语句进行更新。若属性名已经存在对象中，这个属性的值就会被替换。如果对象之前没有这个属性名，则属性就会被扩充到对象中。</p>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>对象通过引用来传递，永远不会被复制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var x = y;</span><br><span class="line">x.name = &quot;zhangsan&quot;</span><br><span class="line">var yname = y.name  // 因为x和y是指向同一个对象的引用，所以yname也为zhangsan</span><br><span class="line"></span><br><span class="line">var a = &#123;&#125; , b = &#123;&#125; , c = &#123;&#125;; // a,b,c都引用一个不同的空对象</span><br><span class="line">var a = b = c = &#123;&#125;; // a,b,c都引用同一个空对象</span><br></pre></td></tr></table></figure>
+
+<h4 id="原型（prototype）"><a href="#原型（prototype）" class="headerlink" title="原型（prototype）"></a>原型（prototype）</h4><p>每个对象都连接到一个原型对象，并且可以从中继承属性。所有通过字面量创建的对象都连接到Object.prototype，它是JavaScript中的标配对象。  </p>
+<p>当创建一个对象时，可以选择某个对象作为它的原型。可以使用Object.create()方法<br>(可以参考一些new创建和Object.create()创建方法的区别)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// new Object() 方式创建</span><br><span class="line">var a = &#123;</span><br><span class="line">    name: &apos;zhangsan&apos;,</span><br><span class="line">    age: 25</span><br><span class="line">&#125;</span><br><span class="line">var b = new Object(a)</span><br><span class="line">console.log(b) // &#123; name: &apos;zhangsan&apos;, age: 25 &#125;</span><br><span class="line">console.log(b.__proto__) // &#123;&#125;</span><br><span class="line">console.log(b.name) // zhangsan</span><br><span class="line"></span><br><span class="line">// Object.create() 方式创建</span><br><span class="line">var a = &#123;</span><br><span class="line">    name: &apos;zhangsan&apos;,</span><br><span class="line">    age: 25</span><br><span class="line">&#125;</span><br><span class="line">var b = Object.create(a)</span><br><span class="line">console.log(b) // &#123;&#125;</span><br><span class="line">console.log(b.__proto__) // &#123; name: &apos;zhangsan&apos;, age: 25 &#125;</span><br><span class="line">console.log(b.name) // zhangsan</span><br></pre></td></tr></table></figure>
+
+<p>原型连接在更新时是不起作用的。当对某个对象作出改变时，不会触及该对象的原型。<br>原型连接只在检索值的时候才被用到。当我们尝试去获取对象的某个属性值时，如果该对象没有这个属性名，则JavaScript会试着从原型对象中获取属性值。如果那个对象也没有该属性值，再继续从他的原型中找，知道最后达到终点Object.prototype。如果想要的属性完全不存在于原型链中，则结果为undefined。  </p>
+<p>原型关系是一种动态关系。即如果加一个新属性到原型中，该属性会立即对所有基于该原型创建的对象可见。  </p>
+<h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><p>检查对象并确定对象有什么属性可以使用typeof操作符。<br>注意，原型链中任何属性都会产生值，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeof flight.toString  // &apos;function&apos;</span><br><span class="line">typeof flight.constructor  // &apos;function&apos;</span><br></pre></td></tr></table></figure>
+
+<p>有两种方法处理这些不需要的属性。第一个是让程序做检查并丢弃值为函数的属性。一般来说，当想让对象在运行时动态获取自身信息时，关注更多的是数据，应该意识到一些值可能会是函数。另一个方法是hasOwnProperty方法。如果对象拥有独有的属性，返回true。hasOwnProperty方法并不会检查原型链。</p>
+<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>for in语句可用来遍历对象中所有属性名（包括函数和原型中的属性），所以有必要过滤不想要的值。最为常用的过滤器是hasOwnProperty方法，以及使用typeof来排除函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var name;</span><br><span class="line">for(name in obj) &#123;</span><br><span class="line">    if (typeof obj[name] !== &apos;function&apos;) &#123;</span><br><span class="line">        // 处理语句</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样属性名出现的顺序是不确定的。如果想要确保属性按特定顺序出现，则需要避免使用for in语句，而是创造一个数组，以正确的顺序包含属性名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var i;</span><br><span class="line">var properties = &#123;</span><br><span class="line">    &apos;first_name&apos;,</span><br><span class="line">    &apos;middle_name&apos;,</span><br><span class="line">    &apos;last_name&apos;</span><br><span class="line">&#125;;</span><br><span class="line">for (i = 0; i &lt; properties.length; i++) &#123;</span><br><span class="line">    console.log(properties[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过使用for可以得到我们想要的属性，而不用担心可能发掘出的原型链中的属性，且可以按正确顺序取值。</p>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>delete运算符可以用来删除对象的属性。如果对象包含该属性，则该属性会被移除。不会触及原型链中任何对象。</p>
+<h4 id="减少全局变量污染"><a href="#减少全局变量污染" class="headerlink" title="减少全局变量污染"></a>减少全局变量污染</h4><p>JavaScript可以很随意的定义全局变量来容纳应用的所有资源。但是，全局变量削弱了程序的灵活性，应该避免使用。<br>最小化使用全局变量方法之一是为应用只创建一个唯一的全局变量。<br>只要把全局性资源都纳入一个名称空间下，程序与其他应用程序、组件或类库之间发生冲突的可能性会显著降低。还有一种是利用闭包进行信息隐藏，是另一种有效的减少全局污染方式。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/18/关于JavaScript一些特性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/06/18/关于JavaScript一些特性/" itemprop="url">关于JavaScript一些特性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-18T23:43:49+08:00">
+                2020-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>JavaScript是建立在一些非常优秀的想法和少数非常糟糕的想法之上的。优秀的想法包括函数、弱类型、动态对象和富有表现力的对象字面量表示法。糟糕的想法则是基于全局变量的编程模型。  </p>
+<p>现在大部分的编程语言都流行要求强类型。原理在于强类型允许编译器在编译时检测错误。这样我们就可以越早的检测和修复错误，付出的代价就越小。而JavaScript是一门弱语言类型，所以JavaScript编译器不能检测出类型错误。然而事实证明强类型并不会让测试工作变得轻松。强类型能找到的错误并不是令人头疼的错误。弱类型是自由的，无需建立复杂的类层次。  </p>
+<p>JavaScript有强大的对象字面量表示法。通过列出对象的组成部分就能简单的创造出来。这种表示法是Json的灵感来源，已经成为主流的数据交换格式。  </p>
+<p>原型继承是JavaScript中有争议的特性。JavaScript有一个无类型的对象系统，在这个系统中，对象直接从其他对象继承属性。  </p>
+<p>JavaScript有一个非常糟糕的特性就是：依赖全局变量进行连接。所有编译单元的所有顶级对象被撮合到一个全局对象的公共命名空间。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/11/v-if和v-show区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1469,314 +1793,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/20/vue中axios的request拦截器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="朱程程">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/first.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小二、上酒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/20/vue中axios的request拦截器/" itemprop="url">vue中axios的request拦截器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-20T23:19:30+08:00">
-                2020-05-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="vue中axios的request拦截器"><a href="#vue中axios的request拦截器" class="headerlink" title="vue中axios的request拦截器"></a>vue中axios的request拦截器</h1><p>axios中可以设置拦截器，可以在正式发送请求之前做一些事<br>拦截器分为请求拦截器和响应拦截器</p>
-<h2 id="创建一个axios实例"><a href="#创建一个axios实例" class="headerlink" title="创建一个axios实例"></a>创建一个axios实例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const fetchInstance = axios.create(&#123;</span><br><span class="line">  baseURL: process.env.VUE_APP_BASE_API,</span><br><span class="line">  timeout: 6000</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h2 id="请求拦截器"><a href="#请求拦截器" class="headerlink" title="请求拦截器"></a>请求拦截器</h2><p>首先，看一下请求拦截器的写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// request拦截器</span><br><span class="line">fetchInstance.interceptors.request.use(config =&gt; &#123;</span><br><span class="line">  if (store.getters.token) &#123;</span><br><span class="line">    config.headers[&apos;Dashboard-Token&apos;] = Cookies.get(&apos;Dashboard-Token&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">  return config</span><br><span class="line">&#125;, error =&gt; &#123;</span><br><span class="line">  // 发生异常时处理代码</span><br><span class="line">  console.log(error)</span><br><span class="line">  Promise.reject(error)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>很常见的在请求时将token放在请求头<br>我们在前后端交互时经常会使用到token。<br>首次请求后台把token返回前端，前端把这个token可以保存到到localstorage里，然后每次请求后端都需要带上这个token进行权限验证。<br>而如果每次请求都在路径后面加上token太麻烦了，这时候就可以用拦截器来使token自动添加到请求头</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/09/动态规划：最长上升子序列/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="朱程程">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/first.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小二、上酒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/09/动态规划：最长上升子序列/" itemprop="url">动态规划：最长上升子序列</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-09T15:53:31+08:00">
-                2020-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定n个数，求这n个数的最长上升子序列的长度<br>最长上升子序列：在序列中求出一段不断严格上升的部分，不一定连续。</p>
-<h3 id="样例输入"><a href="#样例输入" class="headerlink" title="样例输入"></a>样例输入</h3><p>7<br>2 5 3 4 1 7 6</p>
-<h3 id="样例输出"><a href="#样例输出" class="headerlink" title="样例输出"></a>样例输出</h3><p>4</p>
-<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>如何将问题分解成子问题，经分析“求以ak（k=1,2,3…n）为终点的最长上升子序列的长度”是个好的子问题：把上升子序列中最右边的数，称为该子序列的“终点”。只要这N个子问题都解决了，那么这N个子问题的解中，最大的那个就是整个问题的解。  </p>
-<p>子问题只和一个变量相关，就是数字的位置。因此序列中数的位置k 就是“状态”，而状态 k 对应的“值”，就是以ak做为“终点”的最长上升子序列的长度。这个问题的状态一共有N个。  </p>
-<p>状态定义出来后，转移方程就不难想了。假设Maxlen(k)表示以ak为终点的最长上升子序列的长度，则：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Maxlen(1) = 1</span><br><span class="line">Maxlen(k) = Max&#123;Maxlen(i): 1&lt;i&lt;k 且 ai&lt;ak 且k！=1&#125; + 1</span><br></pre></td></tr></table></figure>
-
-<p>这个转移方程的意思就是，Maxlen(k)的值，就是在ak的左边，“终点”数值小于ak且长度最大的那个上升子序列的长度再加1。因为ak左边任何“终点”小于ak的子序列加上ak后就能形成一个更长的上升子序列。  </p>
-<p>实际实现的时候，可以不必编写递归函数，因为从MaxLen(1)就能推算出MaxLen(2)，有了MaxLen(1)和MaxLen(2)就能推算出MaxLen(3)……</p>
-<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>c实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"># include &lt;stdio.h&gt;</span><br><span class="line"># define MAX 1000</span><br><span class="line">int seq[MAX+10];  </span><br><span class="line">int seqlen[MAX+10];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int i,j,k,N,max,maxlen=1;</span><br><span class="line">    for(i=1;i&lt;=9;i++)</span><br><span class="line">        seqlen[i] = 1 // 存以第i个数为终点的最长上升序列</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;N);</span><br><span class="line">    for(i=0;i&lt;N;i++)</span><br><span class="line">        scanf(&quot;%d&quot;,&amp;seq[i]);  // seq数组保存序列数组</span><br><span class="line">    for(i=2;i&lt;=N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        max = 0;</span><br><span class="line">        for(j=1;j&lt;i;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            //在前i-1个序列中，寻找以终点小于seq[i]的最长的子序列，即最优子状态</span><br><span class="line">            if(seq[j]&lt;seq[i]&amp;&amp;seqlen[j]&gt;max)</span><br><span class="line">                max=seqlen[j];</span><br><span class="line">        &#125;</span><br><span class="line">        seqlen[i]=max+1;</span><br><span class="line">        if(seqlen[i]&gt;maxlen)</span><br><span class="line">            maxlen=seqlen[i]; </span><br><span class="line">    &#125;</span><br><span class="line">    printf(&quot;%d/n&quot;,maxlen);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>java实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class solution &#123;</span><br><span class="line">    public int lengthOfLIS(int[] nums) &#123;</span><br><span class="line">        int length = nums.length;</span><br><span class="line">        // dp数组保存每一个位置的最长子序列</span><br><span class="line">        int[] dp = new int[length];</span><br><span class="line">        Array.fill(dp, 1);</span><br><span class="line">        if(length&lt;2)</span><br><span class="line">            return length;</span><br><span class="line">        // 首先求出所有位置的最长子序列值</span><br><span class="line">        for (int i=1;i&lt;length;i++) &#123;</span><br><span class="line">            for (int j=0;j&lt;i;j++) &#123;</span><br><span class="line">                if(nums[j] &lt; nums[i]) &#123;</span><br><span class="line">                    dp[i] = Math.max(dp[j]+1,dp[i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int result = dp[0];</span><br><span class="line">        for (int i=0;i&lt;length;i++) &#123;</span><br><span class="line">            result = Math.max(result, dp[i])</span><br><span class="line">        &#125;</span><br><span class="line">        return result</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1824,7 +1845,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
