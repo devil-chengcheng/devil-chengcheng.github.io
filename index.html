@@ -252,6 +252,455 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/19/ES6相关笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/19/ES6相关笔记/" itemprop="url">ES6相关笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-19T00:00:03+08:00">
+                2020-09-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web全栈/" itemprop="url" rel="index">
+                    <span itemprop="name">web全栈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ES"><a href="#ES" class="headerlink" title="ES"></a>ES</h2><p>ECMAScript(ECMA,ES)：一种标准<br>JavaScript是ECMA的一种。  </p>
+<hr>
+<p>ES6新语法：</p>
+<ol>
+<li>变量</li>
+<li>函数</li>
+<li>数组/json</li>
+<li>字符串</li>
+<li>面向对象</li>
+<li>Promise</li>
+<li>generator</li>
+<li>模块</li>
+</ol>
+<hr>
+<h3 id="一、变量"><a href="#一、变量" class="headerlink" title="一、变量"></a>一、变量</h3><p>var：可重复定义，不能限制修改，没有块级作用域。  </p>
+<p>ES6引入let、const：不能重复定义；let是变量，const是常量；  </p>
+<p>解构赋值：</p>
+<ol>
+<li>左右两边必须一样，右边是合法的内容</li>
+<li>赋值和定义必须同步完成。</li>
+</ol>
+<h3 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h3><h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>==箭头函数，内外this不变==</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">参数, 参数</span>)</span>&#123;</span><br><span class="line">    函数体</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 箭头函数</span></span><br><span class="line">(参数， 参数) =&gt; &#123;</span><br><span class="line">    函数体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>如果有且仅有1个参数，()可以省略。</li>
+<li>如果函数体只有一句话，且是return，则{}可以省略。</li>
+</ol>
+<h4 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h4><p>(a, b = XXX, c = XX)</p>
+<h4 id="参数展开（剩余参数、可变参数）"><a href="#参数展开（剩余参数、可变参数）" class="headerlink" title="参数展开（剩余参数、可变参数）"></a>参数展开（剩余参数、可变参数）</h4><ol>
+<li>“…”的第一个作用：结构剩余参数<br>(a, b, …args): 用args接收剩下的所有参数</li>
+<li>“…”的第二个作用：用来展开一个数组</li>
+</ol>
+<h3 id="三、数组和json"><a href="#三、数组和json" class="headerlink" title="三、数组和json"></a>三、数组和json</h3><h4 id="数组新增"><a href="#数组新增" class="headerlink" title="数组新增"></a>数组新增</h4><p>map、reduce、filter、forEach、Array</p>
+<h5 id="map"><a href="#map" class="headerlink" title="map"></a>map</h5><p>映射：一一对应<br>[1, 2, 3, 4] =&gt; [false, true, false, true]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">12</span>, <span class="number">65</span>, <span class="number">58</span>, <span class="number">39</span>, <span class="number">87</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr2 = arr.map(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (item &gt;= <span class="number">60</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用箭头函数</span></span><br><span class="line"><span class="keyword">let</span> arr3 = arr.map(<span class="function"><span class="params">item</span> =&gt;</span> item&gt;=<span class="number">60</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="reduce-汇总"><a href="#reduce-汇总" class="headerlink" title="reduce(汇总)"></a>reduce(汇总)</h5><p>一堆 -&gt; 一个</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 求平均值的功能</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">12</span>, <span class="number">65</span>, <span class="number">58</span>, <span class="number">39</span>, <span class="number">87</span>];</span><br><span class="line"></span><br><span class="line">arr.reduce(<span class="function">(<span class="params">tmp, item, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(temp, item, index)</span><br><span class="line">    <span class="keyword">if</span> (index &lt; arr.length - <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> tmp + item;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (tmp + item) / arr.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="filter-过滤"><a href="#filter-过滤" class="headerlink" title="filter(过滤)"></a>filter(过滤)</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">12</span>, <span class="number">65</span>, <span class="number">58</span>, <span class="number">39</span>, <span class="number">87</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr2 = arr.map(<span class="function"><span class="params">item</span> =&gt;</span> item % <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="forEach-遍历"><a href="#forEach-遍历" class="headerlink" title="forEach(遍历)"></a>forEach(遍历)</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">12</span>, <span class="number">65</span>, <span class="number">58</span>, <span class="number">39</span>, <span class="number">87</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    sum += item</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h5><p>Array.from([array-like]) =&gt; {x, x, x}</p>
+<h4 id="json变化："><a href="#json变化：" class="headerlink" title="json变化："></a>json变化：</h4><ol>
+<li><p>简写：名字和值一样的，可以省略</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">24</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> json = &#123;a, b&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>function可以不写</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> json = &#123;</span><br><span class="line">    a: <span class="number">12</span>,</span><br><span class="line">    b: <span class="number">24</span>,</span><br><span class="line">    show1: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.a + <span class="keyword">this</span>.b)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 可以直接写为</span></span><br><span class="line">    show() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.a + <span class="keyword">this</span>.b)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="四、字符串"><a href="#四、字符串" class="headerlink" title="四、字符串"></a>四、字符串</h3><h4 id="字符串模板"><a href="#字符串模板" class="headerlink" title="字符串模板"></a>字符串模板</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> json = &#123;</span><br><span class="line">    name: <span class="string">'zhangsan'</span>,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(<span class="string">'我叫'</span> + json.name + <span class="string">',今年'</span> + json.age + <span class="string">'岁'</span>)</span><br><span class="line">alert(<span class="string">'我叫$&#123;json.name&#125;,今年$&#123;json.age&#125;岁'</span>)</span><br><span class="line"><span class="comment">// 模板2</span></span><br><span class="line">alert(<span class="string">`ab</span></span><br><span class="line"><span class="string">cde</span></span><br><span class="line"><span class="string">f</span></span><br><span class="line"><span class="string">`</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="startsWith"><a href="#startsWith" class="headerlink" title="startsWith"></a>startsWith</h4><p>判断是否以…开始</p>
+<h4 id="endsWith"><a href="#endsWith" class="headerlink" title="endsWith"></a>endsWith</h4><p>判断是否以…结尾</p>
+<h3 id="五、面向对象"><a href="#五、面向对象" class="headerlink" title="五、面向对象"></a>五、面向对象</h3><p>箭头this、bind<br>统一标准化：class、constroctor；extend、super。写法上的变化。  </p>
+<p>bind: 给一个函数定死一个this</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bind固定this指向</span></span><br><span class="line"><span class="built_in">document</span>.onclick = p.showName.bind(p) <span class="comment">// 相当于写一个函数括起来</span></span><br></pre></td></tr></table></figure>
+
+<p>普通函数：根据调用的人，this经常变<br>箭头函数：根据所在环境，this恒定</p>
+<p>编译：一个语言编程另一语言。<br>打包：多个文件打成压缩包，减少HTTP请求，提高性能。</p>
+<h3 id="六、Promise"><a href="#六、Promise" class="headerlink" title="六、Promise"></a>六、Promise</h3><p>异步操作同步化。类似语法糖，将异步请求看上去同步化<br>作用：解决异步操作。  </p>
+<p>同步：串行，简单、方便<br>异步：并发，性能高、体验好</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 异步</span></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'/banner_data'</span>,</span><br><span class="line">    success(data) &#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: <span class="string">'/user_data'</span>,</span><br><span class="line">            success(data) &#123;</span><br><span class="line">                $.ajax(&#123;</span><br><span class="line">                    url: <span class="string">'/item_data'</span>,</span><br><span class="line">                    success(data) &#123;</span><br><span class="line">                        </span><br><span class="line">                    &#125;,</span><br><span class="line">                    error() &#123;</span><br><span class="line">                        alert(数据获取失败)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            error() &#123;</span><br><span class="line">                alert(数据获取失败)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    error() &#123;</span><br><span class="line">        alert(<span class="string">'数据获取失败'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同步</span></span><br><span class="line"><span class="keyword">let</span> banners = $.ajax(&#123;<span class="attr">url</span>: <span class="string">'/banner_data'</span>&#125;);</span><br><span class="line"><span class="keyword">let</span> user = $.ajax(&#123;<span class="attr">url</span>: <span class="string">'/user_data'</span>&#125;);</span><br><span class="line"><span class="keyword">let</span> item = $.ajax(&#123;<span class="attr">url</span>: <span class="string">'/item_data'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>==用同步的方式写异步：==</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url: <span class="string">'1.txt'</span>,</span><br><span class="line">        dataType: <span class="string">'json'</span>,</span><br><span class="line">        success(data) &#123;</span><br><span class="line">            reslove(json)</span><br><span class="line">        &#125;,</span><br><span class="line">        error(err) &#123;</span><br><span class="line">            reject(json)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.then(<span class="function"><span class="params">json</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(json)</span><br><span class="line">&#125;, err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'err'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>Promise.all()</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.all([</span><br><span class="line">    p, p1, p2</span><br><span class="line">]).then()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Promise有用，解除异步操作</li>
+<li>Promise有局限：带逻辑的异步操作较麻烦</li>
+</ol>
+<p>Promise.all(), 与：所有的都成功。<br>Promise.race(), 或：只要有一个完成。</p>
+<h3 id="七、generator生成器"><a href="#七、generator生成器" class="headerlink" title="七、generator生成器"></a>七、generator生成器</h3><p>生成器函数：能暂停，通过==yield==暂停</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">'aaa'</span>);</span><br><span class="line">    <span class="keyword">yield</span>;</span><br><span class="line">    alert(<span class="string">'bbb'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> gen = show();</span><br><span class="line"></span><br><span class="line">gen.next(); <span class="comment">// aaa</span></span><br><span class="line"></span><br><span class="line">gen.next(); <span class="comment">// bbb</span></span><br></pre></td></tr></table></figure>
+
+<p>yield: 可以传参和返回值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">'aaa'</span>);</span><br><span class="line">    <span class="keyword">let</span> a = <span class="keyword">yield</span>;</span><br><span class="line">    <span class="comment">// yield 55; //返回值</span></span><br><span class="line">    alert(<span class="string">'bbb'</span> + a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> gen = show();</span><br><span class="line">gen.next(); <span class="comment">// aaa</span></span><br><span class="line"><span class="comment">// let res1 = gen.next()</span></span><br><span class="line"><span class="comment">// console.log(res1) // &#123;value: 55, done: false&#125;</span></span><br><span class="line">gen.next(<span class="number">12</span>); <span class="comment">// 注意传参在这一块</span></span><br><span class="line"><span class="comment">// let res2 = gen.next()</span></span><br><span class="line"><span class="comment">// console.log(res2) // &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="generator和promise配合"><a href="#generator和promise配合" class="headerlink" title="generator和promise配合"></a>generator和promise配合</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> data1 = yeild $.ajax(&#123;<span class="attr">url</span>: <span class="string">'1.txt'</span>, <span class="attr">dataType</span>: <span class="string">'json'</span>&#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (data1.a + data1.b &lt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> data2 = <span class="keyword">yield</span> $.ajax(&#123;<span class="attr">url</span>: <span class="string">'2.txt'</span>, <span class="attr">dataType</span>: <span class="string">'json'</span>&#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> data3 = <span class="keyword">yield</span> $.ajax(&#123;<span class="attr">url</span>: <span class="string">'3.txt'</span>, <span class="attr">dataType</span>: <span class="string">'json'</span>&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">runner(show)</span><br></pre></td></tr></table></figure>
+
+<p>generator和promise配合需要一个外来runner辅助执行，会带来不统一、不标准、性能低。且generator函数不能写成箭头函数。</p>
+<h3 id="八、async-await"><a href="#八、async-await" class="headerlink" title="八、async/await"></a>八、async/await</h3><p>和generator类似</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function show() &#123;</span><br><span class="line">    let data1 = await $.ajax(&#123;url: &apos;1.txt&apos;, dataType: &apos;json&apos;&#125;);</span><br><span class="line">    let data2 = await $.ajax(&#123;url: &apos;2.txt&apos;, dataType: &apos;json&apos;&#125;);</span><br><span class="line">    let data3 = await $.ajax(&#123;url: &apos;3.txt&apos;, dataType: &apos;json&apos;&#125;);</span><br><span class="line">&#125;</span><br><span class="line">show();</span><br></pre></td></tr></table></figure>
+
+<p>格式用法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">let</span> 结果 = <span class="keyword">await</span> 异步操作-promise、generator、另一个<span class="keyword">async</span>函数</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/18/Ajax2.0：FormData和cors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/18/Ajax2.0：FormData和cors/" itemprop="url">Ajax2.0：FormData和cors</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-18T23:59:26+08:00">
+                2020-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web全栈/" itemprop="url" rel="index">
+                    <span itemprop="name">web全栈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>ajax2.0</p>
+<ul>
+<li>formdata: 控制提交数据、文件上传进度条</li>
+<li>cors跨域</li>
+</ul>
+<h3 id="formdata"><a href="#formdata" class="headerlink" title="formdata"></a>formdata</h3><p>主要用来上传文件，在服务器端和普通<form>一样。</form></p>
+<p>formdata的四个操作</p>
+<ul>
+<li>set(key, value) 会覆盖</li>
+<li>append(key, value) 不覆盖</li>
+<li>get(key) =&gt; value</li>
+<li>delete(key)</li>
+</ul>
+<h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>本不存在跨域问题，是浏览器对我们的限制  </p>
+<p>在后台对跨域进行处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 允许跨域</span></span><br><span class="line">  res.setHeader(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// req.headers['orign']=='null' || /^https?:\/\/(www\.)+abc\.com/.req.headers['orign']</span></span><br><span class="line"><span class="keyword">if</span>(req.headers[<span class="string">'orign'</span>]==<span class="string">'null'</span> || req.headers[<span class="string">'orign'</span>].startsWith(<span class="string">'http://localhost'</span>)) &#123;</span><br><span class="line">  <span class="comment">// 允许跨域</span></span><br><span class="line">  res.setHeader(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Access-Control-Allow-Origin: 域名||*  </p>
+<ul>
+<li>服务器端：验证headers[‘orign’]认不认识。认识=&gt;setHeader(‘Access-Control-Allow-Origin’, ‘*’)</li>
+<li>客户端：不需要做任何事。</li>
+</ul>
+<p>Ajax跨域和前端无关，只和后端验证相关</p>
+<h3 id="拖拽上传"><a href="#拖拽上传" class="headerlink" title="拖拽上传"></a>拖拽上传</h3><p>事件：</p>
+<ul>
+<li>ondragenter  拖着东西进入</li>
+<li>ondragleave  拖着东西离开</li>
+<li>ondragover  悬停</li>
+<li>ondrop  松手</li>
+</ul>
+<p>超过一定大小的文件：50M————走插件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">media</span>=<span class="string">"screen"</span>&gt;</span></span><br><span class="line">    .box &#123;</span><br><span class="line">      width: 400px;</span><br><span class="line">      height: 150px;</span><br><span class="line">      border: 1px solid black;</span><br><span class="line">      background: #CCC;</span><br><span class="line">      position: absolute;</span><br><span class="line">      margin-left: -200px;</span><br><span class="line">      margin-top: -75px;</span><br><span class="line">      left: 50%;</span><br><span class="line">      top: 50%;</span><br><span class="line">      text-align: center;</span><br><span class="line">      line-height: 150px;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> oBox = <span class="built_in">document</span>.querySelector(<span class="string">'.box'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.ondragenter = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        oBox.innerHTML = <span class="string">'松手上传'</span>;</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.ondragleave = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        oBox.innerHTML = <span class="string">'请拖到这里'</span>;</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="comment">// 鼠标悬停没有松手且还没离开，就一直发生</span></span></span><br><span class="line"><span class="javascript">      oBox.ondragover = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">'aaa'</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="comment">// ondragover不阻止默认事件，ondrop就不会触发</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.ondrop = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">'松手'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(ev.dataTransfer.files);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    请拖到这里</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="上传进度"><a href="#上传进度" class="headerlink" title="上传进度"></a>上传进度</h3><p>ajax对象中的upload的onprogress方法，是一个XMLHttpRequestUpload对象，用来观察上传进度。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">oAjax.upload.onprogress = <span class="function"><span class="keyword">function</span>(<span class="params">env</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(ev);</span><br><span class="line">    ev.loaded   完成</span><br><span class="line">    ev.total   总共</span><br><span class="line">    ev.loader/ev.total  =&gt;  <span class="number">0</span>~<span class="number">1</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>upload必须放在send前面</li>
+<li>以前的上传是POST，加了upload则是OPTIONS、POST</li>
+<li>服务器必须能处理OPTIONS。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">oAjax.onprogress  <span class="comment">// 下载进度</span></span><br><span class="line">oAjax.upload.onprogress  <span class="comment">// 上传进度</span></span><br></pre></td></tr></table></figure>
+
+<p>断点续传：普通HTML做不到，必须通过客户端实现。</p>
+<h3 id="拖拽上传（深入）"><a href="#拖拽上传（深入）" class="headerlink" title="拖拽上传（深入）"></a>拖拽上传（深入）</h3><ul>
+<li>拖拽-&gt;上传  简单<br>ev.dataTransfer.files -&gt; FromData</li>
+<li>拖拽-&gt;读取文件内容  复杂<br>FileReader</li>
+</ul>
+<p>对于阻止事件：<br>如果是直接赋值的话，直接return false：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">oForm.onsubmit = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果是addEventListener绑定的话，使用ev.preventDefault</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">oForm.addEventListener(<span class="string">'submit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">    ev.preventDefault();</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h4><p>上传 -&gt; 显示 -&gt; 存到数据库里</p>
+<p>方法1：先别上传，彻底挑选完了再上传。（节约资源）<br>方法2：真的上传，等用户再删。（保险、万一用户断网）</p>
+<h5 id="FileReader用法："><a href="#FileReader用法：" class="headerlink" title="FileReader用法："></a>FileReader用法：</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line"></span><br><span class="line">reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">reader.readAsXXX</span><br><span class="line"></span><br><span class="line">readAsText   文本</span><br><span class="line">readAsDataURL   图片(以及其他二进制数据)</span><br><span class="line">readAsBinaryString  以字符串形式存储的二进制数据</span><br><span class="line">readAsArrayBuffer   以二进制数组的形式存储数据</span><br></pre></td></tr></table></figure>
+
+<p>传输数据：</p>
+<ol>
+<li>直接二进制</li>
+<li>base64</li>
+</ol>
+<p>base64可以将二进制数据表现成字符串。<br>只要能出现地址(src)的地方都可以使用Base64</p>
+<p>base64应用：小图标不要引用地址，直接放个base64————优化网络性能。</p>
+<p>图片上传代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">    * &#123;margin: 0; padding: 0; list-style: none;&#125;</span><br><span class="line">    .box &#123;</span><br><span class="line">      width: 400px;</span><br><span class="line">      height: 200px;</span><br><span class="line">      background: #CCC;</span><br><span class="line">      border: 1px solid black;</span><br><span class="line">      line-height: 200px;</span><br><span class="line">      position: absolute;</span><br><span class="line">      left: 50%;</span><br><span class="line">      top: 50%;</span><br><span class="line">      margin-left: -200px;</span><br><span class="line">      margin-top: -100px;</span><br><span class="line">      text-align: center;</span><br><span class="line">      display: none;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .img_list &#123;</span><br><span class="line">      overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .img_list li &#123;</span><br><span class="line">      float: left;</span><br><span class="line">      width: 200px;</span><br><span class="line">      height: 200px;</span><br><span class="line">      border: 3px solid #666;</span><br><span class="line">      margin: 10px;</span><br><span class="line">      position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    .img_list li img &#123;</span><br><span class="line">      width: 100%;</span><br><span class="line">      height: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">    .img_list li .del_btn &#123;</span><br><span class="line">      position: absolute;</span><br><span class="line">      right: 0;</span><br><span class="line">      top: 0;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// let oBox = document.getElementsByClassName('box');</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> oBox = <span class="built_in">document</span>.querySelector(<span class="string">'.box'</span>);</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> oUl = <span class="built_in">document</span>.querySelector(<span class="string">'.img_list'</span>);</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> timer;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.addEventListener(<span class="string">'dragover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line">        clearTimeout(timer);</span><br><span class="line"><span class="javascript">        oBox.style.display = <span class="string">'block'</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          oBox.style.display = <span class="string">'none'</span>;</span></span><br><span class="line">        &#125;,300)</span><br><span class="line">        ev.preventDefault();</span><br><span class="line"><span class="javascript">      &#125;, <span class="literal">false</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.addEventListener(<span class="string">'dragenter'</span>, () =&gt; &#123;</span></span><br><span class="line"><span class="javascript">        oBox.innerHTML = <span class="string">'请松手'</span>;</span></span><br><span class="line"><span class="javascript">      &#125;, <span class="literal">false</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.addEventListener(<span class="string">'dragleave'</span>, () =&gt; &#123;</span></span><br><span class="line"><span class="javascript">        oBox.innerHTML = <span class="string">'请拖到这里'</span>;</span></span><br><span class="line"><span class="javascript">      &#125;, <span class="literal">false</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.addEventListener(<span class="string">'drop'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(ev);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">Array</span>.from(ev.dataTransfer.files).forEach(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> reader = <span class="keyword">new</span> FileReader();</span></span><br><span class="line"><span class="javascript">          reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(reader);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> oLi = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span></span><br><span class="line"><span class="javascript">            oLi.file = file;  <span class="comment">// 每个li对应一个图片，将它保存</span></span></span><br><span class="line"><span class="xml">            oLi.innerHTML = '<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"a.tif"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span> <span class="attr">class</span>=<span class="string">"del_btn"</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span>';</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> oImg = oLi.children[<span class="number">0</span>];</span></span><br><span class="line"><span class="javascript">            oImg.src = <span class="keyword">this</span>.result;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> oBtDel = oLi.children[<span class="number">1</span>];</span></span><br><span class="line"><span class="javascript">            oBtDel.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line">              oUl.removeChild(oLi);</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            oUl.appendChild(oLi);</span><br><span class="line">          &#125;;</span><br><span class="line">          reader.readAsDataURL(file);</span><br><span class="line">         &#125;)</span><br><span class="line">        ev.preventDefault();</span><br><span class="line"><span class="javascript">      &#125;, <span class="literal">false</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="comment">// 真正的上传</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> oBtupload = <span class="built_in">document</span>.getElementById(<span class="string">'btn_upload'</span>);</span></span><br><span class="line"><span class="javascript">      oBtupload.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> data = <span class="keyword">new</span> FormData();</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="built_in">Array</span>.from(oUl.children).forEach(<span class="function"><span class="params">li</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">          data.append(<span class="string">'f1'</span>, li.file);</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(li.file, <span class="string">'li'</span>);</span></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> oAjax = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        oAjax.open(<span class="string">'POST'</span>, <span class="string">'http://localhost:8089/api'</span>, <span class="literal">true</span>);</span></span><br><span class="line">        oAjax.send(data);</span><br><span class="line"><span class="javascript">        oAjax.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">if</span>(oAjax.readyState == <span class="number">4</span>) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(oAjax.status &gt;= <span class="number">200</span> &amp;&amp; oAjax.status &lt; <span class="number">300</span> || oAjax.status == <span class="number">304</span>) &#123;</span></span><br><span class="line"><span class="javascript">              alert(<span class="string">'success'</span>);</span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">              alert(<span class="string">'defect'</span>);</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"img_list"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"上传"</span> <span class="attr">id</span>=<span class="string">"btn_upload"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    请拖到这里</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>后端nodejs代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);  <span class="comment">// 框架主体</span></span><br><span class="line"><span class="keyword">const</span> body = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);  <span class="comment">// 接受普通POST数据</span></span><br><span class="line"><span class="keyword">const</span> multer = <span class="built_in">require</span>(<span class="string">'multer'</span>);  <span class="comment">// 接受文件POST数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = express();</span><br><span class="line">server.listen(<span class="number">8089</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中间件</span></span><br><span class="line">server.use(body.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">false</span>&#125;));</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> multerObj = multer(&#123;<span class="attr">dest</span>: <span class="string">'./upload/'</span>&#125;);</span><br><span class="line">server.use(multerObj.any());</span><br><span class="line"></span><br><span class="line">server.use(<span class="string">'/api'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.headers);</span><br><span class="line">  res.setHeader(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</span><br><span class="line"></span><br><span class="line">  res.send(<span class="string">'OK'</span>);</span><br><span class="line">  <span class="comment">// 由中间件提供</span></span><br><span class="line">  <span class="built_in">console</span>.log(req.body);</span><br><span class="line">  <span class="built_in">console</span>.log(req.files);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/17/WebSocket相关笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2047,311 +2496,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/30/vue组件基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="朱程程">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/first.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小二、上酒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/30/vue组件基础/" itemprop="url">vue组件基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-30T22:59:01+08:00">
-                2020-06-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1、组件注册"><a href="#1、组件注册" class="headerlink" title="1、组件注册"></a>1、组件注册</h3><h5 id="全局注册"><a href="#全局注册" class="headerlink" title="全局注册"></a>全局注册</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Vue.component(&apos;button-counter&apos;, &#123;</span><br><span class="line">    data: function() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            count: 0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template: &apos;&lt;button v-on:click=&quot;count++&quot;&gt;全局组件显示： &#123;&#123; count &#125;&#125;&lt;/button&gt;&apos;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">    el: #app</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// html使用</span><br><span class="line">&lt;button-counter&gt;&lt;/button-counter&gt;</span><br></pre></td></tr></table></figure>
-
-<h5 id="局部注册"><a href="#局部注册" class="headerlink" title="局部注册"></a>局部注册</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    components:&#123;</span><br><span class="line">        &quot;button-inner&quot;:&#123;</span><br><span class="line">            data: function() &#123;</span><br><span class="line">                return &#123;</span><br><span class="line">                    inner: 0</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            template: &apos;&lt;button v-on:click=&quot;inner++&quot;&gt;局部组件显示： &#123;&#123; inner &#125;&#125;&lt;/button&gt;&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// html使用</span><br><span class="line">&lt;button-inner&gt;&lt;/button-inner&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2、props属性传值"><a href="#2、props属性传值" class="headerlink" title="2、props属性传值"></a>2、props属性传值</h3><h5 id="属性取值"><a href="#属性取值" class="headerlink" title="属性取值"></a>属性取值</h5><p>如果属性带“-”，</p>
-<h5 id="在构造器向组件传值（v-bind）"><a href="#在构造器向组件传值（v-bind）" class="headerlink" title="在构造器向组件传值（v-bind）"></a>在构造器向组件传值（v-bind）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">        el: &apos;#app&apos;,</span><br><span class="line">        data: &#123;</span><br><span class="line">            message: &apos;hello&apos;</span><br><span class="line">        &#125;,</span><br><span class="line">        components:&#123;</span><br><span class="line">            &quot;button-props&quot;:&#123;</span><br><span class="line">                template:`&lt;div style=&quot;color:red;&quot;&gt;参数1： &#123;&#123; here &#125;&#125;:---参数2： &#123;&#123;fromHere&#125;&#125;&lt;/div&gt;`,</span><br><span class="line">                props:[&apos;here&apos;, &apos;fromHere&apos;]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">// html使用</span><br><span class="line">&lt;button-props v-bind:here=&quot;message&quot; :from-here=&quot;message&quot;&gt;&lt;/button-props&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="3、父子组件"><a href="#3、父子组件" class="headerlink" title="3、父子组件"></a>3、父子组件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// 子组件</span><br><span class="line">var city = &#123;</span><br><span class="line">    template:`&lt;div&gt;Sichuan of China&lt;/div&gt;`</span><br><span class="line">&#125;</span><br><span class="line">// 父组件</span><br><span class="line">var parent = &#123;</span><br><span class="line">    template:</span><br><span class="line">        `&lt;div&gt;</span><br><span class="line">            &lt;p&gt; Panda from China!&lt;/p&gt;</span><br><span class="line">            &lt;city&gt;&lt;/city&gt;</span><br><span class="line">        &lt;/div&gt;`,</span><br><span class="line">    components:&#123;</span><br><span class="line">        &quot;city&quot;: city</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 实例化</span><br><span class="line">new Vue(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    // 定义局部组件</span><br><span class="line">    components:&#123;</span><br><span class="line">        // 组件注册</span><br><span class="line">        &quot;parent&quot;: parent</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// html使用</span><br><span class="line">&lt;parent&gt;&lt;/parent&gt;</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/30/vue自定义指令/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="朱程程">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/first.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小二、上酒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/30/vue自定义指令/" itemprop="url">vue自定义指令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-30T22:58:40+08:00">
-                2020-06-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/vue/" itemprop="url" rel="index">
-                    <span itemprop="name">vue</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>vue中的自定义指令通过Vue.directive来实现，主要完成内置指令不能完成的一些事情。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">  &lt;title&gt;Vue入门之自定义指令&lt;/title&gt;</span><br><span class="line">  &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;div v-test=&quot;color&quot;&gt;</span><br><span class="line">      &#123;&#123; num &#125;&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;button @click=&quot;handleUnbind&quot;&gt;解绑&lt;/button&gt;</span><br><span class="line">  &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">  // 解绑</span><br><span class="line">    function handleUnbind() &#123;</span><br><span class="line">      app.$destroy();</span><br><span class="line">    &#125;</span><br><span class="line">    // 自定义指令</span><br><span class="line">    Vue.directive(&quot;test&quot;, &#123;</span><br><span class="line">      //1-被绑定</span><br><span class="line">      bind: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;1-bind 被绑定&quot;);</span><br><span class="line">        console.log(&quot;el:&quot;, el);</span><br><span class="line">        console.log(&quot;binding:&quot;, binding);</span><br><span class="line">        console.log(&quot;vnode:&quot;, vnode);</span><br><span class="line">        el.style.color = binding.value;</span><br><span class="line">      &#125;,</span><br><span class="line">      //2-被插入</span><br><span class="line">      inserted: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;2-inserted 被插入&quot;);</span><br><span class="line">      &#125;,</span><br><span class="line">      //3-更新</span><br><span class="line">      update: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;3-update 更新&quot;);</span><br><span class="line">      &#125;,</span><br><span class="line">      //4-更新完成</span><br><span class="line">      componentUpdated: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;4-componentUpdated 更新完成&quot;);</span><br><span class="line">      &#125;,</span><br><span class="line">      //5-解绑</span><br><span class="line">      unbind: function (el, binding, vnode) &#123;</span><br><span class="line">        console.log(&quot;5-unbind 解绑&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    var app = new Vue(&#123;</span><br><span class="line">      el: &apos;#app&apos;,</span><br><span class="line">      data: &#123;</span><br><span class="line">        num: 123,</span><br><span class="line">        color: &apos;red&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
-<li>el: 指令所绑定的元素，可以用来直接操作DOM</li>
-<li>binding：一个对象，包含指令的很多东西</li>
-<li>vnode：Vue编译生成的虚拟节点</li>
-</ul>
-<h3 id="声明周期"><a href="#声明周期" class="headerlink" title="声明周期"></a>声明周期</h3><p>自定义指令有五个生命周期（也叫钩子函数），分别是bind、inserted、update、componentUpdated、unbind，说明如下：</p>
-<ol>
-<li>bind：只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个绑定时执行一次的初始化动作。</li>
-<li>inserted：被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于document中）</li>
-<li>update：用于绑定于元素所在的模板更新时调用，而无论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新。</li>
-<li>componentUpdated：被绑定元素所在模板完成一次更新周期时调用。</li>
-<li>unbind：只调用一次，指令与元素解绑时调用</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2404,7 +2548,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
