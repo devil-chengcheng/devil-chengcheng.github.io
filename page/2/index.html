@@ -252,6 +252,529 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/01/vue-router/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/01/vue-router/" itemprop="url">vue-router</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-01T23:49:21+08:00">
+                2020-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">官方文档</a><br>Vue Router是Vue.js官方的路由管理器。和Vue.js的核心深度集成，让构建单页面应用变得易如反掌。包含的功能有：</p>
+<ul>
+<li>嵌套的路由/视图表</li>
+<li>模块化的、基于组件的路由配置</li>
+<li>路由参数、查询、通配符</li>
+<li>基于Vue.js过渡系统的视图过渡效果</li>
+<li>细粒度的导航控制</li>
+<li>带有自动激活的CSS class的链接</li>
+<li>HTML5 历史模式或 hash 模式，在 IE9 中自动降级</li>
+<li>自定义的滚动条行为</li>
+</ul>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ol>
+<li><a href="#1">快速入门</a></li>
+<li><a href="#2">路由属性配置</a></li>
+<li><a href="#3">页面跳转</a></li>
+<li><a href="#4">子路由-路由嵌套</a></li>
+<li><a href="#5">命名路由-命名视图-重定向-别名</a></li>
+<li><a href="#6">路由传递参数</a></li>
+<li><a href="#7">过渡动画</a></li>
+<li><a href="#8">mode和404</a></li>
+<li><a href="#9">路由钩子</a></li>
+<li><a href="#10">路由懒加载</a></li>
+</ol>
+<h2 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a><span id="1">快速入门</span></h2><h3 id="一、简单介绍"><a href="#一、简单介绍" class="headerlink" title="一、简单介绍"></a>一、简单介绍</h3><p>vue-router是vue官方的路由解决方案，中文官方地址<br><a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">中文官方文档</a></p>
+<h3 id="二、安装"><a href="#二、安装" class="headerlink" title="二、安装"></a>二、安装</h3><p>vue-router是一个插件包，需要用npm来进行安装的。如果采用vue-cli构建初始化项目会提示安装，也可以自己使用命令安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-router --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、解读核心文件"><a href="#三、解读核心文件" class="headerlink" title="三、解读核心文件"></a>三、解读核心文件</h3><p>用vue-cli构建项目之后，在src/router/index.js文件中看到以下的核心文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// 引入vue框架</span><br><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">// 引入vue-router路由依赖</span><br><span class="line">import Router from &apos;vue-router&apos;</span><br><span class="line">// 引入页面组件，命名为HelloWorld</span><br><span class="line">import HelloWorld from &apos;@/components/HelloWorld&apos;</span><br><span class="line"></span><br><span class="line">// Vue全局使用Router</span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">// 定义路由配置</span><br><span class="line">export default new Router(&#123;</span><br><span class="line">    routes: [  // 配置路由，这里是个数组</span><br><span class="line">    &#123;           // 每一个连接都是一个对象</span><br><span class="line">        path: &apos;/&apos;, // 链接路径</span><br><span class="line">        name: &apos;HelloWorld&apos;,  // 路由名称</span><br><span class="line">        component: HelloWorld // 对应组件模板</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、使用"><a href="#四、使用" class="headerlink" title="四、使用"></a>四、使用</h3><p>在系统入口文件main.js中注入router，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 引入vue框架</span><br><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">// 引入根组件</span><br><span class="line">import App from &apos;./App&apos;</span><br><span class="line">// 引入路由配置</span><br><span class="line">import router from &apos;./router&apos;</span><br><span class="line"></span><br><span class="line">// 关闭生产模式下给出的提示</span><br><span class="line">Vue.config.productionTip = false</span><br><span class="line"></span><br><span class="line">// 定义实例</span><br><span class="line">new Vue(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    router, // 注入框架中</span><br><span class="line">    components: &#123; App &#125;,</span><br><span class="line">    template: &apos;&lt;App /&gt;&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由属性配置说明"><a href="#路由属性配置说明" class="headerlink" title="路由属性配置说明"></a><span id="2">路由属性配置说明</span></h2><p>代如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">    mode: &apos;history&apos;, // 路由模式，取值为history和hash</span><br><span class="line">    base: &apos;/&apos;, // 打包路径，默认/，可以修改</span><br><span class="line">    routes: [</span><br><span class="line">    &#123;</span><br><span class="line">        path: string, // 路径</span><br><span class="line">        component: Component, // 页面组件</span><br><span class="line">        name: string, // 路由名称</span><br><span class="line">        components: &#123; [name: string]: Component &#125;, // 命名视图组件</span><br><span class="line">        redirect: string | Location | Function, // 重定向</span><br><span class="line">        props: boolean | string | Function, // 路由组件传递参数</span><br><span class="line">        alias: string | Array&lt;string&gt;, // 路由别名</span><br><span class="line">        children: Array&lt;RouteConfig&gt;, // 嵌套子路由</span><br><span class="line">        beforeEnter?: (to: Route, from: Route, next: Function) =&gt; void, // 路由单独钩子</span><br><span class="line">        meta: any, // 自定义标签属性，比如：是否需要登录</span><br><span class="line">        icon: any, // 图标</span><br><span class="line">        // 2.6.0+</span><br><span class="line">        caseSensitive: boolean, // 匹配规则是否大小写敏感？(默认值：false)</span><br><span class="line">        pathToRegexpOptions: Object // 编译正则的选项</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="页面跳转"><a href="#页面跳转" class="headerlink" title="页面跳转"></a><span id="3">页面跳转</span></h2><h3 id="一、router-link标签跳转"><a href="#一、router-link标签跳转" class="headerlink" title="一、router-link标签跳转"></a>一、router-link标签跳转</h3><p>在html标签内使用router-link跳转，相当于超链接a标签，使用方式如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&apos;/&apos;&gt;&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+<p>to: 导航路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;导航 ：</span><br><span class="line">   &lt;router-link to=&quot;/&quot;&gt;首页&lt;/router-link&gt;</span><br><span class="line">   &lt;router-link to=&quot;/hello&quot;&gt;hello&lt;/router-link&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、编程式导航-JS代码内部跳转"><a href="#二、编程式导航-JS代码内部跳转" class="headerlink" title="二、编程式导航-JS代码内部跳转"></a>二、编程式导航-JS代码内部跳转</h3><p>在实际项目中，很多时候都是通过JS代码内部进行跳转，使用方式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$router.push(&apos;/XXX&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>具体简单的用法：<br>（1）先编写一个按钮，在按钮上绑定方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click=&quot;goHome&quot;&gt;返回首页&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（2）在script模块里加入goHome方法，并用this.$router.push(‘/‘)导航到首页  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">    name: &apos;#app&apos;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        goHome() &#123;</span><br><span class="line">            this.$router.push(&apos;/&apos;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、其他常用方法"><a href="#三、其他常用方法" class="headerlink" title="三、其他常用方法"></a>三、其他常用方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 后退一步记录，等同于history.back()</span><br><span class="line">this.$router.go(-1)</span><br><span class="line">// 在浏览器记录中前进一步，等同于history.forward()</span><br><span class="line">this.$router.go(1)</span><br></pre></td></tr></table></figure>
+
+<h2 id="子路由-路由嵌套"><a href="#子路由-路由嵌套" class="headerlink" title="子路由-路由嵌套"></a><span id="4">子路由-路由嵌套</span></h2><p>子路由，也叫路由嵌套，采用在children后跟路由数组来实现，数组里和其他配置路由基本相同，需要配置path和component，然后在响应部分添加<router-view>来展示子页面信息，相当于陷入ifram。  </router-view></p>
+<h3 id="1、src-components-Home-vue（父页面）"><a href="#1、src-components-Home-vue（父页面）" class="headerlink" title="1、src/components/Home.vue（父页面）"></a>1、src/components/Home.vue（父页面）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">        &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;</span><br><span class="line">        &lt;!-- 添加子路由导航 --&gt;</span><br><span class="line">        &lt;p&gt;导航 ：</span><br><span class="line">            &lt;router-link to=&quot;/home&quot;&gt;首页&lt;/router-link&gt; | </span><br><span class="line">            &lt;router-link to=&quot;/home/one&quot;&gt;-子页面1&lt;/router-link&gt; |</span><br><span class="line">            &lt;router-link to=&quot;/home/two&quot;&gt;-子页面2&lt;/router-link&gt;</span><br><span class="line">        &lt;/p&gt;</span><br><span class="line">        &lt;!-- 子页面展示部分 --&gt;</span><br><span class="line">        &lt;router-view/&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name: &apos;Home&apos;,</span><br><span class="line">    data () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            msg: &apos;Home Page!&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、src-components-One-vue（子页面1）"><a href="#2、src-components-One-vue（子页面1）" class="headerlink" title="2、src/components/One.vue（子页面1）"></a>2、src/components/One.vue（子页面1）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">        &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name: &apos;One&apos;,</span><br><span class="line">    data () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            msg: &apos;Hi, I am One Page!&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、src-components-Two-vue（子页面2）"><a href="#3、src-components-Two-vue（子页面2）" class="headerlink" title="3、src/components/Two.vue（子页面2）"></a>3、src/components/Two.vue（子页面2）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">        &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name: &apos;Two&apos;,</span><br><span class="line">    data () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            msg: &apos;Hi, I am Two Page!&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、src-router-index-js（路由配置）"><a href="#4、src-router-index-js（路由配置）" class="headerlink" title="4、src/router/index.js（路由配置）"></a>4、src/router/index.js（路由配置）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import Router from &apos;vue-router&apos;</span><br><span class="line">import Home from &apos;@/components/Home&apos;</span><br><span class="line">import One from &apos;@/components/One&apos; </span><br><span class="line">import Two from &apos;@/components/Two&apos;</span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">export default new Router(&#123;</span><br><span class="line">    routes: [</span><br><span class="line">    &#123;</span><br><span class="line">        path: &apos;/&apos;, // 默认页面重定向到主页</span><br><span class="line">        redirect: &apos;/home&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        path: &apos;/home&apos;, // 主页路由</span><br><span class="line">        name: &apos;Home&apos;,</span><br><span class="line">        component: Home,</span><br><span class="line">        children: [ // 嵌套子路由</span><br><span class="line">        &#123;</span><br><span class="line">            path: &apos;one&apos;,</span><br><span class="line">            component: One</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            path: &apos;two&apos;,</span><br><span class="line">            component: Two</span><br><span class="line">        &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由传递参数"><a href="#路由传递参数" class="headerlink" title="路由传递参数"></a><span id="5">路由传递参数</span></h2><h3 id="1、通过-标签中的to传参"><a href="#1、通过-标签中的to传参" class="headerlink" title="1、通过 标签中的to传参"></a>1、通过<router-link> 标签中的to传参</router-link></h3><p><strong>基本语法</strong>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123;name:xxx, params: &#123;key:value&#125;&#125;&quot;&gt;valueString&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上面to前边是带冒号，后边跟的是一个对象形式的字符串  </p>
+<ul>
+<li>name：在路由配置文件中起的name值。叫做命名路由</li>
+<li>params：要传的参数，它是对象形式，在对象里可以传递多个值</li>
+</ul>
+<p><strong>具体实例</strong>：<br>（1）在src/components/Home.vue里面导航中添加如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123;name: &apos;one&apos;, params:&#123;username:&apos;test123&apos;&#125;&#125;&quot;&gt;子页面1&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（2）在src/router/indes.js中添加如下代码，重点是name：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path:&apos;one&apos;, // 子页面1</span><br><span class="line">    name: &apos;one&apos;, // 路由名称-命名路由</span><br><span class="line">    component:One</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（3）在src/components/One.vue里面接受参数，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;&#123;&#123;$route.params.username&#125;&#125;&lt;/h2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、url中传递参数"><a href="#2、url中传递参数" class="headerlink" title="2、url中传递参数"></a>2、url中传递参数</h3><p>(1)在路由中以冒号传递，在src/router/index.js中加入如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: &apos;/home/two/:id/:name&apos;,</span><br><span class="line">    component: Two</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>(2)接受参数，在src/components/Two.vue中加入如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;ID：&#123;&#123; $route.params.id&#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;名称：&#123;&#123; $route.params.name&#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>(3)路由跳转，在src/components/Home.vue中加入如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&quot;/home/two/1/张三&quot;&gt;子页面2&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+<p>to前没有冒号为字符串路由，必须全部匹配。<br>(4)如果路由参数需要有特定的规则，就需要加入正则表达式了，示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path:&apos;/home/two/:id(\\d+)/:name&apos;, // 子页面2</span><br><span class="line">    component:Two</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、编程式导航-params传递参数"><a href="#3、编程式导航-params传递参数" class="headerlink" title="3、编程式导航-params传递参数"></a>3、编程式导航-params传递参数</h3><p>（1）在src/router/index.js页面加入如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path:&apos;/home/three&apos;, // 子页面3</span><br><span class="line">    name: &apos;three&apos;,</span><br><span class="line">    component:Three</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）在src/components/Three.vue页面加入如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;ID：&#123;&#123; $route.params.id&#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;名称：&#123;&#123; $route.params.name&#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（3）在src/components/Home.vue中加入如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// template</span><br><span class="line">&lt;button @click=&quot;toThreePage&quot;&gt;页面3-params传参&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// script</span><br><span class="line">methods: &#123;</span><br><span class="line">    toThreePage() &#123;</span><br><span class="line">        this.$router.push(&#123;name: &apos;three&apos;, params: &#123;id: 1, name: &apos;zhangsan&apos;&#125;&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>说明：<br>A、动态路由使用params传递参数，在this.$router.push()方法中path不能和params一起使用，否则params将无效。需要用name来指定页面。<br>B、以上的参数不会显示到浏览器的地址栏中，如果刷新一次页面，就获取不到参数了，改进方式将第一步代码改为如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path:&apos;/home/three/:id/:name&apos;, // 子页面3</span><br><span class="line">    name: &apos;three&apos;,</span><br><span class="line">    component:Three</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、编程式导航-query传递参数"><a href="#4、编程式导航-query传递参数" class="headerlink" title="4、编程式导航-query传递参数"></a>4、编程式导航-query传递参数</h3><p>（1）在src/router/index.js页面加入如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path:&apos;/home/three&apos;, // 子页面3</span><br><span class="line">    name: &apos;three&apos;,</span><br><span class="line">    component:Three</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）在src/components/Three.vue页面加入如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;ID：&#123;&#123; $route.query.id&#125;&#125;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;名称：&#123;&#123; $route.query.name&#125;&#125;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（3）在src/components/Home.vue中加入如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// template</span><br><span class="line">&lt;button @click=&quot;toThreePage&quot;&gt;页面3-params传参&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// script</span><br><span class="line">methods: &#123;</span><br><span class="line">    toThreePage() &#123;</span><br><span class="line">        this.$router.push(&#123;path: &apos;/home/three&apos;, query: &#123;id: 1, name: &apos;zhangsan&apos;&#125;&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>动态路由使用query传递参数，会显示到浏览器地址栏中，以上链接为<br>/home/three?id=1&amp;name=zhangsan</p>
+<h2 id="命名路由-命名视图-重定向-别名"><a href="#命名路由-命名视图-重定向-别名" class="headerlink" title="命名路由-命名视图-重定向-别名"></a><span id="6">命名路由-命名视图-重定向-别名</span></h2><h3 id="1、命名路由"><a href="#1、命名路由" class="headerlink" title="1、命名路由"></a>1、命名路由</h3><p>给一个路由命一个唯一的名称，然后跳转调用这个名称即可。<br>（1）在src/router/index.js中加一个带name的路由，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: &apos;one&apos;, // 子页面1</span><br><span class="line">    name: &apos;one&apos;, // 路由名称-命名路由</span><br><span class="line">    component: One // 页面组件</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）在src/component/Home.vue页面中调用，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// template跳转调用</span><br><span class="line">&lt;router-link :to=&quot;&#123;name: &apos;one&apos;&#125;&quot;&gt;子页面1&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line">// router.push函数跳转调用</span><br><span class="line">router.push(&#123; name: &apos;user&apos;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、命名视图"><a href="#2、命名视图" class="headerlink" title="2、命名视图"></a>2、命名视图</h3><p>在同一个页面展示多个视图，如果不用嵌套，智能采用命名视图来实现，代码如下：<br>（1）在src/router/index.js中，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import Router from &apos;vue-router&apos;</span><br><span class="line">// 创建页面组件</span><br><span class="line">const Header = &#123; template: &apos;&lt;div&gt;Header&lt;/div&gt;&apos; &#125;</span><br><span class="line">const Left = &#123; template: &apos;&lt;div&gt;Left&lt;/div&gt;&apos; &#125;</span><br><span class="line">const Right = &#123; template: &apos;&lt;div&gt;Right&lt;/div&gt;&apos; &#125;</span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line">export default new Router(&#123;</span><br><span class="line">    routes: [</span><br><span class="line">    &#123;</span><br><span class="line">        path: &apos;/&apos;, // 主页路由</span><br><span class="line">        components: &#123;</span><br><span class="line">            defaults: Header,</span><br><span class="line">            a: Left,</span><br><span class="line">            b: Right</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>（2）在src/App.vue中，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">        &lt;router-view /&gt;</span><br><span class="line">        &lt;router-view name=&quot;a&quot; class=&quot;left&quot; /&gt;</span><br><span class="line">        &lt;router-view name=&quot;b&quot; class=&quot;right&quot; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name: &apos;App&apos;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">#app &#123;</span><br><span class="line">    text-align: center;</span><br><span class="line">    color: #2c3e50;</span><br><span class="line">    width: 500px;</span><br><span class="line">    border: 1px solid red;</span><br><span class="line">    margin: 0 auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.left,.right&#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width:48%;</span><br><span class="line">    text-align: center;</span><br><span class="line">    border:1px solid red</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>PS：经过实践，命名视图只能放在最顶级的页面中，即第一步中的代码不能放在其他页面中。</p>
+<h3 id="3、重定向"><a href="#3、重定向" class="headerlink" title="3、重定向"></a>3、重定向</h3><p>重定向是通过route的配置中关键词redirect来实现的，具体代码如下：<br>（1）在src/router/index.js中，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">    routes: [</span><br><span class="line">    &#123;</span><br><span class="line">        path: &apos;/&apos;, // 默认页面重定向到主页</span><br><span class="line">        redirect: &apos;/home&apos; // 重定向</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        path: &apos;/home&apos;, // 主页路由</span><br><span class="line">        component: Home,</span><br><span class="line">        children:[ // 嵌套子路由</span><br><span class="line">            &#123;</span><br><span class="line">                path:&apos;/home/two/:id/:name&apos;, // 子页面2</span><br><span class="line">                component:Two</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                path:&apos;/home/three/:id/:name&apos;, // 子页面3</span><br><span class="line">                name: &apos;three&apos;, // 路由名称-命名路由</span><br><span class="line">                redirect: &apos;/home/two/:id/:name&apos; // 重定向-传递参数</span><br><span class="line">            &#125;,</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>（2）在src/components/Home.vue中，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&quot;/&quot;&gt;首页&lt;/router-link&gt; | </span><br><span class="line">&lt;router-link to=&quot;/home/two/1/lisi&quot;&gt;子页面2&lt;/router-link&gt;  |</span><br><span class="line">&lt;router-link :to=&quot;&#123;name: &apos;three&apos;, params: &#123;id: 1, name: &apos;zhangsan&apos;&#125;&#125;&quot;&gt;子页面3&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+<p>说明1-不带参数的重定向：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redirect: &apos;/home&apos; // 重定向-不带参数</span><br></pre></td></tr></table></figure>
+
+<p>说明2-带参数的重定向：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redirect: &apos;/home/two/:id/:name&apos; // 重定向-传递参数</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、别名"><a href="#4、别名" class="headerlink" title="4、别名"></a>4、别名</h3><p>重定向是通过route的配置中关键词alias来实现的，具体代码如下：<br>（1）在src/router/index.js中，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path:&apos;/one&apos;, // 子页面1</span><br><span class="line">    component:One,</span><br><span class="line">    alias: &apos;/oneother&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）在src/components/Home.vue中，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&quot;/oneother&quot;&gt;子页面1&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+<p>redirect和alias的区别：</p>
+<ul>
+<li>redirect：直接改变了url的值，把url变成了真实的path路径。</li>
+<li>alias：url路径没有被改变，这种更友好，让用户知道自己访问的路径，只是改变router-view中的内容。</li>
+</ul>
+<p>别名请不要用在path为’/’中，如下代码的别名是不起作用的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: &apos;/&apos;,</span><br><span class="line">    component: Hello,</span><br><span class="line">    alias:&apos;/home&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="过渡动画"><a href="#过渡动画" class="headerlink" title="过渡动画"></a><span id="7">过渡动画</span></h2><h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><p>（1）在<router-view>标签的外部添加<transition>标签，标签还需要一个name属性，代码如下：</transition></router-view></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;transition name=&quot;fade&quot; mode=&quot;out-in&quot;&gt;</span><br><span class="line">    &lt;router-view /&gt;</span><br><span class="line">&lt;/transition&gt;</span><br></pre></td></tr></table></figure>
+
+<p>（2）加入CSS，一共4个CSS类名，四个类名与transition的name属性有关，比如name=”fade”，相应的css如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/*页面切换动画*/</span><br><span class="line">/*进入过渡的结束状态，元素被插入时就生效，在过渡过程完成后移除*/</span><br><span class="line">.fade-enter-active &#123;</span><br><span class="line">    transition: opacity .5s;</span><br><span class="line">&#125;</span><br><span class="line">/*进入过渡的开始状态，元素被插入时生效，只应用一帧后立刻删除*/</span><br><span class="line">.fade-enter &#123;</span><br><span class="line">    opacity: 0;</span><br><span class="line">&#125;</span><br><span class="line">/*离开过渡的开始状态，元素被删除时触发，只应用一帧后立刻删除*/</span><br><span class="line">.fade-leave &#123;</span><br><span class="line">    opacity: 1;</span><br><span class="line">&#125;</span><br><span class="line">/*离开过渡的结束状态，元素被删除时生效，离开过渡完成后被删除*/</span><br><span class="line">.fade-leave-active &#123;</span><br><span class="line">    opacity:0;</span><br><span class="line">    transition: opacity .5s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、过渡模式mode"><a href="#2、过渡模式mode" class="headerlink" title="2、过渡模式mode"></a>2、过渡模式mode</h3><ul>
+<li>in-out：新元素先进入过渡，完成之后当前元素过渡离开，默认模式。</li>
+<li>out-in：当前元素先进行过渡离开，离开完成后新元素过渡进入.</li>
+</ul>
+<h2 id="mode与404"><a href="#mode与404" class="headerlink" title="mode与404"></a><span id="8">mode与404</span></h2><h3 id="1、mode模式"><a href="#1、mode模式" class="headerlink" title="1、mode模式"></a>1、mode模式</h3><p>代码示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">    mode: &apos;history&apos;, //mode模式</span><br><span class="line">    routes: [...]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>mode取值说明：<br>（1）history: URL就像正常的url，示例：<a href="http://localhost:8080/home" target="_blank" rel="noopener">http://localhost:8080/home</a><br>（2）hash：默认值，会多一个“#”，示例：<a href="http://localhost:8080/#/home" target="_blank" rel="noopener">http://localhost:8080/#/home</a></p>
+<h3 id="404页面设置"><a href="#404页面设置" class="headerlink" title="404页面设置"></a>404页面设置</h3><p>如果访问的路由不存在，或者用户输入错误时，会有一个404友好的提示页面，配置如下：<br>（1）在/src/router/index.js中加入如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 404</span><br><span class="line">&#123;</span><br><span class="line">    path: &apos;*&apos;,</span><br><span class="line">    component: () =&gt; import(&apos;@/components/404&apos;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）在src/components/404.vue中编写如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">        &lt;h1&gt;404 not found&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    data () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由钩子"><a href="#路由钩子" class="headerlink" title="路由钩子"></a><span id="9">路由钩子</span></h2><p>路由钩子，即导航钩子，其实就是路由拦截器，vue-router一共有三类：</p>
+<ol>
+<li>全局钩子：最常用</li>
+<li>路由单独钩子</li>
+<li>组件内钩子</li>
+</ol>
+<h3 id="1、全局钩子"><a href="#1、全局钩子" class="headerlink" title="1、全局钩子"></a>1、全局钩子</h3><p>在src/router/index.js中使用，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 定义路由设置</span><br><span class="line">var router = new Router(&#123;...&#125;)</span><br><span class="line"></span><br><span class="line">// 全局路由拦截-进入页面前执行</span><br><span class="line">router.beforeEach((to, from, next) =&gt; &#123;</span><br><span class="line">    // 这里可以加入全局登录判断</span><br><span class="line">    // 继续执行</span><br><span class="line">    next()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 全局后置钩子-常用于结束动画等</span><br><span class="line">router.afterEach(() =&gt; &#123;</span><br><span class="line">    // 不接受next</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default router</span><br></pre></td></tr></table></figure>
+
+<p>每个钩子方法接收三个参数：<br>to： Router：即将要进入的目标[路由对象]<br>from：Router：当前导航正要离开的路由<br>next：Function：继续执行函数  </p>
+<ul>
+<li>next()：继续执行</li>
+<li>next(false)：中断当前的导航。</li>
+<li>next(‘/‘) 或 next({ path: ‘/‘ })：跳转新页面，常用于登陆失效跳转登陆</li>
+</ul>
+<h3 id="2、路由单独钩子"><a href="#2、路由单独钩子" class="headerlink" title="2、路由单独钩子"></a>2、路由单独钩子</h3><p>使用：在路由配置中单独加入钩子，在src/router/index.js中使用，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    path: &apos;/home/one&apos;, // 子页面1</span><br><span class="line">    component: One,</span><br><span class="line">    // 路由内钩子</span><br><span class="line">    beforeEnter: (to, from, next) =&gt; &#123;</span><br><span class="line">        console.log(&apos;进入前执行&apos;)</span><br><span class="line">        next()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、组件内钩子"><a href="#3、组件内钩子" class="headerlink" title="3、组件内钩子"></a>3、组件内钩子</h3><p>使用：在路由组件内定义豆子函数：</p>
+<ul>
+<li>beforeRouteEnter：进入页面前调用</li>
+<li>beforeRouteUpdate（2.2新增）：页面路由改变时调用，一般需要带参数。</li>
+<li>beforeRouteLeave：离开页面调用</li>
+</ul>
+<p>任意找一页面，编写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        name: &apos;Two&apos;,</span><br><span class="line">        data () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            msg: &apos;Hi, I am Two Page!&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    // 进入页面前调用</span><br><span class="line">    beforeRouteEnter(to, from, next) &#123;</span><br><span class="line">        console.log(&apos;进入enter路由钩子&apos;)</span><br><span class="line">        next()</span><br><span class="line">    &#125;,</span><br><span class="line">    // 离开页面时调用</span><br><span class="line">    beforeRouteLeave(to, from, next) &#123;</span><br><span class="line">        console.log(&apos;进入leave路由钩子&apos;)</span><br><span class="line">        next()</span><br><span class="line">    &#125;,</span><br><span class="line">    // 页面路由改变时调用</span><br><span class="line">    beforeRouteUpdate(to, from, next) &#123;</span><br><span class="line">        console.log(&apos;进入update路由钩子&apos;)</span><br><span class="line">        console.log(to.params.id)</span><br><span class="line">        next()</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="路由懒加载"><a href="#路由懒加载" class="headerlink" title="路由懒加载"></a><span id="10">路由懒加载</span></h2><h3 id="1、路由正常模式："><a href="#1、路由正常模式：" class="headerlink" title="1、路由正常模式："></a>1、路由正常模式：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 1、先引入页面组件</span><br><span class="line">import Home from &apos;@/components/Home&apos;</span><br><span class="line"></span><br><span class="line">// 2、使用组件</span><br><span class="line">    &#123;</span><br><span class="line">        path: &apos;/home&apos;,</span><br><span class="line">        component: Home</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、懒加载模式"><a href="#2、懒加载模式" class="headerlink" title="2、懒加载模式"></a>2、懒加载模式</h3><p>大项目中，为了提高初始化页面的效率，路由一般使用懒加载模式，一共三种实现方式。<br>（1）第一种写法(常用)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">component: () =&gt; import(&apos;@/components/Two&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>（2）第二种写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">component: (resolve) =&gt; require([&apos;@/components/Two&apos;&apos;], resolve)</span><br></pre></td></tr></table></figure>
+
+<p>（3）第三种写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">components: r =&gt; require.ensure([], () =&gt; r(require(&apos;@/components/Three&apos;)), &apos;group-home&apos;)</span><br></pre></td></tr></table></figure>
+
+<p>第三种中，’group-home’是把组件按组分块打包, 可以将多个组件放入这个组中，在打包的时候Webpack会将相同 chunk 下的所有异步模块打包到一个异步块里面。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/01/关于vue-cli/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/01/关于vue-cli/" itemprop="url">关于vue-cli</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-01T23:48:58+08:00">
+                2020-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>官方文档：<a href="https://cli.vuejs.org/" target="_blank" rel="noopener">vue-cli官方</a><br>中文翻译文档：<a href="https://loulanyijian.github.io/vue-cli-doc-Chinese/" target="_blank" rel="noopener">vue-cli中文翻译文档</a>  </p>
+<p>vue-cli是vue官方出品的快速构建单页面应用的脚手架，里面集成了webpack,npm,nodejs,babel,vue,vue-router</p>
+<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p>安装vue-cli的前提是已经安装了npm，在命令行工具中输入npm -v 命令来检测npm的安装以及版本情况。</p>
+<h3 id="1、npm安装"><a href="#1、npm安装" class="headerlink" title="1、npm安装"></a>1、npm安装</h3><p>node下载地址：<a href="http://nodejs.cn/download/" target="_blank" rel="noopener">http://nodejs.cn/download/</a><br>命令行中输入指令查看是否安装成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm -v</span><br><span class="line">6.9.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、vue-cli安装"><a href="#2、vue-cli安装" class="headerlink" title="2、vue-cli安装"></a>2、vue-cli安装</h3><p>全局安装vue-cli</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>-g代表全局安装，然后查看版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vue -V</span><br><span class="line">@vue/cli 4.0.5</span><br></pre></td></tr></table></figure>
+
+<p>注意：这里的V是大写</p>
+<h2 id="二、初始化项目"><a href="#二、初始化项目" class="headerlink" title="二、初始化项目"></a>二、初始化项目</h2><h3 id="1、vue-init命令"><a href="#1、vue-init命令" class="headerlink" title="1、vue init命令"></a>1、vue init命令</h3><p>用vue init命令来初始化项目，具体使用方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init &lt;template-name&gt; &lt;project-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>init：表示要用vue-cli来初始化项目<br><template-name>：表示模板名称，vue-cli官方提供的5种模板  </template-name></p>
+<ol>
+<li>webpack：一个全面的webpack+vue-loader的模板，功能包括热加载，linting,检测和CSS扩展。</li>
+<li>webpack-simple：一个简单webpack+vue-loader的模板，不包含其他功能，让你快速的搭建vue的开发环境。</li>
+<li>browserify：一个全面的Browserify+vueify 的模板，功能包括热加载，linting,单元检测。</li>
+<li>browserify-simple：一个简单Browserify+vueify的模板，不包含其他功能，让你快速的搭建vue的开发环境</li>
+<li>simple：一个最简单的单页应用模板。</li>
+</ol>
+<p><project-name>：标识项目名称，用户根据自己的项目来起名字。</project-name></p>
+<h3 id="2、项目初始化"><a href="#2、项目初始化" class="headerlink" title="2、项目初始化"></a>2、项目初始化</h3><p>在实际开发中，一般都会使用webpack这个模板，命令使用如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack myProject</span><br></pre></td></tr></table></figure>
+
+<p><strong>Project name</strong>：项目名称 ，默认为初始化建项目的名称，不需要直接回车<br><strong>Project description</strong>：项目描述，默认为A Vue.js project，不需要直接回车<br><strong>Author</strong>：作者，如果有配置git的作者，自动会读取。直接回车<br><strong>Install vue-router?</strong> 是否安装vue的路由插件，需要安装，选择Y<br><strong>Use ESLint to lint your code</strong>? 是否用ESLint来限制你的代码错误和风格。不需要输入n，需要选择y<br><strong>setup unit tests with Karma + Mocha?</strong> 是否需要安装单元测试工具，不需要输入n，需要选择y<br><strong>Setup e2e tests with Nightwatch?</strong> 是否安装e2e来进行用户行为模拟测试，不需要输入n，需要选择y  </p>
+<h3 id="3、运行项目"><a href="#3、运行项目" class="headerlink" title="3、运行项目"></a>3、运行项目</h3><p>cd myProject，使用cd命令进入到项目目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 在开发模式下运行项目</span><br><span class="line">npm run dev</span><br><span class="line"></span><br><span class="line">// 为项目打包</span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/30/vue组件基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1560,335 +2083,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/18/JavaScript中对象（Objects）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="朱程程">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/first.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小二、上酒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/18/JavaScript中对象（Objects）/" itemprop="url">JavaScript中对象（Objects）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-18T23:44:27+08:00">
-                2020-06-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>JavaScript简单的数据类型包括数字、字符串、布尔值、null值和undefined值。其他所有值都是对象。数字、字符串、布尔值“貌似”对象，因为它们拥有方法，但是他们是不可变的。在JavaScript中，数组是对象、函数是对象、正则表达式是对象，对象也是对象。  </p>
-<p>对象是属性的容器。属性包含属性名和值。属性名可以是包含空字符串在内的任意字符串，属性值可以是除了undefined之外的任何值。  </p>
-<p>JavaScript对象是无类型的。对新属性的名字和属性的值没有限制。对象中可以包含其他对象，适合用于汇集和管理数据。  </p>
-<p>JavaScript包含一种原型链的特性，允许对象继承另一个对象属性。正确使用可以减少对象初始化时消耗的时间和内存。</p>
-<h4 id="对象字面量"><a href="#对象字面量" class="headerlink" title="对象字面量"></a>对象字面量</h4><p>对象字面量提供了非常方便创建新对象值的方法。对象字面量可出现在任何字面量可以出现的地方。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;&#125;;</span><br><span class="line">var obj2 = &#123;</span><br><span class="line">    &quot;first-name&quot; : &quot;zhangsan&quot;,</span><br><span class="line">    &quot;second-name&quot; : &quot;lisi&quot;</span><br><span class="line">&#125;</span><br><span class="line">var obj3 = &#123;</span><br><span class="line">    first_name : &quot;zhangsan&quot;,</span><br><span class="line">    second_name : &quot;lisi&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果属性名是一个合法的JavaScript标识符且不是保留字，并不强制要求用引号括住属性名</p>
-<h4 id="检索"><a href="#检索" class="headerlink" title="检索"></a>检索</h4><p>要检索对象中包含的值，可以用在[]中括住一个字符串表达式的方式。如果字符串表达式是一个字符串字面量，而且是一个合法的字符串标识符且不是保留字，也可以用 . 表示法代替。推荐用 .</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj[name]</span><br><span class="line">obj.name</span><br></pre></td></tr></table></figure>
-
-<p>如果检索一个不存在的值则会返回undefined。<br>||运算符可以用来填充默认值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var name = obj.name || &quot;zhangsan&quot;</span><br></pre></td></tr></table></figure>
-
-<h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><p>对象中的值可以通过赋值语句进行更新。若属性名已经存在对象中，这个属性的值就会被替换。如果对象之前没有这个属性名，则属性就会被扩充到对象中。</p>
-<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>对象通过引用来传递，永远不会被复制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var x = y;</span><br><span class="line">x.name = &quot;zhangsan&quot;</span><br><span class="line">var yname = y.name  // 因为x和y是指向同一个对象的引用，所以yname也为zhangsan</span><br><span class="line"></span><br><span class="line">var a = &#123;&#125; , b = &#123;&#125; , c = &#123;&#125;; // a,b,c都引用一个不同的空对象</span><br><span class="line">var a = b = c = &#123;&#125;; // a,b,c都引用同一个空对象</span><br></pre></td></tr></table></figure>
-
-<h4 id="原型（prototype）"><a href="#原型（prototype）" class="headerlink" title="原型（prototype）"></a>原型（prototype）</h4><p>每个对象都连接到一个原型对象，并且可以从中继承属性。所有通过字面量创建的对象都连接到Object.prototype，它是JavaScript中的标配对象。  </p>
-<p>当创建一个对象时，可以选择某个对象作为它的原型。可以使用Object.create()方法<br>(可以参考一些new创建和Object.create()创建方法的区别)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">// new Object() 方式创建</span><br><span class="line">var a = &#123;</span><br><span class="line">    name: &apos;zhangsan&apos;,</span><br><span class="line">    age: 25</span><br><span class="line">&#125;</span><br><span class="line">var b = new Object(a)</span><br><span class="line">console.log(b) // &#123; name: &apos;zhangsan&apos;, age: 25 &#125;</span><br><span class="line">console.log(b.__proto__) // &#123;&#125;</span><br><span class="line">console.log(b.name) // zhangsan</span><br><span class="line"></span><br><span class="line">// Object.create() 方式创建</span><br><span class="line">var a = &#123;</span><br><span class="line">    name: &apos;zhangsan&apos;,</span><br><span class="line">    age: 25</span><br><span class="line">&#125;</span><br><span class="line">var b = Object.create(a)</span><br><span class="line">console.log(b) // &#123;&#125;</span><br><span class="line">console.log(b.__proto__) // &#123; name: &apos;zhangsan&apos;, age: 25 &#125;</span><br><span class="line">console.log(b.name) // zhangsan</span><br></pre></td></tr></table></figure>
-
-<p>原型连接在更新时是不起作用的。当对某个对象作出改变时，不会触及该对象的原型。<br>原型连接只在检索值的时候才被用到。当我们尝试去获取对象的某个属性值时，如果该对象没有这个属性名，则JavaScript会试着从原型对象中获取属性值。如果那个对象也没有该属性值，再继续从他的原型中找，知道最后达到终点Object.prototype。如果想要的属性完全不存在于原型链中，则结果为undefined。  </p>
-<p>原型关系是一种动态关系。即如果加一个新属性到原型中，该属性会立即对所有基于该原型创建的对象可见。  </p>
-<h4 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h4><p>检查对象并确定对象有什么属性可以使用typeof操作符。<br>注意，原型链中任何属性都会产生值，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typeof flight.toString  // &apos;function&apos;</span><br><span class="line">typeof flight.constructor  // &apos;function&apos;</span><br></pre></td></tr></table></figure>
-
-<p>有两种方法处理这些不需要的属性。第一个是让程序做检查并丢弃值为函数的属性。一般来说，当想让对象在运行时动态获取自身信息时，关注更多的是数据，应该意识到一些值可能会是函数。另一个方法是hasOwnProperty方法。如果对象拥有独有的属性，返回true。hasOwnProperty方法并不会检查原型链。</p>
-<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><p>for in语句可用来遍历对象中所有属性名（包括函数和原型中的属性），所以有必要过滤不想要的值。最为常用的过滤器是hasOwnProperty方法，以及使用typeof来排除函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var name;</span><br><span class="line">for(name in obj) &#123;</span><br><span class="line">    if (typeof obj[name] !== &apos;function&apos;) &#123;</span><br><span class="line">        // 处理语句</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样属性名出现的顺序是不确定的。如果想要确保属性按特定顺序出现，则需要避免使用for in语句，而是创造一个数组，以正确的顺序包含属性名。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var i;</span><br><span class="line">var properties = &#123;</span><br><span class="line">    &apos;first_name&apos;,</span><br><span class="line">    &apos;middle_name&apos;,</span><br><span class="line">    &apos;last_name&apos;</span><br><span class="line">&#125;;</span><br><span class="line">for (i = 0; i &lt; properties.length; i++) &#123;</span><br><span class="line">    console.log(properties[i])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过使用for可以得到我们想要的属性，而不用担心可能发掘出的原型链中的属性，且可以按正确顺序取值。</p>
-<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>delete运算符可以用来删除对象的属性。如果对象包含该属性，则该属性会被移除。不会触及原型链中任何对象。</p>
-<h4 id="减少全局变量污染"><a href="#减少全局变量污染" class="headerlink" title="减少全局变量污染"></a>减少全局变量污染</h4><p>JavaScript可以很随意的定义全局变量来容纳应用的所有资源。但是，全局变量削弱了程序的灵活性，应该避免使用。<br>最小化使用全局变量方法之一是为应用只创建一个唯一的全局变量。<br>只要把全局性资源都纳入一个名称空间下，程序与其他应用程序、组件或类库之间发生冲突的可能性会显著降低。还有一种是利用闭包进行信息隐藏，是另一种有效的减少全局污染方式。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/18/关于JavaScript一些特性/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="朱程程">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/first.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="小二、上酒">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/18/关于JavaScript一些特性/" itemprop="url">关于JavaScript一些特性</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-18T23:43:49+08:00">
-                2020-06-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>JavaScript是建立在一些非常优秀的想法和少数非常糟糕的想法之上的。优秀的想法包括函数、弱类型、动态对象和富有表现力的对象字面量表示法。糟糕的想法则是基于全局变量的编程模型。  </p>
-<p>现在大部分的编程语言都流行要求强类型。原理在于强类型允许编译器在编译时检测错误。这样我们就可以越早的检测和修复错误，付出的代价就越小。而JavaScript是一门弱语言类型，所以JavaScript编译器不能检测出类型错误。然而事实证明强类型并不会让测试工作变得轻松。强类型能找到的错误并不是令人头疼的错误。弱类型是自由的，无需建立复杂的类层次。  </p>
-<p>JavaScript有强大的对象字面量表示法。通过列出对象的组成部分就能简单的创造出来。这种表示法是Json的灵感来源，已经成为主流的数据交换格式。  </p>
-<p>原型继承是JavaScript中有争议的特性。JavaScript有一个无类型的对象系统，在这个系统中，对象直接从其他对象继承属性。  </p>
-<p>JavaScript有一个非常糟糕的特性就是：依赖全局变量进行连接。所有编译单元的所有顶级对象被撮合到一个全局对象的公共命名空间。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1936,7 +2135,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
