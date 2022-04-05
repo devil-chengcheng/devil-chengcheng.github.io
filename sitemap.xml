@@ -641,6 +641,13 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/categories/vue/</loc>
+    <lastmod>2022-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/categories/vue-echarts/</loc>
     <lastmod>2022-04-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -655,21 +662,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/</loc>
-    <lastmod>2022-04-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/vue/</loc>
-    <lastmod>2022-04-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/categories/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2022-04-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/</loc>
     <lastmod>2022-04-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
