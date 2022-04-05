@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Echarts中的事件和行为用户操作echarts图表时会触发相应的事件，这些事件由开发者监听，然后回调函数做出相应的处理，可以弹出一个对话框、跳转到一个地址或者做数据下钻等等。通过on方法绑定事件事件名称对应DOM事件名称，均为小写的字符串，如下是一个绑定点击操作的示例： 1234myChart.on(&amp;apos;click&amp;apos;,function(params) &amp;#123;    //">
+<meta property="og:type" content="article">
+<meta property="og:title" content="echarts中事件和行为">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/vue-echarts/echarts中的事件和行为/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="Echarts中的事件和行为用户操作echarts图表时会触发相应的事件，这些事件由开发者监听，然后回调函数做出相应的处理，可以弹出一个对话框、跳转到一个地址或者做数据下钻等等。通过on方法绑定事件事件名称对应DOM事件名称，均为小写的字符串，如下是一个绑定点击操作的示例： 1234myChart.on(&amp;apos;click&amp;apos;,function(params) &amp;#123;    //">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-08T07:57:31.857Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="echarts中事件和行为">
+<meta name="twitter:description" content="Echarts中的事件和行为用户操作echarts图表时会触发相应的事件，这些事件由开发者监听，然后回调函数做出相应的处理，可以弹出一个对话框、跳转到一个地址或者做数据下钻等等。通过on方法绑定事件事件名称对应DOM事件名称，均为小写的字符串，如下是一个绑定点击操作的示例： 1234myChart.on(&amp;apos;click&amp;apos;,function(params) &amp;#123;    //">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/vue-echarts/echarts中的事件和行为/">
+
+
+
+
+
+  <title>echarts中事件和行为 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/vue-echarts/echarts中的事件和行为/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">echarts中事件和行为</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T17:38:14+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue-echarts/" itemprop="url" rel="index">
+                    <span itemprop="name">vue-echarts</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Echarts中的事件和行为"><a href="#Echarts中的事件和行为" class="headerlink" title="Echarts中的事件和行为"></a>Echarts中的事件和行为</h1><p>用户操作echarts图表时会触发相应的事件，这些事件由开发者监听，然后回调函数做出相应的处理，可以弹出一个对话框、跳转到一个地址或者做数据下钻等等。<br>通过on方法绑定事件<br>事件名称对应DOM事件名称，均为小写的字符串，如下是一个绑定点击操作的示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">myChart.on(&apos;click&apos;,function(params) &#123;</span><br><span class="line">    // 控制台打印数据的名称</span><br><span class="line">    console.log(params.name);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在echarts中有两种事件类型：</p>
+<ul>
+<li>一种是用户鼠标操作点击，或者hover图表的图形时触发的事件；</li>
+<li>还有一种是用户在使用可以交互的组件后触发的事件，例如在切换图例开关时触发的‘legendselectchanged’事件（这里切换图例开关不会触发‘legendselected’事件），区域缩放时触发的‘dataZoom’事件等等</li>
+</ul>
+<h3 id="ECharts中的图例事件"><a href="#ECharts中的图例事件" class="headerlink" title="ECharts中的图例事件"></a>ECharts中的图例事件</h3><h4 id="events-legendselectchanged"><a href="#events-legendselectchanged" class="headerlink" title="events.legendselectchanged"></a>events.legendselectchanged</h4><p>ACTION：legendToggleSelect切换图例选中状态后的事件<br>注： 图例组件用户切换图例开关会触发该事件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    type: &apos;legendselectchanged&apos;,</span><br><span class="line">    // 切换的图例名称</span><br><span class="line">    name: string</span><br><span class="line">    // 所有图例的选中状态表</span><br><span class="line">    selected: Object</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="events-legendselected"><a href="#events-legendselected" class="headerlink" title="events.legendselected"></a>events.legendselected</h4><p>ACTION: legendSelect 图例选中后的事件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    type: &apos;legendselected&apos;,</span><br><span class="line">    // 选中的图例名称</span><br><span class="line">    name: string</span><br><span class="line">    // 所有图例的选中状态表</span><br><span class="line">    selected: Object</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="events-legendunselected"><a href="#events-legendunselected" class="headerlink" title="events.legendunselected"></a>events.legendunselected</h4><p>ACTION: legendUnSelect 图例取消选中后的事件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    type: &apos;legendunselected&apos;,</span><br><span class="line">    // 取消选中的图例名称</span><br><span class="line">    name: string</span><br><span class="line">    // 所有图例的选中状态表。</span><br><span class="line">    selected: Object</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="events-legendscroll"><a href="#events-legendscroll" class="headerlink" title="events.legendscroll"></a>events.legendscroll</h4><p>ACTION: legendscroll 图例滚动事件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    type: &apos;legendscroll&apos;,</span><br><span class="line">    scrollDataIndex: number</span><br><span class="line">    legendId: string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Echarts鼠标事件的处理"><a href="#Echarts鼠标事件的处理" class="headerlink" title="Echarts鼠标事件的处理"></a>Echarts鼠标事件的处理</h2><p>echarts支持常规的鼠标事件类型，包括 ‘click’,’dblclick’,’mousedown’,’mousemove’,’mouseup’,’mouseover’,’mouseout’事件。<br>示例：点击柱状图后打开相应的百度搜索页面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 基于准备好的dom，初始化ECharts实例</span><br><span class="line">var myChart = echarts.init(document.getElementById(&apos;main&apos;));</span><br><span class="line"></span><br><span class="line">// 指定图表的配置项和数据</span><br><span class="line">var option = &#123;</span><br><span class="line">    xAxis: &#123;</span><br><span class="line">        data: [&quot;衬衫&quot;,&quot;羊毛衫&quot;,&quot;雪纺衫&quot;,&quot;裤子&quot;,&quot;高跟鞋&quot;,&quot;袜子&quot;]</span><br><span class="line">    &#125;,</span><br><span class="line">    yAxis: &#123;&#125;,</span><br><span class="line">    series: [&#123;</span><br><span class="line">        name: &apos;销量&apos;,</span><br><span class="line">        type: &apos;bar&apos;,</span><br><span class="line">        data: [5, 20, 36, 10, 10, 20]</span><br><span class="line">    &#125;]</span><br><span class="line">&#125;;</span><br><span class="line">// 使用刚指定的配置项和数据显示图表。</span><br><span class="line">myChart.setOption(option);</span><br><span class="line">// 处理点击事件并跳转到相应的百度搜索页面</span><br><span class="line">myChart.on(&apos;click&apos;,function(parans) &#123;</span><br><span class="line">    window.open(&apos;https://www.baidu.com/s?wd=&apos; + encodeURIComponent(params.name));</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>所有的鼠标事件包含参数 params，这是一个包含点击图形的数据信息的对象，格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    // 当前点击的图形元素所属的组件名称，</span><br><span class="line">    // 其值如 &apos;series&apos;、&apos;markLine&apos;、&apos;markPoint&apos;、&apos;timeLine&apos; 等。</span><br><span class="line">    componentType: string,</span><br><span class="line">    // 系列类型。值可能为：&apos;line&apos;、&apos;bar&apos;、&apos;pie&apos; 等。当 componentType 为 &apos;series&apos; 时有意义。</span><br><span class="line">    seriesType: string,</span><br><span class="line">    // 系列在传入的 option.series 中的 index。当 componentType 为 &apos;series&apos; 时有意义。</span><br><span class="line">    seriesIndex: number,</span><br><span class="line">    // 系列名称。当 componentType 为 &apos;series&apos; 时有意义。</span><br><span class="line">    seriesName: string,</span><br><span class="line">    // 数据名，类目名</span><br><span class="line">    name: string,</span><br><span class="line">    // 数据在传入的 data 数组中的 index</span><br><span class="line">    dataIndex: number,</span><br><span class="line">    // 传入的原始数据项</span><br><span class="line">    data: Object,</span><br><span class="line">    // sankey、graph 等图表同时含有 nodeData 和 edgeData 两种 data，</span><br><span class="line">    // dataType 的值会是 &apos;node&apos; 或者 &apos;edge&apos;，表示当前点击在 node 还是 edge 上。</span><br><span class="line">    // 其他大部分图表中只有一种 data，dataType 无意义。</span><br><span class="line">    dataType: string,</span><br><span class="line">    // 传入的数据值</span><br><span class="line">    value: number|Array</span><br><span class="line">    // 数据图形的颜色。当 componentType 为 &apos;series&apos; 时有意义。</span><br><span class="line">    color: string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如何区分鼠标点击了哪里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">myChart.on(&apos;click&apos;, function (params) &#123;</span><br><span class="line">    if (params.componentType === &apos;markPoint&apos;) &#123;</span><br><span class="line">        // 点击到了 markPoint 上</span><br><span class="line">        if (params.seriesIndex === 5) &#123;</span><br><span class="line">            // 点击到了 index 为 5 的 series 的 markPoint 上。</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    else if (params.componentType === &apos;series&apos;) &#123;</span><br><span class="line">        if (params.seriesType === &apos;graph&apos;) &#123;</span><br><span class="line">            if (params.dataType === &apos;edge&apos;) &#123;</span><br><span class="line">                // 点击到了 graph 的 edge（边）上。</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                // 点击到了 graph 的 node（节点）上。</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>可以在回调函数中获得这个对象中的数据名、系列名称后在自己的数据仓库中索引得到其他的信息后更新图表，显示浮层等等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">myChart.on(&apos;click&apos;, function (parmas) &#123;</span><br><span class="line">    $.get(&apos;detail?q=&apos; + params.name, function (detail) &#123;</span><br><span class="line">        myChart.setOption(&#123;</span><br><span class="line">            series: [&#123;</span><br><span class="line">                name: &apos;pie&apos;,</span><br><span class="line">                // 通过饼图表现单个柱子中的数据分布</span><br><span class="line">                data: [detail.data]</span><br><span class="line">            &#125;]</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Echarts组件交互的行为事件"><a href="#Echarts组件交互的行为事件" class="headerlink" title="Echarts组件交互的行为事件"></a>Echarts组件交互的行为事件</h2><p>在Echarts中基本上所有的组件交互行为都会触发相应的事件。<br>常用的事件和事件对应的参数可在官方的events文档中列出<br>下面是监听一个图里开关的示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 图例开关的行为只会触发 legendselectchanged 事件</span><br><span class="line">myChart.on(&apos;legendselectchanged&apos;, function (params) &#123;</span><br><span class="line">    // 获取点击图例的选中状态</span><br><span class="line">    var isSelected = params.selected[params.name];</span><br><span class="line">    // 在控制台中打印</span><br><span class="line">    console.log((isSelected ? &apos;选中了&apos; : &apos;取消选中了&apos;) + &apos;图例&apos; + params.name);</span><br><span class="line">    // 打印所有图例的状态</span><br><span class="line">    console.log(params.selected);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码触发-ECharts-中组件的行为"><a href="#代码触发-ECharts-中组件的行为" class="headerlink" title="代码触发 ECharts 中组件的行为"></a>代码触发 ECharts 中组件的行为</h2><p>通过前面的描述我们知道组件交互的行为会触发诸如 ‘legendselectchanged’ 事件，除了用户的交互操作，有时候也会有需要在程序里调用方法触发图表的行为，诸如显示 tooltip，选中图例。<br>ECharts 2.x 通过 myChart.component.tooltip.showTip 这种形式调用相应的接口触发图表行为，入口很深，而且涉及到内部组件的组织，而在 ECharts 3 里改为通过调用 myChart.dispatchAction({ type: ‘’ }) 触发图表行为，统一管理了所有动作，也可以方便地根据需要去记录用户的行为路径。<br>常用的动作和动作对应参数在 action 文档中有列出。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/vue-echarts/echarts中的canvas渲染和svg渲染/" rel="next" title="echarts中的canvas渲染和svg渲染">
+                <i class="fa fa-chevron-left"></i> echarts中的canvas渲染和svg渲染
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/vue-echarts/echarts多个图表的联动/" rel="prev" title="echarts多个图表的联动">
+                echarts多个图表的联动 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Echarts中的事件和行为"><span class="nav-number">1.</span> <span class="nav-text">Echarts中的事件和行为</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ECharts中的图例事件"><span class="nav-number">1.0.1.</span> <span class="nav-text">ECharts中的图例事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#events-legendselectchanged"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">events.legendselectchanged</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#events-legendselected"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">events.legendselected</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#events-legendunselected"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">events.legendunselected</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#events-legendscroll"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">events.legendscroll</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Echarts鼠标事件的处理"><span class="nav-number">1.1.</span> <span class="nav-text">Echarts鼠标事件的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Echarts组件交互的行为事件"><span class="nav-number">1.2.</span> <span class="nav-text">Echarts组件交互的行为事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码触发-ECharts-中组件的行为"><span class="nav-number">1.3.</span> <span class="nav-text">代码触发 ECharts 中组件的行为</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

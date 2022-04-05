@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="数组概览数组是开发中最常见的数据结构了，用于按顺序存储元素的集合。但是元素可以随机存取，因为数组中的每个元素都可以通过索引来识别。插入和删除时要移动后续元素，还要考虑扩容问题，插入速度慢。 双指针用于数组的双指针一般是左右指针，但是快慢指针也是适用的。主要利用两个或多个不同位置的指针，通过速度和方向的变换解决问题。这种技巧经常在排序数组中使用。  调整数组顺序使奇数位于偶数前面 和为 S 的两个数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组概览">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/算法/数组概览/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="数组概览数组是开发中最常见的数据结构了，用于按顺序存储元素的集合。但是元素可以随机存取，因为数组中的每个元素都可以通过索引来识别。插入和删除时要移动后续元素，还要考虑扩容问题，插入速度慢。 双指针用于数组的双指针一般是左右指针，但是快慢指针也是适用的。主要利用两个或多个不同位置的指针，通过速度和方向的变换解决问题。这种技巧经常在排序数组中使用。  调整数组顺序使奇数位于偶数前面 和为 S 的两个数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-04-05T14:31:50.663Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数组概览">
+<meta name="twitter:description" content="数组概览数组是开发中最常见的数据结构了，用于按顺序存储元素的集合。但是元素可以随机存取，因为数组中的每个元素都可以通过索引来识别。插入和删除时要移动后续元素，还要考虑扩容问题，插入速度慢。 双指针用于数组的双指针一般是左右指针，但是快慢指针也是适用的。主要利用两个或多个不同位置的指针，通过速度和方向的变换解决问题。这种技巧经常在排序数组中使用。  调整数组顺序使奇数位于偶数前面 和为 S 的两个数">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/算法/数组概览/">
+
+
+
+
+
+  <title>数组概览 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/算法/数组概览/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数组概览</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T22:23:39+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数组概览"><a href="#数组概览" class="headerlink" title="数组概览"></a>数组概览</h2><p>数组是开发中最常见的数据结构了，用于按顺序存储元素的集合。但是元素可以随机存取，因为数组中的每个元素都可以通过索引来识别。插入和删除时要移动后续元素，还要考虑扩容问题，插入速度慢。</p>
+<h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>用于数组的双指针一般是左右指针，但是快慢指针也是适用的。主要<strong>利用两个或多个不同位置的指针，通过速度和方向的变换解决问题</strong>。这种技巧经常在排序数组中使用。</p>
+<ul>
+<li>调整数组顺序使奇数位于偶数前面</li>
+<li>和为 S 的两个数字</li>
+<li>和为 S 的连续正整数序列</li>
+</ul>
+<h3 id="N-数之和问题"><a href="#N-数之和问题" class="headerlink" title="N 数之和问题"></a>N 数之和问题</h3><p>非常常见的问题，基本上另一个套路，主要考虑如何比暴力法降低时间复杂度，而且也会用到双指针技巧</p>
+<ul>
+<li>两数之和</li>
+<li>三数之和</li>
+<li>四数之和</li>
+</ul>
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><p>建立一定的抽象建模能力，将实际中的很多问题进行抽象</p>
+<ul>
+<li>构建乘积数组</li>
+<li>顺时针打印矩阵</li>
+</ul>
+<h3 id="数据统计"><a href="#数据统计" class="headerlink" title="数据统计"></a>数据统计</h3><p>数组少不了的就是统计和计算，此类问题考察如何利用更高效的方法对数组进行统计计算</p>
+<ul>
+<li>数组中出现次数超过数组长度一半的数字</li>
+<li>连续子数组的最大和</li>
+<li>扑克牌顺子</li>
+<li>第一个只出现一次的字符</li>
+</ul>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="1-调整数组顺序使奇数位于偶数前面"><a href="#1-调整数组顺序使奇数位于偶数前面" class="headerlink" title="1. 调整数组顺序使奇数位于偶数前面"></a>1. 调整数组顺序使奇数位于偶数前面</h4><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有的奇数位于数组的前半部分，所有的偶数位于数组的后半部分。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> exchange = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> left = <span class="number">0</span>, right = nums.length<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">while</span>(nums[left] % <span class="number">2</span> === <span class="number">1</span>) &#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(nums[right] % <span class="number">2</span> === <span class="number">0</span>) &#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">const</span> temp = nums[left];</span><br><span class="line">            nums[left] = nums[right];</span><br><span class="line">            nums[right] = temp;</span><br><span class="line">            left++;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-和为-S-的两个数字"><a href="#2-和为-S-的两个数字" class="headerlink" title="2. 和为 S 的两个数字"></a>2. 和为 S 的两个数字</h4><p>输入一个递增排序的数组和一个数字 S ，在数组中查找两个数，使得他们的和正好是 S，如果有多对数字的和等于 S，输出两个数的乘积是最小的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> left = <span class="number">0</span>, right = nums.length<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">const</span> sum = nums[left] + nums[right];</span><br><span class="line">        <span class="keyword">if</span> (sum === target) &#123;</span><br><span class="line">            <span class="keyword">return</span> [nums[left], nums[right]]</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">            left++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> [];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-和为-S-的连续正整数序列"><a href="#3-和为-S-的连续正整数序列" class="headerlink" title="3. 和为 S 的连续正整数序列"></a>3. 和为 S 的连续正整数序列</h4><p>输入一个正整数 <code>target</code> ，输出所有和为 <code>target</code> 的连续正整数序列（至少含有两个数）</p>
+<p><strong>思路</strong>：借用滑动窗口实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> findContinuousSequence = <span class="function"><span class="keyword">function</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> res = [];</span><br><span class="line">    <span class="keyword">let</span> <span class="built_in">window</span> = [];</span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> left = <span class="number">0</span>, right = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (right &lt; target) &#123;</span><br><span class="line">        right++;</span><br><span class="line">        <span class="built_in">window</span>.push(right);</span><br><span class="line">        sum += right;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (sum &gt; target) &#123;</span><br><span class="line">            left++;</span><br><span class="line">            <span class="built_in">window</span>.shift();</span><br><span class="line">            sum -= left;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (sum === target &amp;&amp; <span class="built_in">window</span>.length&gt;<span class="number">1</span>) &#123;</span><br><span class="line">            res.push(<span class="built_in">window</span>.slice());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-两数之和"><a href="#4-两数之和" class="headerlink" title="4. 两数之和"></a>4. 两数之和</h4><p>给定一个整数数组 <code>nums</code> 和一个目标值 <code>target</code> ，请在该数组中找出和为目标值的那两个整数，并返回它们的数组下标。</p>
+<p>解析：因为数组不是有序的数组，所以不适合利用左右指针去寻找两数之和。可以使用两个 for 循环进行遍历，简单粗暴，但是时间复杂度很高。</p>
+<p>所以使用一个 map 函数将遍历过的数字存储起来。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> twoSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (map.has(target - nums[i])) &#123;</span><br><span class="line">            <span class="keyword">return</span> [map.get(target - nums[i]), i];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.set(nums[i], i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-三数之和"><a href="#5-三数之和" class="headerlink" title="5. 三数之和"></a>5. 三数之和</h4><p>给定一个包含 n 个整数的数组 <code>nums</code> ，判断 <code>nums</code> 中是否存在三个元素 <code>a,b,c</code> ，使得 <code>a + b + c = 0</code> 找出所有满足条件且不重复的三元组。</p>
+<p><strong>思路：</strong></p>
+<p>因为题目说明可能出现多组结果，有重复数字，所以要考虑好去重。</p>
+<ul>
+<li>为了方便去重，首先将数组进行排序</li>
+<li>对数组进行遍历，取当前遍历的数 <code>nums[i]</code> 为一个基准数，遍历数后面的数组为寻找数组</li>
+<li>在寻找数组中利用左右指针进行遍历</li>
+<li>判断三数之和是否等于 0，如果等于 0 ，加入结果，左右指针分别进行移动一位，同时还要考虑去重。</li>
+<li>结果大于 0 ，<code>right</code> 指针向左移动一位</li>
+<li>结果小于 0，<code>left</code> 指针向右移动一位</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> threeSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (nums.length &lt; <span class="number">3</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">const</span> res = [];</span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a-b);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &amp;&amp; nums[i] === nums[i<span class="number">-1</span>]) <span class="keyword">continue</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> left = i+<span class="number">1</span>, right = nums.length<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">            <span class="keyword">const</span> sum = nums[i] + nums[left] + nums[right];</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (sum === <span class="number">0</span>) &#123;</span><br><span class="line">                res.push([nums[i], nums[left], nums[right]]);</span><br><span class="line">                left++;</span><br><span class="line">                right--;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">while</span>(nums[left] === nums[left<span class="number">-1</span>]) &#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">while</span>(nums[right] === nums[right<span class="number">-1</span>]) &#123;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-四数之和"><a href="#6-四数之和" class="headerlink" title="6. 四数之和"></a>6. 四数之和</h4><p>给定一个包含 n 个整数的数组 <code>nums</code> ，判断 <code>nums</code> 中是否存在四个元素 <code>a, b, c, d</code> ，使得 <code>a + b + c + d = 0</code>。找出所有满足条件且不重复的四元组。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fourSum = <span class="function"><span class="keyword">function</span>(<span class="params">nums, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length &lt; <span class="number">4</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">const</span> res = [];</span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a-b);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length<span class="number">-3</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &amp;&amp; nums[i] === nums[i<span class="number">-1</span>]) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = i+<span class="number">1</span>; j &lt;nums.length<span class="number">-2</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j &gt; i+<span class="number">1</span> &amp;&amp; nums[j] === nums[j<span class="number">-1</span>]) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">let</span> left = j+<span class="number">1</span>, right = nums.length<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">                <span class="keyword">const</span> sum = nums[i] + nums[j] + nums[left] + nums[right];</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (sum === target) &#123;</span><br><span class="line">                    res.push([nums[i], nums[j], nums[left], nums[right]]);</span><br><span class="line">                    left++;</span><br><span class="line">                    right--;</span><br><span class="line">                    <span class="keyword">while</span>(nums[left] === nums[left<span class="number">-1</span>]) &#123;</span><br><span class="line">                        left++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">while</span>(nums[right] === nums[right+<span class="number">1</span>]) &#123;</span><br><span class="line">                        right--;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-构建数组乘积"><a href="#7-构建数组乘积" class="headerlink" title="7. 构建数组乘积"></a>7. 构建数组乘积</h4><p>给定一个数组 A <code>[0, 1, ..., n-1]</code>，请构建一个数组 B <code>[0, 1, ..., n-1]</code>，其中 B 中的元素 <code>B[i] = A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]</code>。不能使用除法。</p>
+<p>思路：两种方法</p>
+<p><strong>方法一</strong>：可以使用两个数组，分别从前和从后开始遍历，一个保存前 i 个数的乘积，一个保存后 i 个数的乘积。然后利用这两个数组构建B</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> constructArr = <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a.length &lt;= <span class="number">0</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">const</span> b = <span class="keyword">new</span> <span class="built_in">Array</span>(a.length);</span><br><span class="line">    <span class="keyword">const</span> pre = <span class="keyword">new</span> <span class="built_in">Array</span>(a.length);</span><br><span class="line">    <span class="keyword">const</span> last = <span class="keyword">new</span> <span class="built_in">Array</span>(a.length);</span><br><span class="line"></span><br><span class="line">    pre[<span class="number">0</span>] = a[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i&lt;a.length; i++) &#123;</span><br><span class="line">        pre[i] = a[i] * pre[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    last[a.length<span class="number">-1</span>] = a[a.length<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=a.length<span class="number">-2</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">        last[i] = a[i] * last[i+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    b[<span class="number">0</span>] = last[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">1</span>; i&lt;a.length<span class="number">-1</span>; i++) &#123;</span><br><span class="line">        b[i] = pre[i<span class="number">-1</span>] * last[i+<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    b[a.length<span class="number">-1</span>] = pre[a.length<span class="number">-2</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>方法二：构建对角线元素都为 1 的二维矩阵，<code>B[i]</code> 的值相当于矩阵每行的乘积。可以将 B 数组分为上下两个三角，先计算下三角，然后将上三角乘进去。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiply</span>(<span class="params">array</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(array) &amp;&amp; array.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 计算下三角</span></span><br><span class="line">        result[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">1</span>; i&lt;array.length; i++) &#123;</span><br><span class="line">            result[i] = result[i<span class="number">-1</span>] * array[i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 乘上三角</span></span><br><span class="line">        <span class="keyword">let</span> temp = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = array.length<span class="number">-2</span>; i&gt;=<span class="number">0</span>; i--) &#123;</span><br><span class="line">            temp = temp * array[i+<span class="number">1</span>];</span><br><span class="line">            result[i] = result[i] * temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-顺时针打印数组"><a href="#8-顺时针打印数组" class="headerlink" title="8. 顺时针打印数组"></a>8. 顺时针打印数组</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> spiralOrder = <span class="function"><span class="keyword">function</span>(<span class="params">matrix</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line">    <span class="keyword">const</span> m = matrix.length;</span><br><span class="line">    <span class="keyword">if</span> (m &lt;= <span class="number">0</span>) <span class="keyword">return</span> [];</span><br><span class="line">    <span class="keyword">const</span> n = matrix[<span class="number">0</span>].length;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (m &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> [];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> boundl = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> boundr = n<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">let</span> boundt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> boundb = m<span class="number">-1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> turn = n === <span class="number">1</span> ? <span class="string">'d'</span> : <span class="string">'r'</span>;</span><br><span class="line">    <span class="keyword">let</span> i=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> j=<span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> a=<span class="number">0</span>; a&lt;m*n; a++) &#123;</span><br><span class="line">        result.push(matrix[i][j]);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (turn === <span class="string">'r'</span>) &#123;</span><br><span class="line">            j++;</span><br><span class="line">            <span class="keyword">if</span> (j === boundr) &#123;</span><br><span class="line">                turn = <span class="string">'d'</span>;</span><br><span class="line">                boundt++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (turn === <span class="string">'d'</span>) &#123;</span><br><span class="line">            i++;</span><br><span class="line">            <span class="keyword">if</span> (i === boundb) &#123;</span><br><span class="line">                turn = <span class="string">'l'</span>;</span><br><span class="line">                boundr--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (turn === <span class="string">'l'</span>) &#123;</span><br><span class="line">            j--;</span><br><span class="line">            <span class="keyword">if</span> (j === boundl) &#123;</span><br><span class="line">                turn = <span class="string">'t'</span>;</span><br><span class="line">                boundb--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (turn === <span class="string">'t'</span>) &#123;</span><br><span class="line">            i--;</span><br><span class="line">            <span class="keyword">if</span> (i === boundt) &#123;</span><br><span class="line">                turn = <span class="string">'r'</span>;</span><br><span class="line">                boundl++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-数组中出现次数超过数组长度一半的数字"><a href="#9-数组中出现次数超过数组长度一半的数字" class="headerlink" title="9. 数组中出现次数超过数组长度一半的数字"></a>9. 数组中出现次数超过数组长度一半的数字</h4><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> majorityElement = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">	<span class="keyword">const</span> mid = <span class="built_in">Math</span>.floor(nums.length/<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (nums.length == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (map.has(nums[i])) &#123;</span><br><span class="line">            map.set(nums[i], map.get(nums[i]) + <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (map.get(nums[i]) &gt; mid) &#123;</span><br><span class="line">                <span class="keyword">return</span> nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.set(nums[i], <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="10-连续子数组的最大和"><a href="#10-连续子数组的最大和" class="headerlink" title="10. 连续子数组的最大和"></a>10. 连续子数组的最大和</h4><p>输入一个整型数组，数组里有正数也有负数。数组的一个或连续多个整数组成一个子数组。求所有子数组的最大值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> maxSubArray = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> sum = nums[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> max = nums[<span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">1</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sum&lt;<span class="number">0</span>) &#123;</span><br><span class="line">            sum = nums[i];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            sum += nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        max = <span class="built_in">Math</span>.max(max, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>利用动态规划的思路解决。</p>
+<ul>
+<li>首先对数据进行遍历，当前最大连续子序列和为 sum，结果为 max 。</li>
+<li>如果 <code>sum &gt; 0</code>，则说明 sum 对结果有增益效果，则 sum 保留并加上当前遍历数字</li>
+<li>如果 <code>sum &lt; 0</code>，则说明 sum 对结果无增益效果，需要舍弃，sum 直接更新为当前遍历数字。</li>
+<li>敝教教 sum 和 max 大小，将最大值置为 max。</li>
+</ul>
+<h4 id="11-扑克牌顺子"><a href="#11-扑克牌顺子" class="headerlink" title="11. 扑克牌顺子"></a>11. 扑克牌顺子</h4><p>扑克牌中随机抽取 5 张牌，判断是不是一个顺子，即这 5 张牌是不是连续的。</p>
+<p>思路：</p>
+<ul>
+<li>将数组进行排序</li>
+<li>遍历数组，若值为 0 ，记录 0 的个数加 1 ； 若不为 0 ，记录与下一个元素的间隔</li>
+<li>最后比较 0 的个数和间隔数，间隔数大于 0 的个数不能构成顺子</li>
+<li>中间如果有两个元素相等则不能构成顺子。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isStraight = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> zeroCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> spaceCount = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    nums.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length<span class="number">-1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] === <span class="number">0</span>) zeroCount++;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> space = nums[i<span class="number">-1</span>] - nums[i];</span><br><span class="line">            <span class="keyword">if</span> (space === <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                spaceCount += space<span class="number">-1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (spaceCount - zeroCount &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="12-第一个只出现一次的字符"><a href="#12-第一个只出现一次的字符" class="headerlink" title="12. 第一个只出现一次的字符"></a>12. 第一个只出现一次的字符</h4><p>在一个字符串中找到第一个只出现一次的字符，并返回它的位置，如果没有则返回 -1 。（区分大小写）</p>
+<p><strong>思路：</strong>遍历两次，第一次遍历存储元素出现的次数，第二次遍历找出第一个只出现一次的字符</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> firstUniqChar = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;s.length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> a = s[i];</span><br><span class="line">        map.has(a) ? map.set(a, map.get(a) + <span class="number">1</span>) : map.set(a, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;s.length; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> a = s[i];</span><br><span class="line">        <span class="keyword">if</span> (map.get(a) === <span class="number">1</span>) <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="string">" "</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/算法/数组遍历问题/" rel="next" title="数组遍历问题">
+                <i class="fa fa-chevron-left"></i> 数组遍历问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/算法/双指针技巧总结/" rel="prev" title="双指针技巧总结">
+                双指针技巧总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组概览"><span class="nav-number">1.</span> <span class="nav-text">数组概览</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#双指针"><span class="nav-number">1.1.</span> <span class="nav-text">双指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#N-数之和问题"><span class="nav-number">1.2.</span> <span class="nav-text">N 数之和问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二维数组"><span class="nav-number">1.3.</span> <span class="nav-text">二维数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据统计"><span class="nav-number">1.4.</span> <span class="nav-text">数据统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.5.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-调整数组顺序使奇数位于偶数前面"><span class="nav-number">1.5.1.</span> <span class="nav-text">1. 调整数组顺序使奇数位于偶数前面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-和为-S-的两个数字"><span class="nav-number">1.5.2.</span> <span class="nav-text">2. 和为 S 的两个数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-和为-S-的连续正整数序列"><span class="nav-number">1.5.3.</span> <span class="nav-text">3. 和为 S 的连续正整数序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-两数之和"><span class="nav-number">1.5.4.</span> <span class="nav-text">4. 两数之和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-三数之和"><span class="nav-number">1.5.5.</span> <span class="nav-text">5. 三数之和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-四数之和"><span class="nav-number">1.5.6.</span> <span class="nav-text">6. 四数之和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-构建数组乘积"><span class="nav-number">1.5.7.</span> <span class="nav-text">7. 构建数组乘积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-顺时针打印数组"><span class="nav-number">1.5.8.</span> <span class="nav-text">8. 顺时针打印数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-数组中出现次数超过数组长度一半的数字"><span class="nav-number">1.5.9.</span> <span class="nav-text">9. 数组中出现次数超过数组长度一半的数字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-连续子数组的最大和"><span class="nav-number">1.5.10.</span> <span class="nav-text">10. 连续子数组的最大和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-扑克牌顺子"><span class="nav-number">1.5.11.</span> <span class="nav-text">11. 扑克牌顺子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-第一个只出现一次的字符"><span class="nav-number">1.5.12.</span> <span class="nav-text">12. 第一个只出现一次的字符</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

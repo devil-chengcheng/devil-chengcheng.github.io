@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="栈和队列数组中，我们可以通过索引随机访问元素，但是再某些情况下，我们需要限制数据的访问顺序，于是就有两种限制访问顺序的数据结构：栈（先进后出）、队列（先进先出） 队列和栈的互相实现两个栈实现队列用两个栈来实现一个队列，完成队列的 push 和 pop 操作。队列中的元素为 int 类型 思路：两个栈，栈 1 用于入队列存储；栈 2 用于出队列时将栈 1 的数据依次出栈，并入栈到栈 2 中。栈 2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="栈和队列">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/算法/栈和队列/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="栈和队列数组中，我们可以通过索引随机访问元素，但是再某些情况下，我们需要限制数据的访问顺序，于是就有两种限制访问顺序的数据结构：栈（先进后出）、队列（先进先出） 队列和栈的互相实现两个栈实现队列用两个栈来实现一个队列，完成队列的 push 和 pop 操作。队列中的元素为 int 类型 思路：两个栈，栈 1 用于入队列存储；栈 2 用于出队列时将栈 1 的数据依次出栈，并入栈到栈 2 中。栈 2">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-04-05T14:32:37.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="栈和队列">
+<meta name="twitter:description" content="栈和队列数组中，我们可以通过索引随机访问元素，但是再某些情况下，我们需要限制数据的访问顺序，于是就有两种限制访问顺序的数据结构：栈（先进后出）、队列（先进先出） 队列和栈的互相实现两个栈实现队列用两个栈来实现一个队列，完成队列的 push 和 pop 操作。队列中的元素为 int 类型 思路：两个栈，栈 1 用于入队列存储；栈 2 用于出队列时将栈 1 的数据依次出栈，并入栈到栈 2 中。栈 2">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/算法/栈和队列/">
+
+
+
+
+
+  <title>栈和队列 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/算法/栈和队列/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">栈和队列</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T22:23:39+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h2><p>数组中，我们可以通过索引随机访问元素，但是再某些情况下，我们需要限制数据的访问顺序，于是就有两种限制访问顺序的数据结构：栈（先进后出）、队列（先进先出）</p>
+<h4 id="队列和栈的互相实现"><a href="#队列和栈的互相实现" class="headerlink" title="队列和栈的互相实现"></a>队列和栈的互相实现</h4><h5 id="两个栈实现队列"><a href="#两个栈实现队列" class="headerlink" title="两个栈实现队列"></a>两个栈实现队列</h5><p>用两个栈来实现一个队列，完成队列的 push 和 pop 操作。队列中的元素为 int 类型</p>
+<p><strong>思路：</strong>两个栈，栈 1 用于入队列存储；栈 2 用于出队列时将栈 1 的数据依次出栈，并入栈到栈 2 中。栈 2 出栈即栈 1 底部数据即队列要出的数据。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> stack1 = [];</span><br><span class="line"><span class="keyword">const</span> stack2 = [];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    stack1.push(node);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pop</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (stack2.length === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(stack1.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            stack2.push(stack1.pop());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> stack2.pop() || <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="两个队列实现一个栈"><a href="#两个队列实现一个栈" class="headerlink" title="两个队列实现一个栈"></a>两个队列实现一个栈</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> queue1 = [];</span><br><span class="line"><span class="keyword">const</span> queue2 = [];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (queue1.length === <span class="number">0</span>) &#123;</span><br><span class="line">        queue1.push(x);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(queue2.length) &#123;</span><br><span class="line">            queue1.push(queue2.shift())</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (queue2.length === <span class="number">0</span>) &#123;</span><br><span class="line">        queue2.push(X);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(queue1.length) &#123;</span><br><span class="line">            queue2.push(queue1.shift());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (queue1.length !== <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> queue1.shift();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> queue2.shift();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-包含-min-函数的栈"><a href="#2-包含-min-函数的栈" class="headerlink" title="2. 包含 min 函数的栈"></a>2. 包含 min 函数的栈</h4><p>定义栈的数据结构，在该类型中实现以恶搞能够得到栈中所含最小元素的 min 函数</p>
+<p><strong>思路：</strong></p>
+<ul>
+<li>定义两个栈，一个栈用于存储数据，另一个栈用于存储每次数据进栈时栈的最小值。</li>
+<li>每次数据进栈时，将数据和最小值栈的栈顶元素进行比较，将较小的值存入最小值栈中</li>
+<li>数据栈出栈，最小值栈也出栈。这样最小值栈的栈顶永远是当前栈的最小值</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dataStack = [];</span><br><span class="line"><span class="keyword">const</span> minStack = [];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    dataStack.push(node);</span><br><span class="line">    <span class="keyword">if</span> (minStack.length === <span class="number">0</span> || node&lt;min()) &#123;</span><br><span class="line">        minStack.push(node);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        minStack.push(min());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    minStack.pop();</span><br><span class="line">    dataStack.pop();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">top</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> length = dataStack.length;</span><br><span class="line">    <span class="keyword">return</span> length&gt;<span class="number">0</span> &amp;&amp; dataStack[length<span class="number">-1</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">min</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> length = minStack.length;</span><br><span class="line">    <span class="keyword">return</span> length&gt;<span class="number">0</span> &amp;&amp; minStack[length<span class="number">-1</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-栈的压入、弹出序列"><a href="#3-栈的压入、弹出序列" class="headerlink" title="3. 栈的压入、弹出序列"></a>3. 栈的压入、弹出序列</h4><p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列 <code>1,2,3,4,5</code> 是某栈的压入顺序，序列 <code>4,5,3,2,1</code>是该压栈序列对应的一个弹出序列，但 <code>4,3,5,1,2</code> 就不可能是该压栈序列的弹出序列。</p>
+<p><strong>思路：</strong></p>
+<ul>
+<li>借助一个辅助栈来模拟压入、弹出的过程</li>
+<li>设置一个索引 <code>idx</code>，记录出栈序列栈顶的位置</li>
+<li>将压入顺序中的数据依次入栈</li>
+<li>当辅助栈栈顶氧元素和压栈顶元素相同时，辅助栈出栈，每次出栈索引 <code>idx + 1</code></li>
+<li>出栈有可能在任意一次入栈后进行，当辅助栈栈顶元素和压栈栈顶元素相同时，继续让 压入序列入</li>
+<li>当所有数据入栈完成，如果出栈顺序正确，那么辅助栈为空</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPopOrder</span>(<span class="params">pushV, popV</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> stack = []; <span class="comment">// 辅助栈</span></span><br><span class="line">    <span class="keyword">let</span> idx = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;pushV.length; i++) &#123;</span><br><span class="line">        stack.push(pushV[i]);</span><br><span class="line">        <span class="keyword">while</span>(stack.length &amp;&amp; stack[stack.length<span class="number">-1</span>] === popV[idx]) &#123;</span><br><span class="line">            stack.pop();</span><br><span class="line">            idx++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> stack.length === <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-滑动窗口的最大值"><a href="#4-滑动窗口的最大值" class="headerlink" title="4. 滑动窗口的最大值"></a>4. 滑动窗口的最大值</h4><p>给定一个数组 <code>nums</code> ，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。滑动窗口每次只向右移动一位。返回滑动窗口最大值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> maxSlidingWindow = <span class="function"><span class="keyword">function</span>(<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">window</span> = [];</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;k; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">window</span>.length &amp;&amp; nums[i] &gt;= nums[<span class="built_in">window</span>[<span class="built_in">window</span>.length - <span class="number">1</span>]]) &#123;</span><br><span class="line">            <span class="built_in">window</span>.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">window</span>.push(i)</span><br><span class="line">    &#125;</span><br><span class="line">    result.push(nums[<span class="built_in">window</span>[<span class="number">0</span>]])</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=k; i&lt;nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">window</span>.length &amp;&amp; nums[i] &gt;= nums[<span class="built_in">window</span>[<span class="built_in">window</span>.length- <span class="number">1</span>]]) &#123;</span><br><span class="line">            <span class="built_in">window</span>.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">window</span>.push(i);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">window</span>[<span class="number">0</span>] &lt;= i-k) &#123;</span><br><span class="line">            <span class="built_in">window</span>.shift()</span><br><span class="line">        &#125;</span><br><span class="line">        result.push(nums[<span class="built_in">window</span>[<span class="number">0</span>]])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/算法/图的逻辑和实现/" rel="next" title="图的逻辑和实现">
+                <i class="fa fa-chevron-left"></i> 图的逻辑和实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/算法/字符串/" rel="prev" title="字符串">
+                字符串 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#栈和队列"><span class="nav-number">1.</span> <span class="nav-text">栈和队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#队列和栈的互相实现"><span class="nav-number">1.0.1.</span> <span class="nav-text">队列和栈的互相实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#两个栈实现队列"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">两个栈实现队列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#两个队列实现一个栈"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">两个队列实现一个栈</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-包含-min-函数的栈"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 包含 min 函数的栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-栈的压入、弹出序列"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 栈的压入、弹出序列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-滑动窗口的最大值"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 滑动窗口的最大值</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

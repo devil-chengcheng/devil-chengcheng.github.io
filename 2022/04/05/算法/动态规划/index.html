@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="动态规划的基本概念动态规划（Dynamic programming，简称DP），动态规划是求解多阶段决策过程的最优化问题的一种方法。   所谓多阶段决策过程是指这样一类决策过程：可以把一个复杂问题按时间或空间分成若干个阶段，每个阶段都需要作出决策，以便得到过程的最优结局。由于在每阶段采取的决策是与时间有关的而且前一阶段采取的决策如何，不但与该阶段的经济效果有关，还影响后面各阶段的经济效果，可见这类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划算法">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/算法/动态规划/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="动态规划的基本概念动态规划（Dynamic programming，简称DP），动态规划是求解多阶段决策过程的最优化问题的一种方法。   所谓多阶段决策过程是指这样一类决策过程：可以把一个复杂问题按时间或空间分成若干个阶段，每个阶段都需要作出决策，以便得到过程的最优结局。由于在每阶段采取的决策是与时间有关的而且前一阶段采取的决策如何，不但与该阶段的经济效果有关，还影响后面各阶段的经济效果，可见这类">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191027161855864.png#pic_center">
+<meta property="og:updated_time" content="2020-05-09T03:07:43.451Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="动态规划算法">
+<meta name="twitter:description" content="动态规划的基本概念动态规划（Dynamic programming，简称DP），动态规划是求解多阶段决策过程的最优化问题的一种方法。   所谓多阶段决策过程是指这样一类决策过程：可以把一个复杂问题按时间或空间分成若干个阶段，每个阶段都需要作出决策，以便得到过程的最优结局。由于在每阶段采取的决策是与时间有关的而且前一阶段采取的决策如何，不但与该阶段的经济效果有关，还影响后面各阶段的经济效果，可见这类">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191027161855864.png#pic_center">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/算法/动态规划/">
+
+
+
+
+
+  <title>动态规划算法 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/算法/动态规划/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">动态规划算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T17:38:14+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="动态规划的基本概念"><a href="#动态规划的基本概念" class="headerlink" title="动态规划的基本概念"></a>动态规划的基本概念</h2><p>动态规划（Dynamic programming，简称DP），动态规划是求解多阶段决策过程的最优化问题的一种方法。  </p>
+<p>所谓多阶段决策过程是指这样一类决策过程：可以把一个复杂问题按时间或空间分成若干个阶段，每个阶段都需要作出决策，以便得到过程的最优结局。由于在每阶段采取的决策是与时间有关的而且前一阶段采取的决策如何，不但与该阶段的经济效果有关，还影响后面各阶段的经济效果，可见这类多阶段决策问题是一个动态问题，因此，处理的方法称为动态规划方法。然而，动态规划也可以处理一些本来与时间没有关系的静态模型，这只要在静态模型中人为的引入“时间”因素，分成时段，就可以把它看作是多阶段动态模型，用动态规划方法去处理。  </p>
+<p>多阶段决策过程指这样一类特殊活动过程：问题可按时间顺序分解成若干相互联系的阶段，在每一阶段都要做出决策，全部过程的决策是一个决策序列。  </p>
+<p>例：（最短路线问题）从A至E有一批货物需要调运。各节点之间有运输距离，为使总运费最少，必须找出一条由A至E总里程最短的路线。<br><img src="https://img-blog.csdnimg.cn/20191027161855864.png#pic_center" alt="image"><br>为了找到由A至E的最短线路，可以将该问题分成A—B—C—D—E4个阶段，在每个阶段都需要作出决策，即在A点需决策下一步到B1还是到B2或B3；同样，若到达第二阶段某个状态，比如B1 ，需决定走向C1还是C2 ；依次类推，可以看出：各个阶段的决策不同，由A至E的路线就不同，当从某个阶段的某个状态出发作出一个决策，则这个决策不仅影响到下一个阶段的距离，而且直接影响后面各阶段的行进线路。所以这类问题要求在各个阶段选择一个恰当的决策，使这些决策序列所决定的一条路线对应的总路程最短。  </p>
+<h2 id="动态规划算法的基本思想"><a href="#动态规划算法的基本思想" class="headerlink" title="动态规划算法的基本思想"></a>动态规划算法的基本思想</h2><p>动态规划算法与分治法类似，其基本思想也是将带求解问题分解成若干个子问题。但是经分解的子问题往往不是独立的。不同子问题的数目常常只有多项式量级。在用分治法求解时，有些子问题被重复计算了许多次。如果能够保存已解决的子问题的答案，而在需要时再找出已求得的答案，就可以避免大量重复计算，从而得到多项式时间算法。</p>
+<h2 id="动态规划的求解步骤"><a href="#动态规划的求解步骤" class="headerlink" title="动态规划的求解步骤"></a>动态规划的求解步骤</h2><ol>
+<li>划分状态，即划分子问题。每一步的最优解是全部的最优解的子问题</li>
+<li>状态表示，即如何让计算机理解问题。</li>
+<li>状态转移，即父问题如何由子问题推导出来。</li>
+<li>确定边界，确定初始状态是什么？最小的子问题？最终状态又是什么</li>
+</ol>
+<h2 id="动态规划算法的基本要素"><a href="#动态规划算法的基本要素" class="headerlink" title="动态规划算法的基本要素"></a>动态规划算法的基本要素</h2><ul>
+<li>最优子结构<br>矩阵连乘计算次序问题的最优解包含着其子问题的最优解。这种性质称为最优子结构性质<br>最优解肯定是有最优的子解转移推导而来，子解必定也是子问题的最优解。<br>最优子结构是问题能用动态规划算法求解的前提。</li>
+<li>重叠子问题<br>递归算法求解问题时，每次产生的子问题并不总是新问题，有些子问题被反复计算多次。这种性质称为子问题的重叠性质。  </li>
+</ul>
+<p>动态规划算法，对每一个子问题只解一次，而后将其解保存在一个表格中，当再次需要解此子问题时，只是简单地用常数时间查看一下结果。  </p>
+<p>通常不同的子问题个数随问题的大小呈多项式增长。因此用动态规划算法只需要多项式时间，从而获得较高的解题效率。  </p>
+<h2 id="经典模型"><a href="#经典模型" class="headerlink" title="经典模型"></a>经典模型</h2><ol>
+<li>线性模型<br>经典的问题是斐波那切数列，每个数的值都是一个状态，可以用F[i]表示表示第i个数的值是多少。每个数都是由F[i-1]+F[i-2]转移而来。  </li>
+</ol>
+<p>另一个经典的问题就是最长上升自序列（LIS），有一串序列，要求找出它的一串子序列，这串子序列可以不连续，但必须满足它是严格的单调递増的且为最长的。把这个长度输出。示例：1 7 3 5 9 4 8 结果为4。  </p>
+<p>线性模型还可以拓展成二维问题，例如背包问题，用f[i][j]表示前i个物品，凑成大小为j的背包，最大价值是多少。  </p>
+<p>这类问题非常多，但思路无非就是从左往右，从上到下，从低维到高维进行转移。</p>
+<ol start="2">
+<li><p>区间模型<br>对于每个问题，都是由子区间推导过来的，称之为区间模型。</p>
+</li>
+<li><p>树状模型<br>在数据结构树上面进行最求最优解、最大值等问题，</p>
+</li>
+</ol>
+<h2 id="实现套路"><a href="#实现套路" class="headerlink" title="实现套路"></a>实现套路</h2><p>实现动态规划算法，常用的是两个实现套路，一个是自底向上，另外一个是自顶向下。无论哪种方式，都要明确动态规划的过程，把状态表示、状态转移、边界都考虑好。</p>
+<ol>
+<li>自底向上<br>根据初始化状态，逐步推导到最终状态，而这个转移的过程，必须是一个拓扑序。  </li>
+</ol>
+<p>自底向上一般用来解决什么问题呢？那就是可以轻松确定拓扑序的问题，例如线性模型，都是从左往右进行转移，区间模型，一般都是从小区间推导到大区间。自底向上的一个经典实现是斐波那楔数列的递推实现，即F[i] = F[i - 1] + F[i - 2] 。</p>
+<ol start="2">
+<li>自顶向下<br>从最终状态出发，如果遇到一个子问题还未求解，那么就先求解子问题。如果子问题已经求解，那么直接使用子问题的解，所以自顶向下动态规划又有一个形象生动的名字，叫做记忆化搜索，一般采用递归的方式进行求解。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">long getF(int x)&#123;</span><br><span class="line">    if(f[x] != -1) &#123; // 这个状态没有扩展过</span><br><span class="line">        return f[x];</span><br><span class="line">    &#125;</span><br><span class="line">    return getF(x-1) + getF(x-2); // 找到到大这个状态的状态 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>自顶向下，我们一般用在树上面，因为我们根据父亲结点，很容易找到所有的子问题，也就是所有的子结点，而自底向上的话，我们要去统计这个结点的所有兄弟结点是否已经实现。会稍微复杂一点，而且比较难理解。<br>无论是自顶向下还是自底向上，都只是代码实现的一种套路，随便你采用哪一个，都是可以解的，只是看你的选择而已。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/vue/关于vue/" rel="next" title="关于vue一些特点、特性">
+                <i class="fa fa-chevron-left"></i> 关于vue一些特点、特性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/算法/动态规划：最长上升子序列/" rel="prev" title="动态规划：最长上升子序列">
+                动态规划：最长上升子序列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划的基本概念"><span class="nav-number">1.</span> <span class="nav-text">动态规划的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划算法的基本思想"><span class="nav-number">2.</span> <span class="nav-text">动态规划算法的基本思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划的求解步骤"><span class="nav-number">3.</span> <span class="nav-text">动态规划的求解步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态规划算法的基本要素"><span class="nav-number">4.</span> <span class="nav-text">动态规划算法的基本要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#经典模型"><span class="nav-number">5.</span> <span class="nav-text">经典模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现套路"><span class="nav-number">6.</span> <span class="nav-text">实现套路</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

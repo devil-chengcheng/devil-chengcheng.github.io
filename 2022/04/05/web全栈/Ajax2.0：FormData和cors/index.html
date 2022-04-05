@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="ajax2.0  formdata: 控制提交数据、文件上传进度条 cors跨域  formdata主要用来上传文件，在服务器端和普通一样。 formdata的四个操作  set(key, value) 会覆盖 append(key, value) 不覆盖 get(key) =&amp;gt; value delete(key)  跨域本不存在跨域问题，是浏览器对我们的限制   在后台对跨域进行处理 12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax2.0：FormData和cors">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/web全栈/Ajax2.0：FormData和cors/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="ajax2.0  formdata: 控制提交数据、文件上传进度条 cors跨域  formdata主要用来上传文件，在服务器端和普通一样。 formdata的四个操作  set(key, value) 会覆盖 append(key, value) 不覆盖 get(key) =&amp;gt; value delete(key)  跨域本不存在跨域问题，是浏览器对我们的限制   在后台对跨域进行处理 12">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-09-18T15:59:01.965Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax2.0：FormData和cors">
+<meta name="twitter:description" content="ajax2.0  formdata: 控制提交数据、文件上传进度条 cors跨域  formdata主要用来上传文件，在服务器端和普通一样。 formdata的四个操作  set(key, value) 会覆盖 append(key, value) 不覆盖 get(key) =&amp;gt; value delete(key)  跨域本不存在跨域问题，是浏览器对我们的限制   在后台对跨域进行处理 12">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/web全栈/Ajax2.0：FormData和cors/">
+
+
+
+
+
+  <title>Ajax2.0：FormData和cors | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/web全栈/Ajax2.0：FormData和cors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ajax2.0：FormData和cors</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T17:38:14+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web全栈/" itemprop="url" rel="index">
+                    <span itemprop="name">web全栈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ajax2.0</p>
+<ul>
+<li>formdata: 控制提交数据、文件上传进度条</li>
+<li>cors跨域</li>
+</ul>
+<h3 id="formdata"><a href="#formdata" class="headerlink" title="formdata"></a>formdata</h3><p>主要用来上传文件，在服务器端和普通<form>一样。</form></p>
+<p>formdata的四个操作</p>
+<ul>
+<li>set(key, value) 会覆盖</li>
+<li>append(key, value) 不覆盖</li>
+<li>get(key) =&gt; value</li>
+<li>delete(key)</li>
+</ul>
+<h3 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h3><p>本不存在跨域问题，是浏览器对我们的限制  </p>
+<p>在后台对跨域进行处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 允许跨域</span></span><br><span class="line">  res.setHeader(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// req.headers['orign']=='null' || /^https?:\/\/(www\.)+abc\.com/.req.headers['orign']</span></span><br><span class="line"><span class="keyword">if</span>(req.headers[<span class="string">'orign'</span>]==<span class="string">'null'</span> || req.headers[<span class="string">'orign'</span>].startsWith(<span class="string">'http://localhost'</span>)) &#123;</span><br><span class="line">  <span class="comment">// 允许跨域</span></span><br><span class="line">  res.setHeader(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Access-Control-Allow-Origin: 域名||*  </p>
+<ul>
+<li>服务器端：验证headers[‘orign’]认不认识。认识=&gt;setHeader(‘Access-Control-Allow-Origin’, ‘*’)</li>
+<li>客户端：不需要做任何事。</li>
+</ul>
+<p>Ajax跨域和前端无关，只和后端验证相关</p>
+<h3 id="拖拽上传"><a href="#拖拽上传" class="headerlink" title="拖拽上传"></a>拖拽上传</h3><p>事件：</p>
+<ul>
+<li>ondragenter  拖着东西进入</li>
+<li>ondragleave  拖着东西离开</li>
+<li>ondragover  悬停</li>
+<li>ondrop  松手</li>
+</ul>
+<p>超过一定大小的文件：50M————走插件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">media</span>=<span class="string">"screen"</span>&gt;</span></span><br><span class="line">    .box &#123;</span><br><span class="line">      width: 400px;</span><br><span class="line">      height: 150px;</span><br><span class="line">      border: 1px solid black;</span><br><span class="line">      background: #CCC;</span><br><span class="line">      position: absolute;</span><br><span class="line">      margin-left: -200px;</span><br><span class="line">      margin-top: -75px;</span><br><span class="line">      left: 50%;</span><br><span class="line">      top: 50%;</span><br><span class="line">      text-align: center;</span><br><span class="line">      line-height: 150px;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> oBox = <span class="built_in">document</span>.querySelector(<span class="string">'.box'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.ondragenter = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        oBox.innerHTML = <span class="string">'松手上传'</span>;</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.ondragleave = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        oBox.innerHTML = <span class="string">'请拖到这里'</span>;</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="comment">// 鼠标悬停没有松手且还没离开，就一直发生</span></span></span><br><span class="line"><span class="javascript">      oBox.ondragover = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">'aaa'</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="comment">// ondragover不阻止默认事件，ondrop就不会触发</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.ondrop = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">'松手'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(ev.dataTransfer.files);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    请拖到这里</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="上传进度"><a href="#上传进度" class="headerlink" title="上传进度"></a>上传进度</h3><p>ajax对象中的upload的onprogress方法，是一个XMLHttpRequestUpload对象，用来观察上传进度。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">oAjax.upload.onprogress = <span class="function"><span class="keyword">function</span>(<span class="params">env</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(ev);</span><br><span class="line">    ev.loaded   完成</span><br><span class="line">    ev.total   总共</span><br><span class="line">    ev.loader/ev.total  =&gt;  <span class="number">0</span>~<span class="number">1</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>upload必须放在send前面</li>
+<li>以前的上传是POST，加了upload则是OPTIONS、POST</li>
+<li>服务器必须能处理OPTIONS。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">oAjax.onprogress  <span class="comment">// 下载进度</span></span><br><span class="line">oAjax.upload.onprogress  <span class="comment">// 上传进度</span></span><br></pre></td></tr></table></figure>
+
+<p>断点续传：普通HTML做不到，必须通过客户端实现。</p>
+<h3 id="拖拽上传（深入）"><a href="#拖拽上传（深入）" class="headerlink" title="拖拽上传（深入）"></a>拖拽上传（深入）</h3><ul>
+<li>拖拽-&gt;上传  简单<br>ev.dataTransfer.files -&gt; FromData</li>
+<li>拖拽-&gt;读取文件内容  复杂<br>FileReader</li>
+</ul>
+<p>对于阻止事件：<br>如果是直接赋值的话，直接return false：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">oForm.onsubmit = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果是addEventListener绑定的话，使用ev.preventDefault</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">oForm.addEventListener(<span class="string">'submit'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">    ev.preventDefault();</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="图片上传"><a href="#图片上传" class="headerlink" title="图片上传"></a>图片上传</h4><p>上传 -&gt; 显示 -&gt; 存到数据库里</p>
+<p>方法1：先别上传，彻底挑选完了再上传。（节约资源）<br>方法2：真的上传，等用户再删。（保险、万一用户断网）</p>
+<h5 id="FileReader用法："><a href="#FileReader用法：" class="headerlink" title="FileReader用法："></a>FileReader用法：</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line"></span><br><span class="line">reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">reader.readAsXXX</span><br><span class="line"></span><br><span class="line">readAsText   文本</span><br><span class="line">readAsDataURL   图片(以及其他二进制数据)</span><br><span class="line">readAsBinaryString  以字符串形式存储的二进制数据</span><br><span class="line">readAsArrayBuffer   以二进制数组的形式存储数据</span><br></pre></td></tr></table></figure>
+
+<p>传输数据：</p>
+<ol>
+<li>直接二进制</li>
+<li>base64</li>
+</ol>
+<p>base64可以将二进制数据表现成字符串。<br>只要能出现地址(src)的地方都可以使用Base64</p>
+<p>base64应用：小图标不要引用地址，直接放个base64————优化网络性能。</p>
+<p>图片上传代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">    * &#123;margin: 0; padding: 0; list-style: none;&#125;</span><br><span class="line">    .box &#123;</span><br><span class="line">      width: 400px;</span><br><span class="line">      height: 200px;</span><br><span class="line">      background: #CCC;</span><br><span class="line">      border: 1px solid black;</span><br><span class="line">      line-height: 200px;</span><br><span class="line">      position: absolute;</span><br><span class="line">      left: 50%;</span><br><span class="line">      top: 50%;</span><br><span class="line">      margin-left: -200px;</span><br><span class="line">      margin-top: -100px;</span><br><span class="line">      text-align: center;</span><br><span class="line">      display: none;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .img_list &#123;</span><br><span class="line">      overflow: hidden;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    .img_list li &#123;</span><br><span class="line">      float: left;</span><br><span class="line">      width: 200px;</span><br><span class="line">      height: 200px;</span><br><span class="line">      border: 3px solid #666;</span><br><span class="line">      margin: 10px;</span><br><span class="line">      position: relative;</span><br><span class="line">    &#125;</span><br><span class="line">    .img_list li img &#123;</span><br><span class="line">      width: 100%;</span><br><span class="line">      height: 100%;</span><br><span class="line">    &#125;</span><br><span class="line">    .img_list li .del_btn &#123;</span><br><span class="line">      position: absolute;</span><br><span class="line">      right: 0;</span><br><span class="line">      top: 0;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      <span class="comment">// let oBox = document.getElementsByClassName('box');</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> oBox = <span class="built_in">document</span>.querySelector(<span class="string">'.box'</span>);</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> oUl = <span class="built_in">document</span>.querySelector(<span class="string">'.img_list'</span>);</span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> timer;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="built_in">document</span>.addEventListener(<span class="string">'dragover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line">        clearTimeout(timer);</span><br><span class="line"><span class="javascript">        oBox.style.display = <span class="string">'block'</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        timer = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          oBox.style.display = <span class="string">'none'</span>;</span></span><br><span class="line">        &#125;,300)</span><br><span class="line">        ev.preventDefault();</span><br><span class="line"><span class="javascript">      &#125;, <span class="literal">false</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.addEventListener(<span class="string">'dragenter'</span>, () =&gt; &#123;</span></span><br><span class="line"><span class="javascript">        oBox.innerHTML = <span class="string">'请松手'</span>;</span></span><br><span class="line"><span class="javascript">      &#125;, <span class="literal">false</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.addEventListener(<span class="string">'dragleave'</span>, () =&gt; &#123;</span></span><br><span class="line"><span class="javascript">        oBox.innerHTML = <span class="string">'请拖到这里'</span>;</span></span><br><span class="line"><span class="javascript">      &#125;, <span class="literal">false</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      oBox.addEventListener(<span class="string">'drop'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(ev);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">Array</span>.from(ev.dataTransfer.files).forEach(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">let</span> reader = <span class="keyword">new</span> FileReader();</span></span><br><span class="line"><span class="javascript">          reader.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(reader);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> oLi = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span></span><br><span class="line"><span class="javascript">            oLi.file = file;  <span class="comment">// 每个li对应一个图片，将它保存</span></span></span><br><span class="line"><span class="xml">            oLi.innerHTML = '<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"a.tif"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span> <span class="attr">class</span>=<span class="string">"del_btn"</span>&gt;</span>删除<span class="tag">&lt;/<span class="name">a</span>&gt;</span>';</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> oImg = oLi.children[<span class="number">0</span>];</span></span><br><span class="line"><span class="javascript">            oImg.src = <span class="keyword">this</span>.result;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">            <span class="keyword">let</span> oBtDel = oLi.children[<span class="number">1</span>];</span></span><br><span class="line"><span class="javascript">            oBtDel.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line">              oUl.removeChild(oLi);</span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line">            oUl.appendChild(oLi);</span><br><span class="line">          &#125;;</span><br><span class="line">          reader.readAsDataURL(file);</span><br><span class="line">         &#125;)</span><br><span class="line">        ev.preventDefault();</span><br><span class="line"><span class="javascript">      &#125;, <span class="literal">false</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">      <span class="comment">// 真正的上传</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">let</span> oBtupload = <span class="built_in">document</span>.getElementById(<span class="string">'btn_upload'</span>);</span></span><br><span class="line"><span class="javascript">      oBtupload.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> data = <span class="keyword">new</span> FormData();</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="built_in">Array</span>.from(oUl.children).forEach(<span class="function"><span class="params">li</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">          data.append(<span class="string">'f1'</span>, li.file);</span></span><br><span class="line"><span class="javascript">          <span class="built_in">console</span>.log(li.file, <span class="string">'li'</span>);</span></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> oAjax = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">        oAjax.open(<span class="string">'POST'</span>, <span class="string">'http://localhost:8089/api'</span>, <span class="literal">true</span>);</span></span><br><span class="line">        oAjax.send(data);</span><br><span class="line"><span class="javascript">        oAjax.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">if</span>(oAjax.readyState == <span class="number">4</span>) &#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(oAjax.status &gt;= <span class="number">200</span> &amp;&amp; oAjax.status &lt; <span class="number">300</span> || oAjax.status == <span class="number">304</span>) &#123;</span></span><br><span class="line"><span class="javascript">              alert(<span class="string">'success'</span>);</span></span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">              alert(<span class="string">'defect'</span>);</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"img_list"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">value</span>=<span class="string">"上传"</span> <span class="attr">id</span>=<span class="string">"btn_upload"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line">    请拖到这里</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>后端nodejs代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);  <span class="comment">// 框架主体</span></span><br><span class="line"><span class="keyword">const</span> body = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);  <span class="comment">// 接受普通POST数据</span></span><br><span class="line"><span class="keyword">const</span> multer = <span class="built_in">require</span>(<span class="string">'multer'</span>);  <span class="comment">// 接受文件POST数据</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = express();</span><br><span class="line">server.listen(<span class="number">8089</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 中间件</span></span><br><span class="line">server.use(body.urlencoded(&#123;<span class="attr">extended</span>:<span class="literal">false</span>&#125;));</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> multerObj = multer(&#123;<span class="attr">dest</span>: <span class="string">'./upload/'</span>&#125;);</span><br><span class="line">server.use(multerObj.any());</span><br><span class="line"></span><br><span class="line">server.use(<span class="string">'/api'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(req.headers);</span><br><span class="line">  res.setHeader(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</span><br><span class="line"></span><br><span class="line">  res.send(<span class="string">'OK'</span>);</span><br><span class="line">  <span class="comment">// 由中间件提供</span></span><br><span class="line">  <span class="built_in">console</span>.log(req.body);</span><br><span class="line">  <span class="built_in">console</span>.log(req.files);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/11/算法/动态规划-精简/" rel="next" title="动态规划-精简">
+                <i class="fa fa-chevron-left"></i> 动态规划-精简
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/vue/axios/" rel="prev" title="axios相关内容">
+                axios相关内容 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#formdata"><span class="nav-number">1.</span> <span class="nav-text">formdata</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跨域"><span class="nav-number">2.</span> <span class="nav-text">跨域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拖拽上传"><span class="nav-number">3.</span> <span class="nav-text">拖拽上传</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传进度"><span class="nav-number">4.</span> <span class="nav-text">上传进度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拖拽上传（深入）"><span class="nav-number">5.</span> <span class="nav-text">拖拽上传（深入）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#图片上传"><span class="nav-number">5.1.</span> <span class="nav-text">图片上传</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#FileReader用法："><span class="nav-number">5.1.1.</span> <span class="nav-text">FileReader用法：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

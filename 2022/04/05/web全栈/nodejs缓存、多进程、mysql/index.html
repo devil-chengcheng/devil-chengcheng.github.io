@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="缓存缓存会极大提升性能缓存策略：cache-controlexpires 缓存实现过程：  第一次S -&amp;gt; C:”Last-Modified: XX时间” 第二次C -&amp;gt; S:”If-Modified-Since: XX时间” 第三次S -&amp;gt; C: 200 || 304  获取文件信息fs.stat 1234567891011121314151617181920212223242">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs缓存、多进程、mysql">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/web全栈/nodejs缓存、多进程、mysql/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="缓存缓存会极大提升性能缓存策略：cache-controlexpires 缓存实现过程：  第一次S -&amp;gt; C:”Last-Modified: XX时间” 第二次C -&amp;gt; S:”If-Modified-Since: XX时间” 第三次S -&amp;gt; C: 200 || 304  获取文件信息fs.stat 1234567891011121314151617181920212223242">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-09-17T15:29:07.352Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs缓存、多进程、mysql">
+<meta name="twitter:description" content="缓存缓存会极大提升性能缓存策略：cache-controlexpires 缓存实现过程：  第一次S -&amp;gt; C:”Last-Modified: XX时间” 第二次C -&amp;gt; S:”If-Modified-Since: XX时间” 第三次S -&amp;gt; C: 200 || 304  获取文件信息fs.stat 1234567891011121314151617181920212223242">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/web全栈/nodejs缓存、多进程、mysql/">
+
+
+
+
+
+  <title>nodejs缓存、多进程、mysql | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/web全栈/nodejs缓存、多进程、mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nodejs缓存、多进程、mysql</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T17:38:14+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web全栈/" itemprop="url" rel="index">
+                    <span itemprop="name">web全栈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>缓存会极大提升性能<br>缓存策略：<br>cache-control<br>expires</p>
+<p>缓存实现过程：</p>
+<ol>
+<li>第一次S -&gt; C:”Last-Modified: XX时间”</li>
+<li>第二次C -&gt; S:”If-Modified-Since: XX时间”</li>
+<li>第三次S -&gt; C: 200 || 304</li>
+</ol>
+<p>获取文件信息fs.stat</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> serve = http.createServer(<span class="function">(<span class="params">request, response</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.stat(<span class="string">`www<span class="subst">$&#123;pathname&#125;</span>`</span>, (err, stat) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span>(err) &#123;</span><br><span class="line">            <span class="comment">// console.log('获取文件信息失败');</span></span><br><span class="line">            response.writeHeader(<span class="number">404</span>);</span><br><span class="line">            response.write(<span class="string">'Not Found'</span>);</span><br><span class="line">            response.end();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// console.log(stat.mtime.toGMTString());</span></span><br><span class="line">            <span class="keyword">if</span>(request.headers[<span class="string">'if-modified-since'</span>])&#123;</span><br><span class="line">                <span class="keyword">let</span> oDate = <span class="keyword">new</span> <span class="built_in">Date</span>(request.headers[<span class="string">'if-modified-since'</span>]);</span><br><span class="line">                <span class="keyword">let</span> time_client = <span class="built_in">Math</span>.floor(oDate.getTime()/<span class="number">1000</span>);</span><br><span class="line">                <span class="keyword">let</span> time_server = <span class="built_in">Math</span>.floor(stat.mtime.getTime()/<span class="number">1000</span>);</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(time_server &gt; time_client) &#123; <span class="comment">// 服务器的文件比客户端文件新</span></span><br><span class="line">                    sendFileToClient()</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    response.writeHeader(<span class="number">304</span>);</span><br><span class="line">                    response.write(<span class="string">'Not Modified'</span>);</span><br><span class="line">                    response.end();</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                sendFileToClient()</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="function"><span class="keyword">function</span> <span class="title">sendFileToClient</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="comment">// 发送</span></span><br><span class="line">                <span class="keyword">let</span> rs = fs.createReadStream(<span class="string">`www<span class="subst">$&#123;pathname&#125;</span>`</span>);</span><br><span class="line">                response.setHeader(<span class="string">'Last-Modified'</span>, stat.mtime.toGMTString());</span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 输出</span></span><br><span class="line">                rs.pipe(response);</span><br><span class="line">                </span><br><span class="line">                rs.on(<span class="string">'error'</span>, err =&gt; &#123;</span><br><span class="line">                    response.writeHeader(<span class="number">404</span>);</span><br><span class="line">                    response.write(<span class="string">'Not Found'</span>);</span><br><span class="line">                    response.end();</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将日期数据转换成格式化</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> oDate = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(oDate.toUTCString());</span><br><span class="line"><span class="built_in">console</span>.log(oDate.toGMTString());</span><br></pre></td></tr></table></figure>
+
+<h3 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h3><ul>
+<li>多线程：性能高；复杂、考验程序员</li>
+<li>多进程：性能略低；简单、对程序员要求低</li>
+</ul>
+<p>Node.js默认：单进程、单线程<br>多进程  </p>
+<p>主进程：负责派生子进程<br>子进程：干活</p>
+<h4 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h4><ol>
+<li>普通程序不能“创建”进程，只有系统进程才能创建进程。</li>
+<li>进程是分裂出来的</li>
+<li>分裂出来的两个进程执行的是同一套代码</li>
+<li>父子进程之间可以共享“句柄”(端口)</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cluster = <span class="built_in">require</span>(<span class="string">'cluster'</span>);</span><br><span class="line"><span class="keyword">const</span> os = <span class="built_in">require</span>(<span class="string">'os'</span>);</span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> process = <span class="built_in">require</span>(<span class="string">'process'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(cluster.isMaster) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;os.cpus().length;i++) &#123;</span><br><span class="line">        cluster.fork();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'主进程'</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 子进程</span></span><br><span class="line">    <span class="keyword">let</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(process.pid);</span><br><span class="line">        res.write(<span class="string">'aaa'</span>);</span><br><span class="line">        res.end();</span><br><span class="line">    &#125;);</span><br><span class="line">    server.listen(<span class="number">8080</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'abc'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>进程调度——需要开销，只有第一个进程满了，才会启用第二个，前面都满了才会启用下一个。</p>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ol>
+<li>服务端：wamp里面的mysql，单独装的MySQL的server</li>
+<li>客户端：Nodejs、Java、PHP、Navicat for MySQL</li>
+</ol>
+<h5 id="1-连接"><a href="#1-连接" class="headerlink" title="1.连接"></a>1.连接</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> db = mysql.createConnection(&#123;host, port, user, password, database&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-查询"><a href="#2-查询" class="headerlink" title="2.查询"></a>2.查询</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.query(<span class="string">'做什么'</span>, (err, data) =&gt; &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h4><p>四大查询语句</p>
+<ul>
+<li><p>增(INSERT)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 表 （字段列表） <span class="keyword">VALUES</span>(值列表)</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">USER</span> (<span class="keyword">name</span>, gender,chinese,math,english) <span class="keyword">VALUES</span>(<span class="string">'zhangsan'</span>, <span class="string">'man'</span>, <span class="number">55</span>, <span class="number">65</span> <span class="number">87</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删(DELETE)<br>不会重用已删除ID</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> 表 <span class="keyword">WHERE</span> 条件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>改(UPDATE)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> 表 <span class="keyword">SET</span> 字段=值，... <span class="keyword">WHERE</span> 条件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查(SELECT)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELETE 字段列表 FROM 表;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="node中使用mysql"><a href="#node中使用mysql" class="headerlink" title="node中使用mysql"></a>node中使用mysql</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(<span class="string">'mysql'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> db = mysql.createConnection(&#123;</span><br><span class="line">  host: <span class="string">'localhost'</span>,</span><br><span class="line">  user: <span class="string">'root'</span>,</span><br><span class="line">  password: <span class="string">'admin'</span>,</span><br><span class="line">  port: <span class="number">3306</span>,</span><br><span class="line">  database: <span class="string">'user_test'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// let sq = `insert into book (id,name,author,publish,pages,price,bookcaseid,abled) values(0,'雪中悍刀行', '烽火戏诸侯', '江苏文艺出版社', 100000, 100, 10, 1);`;</span></span><br><span class="line"><span class="keyword">let</span> sq = <span class="string">`insert into grade (id,name,gender,chinese,math,english) values(1,'李四', '男', 87, 88, 98);`</span></span><br><span class="line"></span><br><span class="line">db.query(sq, (err, data) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error'</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h5><p>就是在SQL请求语句中，变量中另有SQL语句，导致原本语句变义。</p>
+<h4 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h4><p>注册： /reg?username=XXX&amp;pass=XXX<br>=&gt; {err: 0, msg: ‘原因’}</p>
+<p>登陆：/login?username=XXX&amp;pass=XXX<br>=&gt; {err: 0, msg: ‘原因’}</p>
+<p>关闭占用端口的服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano|findstr 52330</span><br><span class="line">taskkill /f /t /im 5880</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/web全栈/nodejs相关笔记/" rel="next" title="nodejs相关笔记">
+                <i class="fa fa-chevron-left"></i> nodejs相关笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/web全栈/node文件数据解析/" rel="prev" title="Nodejs文件数据解析">
+                Nodejs文件数据解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存"><span class="nav-number">1.</span> <span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多进程"><span class="nav-number">2.</span> <span class="nav-text">多进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程"><span class="nav-number">2.1.</span> <span class="nav-text">进程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库"><span class="nav-number">3.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-连接"><span class="nav-number">3.0.1.</span> <span class="nav-text">1.连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-查询"><span class="nav-number">3.0.2.</span> <span class="nav-text">2.查询</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL"><span class="nav-number">3.1.</span> <span class="nav-text">SQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node中使用mysql"><span class="nav-number">3.2.</span> <span class="nav-text">node中使用mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#sql注入"><span class="nav-number">3.2.1.</span> <span class="nav-text">sql注入</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#接口"><span class="nav-number">3.3.</span> <span class="nav-text">接口</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

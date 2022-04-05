@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="回溯算法回溯算法其实就是常说的 DFS 算法，本质上就是一种暴力穷举算法。 解决一个回溯问题，实际上就是一个决策树的遍历过程。只需要思考三个问题：  路径：也就是已经做出的选择 选择列表：当前可以做的选择 结束条件：到达决策树底层，无法再做选择的条件  回溯算法的框架： 12345678910result = []def backtrack(路径, 选择列表):    if 满足结束条件:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回溯算法">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/算法/回溯算法/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="回溯算法回溯算法其实就是常说的 DFS 算法，本质上就是一种暴力穷举算法。 解决一个回溯问题，实际上就是一个决策树的遍历过程。只需要思考三个问题：  路径：也就是已经做出的选择 选择列表：当前可以做的选择 结束条件：到达决策树底层，无法再做选择的条件  回溯算法的框架： 12345678910result = []def backtrack(路径, 选择列表):    if 满足结束条件:">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://labuladong.github.io/algo/images/backtracking/1.jpg">
+<meta property="og:updated_time" content="2022-04-05T14:30:16.006Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="回溯算法">
+<meta name="twitter:description" content="回溯算法回溯算法其实就是常说的 DFS 算法，本质上就是一种暴力穷举算法。 解决一个回溯问题，实际上就是一个决策树的遍历过程。只需要思考三个问题：  路径：也就是已经做出的选择 选择列表：当前可以做的选择 结束条件：到达决策树底层，无法再做选择的条件  回溯算法的框架： 12345678910result = []def backtrack(路径, 选择列表):    if 满足结束条件:">
+<meta name="twitter:image" content="https://labuladong.github.io/algo/images/backtracking/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/算法/回溯算法/">
+
+
+
+
+
+  <title>回溯算法 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/算法/回溯算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">回溯算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T22:23:39+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="回溯算法"><a href="#回溯算法" class="headerlink" title="回溯算法"></a>回溯算法</h2><p>回溯算法其实就是常说的 DFS 算法，本质上就是一种暴力穷举算法。</p>
+<p><strong>解决一个回溯问题，实际上就是一个决策树的遍历过程</strong>。只需要思考三个问题：</p>
+<ol>
+<li>路径：也就是已经做出的选择</li>
+<li>选择列表：当前可以做的选择</li>
+<li>结束条件：到达决策树底层，无法再做选择的条件</li>
+</ol>
+<p>回溯算法的框架：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">result = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backtrack</span><span class="params">(路径, 选择列表)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> 满足结束条件:</span><br><span class="line">        result.add(路径)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 选择列表:</span><br><span class="line">        做选择</span><br><span class="line">        backtrack(路径，选择列表)</span><br><span class="line">        撤销选择</span><br></pre></td></tr></table></figure>
+
+<p><strong>其核心就是 for 循环里面的递归，在递归调用之前做选择，在递归调用之后撤销选择。</strong></p>
+<h3 id="一、全排列问题"><a href="#一、全排列问题" class="headerlink" title="一、全排列问题"></a>一、全排列问题</h3><p>排列组合问题。n 个不重复的数，全排列共有 <code>n!</code> 个。</p>
+<p><strong>PS：为了简单起见，这次讨论的全排列问题不包含重复的数字</strong></p>
+<p>比方说给三个数 <code>[1, 2, 3]</code>，如何穷举全排列。</p>
+<p><img src="https://labuladong.github.io/algo/images/backtracking/1.jpg" alt="全排列"></p>
+<p>只要从根遍历这棵树，记录路径上的数字，其实就是所有的全排列。不妨<strong>将这棵树成为回溯算法的 “决策树”</strong></p>
+<p>为什么说这是决策树，因为在每个节点上其实都在做决策。</p>
+<p>可以将 “路径” 和 “选择” 列表作为决策树上每个节点的属性。</p>
+<p>定义的 backtrack 函数其实就像一个指针，在这棵树上游走，同时要正确的维护每个节点的属性，每当走到树的底层，其路径就是一个全排列。</p>
+<p>再进一步就是如何遍历一棵树，多叉树的遍历如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (TreeNode child : root.children) &#123;</span><br><span class="line">        <span class="comment">// 前序遍历需要的操作</span></span><br><span class="line">        traverse(child);</span><br><span class="line">        <span class="comment">// 后序遍历需要的操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所谓的前序遍历和后序遍历，只是两个很有用的时间点。<strong>前序遍历的代码在进入某一个节点之前的那个时间点执行，后序遍历代码在离开某个节点之后的那个时间点执行</strong></p>
+<p>“路径”和“选择”是每个节点的属性，函数在树上游走要正确维护节点的属性，就需要在这两个特殊时间点搞点动作。</p>
+<p><strong>前序的节点做选择，后序的节点撤销选择</strong></p>
+<p>现在再回看回溯算法的核心框架：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> 选择 <span class="keyword">in</span> 选择列表:</span><br><span class="line">    <span class="comment"># 做选择</span></span><br><span class="line">    将该选择从选择列表移除</span><br><span class="line">    路径.add(选择)</span><br><span class="line">    backtrack(路径，选择列表)</span><br><span class="line">    <span class="comment"># 撤销选择</span></span><br><span class="line">    路径.remove(选择)</span><br><span class="line">    将该选择再加入选择列表</span><br></pre></td></tr></table></figure>
+
+<p><strong>只要在递归之前做出选择，在递归之后撤销刚才的选择</strong>，就能正确得到每个节点的选择列表和路径</p>
+<p>全排列代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">List&lt;List&lt;Integer&gt;&gt; res = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">/*主函数，输入一组不重复的数字，返回它们的全排列*/</span></span><br><span class="line">List&lt;List&lt;Integer&gt;&gt; permute(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">    <span class="comment">// 记录路径</span></span><br><span class="line">    LinkedList&lt;Integer&gt; track = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    backtrack(nums, track);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 路径：记录在 track 中</span></span><br><span class="line"><span class="comment">// 选择列表：nums 中不存在于 track 的那些元素</span></span><br><span class="line"><span class="comment">// 结束条件：nums 中元素全部在 track 中出现</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="keyword">int</span>[] nums, LinkedList&lt;Integer&gt; track)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 触发结束条件</span></span><br><span class="line">    <span class="keyword">if</span> (track.size() == nums.length) &#123;</span><br><span class="line">        res.add(<span class="keyword">new</span> LinkedList(track));</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">        <span class="comment">// 排除不合法的选择</span></span><br><span class="line">        <span class="keyword">if</span> (track.contains(nums[i]))</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="comment">// 做选择</span></span><br><span class="line">        track.add(nums[i]);</span><br><span class="line">        <span class="comment">// 进入下一层决策树</span></span><br><span class="line">        backtrack(nums, track);</span><br><span class="line">        <span class="comment">// 取消选择</span></span><br><span class="line">        track.removeLast();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>全排列的 JS 代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> permute = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> track = [];</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line">    <span class="keyword">const</span> trackback = <span class="function">(<span class="params">nums, track</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.length === track.length) &#123;</span><br><span class="line">            result.push(track.slice());  <span class="comment">// 使用slice方法进行复制</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(track.includes(nums[i])) <span class="keyword">continue</span>;</span><br><span class="line">            track.push(nums[i]);</span><br><span class="line">            trackback(nums, track);</span><br><span class="line">            track.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    trackback(nums, track);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这里稍微做了变通，没有显示记录“选择列表”，而是通过 <code>nums</code> 和 <code>track</code> 推导出当前的选择列表。</p>
+<p>这个算法解决全排列不是很高效。但是不管怎么优化，都符合回溯框架，而且时间复杂度都不可能低于 <code>O(N)</code>，因为穷举整棵决策树是无法避免的。<strong>这是回溯算法的一个特点，不像动态规划存在重叠子问题可以优化，回溯算法就是纯暴力穷举，复杂度一般都很高</strong></p>
+<p><strong>提升</strong></p>
+<p>上面是假设数组中没有重复出现的元素，现在将难度进行升级，如果数组中存在重复元素，如何进行全排列，且去除重复的组合</p>
+<ul>
+<li>首先不能使用 track 来判断是否出现过元素</li>
+<li>改用 <code>visited</code> 对象，用来保存是否遍历过 i </li>
+<li>用 <code>inclu</code> 数组来去除每次选择时去除重复选择的对象</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> permute = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line">    <span class="keyword">const</span> track = [];</span><br><span class="line">    <span class="keyword">const</span> visited = &#123;&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> backtrack = <span class="function"><span class="keyword">function</span>(<span class="params">nums, track</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (track.length === nums.length) &#123;</span><br><span class="line">            result.push(track.slice());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> inclu = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (visited[i]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span> (inclu.includes(nums[i])) <span class="keyword">continue</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 做选择</span></span><br><span class="line">            visited[i] = <span class="literal">true</span>;</span><br><span class="line">            inclu.push(nums[i]);</span><br><span class="line">            track.push(nums[i]);</span><br><span class="line">            backtrack(nums, track);</span><br><span class="line">            <span class="comment">// 撤销选择</span></span><br><span class="line">            track.pop();</span><br><span class="line">            visited[i] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    backtrack(nums, track);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="组合问题"><a href="#组合问题" class="headerlink" title="组合问题"></a>组合问题</h3><p>给定两个整数 <code>n</code> 和 <code>k</code>，返回范围 <code>[1, n]</code> 中所有可能的 <code>k</code> 个数的组合</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> combine = <span class="function"><span class="keyword">function</span>(<span class="params">n, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> res = [];</span><br><span class="line">    <span class="keyword">const</span> track = [];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> backtrack = <span class="function"><span class="keyword">function</span>(<span class="params">track, start</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (track.length === k) &#123;</span><br><span class="line">            res.push(track.slice());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i=start; i&lt;n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (track.includes(i+<span class="number">1</span>)) <span class="keyword">continue</span>;</span><br><span class="line">            </span><br><span class="line">            track.push(i+<span class="number">1</span>);</span><br><span class="line">            backtrack(track, i);</span><br><span class="line">            track.pop()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    backtrack(track, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="字符串大小写全排列"><a href="#字符串大小写全排列" class="headerlink" title="字符串大小写全排列"></a>字符串大小写全排列</h4><p>给定一个字符串<code>S</code>，通过将字符串<code>S</code>中的每个字母转变大小写，我们可以获得一个新的字符串。返回所有可能得到的字符串集合。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> letterCasePermutation = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> res = [];</span><br><span class="line">    <span class="keyword">const</span> track = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> backtrack = <span class="function"><span class="keyword">function</span>(<span class="params">track, i</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>  (track.length === s.length) &#123;</span><br><span class="line">            res.push(track.slice().join(<span class="string">''</span>));</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">isNaN</span>(s[i])) &#123;</span><br><span class="line">            track.push(s[i].toLowerCase());</span><br><span class="line">            backtrack(track, i+<span class="number">1</span>);</span><br><span class="line">            track.pop();</span><br><span class="line"></span><br><span class="line">            track.push(s[i].toUpperCase());</span><br><span class="line">            backtrack(track, i+<span class="number">1</span>);</span><br><span class="line">            track.pop();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            track.push(s[i])</span><br><span class="line">            backtrack(track, i+<span class="number">1</span>);</span><br><span class="line">            track.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    backtrack(track,<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、N皇后问题"><a href="#二、N皇后问题" class="headerlink" title="二、N皇后问题"></a>二、N皇后问题</h3><p>给你一个 N*N 的棋盘，让你放置 N 个皇后，使得它们不能相互攻击。</p>
+<p>PS：皇后可以攻击同一行、同一列、左上左下右上右下四个方向的任意单位。</p>
+<p>这个问题本质上跟全排列问题差不多，决策树的每一层标识棋盘上的每一行；每个节点可以做出的选择是，在该行的任意一列放置一个皇后。</p>
+<p>直接套用框架：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; res;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*输入棋盘边长n，返回所有合法的放置*/</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; solveNQueens(<span class="keyword">int</span> n) &#123;</span><br><span class="line">    <span class="comment">// '.'表示空，'Q'表示皇后，初始化空棋盘</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; board(n, <span class="built_in">string</span>(n, <span class="string">'.'</span>));</span><br><span class="line">    backtrack(board, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 路径：board 中小于 row 的行都已经成功放置了皇后</span></span><br><span class="line"><span class="comment">// 选择列表：第 row 行的所有列都是放置皇后的选择</span></span><br><span class="line"><span class="comment">// 结束条件：row 超过 board 的最后一行</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">backtrack</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; board, <span class="keyword">int</span> row)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 触发结束条件</span></span><br><span class="line">    <span class="keyword">if</span> (row == board.size()) &#123;</span><br><span class="line">        res.push_back(board);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> n = board[row].length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> col=<span class="number">0</span>; col&lt;n; col++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!isValid(board, row, col)) &#123;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 做选择</span></span><br><span class="line">        board[row][col] = <span class="string">'Q'</span>;</span><br><span class="line">        <span class="comment">// 进入下一行决策</span></span><br><span class="line">        backtrack(board, row + <span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 撤销选择</span></span><br><span class="line">        board[row][col] = <span class="string">'.'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这部分主要代码，和全排列问题差不多，<code>isValid</code>函数的实现也很简单：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*是否可以在 board[row][col] 放置皇后*/</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isValid</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&amp; board, <span class="keyword">int</span> row, <span class="keyword">int</span> col)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = board.size();</span><br><span class="line">    <span class="comment">// 检查列是否有皇后互相冲突</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][col] == <span class="string">'Q'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 检查右上方是否有皇后互相冲突</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=row<span class="number">-1</span>,j=col+<span class="number">1</span>; i&gt;=<span class="number">0</span>&amp;&amp;j&lt;n; i--,j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][j] == <span class="string">'Q'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 检查左上方是否有皇后互相冲突</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=row<span class="number">-1</span>,j=col<span class="number">-1</span>; i&gt;=<span class="number">0</span>&amp;&amp;j&gt;=<span class="number">0</span>; i--,j--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (board[i][j] == <span class="string">'Q'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数 <code>backtrack</code> 依然像个在决策树上游走的指针，通过 <code>row</code> 和 <code>col</code> 就可以表示函数遍历到的位置，通过 <code>isValid</code>函数可以将不符合条件的情况剪枝。</p>
+<h3 id="三、最后总结"><a href="#三、最后总结" class="headerlink" title="三、最后总结"></a>三、最后总结</h3><p>回溯算法就是多叉树的遍历问题，关键就是在前序遍历和后序遍历的位置做一些操作，算法框架如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backtrack</span><span class="params">(...)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 选择列表:</span><br><span class="line">        做选择</span><br><span class="line">        backtrack(...)</span><br><span class="line">        撤销选择</span><br></pre></td></tr></table></figure>
+
+<p><strong>写 backtrack 函数时，需要维护走过的路径和当前可以做的选择列表，当触发结束条件时，将路径记入结果集。</strong></p>
+<p>回想一下，回溯算法和动态规划。动态规划中，三个需要明确的点就是：状态、选择、base case。对应着就是走过的路径、当前的选择列表和结束条件。</p>
+<p>某种程度上说，动态规划的暴力求解阶段就是回溯算法。只是有的问题具有重叠子问题性质，可以用 dp table 或者备忘录优化，将递归树大幅剪枝，这就变成了动态规划。而上面的两个问题都没有重叠子问题，也就是回溯算法问题了，复杂度非常高是不可避免的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/算法/滑动窗口算法/" rel="next" title="滑动窗口算法框架">
+                <i class="fa fa-chevron-left"></i> 滑动窗口算法框架
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/算法/解决 nSum 问题/" rel="prev" title="解决nSum问题">
+                解决nSum问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#回溯算法"><span class="nav-number">1.</span> <span class="nav-text">回溯算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、全排列问题"><span class="nav-number">1.1.</span> <span class="nav-text">一、全排列问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合问题"><span class="nav-number">1.2.</span> <span class="nav-text">组合问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串大小写全排列"><span class="nav-number">1.2.1.</span> <span class="nav-text">字符串大小写全排列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、N皇后问题"><span class="nav-number">1.3.</span> <span class="nav-text">二、N皇后问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、最后总结"><span class="nav-number">1.4.</span> <span class="nav-text">三、最后总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

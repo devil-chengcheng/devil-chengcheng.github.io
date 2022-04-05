@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="双指针技巧总结双指针分为两类，一类是快慢指针，一类是左右指针。前者主要解决链表中的问题，比如典型的判断链表中是否包含环；后者主要解决数组（或者字符串）中的问题，比如二分查找。 一、快慢指针快慢指针一般都初始化指向链表的头结点 head，前进时快指针 fast 在前，慢指针 slow 在后，巧妙解决一些链表中的问题。  判断链表中是否有环 假设链表中有环，求环的初始点 寻找链表的中点 寻找链表的倒数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="双指针技巧总结">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/算法/双指针技巧总结/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="双指针技巧总结双指针分为两类，一类是快慢指针，一类是左右指针。前者主要解决链表中的问题，比如典型的判断链表中是否包含环；后者主要解决数组（或者字符串）中的问题，比如二分查找。 一、快慢指针快慢指针一般都初始化指向链表的头结点 head，前进时快指针 fast 在前，慢指针 slow 在后，巧妙解决一些链表中的问题。  判断链表中是否有环 假设链表中有环，求环的初始点 寻找链表的中点 寻找链表的倒数">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-04-05T14:32:08.214Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="双指针技巧总结">
+<meta name="twitter:description" content="双指针技巧总结双指针分为两类，一类是快慢指针，一类是左右指针。前者主要解决链表中的问题，比如典型的判断链表中是否包含环；后者主要解决数组（或者字符串）中的问题，比如二分查找。 一、快慢指针快慢指针一般都初始化指向链表的头结点 head，前进时快指针 fast 在前，慢指针 slow 在后，巧妙解决一些链表中的问题。  判断链表中是否有环 假设链表中有环，求环的初始点 寻找链表的中点 寻找链表的倒数">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/算法/双指针技巧总结/">
+
+
+
+
+
+  <title>双指针技巧总结 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/算法/双指针技巧总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">双指针技巧总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T22:23:39+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="双指针技巧总结"><a href="#双指针技巧总结" class="headerlink" title="双指针技巧总结"></a>双指针技巧总结</h2><p>双指针分为两类，一类是快慢指针，一类是左右指针。前者主要解决链表中的问题，比如典型的判断链表中是否包含环；后者主要解决数组（或者字符串）中的问题，比如二分查找。</p>
+<h3 id="一、快慢指针"><a href="#一、快慢指针" class="headerlink" title="一、快慢指针"></a>一、快慢指针</h3><p>快慢指针一般都初始化指向链表的头结点 <code>head</code>，前进时快指针 <code>fast</code> 在前，慢指针 <code>slow</code> 在后，巧妙解决一些链表中的问题。</p>
+<ul>
+<li>判断链表中是否有环</li>
+<li>假设链表中有环，求环的初始点</li>
+<li>寻找链表的中点</li>
+<li>寻找链表的倒数第 n 个节点</li>
+</ul>
+<h5 id="1-判断链表中是否有环"><a href="#1-判断链表中是否有环" class="headerlink" title="1. 判断链表中是否有环"></a>1. 判断链表中是否有环</h5><p>这属于链表的最基本操作。</p>
+<p>单链表的特点时每个节点只知道下一个节点，所以一个指针无法判断链表中是否有环的。</p>
+<p>如果链表中不含环，那么指针最终会遇到空指针 <code>null</code> 表示链表到头了，这样可以判断该链表不含环。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(head != <span class="keyword">null</span>) &#123;</span><br><span class="line">        head = head.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是如果链表中含有环，那么这个指针就会陷入死循环，因为环形链表中没有 <code>null</code> 指针作为尾部节点。</p>
+<p>经典解法就是用两个指针，一个跑得快，一个跑得慢。如果不含环，跑的快的那个指针最终会遇到 <code>null</code>，说明链表不含环；如果含有环，快指针最终会超满指针一圈，和慢指针相遇，说明链表含有环。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    ListNode fast, slow;</span><br><span class="line">    fast = slow = head;</span><br><span class="line">    <span class="keyword">while</span>(fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">        fast = fast.next.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (fast == slow) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-已知链表中含有环，返回这个环的起始位置"><a href="#2-已知链表中含有环，返回这个环的起始位置" class="headerlink" title="2. 已知链表中含有环，返回这个环的起始位置"></a>2. 已知链表中含有环，返回这个环的起始位置</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode <span class="title">detectCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    ListNode fast, slow;</span><br><span class="line">    fast = slow = head;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">        fast = fast.next.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (fast == slow) <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (fast == <span class="keyword">null</span> || fast.next == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">// fast 遇到空指针说明没有环</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    slow = head;</span><br><span class="line">    <span class="keyword">while</span>(slow != fast) &#123;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，当快慢指针相遇时，让其中任一个指针指向头结点，然后让他俩以相同的速度前进，再次相遇时所在的节点就是环开始的位置。</p>
+<p>第一次相遇时，假设慢指针 <code>slow</code> 走了 <code>k</code> 步，那么快指针 <code>fast</code> 一定走了 <code>2k</code> 步；</p>
+<p><code>fast</code> 一定比 <code>slow</code> 多走了 <code>k</code> 步，这多走的 <code>k</code> 步就是 <code>fast</code> 指针在环中转圈圈，所以 <code>k</code> 值就是环长度的整数倍。</p>
+<p>设相遇点距环的起点的距离为 <code>m</code> ，那么环的起点距头结点 <code>head</code> 的距离为 <code>k-m</code>，也就是说如果从 <code>head</code> 前进 <code>k - m</code> 步就能到达环起点。而巧的是，如果从相遇点继续前进 <code>k-m</code> 步，也恰好到达环起点。</p>
+<p>所以只要将快慢指针中的任一个重新指向 <code>head</code> ，然后两个指针同速前进，<code>k-m</code> 步后就会相遇，相遇之处就是环的起点了。</p>
+<h5 id="3-寻找链表的中点"><a href="#3-寻找链表的中点" class="headerlink" title="3. 寻找链表的中点"></a>3. 寻找链表的中点</h5><p>类似上面的思路，可以让快指针一次前进两步，慢指针一次前进一步，当快指针到达链表尽头时，慢指针就处于链表的中间位置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode <span class="title">middleNode</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    ListNode fast, slow;</span><br><span class="line">    fast = slow = head;</span><br><span class="line">    <span class="keyword">while</span>(fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">        fast = fast.next.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// slow 就在中间位置</span></span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当链表的长度是奇数时，<code>slow</code> 恰巧停在中点位置；如果长度是偶数， <code>slow</code> 的位置是中间偏右。</p>
+<p>寻找链表中点的一个重要作用是对链表进行归并排序。</p>
+<p>回想数组的归并排序：求中点索引递归的将数组二分，最后合并两个有序数组。对于链表，合并两个有序链表是很简单的，难点就在于二分。</p>
+<p>但是现在能够寻找链表的中点，就能实现链表的二分了。</p>
+<h5 id="4-寻找链表的倒数第-n-个元素"><a href="#4-寻找链表的倒数第-n-个元素" class="headerlink" title="4. 寻找链表的倒数第 n 个元素"></a>4. 寻找链表的倒数第 n 个元素</h5><p>删除链表中倒数第 n 个节点。</p>
+<p>思路还是使用快慢指针，让快指针先走 n 步，然后快慢指针同速前进。这样当快指针走到链表末尾 <code>null</code> 时，慢指针所在的位置就是倒数第 n 个链表节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    ListNode fast, slow;</span><br><span class="line">    fast = slow = head;</span><br><span class="line">    <span class="keyword">while</span>(n&gt;<span class="number">0</span>) &#123;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">        n--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (fast == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 如果此时快指针走到头了，说明倒数第 n 个节点就是第一个节点</span></span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 让慢指针和快指针同步向前</span></span><br><span class="line">    <span class="keyword">while</span>(fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// slow.next 就是倒数第 n 个节点</span></span><br><span class="line">    slow.next = slow.next.next;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、左右指针"><a href="#二、左右指针" class="headerlink" title="二、左右指针"></a>二、左右指针</h3><p>左右指针在数组中实际是指两个索引值，一般初始化为 <code>left=0, right=nums.length-1</code></p>
+<h5 id="1-二分查找"><a href="#1-二分查找" class="headerlink" title="1. 二分查找"></a>1. 二分查找</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] == target) &#123;</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-两数之和"><a href="#2-两数之和" class="headerlink" title="2. 两数之和"></a>2. 两数之和</h5><p>给定一个按升序排列的有序数组，找到两个数使得它们相加之和等于目标数。</p>
+<p>只要数组有序，就应该想到双指针技巧。这题解法类似二分查找，通过调节 <code>left</code> 和 <code>right</code> 可以调整 <code>sum</code> 的大小。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] twoSum(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> target) &#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.length - <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">        <span class="keyword">int</span> sum = nums[left] + nums[right];</span><br><span class="line">        <span class="keyword">if</span> (sum == target) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;left+<span class="number">1</span>, right+<span class="number">1</span>&#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &lt; target) &#123;</span><br><span class="line">            left++; <span class="comment">// 让 sum 大一点</span></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sum &gt; target) &#123;</span><br><span class="line">            right--; <span class="comment">// 让 sum 小一点</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;-<span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-反转数组"><a href="#3-反转数组" class="headerlink" title="3. 反转数组"></a>3. 反转数组</h5><p>一般编程语言都会提供 reverse 函数，其实非常简单，leetcode 344 题是类似需求，反转一个 <code>char[]</code> 类型的字符数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reverseString</span><span class="params">(<span class="keyword">char</span>[] arr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> right = arr.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        <span class="comment">// 交换 arr[left] 和 arr[right]</span></span><br><span class="line">        <span class="keyword">char</span> temp = arr[left];</span><br><span class="line">        arr[left] = arr[right];</span><br><span class="line">        arr[right] = temp;</span><br><span class="line">        left++;</span><br><span class="line">        right--;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-滑动窗口算法"><a href="#4-滑动窗口算法" class="headerlink" title="4. 滑动窗口算法"></a>4. 滑动窗口算法</h5><p>这是双指针技巧的最高境界，掌握该算法，可以解决一大类子字符串匹配的问题，不过滑动窗口算法稍微复杂，详情见滑动窗口的模板框架</p>
+<h5 id="5-接雨水问题"><a href="#5-接雨水问题" class="headerlink" title="5. 接雨水问题"></a>5. 接雨水问题</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">maxWater</span>(<span class="params"> arr </span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> left = <span class="number">0</span>, right = arr.length<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">let</span> left_max = <span class="number">0</span>, right_max = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> res = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[left] &lt; arr[right]) &#123;</span><br><span class="line">            left_max = <span class="built_in">Math</span>.max(left_max, arr[left]);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (arr[left] &lt; left_max) &#123;</span><br><span class="line">                res += left_max - arr[left];</span><br><span class="line">            &#125;</span><br><span class="line">            left++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            right_max = <span class="built_in">Math</span>.max(right_max, arr[right]);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (arr[right] &lt; right_max) &#123;</span><br><span class="line">                res += right_max - arr[right];</span><br><span class="line">            &#125;</span><br><span class="line">            right--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/算法/数组概览/" rel="next" title="数组概览">
+                <i class="fa fa-chevron-left"></i> 数组概览
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/算法/图的逻辑和实现/" rel="prev" title="图的逻辑和实现">
+                图的逻辑和实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#双指针技巧总结"><span class="nav-number">1.</span> <span class="nav-text">双指针技巧总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、快慢指针"><span class="nav-number">1.1.</span> <span class="nav-text">一、快慢指针</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-判断链表中是否有环"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">1. 判断链表中是否有环</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-已知链表中含有环，返回这个环的起始位置"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">2. 已知链表中含有环，返回这个环的起始位置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-寻找链表的中点"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">3. 寻找链表的中点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-寻找链表的倒数第-n-个元素"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">4. 寻找链表的倒数第 n 个元素</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、左右指针"><span class="nav-number">1.2.</span> <span class="nav-text">二、左右指针</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-二分查找"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">1. 二分查找</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-两数之和"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">2. 两数之和</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-反转数组"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">3. 反转数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-滑动窗口算法"><span class="nav-number">1.2.0.4.</span> <span class="nav-text">4. 滑动窗口算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-接雨水问题"><span class="nav-number">1.2.0.5.</span> <span class="nav-text">5. 接雨水问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

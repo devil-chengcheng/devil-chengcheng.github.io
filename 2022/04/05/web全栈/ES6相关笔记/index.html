@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="ESECMAScript(ECMA,ES)：一种标准JavaScript是ECMA的一种。    ES6新语法：  变量 函数 数组/json 字符串 面向对象 Promise generator 模块   一、变量var：可重复定义，不能限制修改，没有块级作用域。   ES6引入let、const：不能重复定义；let是变量，const是常量；   解构赋值：  左右两边必须一样，右边是合法的内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6相关笔记">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/web全栈/ES6相关笔记/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="ESECMAScript(ECMA,ES)：一种标准JavaScript是ECMA的一种。    ES6新语法：  变量 函数 数组/json 字符串 面向对象 Promise generator 模块   一、变量var：可重复定义，不能限制修改，没有块级作用域。   ES6引入let、const：不能重复定义；let是变量，const是常量；   解构赋值：  左右两边必须一样，右边是合法的内">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-09-18T15:59:46.682Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6相关笔记">
+<meta name="twitter:description" content="ESECMAScript(ECMA,ES)：一种标准JavaScript是ECMA的一种。    ES6新语法：  变量 函数 数组/json 字符串 面向对象 Promise generator 模块   一、变量var：可重复定义，不能限制修改，没有块级作用域。   ES6引入let、const：不能重复定义；let是变量，const是常量；   解构赋值：  左右两边必须一样，右边是合法的内">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/web全栈/ES6相关笔记/">
+
+
+
+
+
+  <title>ES6相关笔记 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/web全栈/ES6相关笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ES6相关笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T17:38:14+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web全栈/" itemprop="url" rel="index">
+                    <span itemprop="name">web全栈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="ES"><a href="#ES" class="headerlink" title="ES"></a>ES</h2><p>ECMAScript(ECMA,ES)：一种标准<br>JavaScript是ECMA的一种。  </p>
+<hr>
+<p>ES6新语法：</p>
+<ol>
+<li>变量</li>
+<li>函数</li>
+<li>数组/json</li>
+<li>字符串</li>
+<li>面向对象</li>
+<li>Promise</li>
+<li>generator</li>
+<li>模块</li>
+</ol>
+<hr>
+<h3 id="一、变量"><a href="#一、变量" class="headerlink" title="一、变量"></a>一、变量</h3><p>var：可重复定义，不能限制修改，没有块级作用域。  </p>
+<p>ES6引入let、const：不能重复定义；let是变量，const是常量；  </p>
+<p>解构赋值：</p>
+<ol>
+<li>左右两边必须一样，右边是合法的内容</li>
+<li>赋值和定义必须同步完成。</li>
+</ol>
+<h3 id="二、函数"><a href="#二、函数" class="headerlink" title="二、函数"></a>二、函数</h3><h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>==箭头函数，内外this不变==</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">参数, 参数</span>)</span>&#123;</span><br><span class="line">    函数体</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 箭头函数</span></span><br><span class="line">(参数， 参数) =&gt; &#123;</span><br><span class="line">    函数体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>如果有且仅有1个参数，()可以省略。</li>
+<li>如果函数体只有一句话，且是return，则{}可以省略。</li>
+</ol>
+<h4 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h4><p>(a, b = XXX, c = XX)</p>
+<h4 id="参数展开（剩余参数、可变参数）"><a href="#参数展开（剩余参数、可变参数）" class="headerlink" title="参数展开（剩余参数、可变参数）"></a>参数展开（剩余参数、可变参数）</h4><ol>
+<li>“…”的第一个作用：结构剩余参数<br>(a, b, …args): 用args接收剩下的所有参数</li>
+<li>“…”的第二个作用：用来展开一个数组</li>
+</ol>
+<h3 id="三、数组和json"><a href="#三、数组和json" class="headerlink" title="三、数组和json"></a>三、数组和json</h3><h4 id="数组新增"><a href="#数组新增" class="headerlink" title="数组新增"></a>数组新增</h4><p>map、reduce、filter、forEach、Array</p>
+<h5 id="map"><a href="#map" class="headerlink" title="map"></a>map</h5><p>映射：一一对应<br>[1, 2, 3, 4] =&gt; [false, true, false, true]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">12</span>, <span class="number">65</span>, <span class="number">58</span>, <span class="number">39</span>, <span class="number">87</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr2 = arr.map(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (item &gt;= <span class="number">60</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用箭头函数</span></span><br><span class="line"><span class="keyword">let</span> arr3 = arr.map(<span class="function"><span class="params">item</span> =&gt;</span> item&gt;=<span class="number">60</span>);</span><br></pre></td></tr></table></figure>
+
+<h5 id="reduce-汇总"><a href="#reduce-汇总" class="headerlink" title="reduce(汇总)"></a>reduce(汇总)</h5><p>一堆 -&gt; 一个</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 求平均值的功能</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">12</span>, <span class="number">65</span>, <span class="number">58</span>, <span class="number">39</span>, <span class="number">87</span>];</span><br><span class="line"></span><br><span class="line">arr.reduce(<span class="function">(<span class="params">tmp, item, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(temp, item, index)</span><br><span class="line">    <span class="keyword">if</span> (index &lt; arr.length - <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> tmp + item;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (tmp + item) / arr.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="filter-过滤"><a href="#filter-过滤" class="headerlink" title="filter(过滤)"></a>filter(过滤)</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">12</span>, <span class="number">65</span>, <span class="number">58</span>, <span class="number">39</span>, <span class="number">87</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr2 = arr.map(<span class="function"><span class="params">item</span> =&gt;</span> item % <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="forEach-遍历"><a href="#forEach-遍历" class="headerlink" title="forEach(遍历)"></a>forEach(遍历)</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">12</span>, <span class="number">65</span>, <span class="number">58</span>, <span class="number">39</span>, <span class="number">87</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">arr.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    sum += item</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h5><p>Array.from([array-like]) =&gt; {x, x, x}</p>
+<h4 id="json变化："><a href="#json变化：" class="headerlink" title="json变化："></a>json变化：</h4><ol>
+<li><p>简写：名字和值一样的，可以省略</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">12</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">24</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> json = &#123;a, b&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>function可以不写</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> json = &#123;</span><br><span class="line">    a: <span class="number">12</span>,</span><br><span class="line">    b: <span class="number">24</span>,</span><br><span class="line">    show1: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.a + <span class="keyword">this</span>.b)</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 可以直接写为</span></span><br><span class="line">    show() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.a + <span class="keyword">this</span>.b)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="四、字符串"><a href="#四、字符串" class="headerlink" title="四、字符串"></a>四、字符串</h3><h4 id="字符串模板"><a href="#字符串模板" class="headerlink" title="字符串模板"></a>字符串模板</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> json = &#123;</span><br><span class="line">    name: <span class="string">'zhangsan'</span>,</span><br><span class="line">    age: <span class="number">18</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">alert(<span class="string">'我叫'</span> + json.name + <span class="string">',今年'</span> + json.age + <span class="string">'岁'</span>)</span><br><span class="line">alert(<span class="string">'我叫$&#123;json.name&#125;,今年$&#123;json.age&#125;岁'</span>)</span><br><span class="line"><span class="comment">// 模板2</span></span><br><span class="line">alert(<span class="string">`ab</span></span><br><span class="line"><span class="string">cde</span></span><br><span class="line"><span class="string">f</span></span><br><span class="line"><span class="string">`</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="startsWith"><a href="#startsWith" class="headerlink" title="startsWith"></a>startsWith</h4><p>判断是否以…开始</p>
+<h4 id="endsWith"><a href="#endsWith" class="headerlink" title="endsWith"></a>endsWith</h4><p>判断是否以…结尾</p>
+<h3 id="五、面向对象"><a href="#五、面向对象" class="headerlink" title="五、面向对象"></a>五、面向对象</h3><p>箭头this、bind<br>统一标准化：class、constroctor；extend、super。写法上的变化。  </p>
+<p>bind: 给一个函数定死一个this</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bind固定this指向</span></span><br><span class="line"><span class="built_in">document</span>.onclick = p.showName.bind(p) <span class="comment">// 相当于写一个函数括起来</span></span><br></pre></td></tr></table></figure>
+
+<p>普通函数：根据调用的人，this经常变<br>箭头函数：根据所在环境，this恒定</p>
+<p>编译：一个语言编程另一语言。<br>打包：多个文件打成压缩包，减少HTTP请求，提高性能。</p>
+<h3 id="六、Promise"><a href="#六、Promise" class="headerlink" title="六、Promise"></a>六、Promise</h3><p>异步操作同步化。类似语法糖，将异步请求看上去同步化<br>作用：解决异步操作。  </p>
+<p>同步：串行，简单、方便<br>异步：并发，性能高、体验好</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 异步</span></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    url: <span class="string">'/banner_data'</span>,</span><br><span class="line">    success(data) &#123;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: <span class="string">'/user_data'</span>,</span><br><span class="line">            success(data) &#123;</span><br><span class="line">                $.ajax(&#123;</span><br><span class="line">                    url: <span class="string">'/item_data'</span>,</span><br><span class="line">                    success(data) &#123;</span><br><span class="line">                        </span><br><span class="line">                    &#125;,</span><br><span class="line">                    error() &#123;</span><br><span class="line">                        alert(数据获取失败)</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            error() &#123;</span><br><span class="line">                alert(数据获取失败)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    error() &#123;</span><br><span class="line">        alert(<span class="string">'数据获取失败'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同步</span></span><br><span class="line"><span class="keyword">let</span> banners = $.ajax(&#123;<span class="attr">url</span>: <span class="string">'/banner_data'</span>&#125;);</span><br><span class="line"><span class="keyword">let</span> user = $.ajax(&#123;<span class="attr">url</span>: <span class="string">'/user_data'</span>&#125;);</span><br><span class="line"><span class="keyword">let</span> item = $.ajax(&#123;<span class="attr">url</span>: <span class="string">'/item_data'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>==用同步的方式写异步：==</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        url: <span class="string">'1.txt'</span>,</span><br><span class="line">        dataType: <span class="string">'json'</span>,</span><br><span class="line">        success(data) &#123;</span><br><span class="line">            reslove(json)</span><br><span class="line">        &#125;,</span><br><span class="line">        error(err) &#123;</span><br><span class="line">            reject(json)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">p.then(<span class="function"><span class="params">json</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(json)</span><br><span class="line">&#125;, err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'err'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>Promise.all()</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.all([</span><br><span class="line">    p, p1, p2</span><br><span class="line">]).then()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Promise有用，解除异步操作</li>
+<li>Promise有局限：带逻辑的异步操作较麻烦</li>
+</ol>
+<p>Promise.all(), 与：所有的都成功。<br>Promise.race(), 或：只要有一个完成。</p>
+<h3 id="七、generator生成器"><a href="#七、generator生成器" class="headerlink" title="七、generator生成器"></a>七、generator生成器</h3><p>生成器函数：能暂停，通过==yield==暂停</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">'aaa'</span>);</span><br><span class="line">    <span class="keyword">yield</span>;</span><br><span class="line">    alert(<span class="string">'bbb'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> gen = show();</span><br><span class="line"></span><br><span class="line">gen.next(); <span class="comment">// aaa</span></span><br><span class="line"></span><br><span class="line">gen.next(); <span class="comment">// bbb</span></span><br></pre></td></tr></table></figure>
+
+<p>yield: 可以传参和返回值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">'aaa'</span>);</span><br><span class="line">    <span class="keyword">let</span> a = <span class="keyword">yield</span>;</span><br><span class="line">    <span class="comment">// yield 55; //返回值</span></span><br><span class="line">    alert(<span class="string">'bbb'</span> + a)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> gen = show();</span><br><span class="line">gen.next(); <span class="comment">// aaa</span></span><br><span class="line"><span class="comment">// let res1 = gen.next()</span></span><br><span class="line"><span class="comment">// console.log(res1) // &#123;value: 55, done: false&#125;</span></span><br><span class="line">gen.next(<span class="number">12</span>); <span class="comment">// 注意传参在这一块</span></span><br><span class="line"><span class="comment">// let res2 = gen.next()</span></span><br><span class="line"><span class="comment">// console.log(res2) // &#123;value: undefined, done: true&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="generator和promise配合"><a href="#generator和promise配合" class="headerlink" title="generator和promise配合"></a>generator和promise配合</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> *<span class="title">show</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> data1 = yeild $.ajax(&#123;<span class="attr">url</span>: <span class="string">'1.txt'</span>, <span class="attr">dataType</span>: <span class="string">'json'</span>&#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (data1.a + data1.b &lt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> data2 = <span class="keyword">yield</span> $.ajax(&#123;<span class="attr">url</span>: <span class="string">'2.txt'</span>, <span class="attr">dataType</span>: <span class="string">'json'</span>&#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> data3 = <span class="keyword">yield</span> $.ajax(&#123;<span class="attr">url</span>: <span class="string">'3.txt'</span>, <span class="attr">dataType</span>: <span class="string">'json'</span>&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">runner(show)</span><br></pre></td></tr></table></figure>
+
+<p>generator和promise配合需要一个外来runner辅助执行，会带来不统一、不标准、性能低。且generator函数不能写成箭头函数。</p>
+<h3 id="八、async-await"><a href="#八、async-await" class="headerlink" title="八、async/await"></a>八、async/await</h3><p>和generator类似</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">async function show() &#123;</span><br><span class="line">    let data1 = await $.ajax(&#123;url: &apos;1.txt&apos;, dataType: &apos;json&apos;&#125;);</span><br><span class="line">    let data2 = await $.ajax(&#123;url: &apos;2.txt&apos;, dataType: &apos;json&apos;&#125;);</span><br><span class="line">    let data3 = await $.ajax(&#123;url: &apos;3.txt&apos;, dataType: &apos;json&apos;&#125;);</span><br><span class="line">&#125;</span><br><span class="line">show();</span><br></pre></td></tr></table></figure>
+
+<p>格式用法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">let</span> 结果 = <span class="keyword">await</span> 异步操作-promise、generator、另一个<span class="keyword">async</span>函数</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/vue/Electron-vue跨平台桌面应用开发/" rel="next" title="Electron-vue跨平台桌面应用开发">
+                <i class="fa fa-chevron-left"></i> Electron-vue跨平台桌面应用开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/vue/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES"><span class="nav-number">1.</span> <span class="nav-text">ES</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、变量"><span class="nav-number">1.1.</span> <span class="nav-text">一、变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、函数"><span class="nav-number">1.2.</span> <span class="nav-text">二、函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#箭头函数"><span class="nav-number">1.2.1.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默认参数"><span class="nav-number">1.2.2.</span> <span class="nav-text">默认参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数展开（剩余参数、可变参数）"><span class="nav-number">1.2.3.</span> <span class="nav-text">参数展开（剩余参数、可变参数）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、数组和json"><span class="nav-number">1.3.</span> <span class="nav-text">三、数组和json</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组新增"><span class="nav-number">1.3.1.</span> <span class="nav-text">数组新增</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#map"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#reduce-汇总"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">reduce(汇总)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#filter-过滤"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">filter(过滤)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#forEach-遍历"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">forEach(遍历)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Array"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">Array</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#json变化："><span class="nav-number">1.3.2.</span> <span class="nav-text">json变化：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、字符串"><span class="nav-number">1.4.</span> <span class="nav-text">四、字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串模板"><span class="nav-number">1.4.1.</span> <span class="nav-text">字符串模板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#startsWith"><span class="nav-number">1.4.2.</span> <span class="nav-text">startsWith</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#endsWith"><span class="nav-number">1.4.3.</span> <span class="nav-text">endsWith</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、面向对象"><span class="nav-number">1.5.</span> <span class="nav-text">五、面向对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、Promise"><span class="nav-number">1.6.</span> <span class="nav-text">六、Promise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、generator生成器"><span class="nav-number">1.7.</span> <span class="nav-text">七、generator生成器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#generator和promise配合"><span class="nav-number">1.7.1.</span> <span class="nav-text">generator和promise配合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、async-await"><span class="nav-number">1.8.</span> <span class="nav-text">八、async/await</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="JavaScript设计最出色的就是它的函数实现。函数包含一组语句，是JavaScript的基础模块单元，用于代码复用、信息隐藏和组合调用。一般来说，编程就是将一组需求分解成一组函数与数据结构的技能。重点关注this参数 函数对象JavaScript中函数就是对象。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到O">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中函数">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/javascript/JavaScript中函数/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="JavaScript设计最出色的就是它的函数实现。函数包含一组语句，是JavaScript的基础模块单元，用于代码复用、信息隐藏和组合调用。一般来说，编程就是将一组需求分解成一组函数与数据结构的技能。重点关注this参数 函数对象JavaScript中函数就是对象。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到O">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-06-21T03:04:30.002Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中函数">
+<meta name="twitter:description" content="JavaScript设计最出色的就是它的函数实现。函数包含一组语句，是JavaScript的基础模块单元，用于代码复用、信息隐藏和组合调用。一般来说，编程就是将一组需求分解成一组函数与数据结构的技能。重点关注this参数 函数对象JavaScript中函数就是对象。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到O">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/javascript/JavaScript中函数/">
+
+
+
+
+
+  <title>JavaScript中函数 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/javascript/JavaScript中函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript中函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T17:38:14+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>JavaScript设计最出色的就是它的函数实现。<br>函数包含一组语句，是JavaScript的基础模块单元，用于代码复用、信息隐藏和组合调用。一般来说，编程就是将一组需求分解成一组函数与数据结构的技能。<br>重点关注this参数</p>
+<h4 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h4><p>JavaScript中函数就是对象。对象字面量产生的对象连接到Object.prototype。函数对象连接到Function.prototype（该原型对象本身连接到Object.prototype）。每个函数创建时会附加两个隐藏属性：函数的上下文和实现函数行为的代码。（JavaScript创建一个函数对象时，会给对象设置一个“调用”属性。当调用一个函数时，可理解调用此函数的“调用”属性）  </p>
+<p>每个函数在创建时也随配有一个prototype属性。他的值是一个拥有constructor属性且值即为该函数的对象。  </p>
+<p>因为函数是对象，所以他们可以向任何其他值一样被使用。函数可以保存在变量、对象和数组中。函数可以被当作参数传递给其他函数，函数也可以再返回函数。而且，因为函数是对象，所以函数也可以拥有方法。  </p>
+<p>函数的与众不同在于他们可以被调用。</p>
+<h4 id="函数字面量"><a href="#函数字面量" class="headerlink" title="函数字面量"></a>函数字面量</h4><p>函数对象通过函数字面量来创建：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 创建一个add变量，并用来把两个数字相加的函数赋值给他</span><br><span class="line">var add = function (a, b) &#123;</span><br><span class="line">    return a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数字面量包含4个部分：</p>
+<ol>
+<li>保留字function</li>
+<li>函数名，可省略。如果没有函数名，则被称为匿名函数。</li>
+<li>参数。参数的名称被定义为函数中的变量。不像普通变量被初始化为undefined，而是函数调用时初始化实际提供的参数值</li>
+<li>包围在花括号中的一组语句。函数的主体，调用时执行。</li>
+</ol>
+<p>一个内部函数除了可访问自己参数和变量，同时也能自由访问把它嵌套其中的父函数的参数和变量</p>
+<h4 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h4><p>调用一个函数会暂停当前函数的执行，传递控制权和参数给新函数。除了声明时定义的形参，每个函数还接受两个附加参数：this和argument。  </p>
+<p>调用运算符是跟在任何一个函数值的表达式之后的一对圆括号。圆括号内可包含零个或多个用逗号隔开的表达式，每个表达式产生一个参数值，每个参数值被赋予函数声明时定义的形式参数名。<strong>当实际参数个数与形参个数不匹配时，不会导致运行时的错误</strong>。如果实际参数值过多了，超出的会被省略；如果实际参数少了，缺失的值会被替换为undefined。<strong>对参数值不会进行类型检查</strong>：任何类型的值都可以被传递给任何参数。</p>
+<h4 id="JavaScript中的调用模式"><a href="#JavaScript中的调用模式" class="headerlink" title="==JavaScript中的调用模式=="></a>==JavaScript中的调用模式==</h4><p>函数中有参数this，this在面向对象编程中是非常重要的，他的值取决调用的模式。JavaScript中一共有4种调用的模式：方法调用模式、函数调用模式、构造器调用模式、apply调用模式。这些模式再如何初始化this上存在差异。</p>
+<h5 id="方法调用模式"><a href="#方法调用模式" class="headerlink" title="方法调用模式"></a>方法调用模式</h5><p>当一个函数被保存为对象的一个属性时，称之为方法。当方法被调用时，this被绑定到该对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 创建一个obj对象，有一个value属性和一个increment方法</span><br><span class="line">// increment接受一个可选参数。如果参数不是数字，那么默认使用数字1</span><br><span class="line"></span><br><span class="line">var obj = &#123;</span><br><span class="line">    value: 0,</span><br><span class="line">    increment: function(inc) &#123;</span><br><span class="line">        this.value += typeof inc === &apos;number&apos; ? inc : 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.increment();</span><br><span class="line">document.writeln(obj.value); // 1</span><br><span class="line">obj.increment(2)</span><br><span class="line">document.writeln(obj.value); // 3</span><br></pre></td></tr></table></figure>
+
+<p>方法this可以访问自己所属的对象，可从对象中取值或者对对象进行修改。this到对象的绑定发生在调用的时候。这个“超级”延迟绑定使得函数可以对this高度复用。通过this可取得所属对象上下文的方法称为公共方法。</p>
+<h5 id="函数调用模式"><a href="#函数调用模式" class="headerlink" title="函数调用模式"></a>函数调用模式</h5><p>当一个函数并非一个对象的属性时，它是被当做一个函数来调用的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var sum = add(3, 4)</span><br></pre></td></tr></table></figure>
+
+<p>在这个模式下调用函数时，this绑定的是全局变量。这是语言设计上的一个错误。如果设计正确的话，那么内部函数被调用的时候，this应该仍然绑定到他外部函数的this变量。这个错误的后果是方法不能利用内部函数来帮它工作，因为内部函数的this绑定了错误的值，不能共享该方法对对象的访问权。当然也有解决方案，就是通过定义一个变量，把this赋值给它。那么内部函数就可以通过这个变量访问到this。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 给obj添加一个double方法</span><br><span class="line">obj.double = function() &#123;</span><br><span class="line">    var _this = this;</span><br><span class="line">    var fun = function() &#123;</span><br><span class="line">        _this.value = add(_this.value, _this.value)</span><br><span class="line">    &#125;</span><br><span class="line">    fun();</span><br><span class="line">&#125;</span><br><span class="line">// 以方法的形式调用double</span><br><span class="line">obj.double();</span><br><span class="line">document.writeln(obj.value)</span><br></pre></td></tr></table></figure>
+
+<h5 id="构造器调用模式"><a href="#构造器调用模式" class="headerlink" title="构造器调用模式"></a>构造器调用模式</h5><p>如果一个函数前面带上new来调用，那么背地里将会创建一个连接到该函数的prototype成员的新对象，同时this会被绑定到新对象上。  </p>
+<p>new前缀也会改变return语句的行为。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 创建一个名为Quo的构造器函数。构造一个带有status属性的对象</span><br><span class="line">var Quo = function(string) &#123;</span><br><span class="line">    this.status = string</span><br><span class="line">&#125;;</span><br><span class="line">// 给Quo所有实例提供一个名为get_status的公共方法</span><br><span class="line">Quo.prototype.get_status = function() &#123;</span><br><span class="line">    return this.status;</span><br><span class="line">&#125;;</span><br><span class="line">// 构造一个Quo实例</span><br><span class="line">var myQuo = new Quo(&quot;confused&quot;);</span><br><span class="line">document.writeln(myQuo.get_status()); // 打印显示“confused”</span><br></pre></td></tr></table></figure>
+
+<p><strong>一个函数如果创建的目的是希望结合new前缀来调用，那么就被称为构造器函数</strong>。按照约定，他们保存在以大写格式命名的变量里。如果构造器函数前没有加new，可能会发生很糟糕的事，既没有编译时警告，也没有运行时警告。所以大写约定很重要。</p>
+<h5 id="Apply调用模式-不是太理解"><a href="#Apply调用模式-不是太理解" class="headerlink" title="Apply调用模式(不是太理解)"></a>Apply调用模式(不是太理解)</h5><p>因为JavaScript是函数式的面向对象的编程语言，所以函数可以拥有方法。  </p>
+<p>apply方法让我们构建一个参数数组传递给调用函数。它也允许我们选择this的值。apply方法接收两个参数，第一个是要绑定给this的值，第二个就是一个参数数组。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 构造一个包含两个数字的数组，并将他们相加</span><br><span class="line">var array = [3, 4]</span><br><span class="line">var sum = add.apply(null, array)</span><br><span class="line"></span><br><span class="line">// 构造一个包含status成员的对象</span><br><span class="line">var statusObj = &#123;</span><br><span class="line">    status: &apos;ok&apos;</span><br><span class="line">&#125;</span><br><span class="line">// statusObj没有继承Quo.prototype，但我们可以在statusObj上调用get_status方法，尽管statusObj上没有get_status方法</span><br><span class="line">var status = Quo.prototype.get_status.apply(statusObj)</span><br></pre></td></tr></table></figure>
+
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>当函数被调用时会有一个附带的参数arguments数组。函数可以通过这个参数访问所有他被调用时传递给他的参数列表，包括那些函数没有分配给函数声明时定义的形式参数的多余参数。这使得编写一个无须指定参数个数的函数成为可能。  </p>
+<p>因为语言的一个设计错误，arguments并不是一个真正的数组。只是一个“类似数组”的对象。arguments拥有一个length属性，但是它没有任何数组的方法。</p>
+<h4 id="返回"><a href="#返回" class="headerlink" title="返回"></a>返回</h4><p>return语句可使函数提前返回。<br>一个函数总是会返回一个值，如果没有指定返回值，则返回undefined。<br>如果函数调用时在前面加上了new前缀，且返回值不是一个对象，则返回this（该新对象）</p>
+<h4 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h4><p>JavaScript提供一套异常处理机制。异常是干扰程序正常流程的不寻常（但并非是完全出乎意料）的事故。当发生这样的事故时，程序应该抛出一个异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var add = function(a, b) &#123;</span><br><span class="line">    if (typeof a !== &apos;number&apos; || typeof b !== &apos;number&apos;) &#123;</span><br><span class="line">        throw &#123;</span><br><span class="line">            name: &apos;TypeError&apos;,</span><br><span class="line">            message: &apos;add needs numbers&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return a + b</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>throw语句中断函数的执行，它应该抛出一个exception对象，该对象包含异常类型的name属性和一个描述的message属性。当然也可以添加其他属性。  </p>
+<p>该exception对象被传递到一个try语句的catch从句。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 构造一个try_it函数，以不正确的方式调用之前的add函数</span><br><span class="line">var try_it = function() &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        add(&apos;seven&apos;)</span><br><span class="line">    &#125; catch (e) &#123;</span><br><span class="line">        document.writeln(e.name + &apos;: &apos; + e.message)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">try_it()</span><br></pre></td></tr></table></figure>
+
+<p>如果在try代码块内抛出一个异常，则控制权会跳转到catch从句。<br>一个try语句只会有一个捕获异常的catch代码块。如果处理手段取决于异常的类型，则异常处理器必须检查异常对象的name属性来确定异常的类型。</p>
+<h4 id="扩充类型的功能"><a href="#扩充类型的功能" class="headerlink" title="扩充类型的功能"></a>扩充类型的功能</h4><p>JavaScript允许给语言基本类型的扩充功能.对于对象我们可以通过Object.prototype添加方法，可以让该方法对所有对象都可用。这种方式同样适用函数、数组、字符串、数字、正则表达式和布尔值。  </p>
+<p>可以通过Function.prototype增加方法来使所有函数可用。  </p>
+<p>JavaScript没有专门的整数类型。可通过Number.prototype增加一个integer方法来改善。会根据数字正负来判断是用Math.ceiling还是Math.floor。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Number.method(&apos;integer&apos;, function() &#123;</span><br><span class="line">    return Math[this &lt; 0 ? &apos;ceil&apos; : &apos;floor&apos;](this)</span><br><span class="line">&#125;);</span><br><span class="line">document.writeln((-10/3).integer()); // -3</span><br></pre></td></tr></table></figure>
+
+<p>通过给基本类型增加方法，极大地提高了语言的表现力。因为JavaScript原型继承的动态本质，新方法立刻被赋予到所有对象实例上，哪怕对象在方法被增加之前已经创建。  </p>
+<p>基本类型的原型是公用的结构，所以类库混用时要小心。</p>
+<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><p>递归函数就是会直接或间接调用自身的一种函数。把一个问题分解成一组相似的子问题，每一个都用一个寻常解去解决。<br>递归函数可以非常高效的操作树形结构，比如浏览器端的文档对象模型（DOM）,每次递归调用时处理指定的树的一小段。<br>一些语言提供了尾递归优化（尾递归是一种在函数的最后执行递归调用语句的特殊形式的递归）。这意味着如果一个函数返回自身递归调用的结果，那么调用过程会被替换为一个循环，可以显著提高速度。而JavaScript当前没有提供尾递归优化。深度递归的函数可能会因为对战溢出而运行失败。</p>
+<h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p>在编程语言中，作用域控制着变量与参数的可见性和生命周期。<br>大多数类C语言语法的语言都拥有块级作用域。但是，<strong>尽管JavaScript的代码块语法貌似支持块级作用域，但实际上JavaScript并不支持</strong>。  </p>
+<p>JavaScript缺失有函数作用域。那意味着定义在函数中的参数和变量在函数外部是不可见的。而==在函数内部任何位置定义的变量，在该函数内部任何地方都是可见的==。  </p>
+<p>现在很多语言都推荐尽可能延迟声明变量。而在JavaScript中不适合，因为它缺少块级作用域。所以最好的方法是在函数体的顶部声明函数中可能用到的所有变量。</p>
+<h4 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h4><p>作用域的好处是内部函数可以访问定义他们的外部函数的参数和变量（除了this和arguments）。<br>之前构造过一个obj对象，它拥有一个value属性和一个increment方法。假定希望保护该值不被非法修改。和以对象字面量形式初始化不同，通过调用函数的形式初始化obj。函数会返回一个对象字面量。函数中定义一个value变量。变量对于increment和getValue方法总是可见的，但函数的作用域使得它对其他的程序是不可见的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var obj = (function() &#123;</span><br><span class="line">    var value = 0;</span><br><span class="line">    </span><br><span class="line">    return &#123;</span><br><span class="line">        increment: function(inc) &#123;</span><br><span class="line">            valur += typeof inc === &apos;number&apos; ? inc : 1;</span><br><span class="line">        &#125;,</span><br><span class="line">        getValue: function() &#123;</span><br><span class="line">            return value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure>
+
+<p>这不是将一个函数赋值给obj，而==是将函数调用的结果赋值给他。注意最后一行的()==。  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 创建一个名为quo的构造函数</span><br><span class="line">// 构造带有get_status方法和status私有属性的一个对象</span><br><span class="line">var quo = function(status) &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        get_status: function() &#123;</span><br><span class="line">            return status</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 构造一个quo实例</span><br><span class="line">var myQuo = quo(&quot;amazed&quot;);</span><br><span class="line">document.writeln(myQuo.get_status());</span><br></pre></td></tr></table></figure>
+
+<p>这个quo函数被设计成无须在前面加上new来使用，所以名字也没有首字母大写。当调用quo时，返回一个包含get_status方法的一个新对象。该对象的一个引用保存在myQuo中。即使quo已经返回了，但get_status方法仍然享有访问quo对象status属性的特权。get_status方法并不是访问该参数的一个副本，访问的是参数本身。因为该函数可以访问他被创建时的上下文环境。这被称为闭包。  </p>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个函数，设置DOM节点为黄色，然后把它渐变为白色</span><br><span class="line">var fade = function(node) &#123;</span><br><span class="line">    var level = 1;</span><br><span class="line">    var step = function() &#123;</span><br><span class="line">        var hex = level.toString(16);</span><br><span class="line">        node.style.backgroundColor = &apos;#FFFF&apos; + hex + hex</span><br><span class="line">        if (level &lt; 15) &#123;</span><br><span class="line">            level += 1;</span><br><span class="line">            setTimeout(level, 100);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    setTimeout(step, 100);</span><br><span class="line">&#125;;</span><br><span class="line">fade(document.body);</span><br></pre></td></tr></table></figure>
+
+<p>调用fade，把document.body作为参数传递。fade函数定义一个level变量和一个step函数，接着调用setTimeout。然后返回，fade函数结束。  </p>
+<p>100ms之后，step函数被调用。将fade函数level变量转化为16位字符。接着，修改fade函数得到的节点的背景颜色。然后查看level变量，如果背景色没有到白色，则level增1，接着使用setTimeout继续执行。  </p>
+<p>==避免在循环中创建函数，他可能只会到来无谓的计算，还会引起混淆==。可以先在循环之外创建一个辅助函数，让这个辅助函数再返回一个绑定当前i值的函数。</p>
+<h4 id="回调"><a href="#回调" class="headerlink" title="回调"></a>回调</h4><p>函数使得对不连续的事件处理变的容易。<br>网络上的同步请求会导致客户端进入假死状态。如果网络传输或服务器很慢，响应会慢的让人难以接受。更好的方式是发起异步请求，提供一个当服务器的响应到达时随即触发的回调函数。异步函数立即返回，这样客户端就不会阻塞。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">request = handleRequest();</span><br><span class="line">send_request(request, function(response) &#123;</span><br><span class="line">    display(response)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>传递一个函数作为参数给send_request函数，一旦收到响应就会被调用。</p>
+<h4 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h4><p>可以使用函数和闭包来构造模块。模块是一个提供接口却隐藏状态与实现的函数或对象。通过使用函数产生模块，几乎可以完全摒弃全局变量的使用，从而缓解这个JavaScript最糟糕的特性之一带来的影响。  </p>
+<p>模块模式利用了函数作用域和闭包来创建被绑定对象和私有成员的关联。  </p>
+<p>模块模式的一般形式是：一个定义了私有变量和函数的函数；利用闭包创建可以访问私有变量和函数的函数；最后返回这个特权函数，或者把它保存到可以访问到的地方。  </p>
+<p>使用模块模式可以完全摒弃全局变量的使用。促进信息隐藏和其他优秀设计实践。对于应用程序的封装，或者构造其他单例对象，模块模式非常有效。</p>
+<h4 id="级联"><a href="#级联" class="headerlink" title="级联"></a>级联</h4><p>有一些方法没有返回值。例如，一些设置或修改对象的某个状态却不返回任何值的方法。如果让这些方法返回this而非undefined，就可以启用级联。在一个级联中，我们可以在单独一条语句中依次调用同一个对象的很多方法。  </p>
+<p>级联技术可以产生极富表现力的接口。使得一个接口不必要依次做太多的事。</p>
+<h4 id="柯里化（局部套用）"><a href="#柯里化（局部套用）" class="headerlink" title="柯里化（局部套用）"></a>柯里化（局部套用）</h4><p>这篇博客详细介绍了柯里化<br><a href="https://www.jianshu.com/p/2975c25e4d71" target="_blank" rel="noopener">https://www.jianshu.com/p/2975c25e4d71</a>  </p>
+<p>将多参函数转化为一系列单参数函数并进行调用的技术。<br>柯里化允许我们把函数与传递给他的参数相结合，产生一个新的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 普通的add函数</span><br><span class="line">function add(x, y) &#123;</span><br><span class="line">    return x + y</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Currying后</span><br><span class="line">function curryingAdd(x) &#123;</span><br><span class="line">    return function (y) &#123;</span><br><span class="line">        return x + y</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">add(1, 2) // 3</span><br><span class="line">curryingAdd(1)(2) // 3</span><br></pre></td></tr></table></figure>
+
+<p>即只传递给函数一部分参数来调用它，让它返回一个函数去处理剩下的参数</p>
+<h4 id="记忆"><a href="#记忆" class="headerlink" title="记忆"></a>记忆</h4><p>让函数记住处理过的参数和处理结果。<br>函数可将先前操作的结果记录在某个对象中，从而==避免无谓的重复计算==。这种优化被称为记忆。<br>当输入的参数不变时，我们就可以采用缓存的结果，当输入参数有所变化时才重新计算。  </p>
+<p>思想：通过闭包来缓存计算参数以及结果，通过参数的变化与否来决定是否重新计算。  </p>
+<p>什么时候使用：只要一个函数可能反复计算相同的数据时。  </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/web全栈/HTML5特性/" rel="next" title="HTML5特性">
+                <i class="fa fa-chevron-left"></i> HTML5特性
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/javascript/JavaScript中对象（Objects）/" rel="prev" title="JavaScript中对象（Objects）">
+                JavaScript中对象（Objects） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数对象"><span class="nav-number">1.</span> <span class="nav-text">函数对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数字面量"><span class="nav-number">2.</span> <span class="nav-text">函数字面量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用"><span class="nav-number">3.</span> <span class="nav-text">调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JavaScript中的调用模式"><span class="nav-number">4.</span> <span class="nav-text">==JavaScript中的调用模式==</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法调用模式"><span class="nav-number">4.1.</span> <span class="nav-text">方法调用模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#函数调用模式"><span class="nav-number">4.2.</span> <span class="nav-text">函数调用模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造器调用模式"><span class="nav-number">4.3.</span> <span class="nav-text">构造器调用模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Apply调用模式-不是太理解"><span class="nav-number">4.4.</span> <span class="nav-text">Apply调用模式(不是太理解)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数"><span class="nav-number">5.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回"><span class="nav-number">6.</span> <span class="nav-text">返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常"><span class="nav-number">7.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩充类型的功能"><span class="nav-number">8.</span> <span class="nav-text">扩充类型的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#递归"><span class="nav-number">9.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用域"><span class="nav-number">10.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包"><span class="nav-number">11.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回调"><span class="nav-number">12.</span> <span class="nav-text">回调</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模块"><span class="nav-number">13.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#级联"><span class="nav-number">14.</span> <span class="nav-text">级联</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#柯里化（局部套用）"><span class="nav-number">15.</span> <span class="nav-text">柯里化（局部套用）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#记忆"><span class="nav-number">16.</span> <span class="nav-text">记忆</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

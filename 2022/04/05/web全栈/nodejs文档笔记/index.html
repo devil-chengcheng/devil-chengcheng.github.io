@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="nodejs简介nodejs是一个开源和跨平台的JavaScript运行时环境，是一个可用于几乎任何项目的流行工具。 nodejs在浏览器外运行V8 JavaScript引擎。 nodejs应用程序运行于单个进程中，无需为每个请求创建新的线程。nodejs标准库中提供了一组异步的I/O原生功能（防止JavaScript代码被阻塞），并且nodejs中库通常是使用非阻塞的范式编写的（从而使阻塞行为成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs文档笔记">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/web全栈/nodejs文档笔记/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="nodejs简介nodejs是一个开源和跨平台的JavaScript运行时环境，是一个可用于几乎任何项目的流行工具。 nodejs在浏览器外运行V8 JavaScript引擎。 nodejs应用程序运行于单个进程中，无需为每个请求创建新的线程。nodejs标准库中提供了一组异步的I/O原生功能（防止JavaScript代码被阻塞），并且nodejs中库通常是使用非阻塞的范式编写的（从而使阻塞行为成">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://nodejs.cn/static/270ebeb6dbfa7d613152b71257c72a9e/11a8f/call-stack-first-example.png">
+<meta property="og:image" content="http://nodejs.cn/static/be55515b9343074d00b43de88c495331/966a0/call-stack-second-example.png">
+<meta property="og:updated_time" content="2020-10-12T15:36:17.220Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs文档笔记">
+<meta name="twitter:description" content="nodejs简介nodejs是一个开源和跨平台的JavaScript运行时环境，是一个可用于几乎任何项目的流行工具。 nodejs在浏览器外运行V8 JavaScript引擎。 nodejs应用程序运行于单个进程中，无需为每个请求创建新的线程。nodejs标准库中提供了一组异步的I/O原生功能（防止JavaScript代码被阻塞），并且nodejs中库通常是使用非阻塞的范式编写的（从而使阻塞行为成">
+<meta name="twitter:image" content="http://nodejs.cn/static/270ebeb6dbfa7d613152b71257c72a9e/11a8f/call-stack-first-example.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/web全栈/nodejs文档笔记/">
+
+
+
+
+
+  <title>nodejs文档笔记 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/web全栈/nodejs文档笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nodejs文档笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T17:38:14+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web全栈/" itemprop="url" rel="index">
+                    <span itemprop="name">web全栈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="nodejs简介"><a href="#nodejs简介" class="headerlink" title="nodejs简介"></a>nodejs简介</h3><p>nodejs是一个开源和跨平台的JavaScript运行时环境，是一个可用于几乎任何项目的流行工具。</p>
+<p>nodejs在浏览器外运行V8 JavaScript引擎。</p>
+<p>nodejs应用程序运行于单个进程中，无需为每个请求创建新的线程。nodejs标准库中提供了一组异步的I/O原生功能（防止JavaScript代码被阻塞），并且nodejs中库通常是使用非阻塞的范式编写的（从而使阻塞行为成为例外而不是规范）</p>
+<p>当nodejs执行I/O操作时（例如从网络读取、访问数据库或文件系统），nodejs会响应返回时恢复操作，而不是阻塞线程并浪费CPU循环等待。</p>
+<p>这使 Node.js 可以在一台服务器上处理数千个并发连接，而无需引入管理线程并发的负担（这可能是重大 bug 的来源）。</p>
+<p>nodejs具有独特的优势，因为为浏览器编写JavaScript的数百万前端开发者现在除了客户端代码之外还可以编写服务器端代码。</p>
+<p>在 Node.js 中，可以毫无问题地使用新的 ECMAScript 标准，因为不必等待所有用户更新其浏览器，你可以通过更改 Node.js 版本来决定要使用的 ECMAScript 版本，并且还可以通过运行带有标志的 Node.js 来启用特定的实验中的特性</p>
+<h4 id="大量的库"><a href="#大量的库" class="headerlink" title="大量的库"></a>大量的库</h4><p>npm 的简单结构有助于 Node.js 生态系统的激增</p>
+<h4 id="nodejs与浏览器区别"><a href="#nodejs与浏览器区别" class="headerlink" title="nodejs与浏览器区别"></a>nodejs与浏览器区别</h4><ol>
+<li>浏览器和nodejs==均使用JavaScript作为编程语言==</li>
+<li>构建运行于浏览器的应用程序和构建nodejs应用程序完全不同</li>
+<li>对于广泛使用JavaScript的前端开发者的角度来看，==nodejs巨大的优势：使用单一语言轻松编程所有一切，包括前端和后端==</li>
+<li>在浏览器中，大多时候做的是与DOM或其他web平台API（例如cookies）进行交互。在==nodejs中是不存在的，没有浏览器提供的document、window、以及其他对象==</li>
+<li>在浏览器中，不存在nodejs通过其模块提供的所有不错的API，例如文件系统访问功能</li>
+<li>在 Node.js 中，可以控制运行环境。除非构建的是任何人都可以在任何地方部署的开源应用程序，否则你能知道会在哪个版本的Node.js上运行该应用程序。与浏览器环境（你无法选择访客会使用的浏览器）相比起来，这非常方便。</li>
+<li>由于JavaScript发展速度非常快，但是浏览器发展的慢一些，且用户的升级速度也慢一些，因此有时在web上，不得不使用较旧的JavaScript/ECMAScript版本。可以==使用babel将代码转换为ES5兼容的代码，再交付给浏览器==，但在nodejs中，不需要这么做。</li>
+<li>nodejs使用CommonJS模块系统，而在浏览器中，则还正在实现ES模块标准。</li>
+<li>在实践中，这意味着在nodejs中使用require()，而在浏览器中则使用import</li>
+</ol>
+<h4 id="V8-JavaScript引擎"><a href="#V8-JavaScript引擎" class="headerlink" title="V8 JavaScript引擎"></a>V8 JavaScript引擎</h4><p>V8 是为 Google Chrome 提供支持的 JavaScript 引擎的名称。 当使用 Chrome 进行浏览时，它负责处理并执行 JavaScript。</p>
+<p>V8提供了执行JavaScript的运行时环境。DOM和其他web平台API由浏览器提供。</p>
+<p>==JavaScript 引擎独立于托管它的浏览器==。 此关键的特性推动了 Node.js 的兴起。 ==V8 于 2009 年被选为为 Node.js 提供支持的引擎==，并且随着 Node.js 的爆炸性发展，V8 成为了现在为大量的服务器端代码（使用 JavaScript 编写）提供支持的引擎。</p>
+<h4 id="nodejs程序退出"><a href="#nodejs程序退出" class="headerlink" title="nodejs程序退出"></a>nodejs程序退出</h4><p>以编程的方式退出nodejs程序：process.exit()</p>
+<p>默认情况下，退出码为0，表示成功。不同的退出码具有不同的含义，可以在系统中用于程序和其他程序的通信。</p>
+<p>也可以设置process.exitCode属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process.exitCode = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>当程序结束时，nodejs会返回该退出码。当进程完成所有处理后，程序正常退出。</p>
+<p>使用nodejs启动服务器，例如HTTP服务器</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> server = express()</span><br><span class="line"></span><br><span class="line">server.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    res.send(<span class="string">'hello'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8080</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'服务器已就绪'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这个程序永远不会结束。如果调用process.exit()，则任何当前等待中或运行中的请求都会被终止，这不太友好。</p>
+<p>这种情况下，需要向该命令发送SIGTERM信号，并使用进程的信号处理程序进行处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    res.send(<span class="string">'hello'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = app.listen(<span class="number">8080</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>,log(<span class="string">'服务已就绪'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">process.on(<span class="string">'SIGTERM'</span>, () =&gt; &#123;</span><br><span class="line">    server.close(() = &gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'进程已终止'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>信号是一个POSIX内部通信系统：发送通知给进程，以告知发生的事件。</p>
+<ul>
+<li>SIGKILL：告诉进程立即停止的信号，理想情况下，类似process.exit()</li>
+<li>SIGTERM：告诉进程正常终止的信号。</li>
+</ul>
+<p>可从程序内部的另一个函数中发送此信号：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process.kill(process.pid, <span class="string">'SIGTERM'</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="从nodejs读取环境变量"><a href="#从nodejs读取环境变量" class="headerlink" title="从nodejs读取环境变量"></a>从nodejs读取环境变量</h4><p>nodejs的process核心模块提供了env属性，承载了在启动进程时设置的所有环境变量。</p>
+<p>访问NODE_ENV环境变量示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process.env.NODE_ENV</span><br></pre></td></tr></table></figure>
+
+<h4 id="命令行接收参数"><a href="#命令行接收参数" class="headerlink" title="命令行接收参数"></a>命令行接收参数</h4><p>获取参数值的方法是内置的process对象。公开一个argv属性，是一个包含所有命令行调用参数的数组。<br>第一个参数时node命令的完整路径，第二个参数时正被执行文件的完整路径。所有其他参数是从第三个位置开始的。</p>
+<p>使用循环迭代所有参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process.argv.forEach(<span class="function">(<span class="params">val, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;val&#125;</span>:<span class="subst">$&#123;index&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用exports从nodejs文件中公开功能"><a href="#使用exports从nodejs文件中公开功能" class="headerlink" title="使用exports从nodejs文件中公开功能"></a>使用exports从nodejs文件中公开功能</h4><p>nodejs是具有模块化，可以导入其他nodejs文件公开的内容。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> library = <span class="built_in">require</span>(<span class="string">'./library'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以导入存在当前文件夹下library.js文件中公开的功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导出功能</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 另一个文件中</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="npm包管理器"><a href="#npm包管理器" class="headerlink" title="npm包管理器"></a>npm包管理器</h4><ul>
+<li>–save安装并添加条目到package.json文件的dependencies</li>
+<li>–save-dev安装并添加条目到package.json文件的devDependencies</li>
+</ul>
+<p>主要区别：devDependencies通常是开发的工具，而dependencies则是与生产环境中的应用程序相关。</p>
+<p>npm有两种安装类型，本地安装和全局安装。<br>默认情况下是本地安装，软件包被安装到当前文件树种的node_modules子文件夹下。<br>这种情况下，npm还会在当前文件夹树种的package.json文件的dependencies属性中添加lodash条目。  </p>
+<p>使用-g标志表示全局安装。</p>
+<p><strong>运行任务</strong>：<br>package.json文件支持一种用于指定命令行任务的格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run &lt;task-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"scripts"</span>: &#123;</span><br><span class="line">        <span class="string">"start-dev"</span>: <span class="string">"node lib/server-development"</span>,</span><br><span class="line">        <span class="string">"start"</span>: <span class="string">"node lib/server-production"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用该特性运行webpack是很常见的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"script"</span>: &#123;</span><br><span class="line">        <span class="string">"watch"</span>: <span class="string">"webpack --watch --progress --colors --config webpack.conf.js"</span>,</span><br><span class="line">        <span class="string">"dev"</span>: <span class="string">"webpack --progress --colors --config webpack.conf.js"</span>,</span><br><span class="line">        <span class="string">"prod"</span>: <span class="string">"NODE_ENV=production webpack -p --config webpack.conf.js"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因此可以运行如下，而不是输入容易忘记或错误的长命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ npm run watch</span><br><span class="line">$ npm run dev</span><br><span class="line">$ npm run prod</span><br></pre></td></tr></table></figure>
+
+<h4 id="package-json详解"><a href="#package-json详解" class="headerlink" title="package.json详解"></a>package.json详解</h4><p>package.json文件是项目的清单。可以做很多完全互不相关的事。例如，是工具的配置中心，也是npm和yarn存储所有已安装软件包的名称和版本的地方。</p>
+<p>示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"test-project"</span>,             <span class="comment">// 用于告知应用程序或软件包的名称</span></span><br><span class="line">  <span class="string">"version"</span>: <span class="string">"1.0.0"</span>,                 <span class="comment">// 当前版本</span></span><br><span class="line">  <span class="string">"description"</span>: <span class="string">"A Vue.js project"</span>,  <span class="comment">// 程序或软件包的简短描述</span></span><br><span class="line">  <span class="string">"main"</span>: <span class="string">"src/main.js"</span>,              <span class="comment">// 应用程序入口地址</span></span><br><span class="line">  <span class="string">"private"</span>: <span class="literal">true</span>,          <span class="comment">// 设置true可以防止应用程序/软件包被意外的发布到npm</span></span><br><span class="line">  <span class="string">"scripts"</span>: &#123;                        <span class="comment">// 定义了一组可运行的node脚本</span></span><br><span class="line">    <span class="string">"dev"</span>: <span class="string">"webpack-dev-server --inline --progress --config build/webpack.dev.conf.js"</span>,</span><br><span class="line">    <span class="string">"start"</span>: <span class="string">"npm run dev"</span>,</span><br><span class="line">    <span class="string">"unit"</span>: <span class="string">"jest --config test/unit/jest.conf.js --coverage"</span>,</span><br><span class="line">    <span class="string">"test"</span>: <span class="string">"npm run unit"</span>,</span><br><span class="line">    <span class="string">"lint"</span>: <span class="string">"eslint --ext .js,.vue src test/unit"</span>,</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"node build/build.js"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"dependencies"</span>: &#123;                  <span class="comment">// 设置了作为依赖安装的npm软件包列表</span></span><br><span class="line">    <span class="string">"vue"</span>: <span class="string">"^2.5.2"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"devDependencies"</span>: &#123;              <span class="comment">// 设置了作为开发依赖安装的npm软件包的列表</span></span><br><span class="line">    <span class="string">"autoprefixer"</span>: <span class="string">"^7.1.2"</span>,</span><br><span class="line">    <span class="string">"babel-core"</span>: <span class="string">"^6.22.1"</span>,</span><br><span class="line">    <span class="string">"babel-eslint"</span>: <span class="string">"^8.2.1"</span>,</span><br><span class="line">    <span class="string">"babel-helper-vue-jsx-merge-props"</span>: <span class="string">"^2.0.3"</span>,</span><br><span class="line">    <span class="string">"babel-jest"</span>: <span class="string">"^21.0.2"</span>,</span><br><span class="line">    <span class="string">"babel-loader"</span>: <span class="string">"^7.1.1"</span>,</span><br><span class="line">    <span class="string">"babel-plugin-dynamic-import-node"</span>: <span class="string">"^1.2.0"</span>,</span><br><span class="line">    <span class="string">"babel-plugin-syntax-jsx"</span>: <span class="string">"^6.18.0"</span>,</span><br><span class="line">    <span class="string">"babel-plugin-transform-es2015-modules-commonjs"</span>: <span class="string">"^6.26.0"</span>,</span><br><span class="line">    <span class="string">"babel-plugin-transform-runtime"</span>: <span class="string">"^6.22.0"</span>,</span><br><span class="line">    <span class="string">"babel-plugin-transform-vue-jsx"</span>: <span class="string">"^3.5.0"</span>,</span><br><span class="line">    <span class="string">"babel-preset-env"</span>: <span class="string">"^1.3.2"</span>,</span><br><span class="line">    <span class="string">"babel-preset-stage-2"</span>: <span class="string">"^6.22.0"</span>,</span><br><span class="line">    <span class="string">"chalk"</span>: <span class="string">"^2.0.1"</span>,</span><br><span class="line">    <span class="string">"copy-webpack-plugin"</span>: <span class="string">"^4.0.1"</span>,</span><br><span class="line">    <span class="string">"css-loader"</span>: <span class="string">"^0.28.0"</span>,</span><br><span class="line">    <span class="string">"eslint"</span>: <span class="string">"^4.15.0"</span>,</span><br><span class="line">    <span class="string">"eslint-config-airbnb-base"</span>: <span class="string">"^11.3.0"</span>,</span><br><span class="line">    <span class="string">"eslint-friendly-formatter"</span>: <span class="string">"^3.0.0"</span>,</span><br><span class="line">    <span class="string">"eslint-import-resolver-webpack"</span>: <span class="string">"^0.8.3"</span>,</span><br><span class="line">    <span class="string">"eslint-loader"</span>: <span class="string">"^1.7.1"</span>,</span><br><span class="line">    <span class="string">"eslint-plugin-import"</span>: <span class="string">"^2.7.0"</span>,</span><br><span class="line">    <span class="string">"eslint-plugin-vue"</span>: <span class="string">"^4.0.0"</span>,</span><br><span class="line">    <span class="string">"extract-text-webpack-plugin"</span>: <span class="string">"^3.0.0"</span>,</span><br><span class="line">    <span class="string">"file-loader"</span>: <span class="string">"^1.1.4"</span>,</span><br><span class="line">    <span class="string">"friendly-errors-webpack-plugin"</span>: <span class="string">"^1.6.1"</span>,</span><br><span class="line">    <span class="string">"html-webpack-plugin"</span>: <span class="string">"^2.30.1"</span>,</span><br><span class="line">    <span class="string">"jest"</span>: <span class="string">"^22.0.4"</span>,</span><br><span class="line">    <span class="string">"jest-serializer-vue"</span>: <span class="string">"^0.3.0"</span>,</span><br><span class="line">    <span class="string">"node-notifier"</span>: <span class="string">"^5.1.2"</span>,</span><br><span class="line">    <span class="string">"optimize-css-assets-webpack-plugin"</span>: <span class="string">"^3.2.0"</span>,</span><br><span class="line">    <span class="string">"ora"</span>: <span class="string">"^1.2.0"</span>,</span><br><span class="line">    <span class="string">"portfinder"</span>: <span class="string">"^1.0.13"</span>,</span><br><span class="line">    <span class="string">"postcss-import"</span>: <span class="string">"^11.0.0"</span>,</span><br><span class="line">    <span class="string">"postcss-loader"</span>: <span class="string">"^2.0.8"</span>,</span><br><span class="line">    <span class="string">"postcss-url"</span>: <span class="string">"^7.2.1"</span>,</span><br><span class="line">    <span class="string">"rimraf"</span>: <span class="string">"^2.6.0"</span>,</span><br><span class="line">    <span class="string">"semver"</span>: <span class="string">"^5.3.0"</span>,</span><br><span class="line">    <span class="string">"shelljs"</span>: <span class="string">"^0.7.6"</span>,</span><br><span class="line">    <span class="string">"uglifyjs-webpack-plugin"</span>: <span class="string">"^1.1.1"</span>,</span><br><span class="line">    <span class="string">"url-loader"</span>: <span class="string">"^0.5.8"</span>,</span><br><span class="line">    <span class="string">"vue-jest"</span>: <span class="string">"^1.0.2"</span>,</span><br><span class="line">    <span class="string">"vue-loader"</span>: <span class="string">"^13.3.0"</span>,</span><br><span class="line">    <span class="string">"vue-style-loader"</span>: <span class="string">"^3.0.1"</span>,</span><br><span class="line">    <span class="string">"vue-template-compiler"</span>: <span class="string">"^2.5.2"</span>,</span><br><span class="line">    <span class="string">"webpack"</span>: <span class="string">"^3.6.0"</span>,</span><br><span class="line">    <span class="string">"webpack-bundle-analyzer"</span>: <span class="string">"^2.9.0"</span>,</span><br><span class="line">    <span class="string">"webpack-dev-server"</span>: <span class="string">"^2.9.1"</span>,</span><br><span class="line">    <span class="string">"webpack-merge"</span>: <span class="string">"^4.1.0"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"engines"</span>: &#123;          <span class="comment">// 设置了此软件包/应用程序在那个版本的nodejs上运行</span></span><br><span class="line">    <span class="string">"node"</span>: <span class="string">"&gt;= 6.0.0"</span>,</span><br><span class="line">    <span class="string">"npm"</span>: <span class="string">"&gt;= 3.0.0"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"browserslist"</span>: [<span class="string">"&gt; 1%"</span>, <span class="string">"last 2 versions"</span>, <span class="string">"not ie &lt;= 8"</span>] <span class="comment">// 用于告知要支持哪些浏览器（及其版本）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>属性分类：</p>
+<ul>
+<li>name：设置软件包的名称</li>
+<li>author：列出软件包的作者名称</li>
+<li>contributors： 除作者外，项目可以有一个或多个贡献者</li>
+<li>homepage：设置软件包的主页</li>
+<li>version：指定软件包当前版本（主版本号、次版本号、补丁版本号）</li>
+<li>license：指定软件包的许可证</li>
+<li>keywords：包含与软件包功能相关的关键字数组</li>
+<li>description：对软件包的简短描述</li>
+<li>repository：指定此程序包仓库所在的位置</li>
+<li>main：设置软件包的入口点</li>
+<li>private：如果设置为 true 可以防止应用程序/软件包被意外发布到 npm 上。</li>
+<li>scripts：可以定义一组可以运行的 node 脚本。</li>
+<li>dependencies：设置作为依赖安装的 npm 软件包的列表</li>
+<li>devDependencies：设置作为开发依赖安装的 npm 软件包的列表</li>
+<li>engines：设置此软件包/应用程序要运行的 Node.js 或其他命令的版本。</li>
+<li>browserslist：用于告知要支持哪些浏览器（及其版本）</li>
+</ul>
+<h4 id="package-lock-json文件"><a href="#package-lock-json文件" class="headerlink" title="package-lock.json文件"></a>package-lock.json文件</h4><p>该文件==旨在跟踪被安装的每个软件包的确切版本==，以便产品可以以相同的方式被100%复制。</p>
+<p>这解决了package.json一直尚未解决的特殊问题。在 package.json 中，可以使用 semver 表示法设置要升级到的版本（补丁版本或次版本）</p>
+<p>无需将node_modules文件夹提交到git，在另一台机器上复制项目使用npm install就可。</p>
+<p>原始的项目和新初始化的项目实际上是不同的。及时补丁版本或此版本不应该引入重大的更改，但还是可能引入缺陷。</p>
+<p>package-lock.json 会固化当前安装的每个软件包的版本，当运行 npm install时，npm 会使用这些确切的版本。</p>
+<p>==package-lock.json需要被提交到git仓库，以便被其他人获取。==</p>
+<h4 id="使用npm的语义版本控制"><a href="#使用npm的语义版本控制" class="headerlink" title="使用npm的语义版本控制"></a>使用npm的语义版本控制</h4><p>所有版本有三个数字：x,y,z</p>
+<ul>
+<li>第一个数字是主版本。</li>
+<li>第二个数字是次版本。</li>
+<li>第三个数字是补丁版本。</li>
+</ul>
+<p>当发布新版本时，要遵循以下规则：</p>
+<ul>
+<li>进行不兼容API更改时，升级主版本</li>
+<li>当以向后兼容的方式添加功能时，则升级次版本。</li>
+<li>当进行向后兼容的缺陷修复时，升级补丁版本。</li>
+</ul>
+<p>npm设置了一些规则，可用在package.json文件中选择要将软件包更新到的版本（当运行npm update时）  </p>
+<p>规则：</p>
+<ul>
+<li>^：如果写入^0.13.0，则当运行npm update时，会更新到补丁版本或次版本：即0.13.1、0.14.0</li>
+<li>~：如果写入~0.13.0，则当运行npm update时，会更新到补丁版本：即0.13.1可以，0.14.0不可以</li>
+<li>&gt;：接受高于指定版本的任何版本</li>
+<li>&gt;=: 接受等于或高于指定版本的任何版本。</li>
+<li>&lt;=: 接受等于或低于指定版本的任何版本。</li>
+<li>&lt;: 接受低于指定版本的任何版本。</li>
+<li>=: 接受确切的版本。</li>
+<li>-: 接受一定范围的版本。例如：2.1.0 - 2.6.2。</li>
+<li>||: 组合集合。例如 &lt; 2.1 || &gt; 2.6。</li>
+</ul>
+<h4 id="卸载npm软件包"><a href="#卸载npm软件包" class="headerlink" title="卸载npm软件包"></a>卸载npm软件包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall &lt;package-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如果使用-S或–save标志，则会移除package.json文件中的引用。</p>
+<p>如果程序包是开发依赖项（列出在package.json文件的devDependencies中），必须使用-D或–save-dev标志从文件中删除.</p>
+<p>如果该软件包是全局安装的，则需要添加 -g 或 –global 标志：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall -S &lt;package-name&gt;</span><br><span class="line">npm uninstall -D &lt;package-name&gt;</span><br><span class="line">npm uninstall -g &lt;package-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="nodejs包运行器npx"><a href="#nodejs包运行器npx" class="headerlink" title="nodejs包运行器npx"></a>nodejs包运行器npx</h4><p>npx是一个非常强大的命令，从npm5.2版本可用。<br>npx可以运行使用nodejs构建并通过npm仓库发布的代码。</p>
+<ul>
+<li>轻松的运行本地命令</li>
+<li>无需安装的命令执行  </li>
+<li>使用不同的nodejs版本运行代码</li>
+<li>直接从URL运行任意代码片段</li>
+</ul>
+<h4 id="nodejs事件循环"><a href="#nodejs事件循环" class="headerlink" title="nodejs事件循环"></a>nodejs事件循环</h4><p>事件循环是了解nodejs最重要的方面之一。它==阐明了nodejs如何做到异步且具有非阻塞的I/O==。</p>
+<p>==Node.js JavaScript代码运行在单个线程上==。每次只处理一件事。这个限制大大简化了编程方式，而不必担心并发问题。只需要注意如何编写代码，并避免任何可能阻塞线程的事情，例如同步的网络调用或无限的循环。</p>
+<p>大多数浏览器中，每个浏览器选项卡都有一个事件循环，以使每个进程都隔离开，并避免使用无限的循环或繁重的处理来阻止整个浏览器的网页。</p>
+<p>主要需要关心代码会在单个事件循环上运行。</p>
+<p><strong>阻塞事件循环</strong>：任何花费太长时间才能将控制权返回给事件循环的JavaScript代码，都会阻塞页面中任何JavaScript代码的执行，甚至阻塞UI线程、用户无法单机浏览、滚动页面等。</p>
+<p>==JavaScript 中几乎所有的 I/O 基元都是非阻塞的==。 网络请求、文件系统操作等。 被阻塞是个异常，这就是 JavaScript 如此之多基于回调（最近越来越多基于 promise 和 async/await）的原因。</p>
+<p><strong>调用堆栈</strong>：事件循环不断调用堆栈，以检查是否需要运行任何函数。</p>
+<p>执行时，将找到的所有函数调用添加到调用堆栈中，并顺序执行每个函数。</p>
+<p>example：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bar = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'bar'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> baz = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'baz'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> foo = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'foo'</span>)</span><br><span class="line">  bar()</span><br><span class="line">  baz()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
+
+<p>调用堆栈如图：<br><img src="http://nodejs.cn/static/270ebeb6dbfa7d613152b71257c72a9e/11a8f/call-stack-first-example.png" alt="image"></p>
+<p>每次迭代中的事件循环都会查看调用堆栈中是否有东西并执行它直到调用堆栈为空。</p>
+<p><strong>入队函数执行</strong>：<br>如何将函数推迟直到堆栈被清空。传统的回调函数，例如setTimeout。用例是调用一个函数，但是在代码中的其他函数已被执行之后。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bar = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'bar'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> baz = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'baz'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> foo = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'foo'</span>)</span><br><span class="line">  setTimeout(bar, <span class="number">0</span>)</span><br><span class="line">  baz()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line">foo</span><br><span class="line">baz</span><br><span class="line">bar</span><br></pre></td></tr></table></figure>
+
+<p>此时的调用堆栈为：<br><img src="http://nodejs.cn/static/be55515b9343074d00b43de88c495331/966a0/call-stack-second-example.png" alt="image"></p>
+<p><strong>消息队列</strong>：当调用setTimeout()时，浏览器或nodejs会启动定时器。当定时器到期时，回调函数被放入消息队列中。</p>
+<p>在消息队列中，用户触发的事件会在此排队，然后带队才有机会对其作出反应。</p>
+<p>==<strong>事件循环会赋予调用堆栈优先级，首先处理在调用堆栈中找到的所有东西，一旦其中没有任何东西，便开始处理消息队列中的东西。</strong>==</p>
+<p>ES6作业队列：ECMAScript 2015引入了作业队列的概念，Promise使用了该队列。这种方式会尽快执行异步函数的结果，而不是放在调用堆栈的末尾。</p>
+<p>在当前函数结束之前resolve的Promise会在当前函数之后被立即执行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bar = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'bar'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> baz = <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">'baz'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> foo = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'foo'</span>)</span><br><span class="line">    setTimeout(bar, <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> </span><br><span class="line">        resolve(<span class="string">'baz之后，bar之前'</span>)</span><br><span class="line">    ).then(<span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">console</span>.log(resolve))</span><br><span class="line">    baz()</span><br><span class="line">&#125;</span><br><span class="line">foo()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果为</span></span><br><span class="line">foo</span><br><span class="line">baz</span><br><span class="line">baz之后，bar之前</span><br><span class="line">bar</span><br></pre></td></tr></table></figure>
+
+<p>这是Promise（以及基于promise构建的async/await）与通过setTimeout()或其他平台API的普通的旧异步函数之间的巨大区别。</p>
+<h4 id="了解process-nextTick"><a href="#了解process-nextTick" class="headerlink" title="了解process.nextTick()"></a>了解process.nextTick()</h4><p>每当事件循环进行一次完整的行程时，将其称为一个滴答。</p>
+<p>当将一个函数传给process.nextTick()时，则指示引擎在当前操作结束（在下一个事件循环滴答开始之前）调用此函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process.nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当操作结束时，JS引擎会运行在该操作期间传给nextTick调用的所有函数。</p>
+<p>调用setTimeout会在下一个滴答结束时执行该函数，比使用nextTick()晚的多。</p>
+<p>当要确保在下一个事件循环迭代中代码已被执行，则使用nextTick()</p>
+<h4 id="了解setImmediate"><a href="#了解setImmediate" class="headerlink" title="了解setImmediate()"></a>了解setImmediate()</h4><p>当要异步的（但要尽可能快）执行某些代码时，其中一个选择是使用nodejs提供的setImmediate()函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setImmediate(<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>作为 setImmediate() 参数传入的任何函数都是在事件循环的下一个迭代中执行的回调。</p>
+<p>传给process.nextTick()的函数会在时间循环的当前迭代中（当前操作结束之后）被执行。它始终在setTimeout和setImmediate之前执行。</p>
+<h4 id="nodejs事件触发器"><a href="#nodejs事件触发器" class="headerlink" title="nodejs事件触发器"></a>nodejs事件触发器</h4><p>浏览器中用户的交互是通过事件：鼠标点击、键盘按键、鼠标移动等等。</p>
+<p>在后端，nodejs提供了events模块构建类似系统的选项。特别的，这个模块提供了EventEmitter类，使用它来处理事件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>)</span><br><span class="line"><span class="keyword">const</span> eventEmitter = <span class="keyword">new</span> EventEmitter()</span><br></pre></td></tr></table></figure>
+
+<p>和其他方法一样，此对象公开了on和emit方法</p>
+<ul>
+<li>emit用于触发事件</li>
+<li>on用于添加一个回调函数，该函数在事件触发时执行</li>
+</ul>
+<p>例如，创建一个start事件，通过console来响应</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eventEmitter.on(<span class="string">'start'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'startes'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当运行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eventEmitter.emit(<span class="string">'start'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>事件处理程序函数被触发。也可以传递参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">eventEmitter.on(<span class="string">'start'</span>, number =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`started <span class="subst">$&#123;number&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">eventEmitter.emit(<span class="string">'start'</span>, <span class="number">23</span>)</span><br></pre></td></tr></table></figure>
+
+<p>或者传多个参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">eventEmitter.on(<span class="string">'start'</span>, (start, end) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`started from <span class="subst">$&#123;start&#125;</span> to <span class="subst">$&#123;end&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">eventEmitter.emit(<span class="string">'start'</span>, <span class="number">1</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+
+<p>EventEmitter还公开了几个与事件交互的其他方法</p>
+<ul>
+<li>once(): 添加一次性监听器</li>
+<li>removeListener()/ off()：从事件删除事件监听器</li>
+<li>removeAllListeners()：删除事件所有的监听器</li>
+</ul>
+<h4 id="搭建http服务器"><a href="#搭建http服务器" class="headerlink" title="搭建http服务器"></a>搭建http服务器</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = process.env.PORT</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.statusCode = <span class="number">200</span></span><br><span class="line">    res.setHeader(<span class="string">'Content-Type'</span>, <span class="string">'text/html'</span>)</span><br><span class="line">    res.end(<span class="string">'hello world'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(port, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`server is running at port <span class="subst">$&#123;port&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用nodejs发送HTTP请求"><a href="#使用nodejs发送HTTP请求" class="headerlink" title="使用nodejs发送HTTP请求"></a>使用nodejs发送HTTP请求</h4><p>准备一个get请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">    hostname: <span class="string">'localhost'</span>,</span><br><span class="line">    port: <span class="number">8089</span>,</span><br><span class="line">    path: <span class="string">'/todo'</span>,</span><br><span class="line">    method: <span class="string">'GET'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> req = https.request(options, res =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`statusCode: <span class="subst">$&#123;res.statusCode&#125;</span>`</span>)</span><br><span class="line">    </span><br><span class="line">    res.on(<span class="string">'data'</span>, data =&gt; &#123;</span><br><span class="line">        process.stdout.write(data)</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    res.on(<span class="string">'error'</span>, err =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    res.end()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>一个post请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>)</span><br><span class="line"><span class="keyword">const</span> data = <span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">    name: <span class="string">'zhangsan'</span>,</span><br><span class="line">    age: <span class="number">23</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">    hostname: <span class="string">'localhost'</span>,</span><br><span class="line">    port: <span class="number">8089</span>,</span><br><span class="line">    path: <span class="string">'/todo'</span>,</span><br><span class="line">    method: <span class="string">'POST'</span>,</span><br><span class="line">    headers: &#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>,</span><br><span class="line">        <span class="string">'Content-Length'</span>: data.length</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> req = https.request(options, res =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`statusCode:<span class="subst">$&#123;res.statusCode&#125;</span>`</span>)</span><br><span class="line">    </span><br><span class="line">    res.on(<span class="string">'data'</span>, data =&gt; &#123;</span><br><span class="line">        process.stdout.write(d)</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    res.on(<span class="string">'error'</span>, err =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    res.write(data)</span><br><span class="line">    res.end()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>PUT和DELETE请求和POST格式相同。只是改变option.method值</p>
+<h3 id="使用nodejs发送HTTP-post请求"><a href="#使用nodejs发送HTTP-post请求" class="headerlink" title="使用nodejs发送HTTP post请求"></a>使用nodejs发送HTTP post请求</h3><p>在node中执行post方式有很多种，取决于使用的抽象级别</p>
+<p>使用axios请求</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> axios = <span class="built_in">require</span>(<span class="string">'axios'</span>)</span><br><span class="line"></span><br><span class="line">axios</span><br><span class="line">  .post(<span class="string">'http://localhost'</span>, &#123;</span><br><span class="line">      name: <span class="string">'zhangsna'</span>,</span><br><span class="line">      pass: <span class="string">'123456'</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`statusCode: <span class="subst">$&#123;res.statusCode&#125;</span>`</span>)</span><br><span class="line">      <span class="built_in">console</span>.log(res)</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(err)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>axios需要使用第三方库。</p>
+<p>POST请求也可只使用nodejs标准模块</p>
+<h3 id="使用nodejs获取HTTP请求的正文数据"><a href="#使用nodejs获取HTTP请求的正文数据" class="headerlink" title="使用nodejs获取HTTP请求的正文数据"></a>使用nodejs获取HTTP请求的正文数据</h3><p>以下是从请求主体中提取以json形式发送的数据的方法。</p>
+<p>如果使用的是express，则非常简单，使用body-parser模块<br>例如，要获得此主题的主体</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> axios = <span class="built_in">require</span>(<span class="string">'axios'</span>)</span><br><span class="line"></span><br><span class="line">axios.post(<span class="string">'http://localhost'</span>, &#123;</span><br><span class="line">    message: <span class="string">'hello world'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>与之匹配的服务端代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>)</span><br><span class="line"></span><br><span class="line">app.use(bodyParser.urlencoded(&#123;<span class="attr">extend</span>: <span class="literal">true</span>&#125;))</span><br><span class="line"></span><br><span class="line">app.use(bodyParser.json())</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">'/todo'</span>, (req, res) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.body.message)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果不使用express，需要做很多的工作。因为express抽象了很多。</p>
+<p>要理解的关键问题是：当使用HTTP.createServer()初始化HTTP服务器时，服务器获得所有HTTP请求头而不是请求体时，将调用回调。</p>
+<p>在连接回调中传递的请求对象是一个数据流。所以要侦听要处理的主体内容，而它是按块处理的。</p>
+<p>首先监听流data事件来获取数据，当数据结束时，调用流end事件，一次</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> data = []</span><br><span class="line">    req.on(<span class="string">'data'</span>, chunk =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`data chunk available: <span class="subst">$&#123;chunk&#125;</span>`</span>)</span><br><span class="line">        data.push(chunk)</span><br><span class="line">    &#125;)</span><br><span class="line">    req.on(<span class="string">'end'</span>, () =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="在nodejs中使用文件描述符"><a href="#在nodejs中使用文件描述符" class="headerlink" title="在nodejs中使用文件描述符"></a>在nodejs中使用文件描述符</h3><p>在与文件交互前，必须要得到一个文件描述符<br>文件描述符是通过使用fs模块提供的open()方法打开文件返回的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line">fs.open(<span class="string">'./file.js'</span>, <span class="string">'r'</span>, (err, fd) =&gt; &#123;</span><br><span class="line">    <span class="comment">// fd就是一个文件描述符</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>fs.openSync方法打开文件，返回文件描述符，而不是在回调中提供。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> fs = fs.openSync(<span class="string">'./file.js'</span>, <span class="string">'r'</span>)</span><br><span class="line">&#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="nodejs文件属性"><a href="#nodejs文件属性" class="headerlink" title="nodejs文件属性"></a>nodejs文件属性</h3><p>每个文件都带有一组详细信息，可以使用fs模块的stat()方法</p>
+<p>传递一个文件路径，一旦nodejs获得文件细节，调用传递的回调函数，有两个参数：错误信息和文件描述</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line">fs.stat(<span class="string">'./file.js'</span>, (err, stats) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>nodejs还提供一种同步方法，阻止线程直到文件统计信息就绪</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> stats = fs.statSync(<span class="string">'./file.js'</span>)</span><br><span class="line">&#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>文件信息包含在stats变量中，我们可以获得的信息有：</p>
+<ul>
+<li>如果文件是目录或文件，则使用stats.isFile()和stats.isDirectory()</li>
+<li>如果文件是一个链接，则使用stats.isSymbolicLink()</li>
+<li>使用stats.size查看文件大小<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line">fs.stat(<span class="string">'/Users/joe/test.txt'</span>, (err, stats) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  stats.isFile() <span class="comment">//true</span></span><br><span class="line">  stats.isDirectory() <span class="comment">//false</span></span><br><span class="line">  stats.isSymbolicLink() <span class="comment">//false</span></span><br><span class="line">  stats.size <span class="comment">//1024000 //= 1MB</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="nodejs文件路径"><a href="#nodejs文件路径" class="headerlink" title="nodejs文件路径"></a>nodejs文件路径</h3><p>从路径中获得信息：</p>
+<ul>
+<li>dirname：获得文件父文件夹路径</li>
+<li>basename：文件名部分</li>
+<li>extname：文件扩展名</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">'/users/joe/notes.txt'</span></span><br><span class="line"></span><br><span class="line">path.dirname(url) <span class="comment">// /users/joe</span></span><br><span class="line">path.basename(url) <span class="comment">// notes.txt</span></span><br><span class="line">path.extname(url) <span class="comment">// .txt</span></span><br></pre></td></tr></table></figure>
+
+<p>可以为basename指定第二个参数来获得不带扩展名的文件名</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path.basename(url, path.extname(url))  <span class="comment">// notes</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="path的一些方法"><a href="#path的一些方法" class="headerlink" title="path的一些方法"></a>path的一些方法</h4><p>使用 ==path.join()== 连接路径的多个部分</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">'aaa'</span></span><br><span class="line"></span><br><span class="line">path.join(<span class="string">'/'</span>, <span class="string">'users'</span>, name, <span class="string">'file.js'</span>)  <span class="comment">// '/users/aaa/file.js'</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 path.resolve() 得到绝对路径</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">path.resolve(<span class="string">'file.js'</span>)  <span class="comment">// '/users/aaa/file.js'</span></span><br><span class="line"><span class="comment">// 再添加文件夹</span></span><br><span class="line">path.resolve(<span class="string">'tmp'</span>, <span class="string">'file.js'</span>)  <span class="comment">// '/users/aaa/tmp/file.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果第一个参数带有 / ,表示这是一个绝对路径</span></span><br><span class="line">path.resolve(<span class="string">'/ect'</span>, <span class="string">'file.js'</span>)  <span class="comment">// '/etc/file.js'</span></span><br></pre></td></tr></table></figure>
+
+<p>path.normalize() 在路径中包含相对说明符 . 或 .. 或 // 时，计算实际的路径</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path.normalize(<span class="string">'/users/joe/..//test.txt'</span>) <span class="comment">///users/test.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>但是resolve和normalize都不会检查路径存不存在。只根据获得的信息计算路径。</p>
+<h3 id="nodejs读文件"><a href="#nodejs读文件" class="headerlink" title="nodejs读文件"></a>nodejs读文件</h3><p>fs.readFile()</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">'/users/aaa/file.js'</span>, (err, data) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(data)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>同样有一种同步的方法readFileSync</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    data = fs.readFileSync(<span class="string">'/users/aaa/file.js'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(data)</span><br><span class="line">&#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="nodejs写文件"><a href="#nodejs写文件" class="headerlink" title="nodejs写文件"></a>nodejs写文件</h3><p>最简单的方法是使用fs.writeFile()</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> content = <span class="string">'asdkdlfa'</span></span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">'/user/aaa/test.txt'</span>, content, err =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'success'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>同步的方法writeFileSync</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">const</span> content = <span class="string">'sdafasf'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    fs.writeFileSync(<span class="string">'/user/aaa/test.txt'</span>, content)</span><br><span class="line">&#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果文件已经存在，默认则会改变其中的内容。</p>
+<p>可以通过指定flag来修改默认</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(<span class="string">'/user/aaa/test.txt'</span>, content, &#123;<span class="attr">flag</span>: <span class="string">'a+'</span>&#125;, err =&gt; &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>flag有：</p>
+<ul>
+<li>r+ ：打开文件读和写</li>
+<li>w+ ： 打开文件进行读写，将流放在文件的开头。如果文件不存在就创建</li>
+<li>a ： 打开要写入的文件，将流放在文件末尾。如果文件不存在就创建</li>
+<li>a+ ： 打开文件进行读写，将流放在文件末尾，如果文件不存在则创建</li>
+</ul>
+<p>将内容追加到文件末尾的快捷方式是： fs.appendFile()</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">const</span> content = <span class="string">'sdafasf'</span></span><br><span class="line"></span><br><span class="line">fs.appendFile(<span class="string">'file.log'</span>, content, err =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="nodejs中使用文件夹"><a href="#nodejs中使用文件夹" class="headerlink" title="nodejs中使用文件夹"></a>nodejs中使用文件夹</h3><p>nodejs模块fs可以很多方法可以处理文件夹  </p>
+<ol>
+<li><p>检查文件夹是否存在：fs.access()</p>
+</li>
+<li><p>创建一个新的文件夹：fs.mkdir()或fs.mkdirSync</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> folderName = <span class="string">'/Users/joe/test'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(!fs.existsSync(foldName) &#123;</span><br><span class="line">        fs.mkdirSync(foldName)</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读取目录的内容：fs.readdir()或fs.readdirSync()</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 读取文件夹中文件和子文件夹内容，返回他们的相对路径</span></span><br><span class="line">cosnt fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> folderPath = <span class="string">'/users/aaa'</span></span><br><span class="line"></span><br><span class="line">fs.readdirSync(folderPath)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>得到完整的path</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fs.readdirSync(folderPath).map(<span class="function"><span class="params">fileName</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> path.join(folderPath, fileName)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>过滤、仅返回文件类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isFile = <span class="function"><span class="params">fileName</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> fs.lstatSync(fileName).isFile</span><br><span class="line">&#125;</span><br><span class="line">fs.readdirSync(folderPath).map(<span class="function"><span class="params">fileName</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> path.join(folderPath, fileName)</span><br><span class="line">&#125;).filter(isFile)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>重命名一个文件夹: fs.rename() 或 fs.renameSync()</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line">fs.rename(<span class="string">'/users/aaa'</span>, <span class="string">'users/bbb'</span>, err =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>fs.renameSync()方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    fs.renameSync(<span class="string">'/users/aaa'</span>, <span class="string">'/users/bbb'</span>)</span><br><span class="line">&#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>移除文件夹: fs.rmdir() 或 fs.rmdirSync()</li>
+</ol>
+<p>删除包含内容的文件夹比较复杂，安装fs-extra模块，是fs模块的替代品，在它之上提供了更多的功能。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs-extra'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> folder = <span class="string">'/users/aaa'</span></span><br><span class="line"></span><br><span class="line">fs.remove(folder, err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(err)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>也可以和promise一起使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.remove(folder)</span><br><span class="line">  .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// done</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.error(err)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>或者和async/await一起使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">removeFolder</span>(<span class="params">folder</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">await</span> fs.remove(folder)</span><br><span class="line">    &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> folder = <span class="string">'/users/aaa'</span></span><br><span class="line">removeFolder(folder)</span><br></pre></td></tr></table></figure>
+
+<h3 id="nodejs文件系统模块"><a href="#nodejs文件系统模块" class="headerlink" title="nodejs文件系统模块"></a>nodejs文件系统模块</h3><p>方法包括：</p>
+<ul>
+<li>fs.access()：检查文件是否存在</li>
+<li>fs.appendFile()：将数据添加到文件中，如果文件不存在，则创建它</li>
+<li>fs.chmod()：更改由文件名指定的文件的权限</li>
+<li>fs.chown()：更改由文件名指定的文件所有者和群体</li>
+<li>fs.close()：关闭一个文件</li>
+<li>fs.copyFile()：拷贝一个文件</li>
+<li>fs.createReadStream()：创建一个读文件流</li>
+<li>fs.createWriteStream()：创建一个写文件流</li>
+<li>fs.mkdir()：创建一个文件夹</li>
+<li>fs.mkdtemp()：创建一个临时目录</li>
+<li>fs.open(): 设置文件模式</li>
+<li>fs.readdir()：读取目录的内容</li>
+<li>fs.readFile()：读取文件内容</li>
+<li>fs.readLink()：读取符号链接的值</li>
+<li>fs.realpath()：将相对路径解析成完整路径</li>
+<li>fs.rename()：重命名一个文件或文件夹</li>
+<li>fs.rmdir()：移除一个文件夹</li>
+<li>fs.stat()：返回文件状态</li>
+<li>fs.synlink()：为文件创建一个符号链接</li>
+<li>fs.truncate()：将文件截断为指定长度</li>
+<li>fs.unlink()：移除一个文件或符号链接</li>
+<li>fs.unwatchFile()：停止对文件的监听</li>
+<li>fs.utimes()：更改文件的时间戳</li>
+<li>fs.watchFile()：开始监听文件的改变</li>
+<li>fs.writeFile()：将数据写入文件</li>
+</ul>
+<h3 id="nodejs路径模块"><a href="#nodejs路径模块" class="headerlink" title="nodejs路径模块"></a>nodejs路径模块</h3><ul>
+<li>path.basename()</li>
+<li>path.dirname()</li>
+<li>path.extname()</li>
+<li>path.isAbsolute()</li>
+<li>path.join()</li>
+<li>path.normalize()</li>
+<li>path.parse()</li>
+<li>path.relative()</li>
+<li>path.resolve()</li>
+</ul>
+<ol>
+<li>path.basename()</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line">path.basename(<span class="string">'/test/aaa'</span>)  <span class="comment">// aaa</span></span><br><span class="line">path.basename(<span class="string">'/test/aaa.txt'</span>) <span class="comment">// aaa.txt</span></span><br><span class="line">path.basename(<span class="string">'/test/aaa.txt'</span>, <span class="string">'txt'</span>) <span class="comment">// aaa</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>path.dirname()</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.dirname(<span class="string">'/test/aaa'</span>)  <span class="comment">// /test</span></span><br><span class="line">path.dirname(<span class="string">'/test/aaa/file.txt'</span>) <span class="comment">// /test/aaa</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>path.extname()</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.extname(<span class="string">'/test/something'</span>) <span class="comment">// ''</span></span><br><span class="line">path.extname(<span class="string">'/test/something/file.txt'</span>) <span class="comment">// '.txt'</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>path.isAbsolute()</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.isAbsolute(<span class="string">'/test/aaa'</span>)  <span class="comment">// true</span></span><br><span class="line">path.isAbsolute(<span class="string">'./test/aaa'</span>)  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>path.join()</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> name = <span class="string">'aaa'</span></span><br><span class="line"></span><br><span class="line">path.join(<span class="string">'/'</span>, name, <span class="string">'bbb'</span>, <span class="string">'file.txt'</span>)</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>path.normalize()</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">path.normalize(<span class="string">'/users/aaa/..//test.txt'</span>) <span class="comment">// '/users/test.txt'</span></span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>path.parse()<br>解析路径会得到以下：</li>
+</ol>
+<ul>
+<li>root</li>
+<li>dir</li>
+<li>base</li>
+<li>name</li>
+<li>ext</li>
+</ul>
+<p>例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">path.parse(<span class="string">'/users/test.txt'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">&#123;</span><br><span class="line">    root: <span class="string">'/'</span>,</span><br><span class="line">    dir: <span class="string">'/users'</span>,</span><br><span class="line">    base: <span class="string">'test.txt'</span>,</span><br><span class="line">    name: <span class="string">'test'</span>,</span><br><span class="line">    ext: <span class="string">'txt'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li><p>path.relative()<br>接受2个路径作为参数。根据当前工作目录返回从第一个路径到第二个路径的相对路径</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">path.relative(<span class="string">'/Users/joe'</span>, <span class="string">'/Users/joe/test.txt'</span>) <span class="comment">//'test.txt'</span></span><br><span class="line">path.relative(<span class="string">'/Users/joe'</span>, <span class="string">'/Users/joe/something/test.txt'</span>) <span class="comment">//'something/test.txt'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>path.resolve()<br>得到绝对的路径</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">path.resolve(<span class="string">'file.txt'</span>) <span class="comment">// '/users/aaa/file.txt'</span></span><br><span class="line">path.resolve(<span class="string">'tmp'</span>, <span class="string">'file.txt'</span>) <span class="comment">// '/users/aaa/tmp/file.txt'</span></span><br><span class="line">path.resolve(<span class="string">'/etc'</span>, <span class="string">'file.txt'</span>)  <span class="comment">// '/etc/file.txt'</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="nodejs操作系统模块"><a href="#nodejs操作系统模块" class="headerlink" title="nodejs操作系统模块"></a>nodejs操作系统模块</h3><ul>
+<li>os.arch()：返回基础架构的字符串，例如arm、x64，arm64</li>
+<li>os.cpus(): 返回系统cpu相关信息</li>
+<li>os.endianness()：根据使用Big Endian还是Little Endian编译nodejs，返回BE或LE</li>
+<li>os.freemem()：返回代表系统中可用内存的字节数</li>
+<li>os.homedir(): 将路径返回到当前用户的主目录</li>
+<li>os.hostname()：得到host名字</li>
+<li>os.loadavg()：返回操作系统对平均负载的计算。仅在linux和macOS上返回有意义值</li>
+<li>os.networkInterfaces()：返回系统上可用网络接口的详细信息</li>
+<li>os.platform()：返回为nodejs编译的平台</li>
+<li>os.release()：返回标识操作系统版本号的字符串</li>
+<li>os.tmpdir()：返回指定的临时文件夹的路径</li>
+<li>os.totalmem()：返回标识系统中可用总内存的字节数</li>
+<li>os.type()：操作系统标识符</li>
+<li>os.uptime()：返回自上次重新启动以来计算机一直在运行的秒数</li>
+</ul>
+<h3 id="nodejs事件模块"><a href="#nodejs事件模块" class="headerlink" title="nodejs事件模块"></a>nodejs事件模块</h3><p>events模块提供了EventEmitter类，这是在nodejs中处理事件的关键</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> EventEmitter = <span class="built_in">require</span>(<span class="string">'events'</span>)</span><br><span class="line">cosnt emitter = <span class="keyword">new</span> EventEmitter()</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>emitter.addListener()：emitter.on()的别名</li>
+<li>emitter.emit()：发生事件，按照注册事件的顺序同步调用每个事件侦听器</li>
+<li>emitter.eventNames()：返回一个字符串数组，这些字符串标识在当前EventEmitter对象上注册的事件</li>
+<li>emitter.getMaxListeners()：获得一个可以添加到EventEmitter对象的最大侦听器数量，默认为10，但可以使用setMaxListeners()进行增加或降低</li>
+<li>emitter.listenerCount()：获取作为参数传递的事件的侦听器的数量</li>
+<li>emitter.listeners()：获得作为参数传递的事件的侦听器数组</li>
+<li>emitter.off()：emitter.removeListener()的别名</li>
+<li>emitter.on(): 添加发出事件时调用的回调函数</li>
+<li>emitter.once(): 回调只会被调用一次，不会再被调用</li>
+<li>emitter.prependListener()：使用on或者addListener添加侦听器时，该侦听器被添加到侦听器队列中的最后一个，并被称为last。使用prependListener可以在其他侦听器之前添加并调用</li>
+<li>emitter.prependOnceListener()：调用一次</li>
+<li>emitter.removeListener()：删除特定的侦听器，可以让回调函数保存在一个变量中，便于引用</li>
+<li>emitter.setMaxListeners()：设置一个可以添加到EventEmitter对象的侦听器的最大数量，默认为10</li>
+</ol>
+<h3 id="nodejs-http模块"><a href="#nodejs-http模块" class="headerlink" title="nodejs http模块"></a>nodejs http模块</h3><h4 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h4><ul>
+<li>http.METHODS</li>
+<li>http.STATUS_CODES</li>
+<li>http.globalAgent</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> <span class="built_in">require</span>(<span class="string">'http'</span>).METHODS</span><br><span class="line">[ <span class="string">'ACL'</span>,</span><br><span class="line">  <span class="string">'BIND'</span>,</span><br><span class="line">  <span class="string">'CHECKOUT'</span>,</span><br><span class="line">  <span class="string">'CONNECT'</span>,</span><br><span class="line">  <span class="string">'COPY'</span>,</span><br><span class="line">  <span class="string">'DELETE'</span>,</span><br><span class="line">  <span class="string">'GET'</span>,</span><br><span class="line">  <span class="string">'HEAD'</span>,</span><br><span class="line">  <span class="string">'LINK'</span>,</span><br><span class="line">  <span class="string">'LOCK'</span>,</span><br><span class="line">  <span class="string">'M-SEARCH'</span>,</span><br><span class="line">  <span class="string">'MERGE'</span>,</span><br><span class="line">  <span class="string">'MKACTIVITY'</span>,</span><br><span class="line">  <span class="string">'MKCALENDAR'</span>,</span><br><span class="line">  <span class="string">'MKCOL'</span>,</span><br><span class="line">  <span class="string">'MOVE'</span>,</span><br><span class="line">  <span class="string">'NOTIFY'</span>,</span><br><span class="line">  <span class="string">'OPTIONS'</span>,</span><br><span class="line">  <span class="string">'PATCH'</span>,</span><br><span class="line">  <span class="string">'POST'</span>,</span><br><span class="line">  <span class="string">'PROPFIND'</span>,</span><br><span class="line">  <span class="string">'PROPPATCH'</span>,</span><br><span class="line">  <span class="string">'PURGE'</span>,</span><br><span class="line">  <span class="string">'PUT'</span>,</span><br><span class="line">  <span class="string">'REBIND'</span>,</span><br><span class="line">  <span class="string">'REPORT'</span>,</span><br><span class="line">  <span class="string">'SEARCH'</span>,</span><br><span class="line">  <span class="string">'SUBSCRIBE'</span>,</span><br><span class="line">  <span class="string">'TRACE'</span>,</span><br><span class="line">  <span class="string">'UNBIND'</span>,</span><br><span class="line">  <span class="string">'UNLINK'</span>,</span><br><span class="line">  <span class="string">'UNLOCK'</span>,</span><br><span class="line">  <span class="string">'UNSUBSCRIBE'</span> ]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'http'</span>).STATUS_CODES</span><br><span class="line">&#123; <span class="string">'100'</span>: <span class="string">'Continue'</span>,</span><br><span class="line">  <span class="string">'101'</span>: <span class="string">'Switching Protocols'</span>,</span><br><span class="line">  <span class="string">'102'</span>: <span class="string">'Processing'</span>,</span><br><span class="line">  <span class="string">'200'</span>: <span class="string">'OK'</span>,</span><br><span class="line">  <span class="string">'201'</span>: <span class="string">'Created'</span>,</span><br><span class="line">  <span class="string">'202'</span>: <span class="string">'Accepted'</span>,</span><br><span class="line">  <span class="string">'203'</span>: <span class="string">'Non-Authoritative Information'</span>,</span><br><span class="line">  <span class="string">'204'</span>: <span class="string">'No Content'</span>,</span><br><span class="line">  <span class="string">'205'</span>: <span class="string">'Reset Content'</span>,</span><br><span class="line">  <span class="string">'206'</span>: <span class="string">'Partial Content'</span>,</span><br><span class="line">  <span class="string">'207'</span>: <span class="string">'Multi-Status'</span>,</span><br><span class="line">  <span class="string">'208'</span>: <span class="string">'Already Reported'</span>,</span><br><span class="line">  <span class="string">'226'</span>: <span class="string">'IM Used'</span>,</span><br><span class="line">  <span class="string">'300'</span>: <span class="string">'Multiple Choices'</span>,</span><br><span class="line">  <span class="string">'301'</span>: <span class="string">'Moved Permanently'</span>,</span><br><span class="line">  <span class="string">'302'</span>: <span class="string">'Found'</span>,</span><br><span class="line">  <span class="string">'303'</span>: <span class="string">'See Other'</span>,</span><br><span class="line">  <span class="string">'304'</span>: <span class="string">'Not Modified'</span>,</span><br><span class="line">  <span class="string">'305'</span>: <span class="string">'Use Proxy'</span>,</span><br><span class="line">  <span class="string">'307'</span>: <span class="string">'Temporary Redirect'</span>,</span><br><span class="line">  <span class="string">'308'</span>: <span class="string">'Permanent Redirect'</span>,</span><br><span class="line">  <span class="string">'400'</span>: <span class="string">'Bad Request'</span>,</span><br><span class="line">  <span class="string">'401'</span>: <span class="string">'Unauthorized'</span>,</span><br><span class="line">  <span class="string">'402'</span>: <span class="string">'Payment Required'</span>,</span><br><span class="line">  <span class="string">'403'</span>: <span class="string">'Forbidden'</span>,</span><br><span class="line">  <span class="string">'404'</span>: <span class="string">'Not Found'</span>,</span><br><span class="line">  <span class="string">'405'</span>: <span class="string">'Method Not Allowed'</span>,</span><br><span class="line">  <span class="string">'406'</span>: <span class="string">'Not Acceptable'</span>,</span><br><span class="line">  <span class="string">'407'</span>: <span class="string">'Proxy Authentication Required'</span>,</span><br><span class="line">  <span class="string">'408'</span>: <span class="string">'Request Timeout'</span>,</span><br><span class="line">  <span class="string">'409'</span>: <span class="string">'Conflict'</span>,</span><br><span class="line">  <span class="string">'410'</span>: <span class="string">'Gone'</span>,</span><br><span class="line">  <span class="string">'411'</span>: <span class="string">'Length Required'</span>,</span><br><span class="line">  <span class="string">'412'</span>: <span class="string">'Precondition Failed'</span>,</span><br><span class="line">  <span class="string">'413'</span>: <span class="string">'Payload Too Large'</span>,</span><br><span class="line">  <span class="string">'414'</span>: <span class="string">'URI Too Long'</span>,</span><br><span class="line">  <span class="string">'415'</span>: <span class="string">'Unsupported Media Type'</span>,</span><br><span class="line">  <span class="string">'416'</span>: <span class="string">'Range Not Satisfiable'</span>,</span><br><span class="line">  <span class="string">'417'</span>: <span class="string">'Expectation Failed'</span>,</span><br><span class="line">  <span class="string">'418'</span>: <span class="string">'I\'m a teapot'</span>,</span><br><span class="line">  <span class="string">'421'</span>: <span class="string">'Misdirected Request'</span>,</span><br><span class="line">  <span class="string">'422'</span>: <span class="string">'Unprocessable Entity'</span>,</span><br><span class="line">  <span class="string">'423'</span>: <span class="string">'Locked'</span>,</span><br><span class="line">  <span class="string">'424'</span>: <span class="string">'Failed Dependency'</span>,</span><br><span class="line">  <span class="string">'425'</span>: <span class="string">'Unordered Collection'</span>,</span><br><span class="line">  <span class="string">'426'</span>: <span class="string">'Upgrade Required'</span>,</span><br><span class="line">  <span class="string">'428'</span>: <span class="string">'Precondition Required'</span>,</span><br><span class="line">  <span class="string">'429'</span>: <span class="string">'Too Many Requests'</span>,</span><br><span class="line">  <span class="string">'431'</span>: <span class="string">'Request Header Fields Too Large'</span>,</span><br><span class="line">  <span class="string">'451'</span>: <span class="string">'Unavailable For Legal Reasons'</span>,</span><br><span class="line">  <span class="string">'500'</span>: <span class="string">'Internal Server Error'</span>,</span><br><span class="line">  <span class="string">'501'</span>: <span class="string">'Not Implemented'</span>,</span><br><span class="line">  <span class="string">'502'</span>: <span class="string">'Bad Gateway'</span>,</span><br><span class="line">  <span class="string">'503'</span>: <span class="string">'Service Unavailable'</span>,</span><br><span class="line">  <span class="string">'504'</span>: <span class="string">'Gateway Timeout'</span>,</span><br><span class="line">  <span class="string">'505'</span>: <span class="string">'HTTP Version Not Supported'</span>,</span><br><span class="line">  <span class="string">'506'</span>: <span class="string">'Variant Also Negotiates'</span>,</span><br><span class="line">  <span class="string">'507'</span>: <span class="string">'Insufficient Storage'</span>,</span><br><span class="line">  <span class="string">'508'</span>: <span class="string">'Loop Detected'</span>,</span><br><span class="line">  <span class="string">'509'</span>: <span class="string">'Bandwidth Limit Exceeded'</span>,</span><br><span class="line">  <span class="string">'510'</span>: <span class="string">'Not Extended'</span>,</span><br><span class="line">  <span class="string">'511'</span>: <span class="string">'Network Authentication Required'</span> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>http.globalAgent():<br>用于管理HTTP客户端的连接持久性和重用，是nodejs HTTP网络的关键组成部分</p>
+<h4 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h4><ul>
+<li>http.createServer()</li>
+<li>http.request()：向服务器发出HTTP请求</li>
+<li>http.get()：与http.request()类似，但会自动将http方法设置为GET，并自动调用req.end()</li>
+</ul>
+<h4 id="Classes"><a href="#Classes" class="headerlink" title="Classes"></a>Classes</h4><p>http模块提供了五种类</p>
+<ul>
+<li>http.Agent</li>
+<li>http.ClientRequest</li>
+<li>http.Server</li>
+<li>http.ServerResponse</li>
+<li>http.IncomingMessage</li>
+</ul>
+<p><strong>http.Agent</strong>:<br>nodejs创建http.Agent类的全局实例，以管理HTTP客户端的连接持久性和重用（Nodejs HTTP网络的关键组成部分）</p>
+<p>该对象确保对服务器的每个请求都排队，并且重用单个socket</p>
+<p>维护一个socket池</p>
+<p><strong>http.ClientRequest</strong>:<br>当调用http.request()或http.get()时，将创建一个http.ClientRequest对象</p>
+<p>接收到响应后，将使用http.IncomingMessage实例作为参数，调用响应事件</p>
+<p>可通过两种方式读取响应的返回数据：</p>
+<ul>
+<li>使用response.read()方法</li>
+<li>在响应事件处理程序中，可以为数据事件设置事件侦听器，以便可以侦听流入的事件</li>
+</ul>
+<p><strong>http.Server</strong>:<br>使用http.createServer()创建服务器时，通常会实例化返回类。有close和listen方法</p>
+<ul>
+<li>close()：阻止服务器接受新连接</li>
+<li>listen()：启动HTTP服务器并侦听连接</li>
+</ul>
+<p><strong>http.ServerResponse</strong>:<br>由http.Server创建，并作为第二个参数传递给它触发的request事件<br>即res</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>始终在处理程序中调用的方法是end()，关闭响应，信息已完成，服务器可以将其发送给客户端。必须在每个响应上调用</p>
+<p><strong>http.IncomingMessage</strong>：<br>一个http.IncomingMessage对象是通过以下方式创建</p>
+<ul>
+<li>http.Server监听request事件</li>
+<li>http.ClientRequest监听response事件</li>
+</ul>
+<p>可以用来访问响应：</p>
+<ul>
+<li>状态使用statusCode和statusMessage方法</li>
+<li>头部使用headers方法或rawHeaders</li>
+<li>HTTP方法用method</li>
+<li>HTTP版本使用httpVersion</li>
+<li>URL使用url</li>
+<li>underlying socket使用the socket </li>
+</ul>
+<p>由于http.IncomingMessage实现了Readable Stream接口，因此使用流访问数据。</p>
+<h3 id="nodejs-Buffer"><a href="#nodejs-Buffer" class="headerlink" title="nodejs Buffer"></a>nodejs Buffer</h3><p>Buffer是一个内存区域，代表在V8 JavaScript引擎外部分配的固定大小的内存块（无法调整大小）。<br>可将Buffer看作一个整数数组，每个整数代表一个数据字节</p>
+<p>引入Buffer帮助处理二进制数据。Buffer和stream紧密相连，将stream处理器接收数据的速度快与处理速度时，将数据放入Buffer中</p>
+<h5 id="create-a-buffer"><a href="#create-a-buffer" class="headerlink" title="create a buffer"></a>create a buffer</h5><p>使用Buffer.from()，Buffer.alloc()，Buffer.allocUnsafe()方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf = Buffer.from(<span class="string">'hey'</span>)</span><br><span class="line"><span class="keyword">const</span> buf = Buffer.alloc(<span class="number">1024</span>)</span><br><span class="line">buf.write(<span class="string">'XXX'</span>)</span><br><span class="line"><span class="keyword">const</span> buf = Buffer.allocUnsafe(<span class="number">1024</span>)</span><br></pre></td></tr></table></figure>
+
+<p>虽然alloc和allocUnsafe都分配指定大小的Buffer，但alloc创建的Buffer将初始化为零，而allocUnsafe创建的Buffer没有初始化。 这意味着，尽管allocUnsafe与alloc相比要快得多，但分配的内存段可能包含可能敏感的旧数据。</p>
+<h3 id="using-a-buffer"><a href="#using-a-buffer" class="headerlink" title="using a buffer"></a>using a buffer</h3><p>Buffer可以向数组一样进行访问</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buf = Buffer.from(<span class="string">'Hey!'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(buf[<span class="number">0</span>]) <span class="comment">// 72</span></span><br><span class="line"><span class="built_in">console</span>.log(buf[<span class="number">1</span>]) <span class="comment">// 101</span></span><br><span class="line"><span class="built_in">console</span>.log(buf[<span class="number">2</span>]) <span class="comment">//121</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 可使用toString()方法</span></span><br><span class="line"><span class="built_in">console</span>.log(buf.toString())</span><br><span class="line"></span><br><span class="line"><span class="comment">// 得到buffer的长度</span></span><br><span class="line"><span class="built_in">console</span>.log(buf.length)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对buffer内容的迭代</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> item <span class="keyword">in</span> buffer) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改buffer内容</span></span><br><span class="line">buf[<span class="number">1</span>] = <span class="number">111</span> <span class="comment">// o</span></span><br><span class="line"><span class="built_in">console</span>.log(buf.toString()) <span class="comment">// Hoy</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 拷贝</span></span><br><span class="line">buf.copy(bufcopy)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Slice a buffer</span></span><br><span class="line">buf.slice(<span class="number">0</span>).toString()  <span class="comment">// Hey!</span></span><br><span class="line"><span class="keyword">const</span> slice = buf.slice(<span class="number">0</span>, <span class="number">2</span>)  <span class="comment">// He</span></span><br><span class="line">buf[<span class="number">1</span>] = <span class="number">111</span>  <span class="comment">// o</span></span><br><span class="line"><span class="built_in">console</span>.log(slice.toString()) <span class="comment">//Ho</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="nodejs-流"><a href="#nodejs-流" class="headerlink" title="nodejs 流"></a>nodejs 流</h3><p>流是支持nodejs应用程序的基本概念之一。以一种有效的方式处理读/写文件、网络通信或任何类型的端到端信息交换的方式。</p>
+<p>使用流，可以逐段读取文件，在不将其全部保存在内存中的情况下处理其内容。</p>
+<p>nodejs流模块提供了构建所有流API的基础。所有流都是EventEmitter的实例</p>
+<p>相比于其他数据处理方法，流提供的两个主要优点：</p>
+<ul>
+<li>内存效率：处理数据之前，无需再内存中加载大量的数据</li>
+<li>时间效率：拥有数据后立即开始处理数据，所需的时间更少，不必等到整个数据有效负载就可开始使用。</li>
+</ul>
+<h5 id="An-example-of-a-stream"><a href="#An-example-of-a-stream" class="headerlink" title="An example of a stream"></a>An example of a stream</h5><p>使用nodejs模块fs，可以读取我呢间，并在与HTTP服务器建立新连接时通过HTTP提供文件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) =&gt; </span>&#123;</span><br><span class="line">    fs.readFile(path.resolve(<span class="string">'./data.txt'</span>), (err, data) =&gt; &#123;</span><br><span class="line">        res.end(data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">8089</span>)</span><br></pre></td></tr></table></figure>
+
+<p>readFile()读取文件的全部内容，并在完成后调用回调函数。<br>回调中的res.end(data)会将文件内容返回给HTTP客户端</p>
+<p>如果文件很大，这个操作会花费大量的时间。使用流的代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> stream = fs.createReadStream(path.resolve(<span class="string">'./data.txt'</span>))</span><br><span class="line">    stream.pipe(res)</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(<span class="number">8089</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这没有等待文件完全读取，在准备好要发送的大量数据后立即开始将其流式传输到HTTP客户端</p>
+<h5 id="pipe"><a href="#pipe" class="headerlink" title="pipe()"></a>pipe()</h5><p>上面示例使用stream.pipe(res)，在文件流上调用pipe()方法。它获取源数据并将其通过管道传递到HTTP response</p>
+<p>pipe()方法的返回值是目标流，这使得可以链接多个pipe()</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">src.pipe(dest1).pipe(dest2)</span><br><span class="line"></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line">src.pipe(dest1)</span><br><span class="line">dest1.pipe(dest2)</span><br></pre></td></tr></table></figure>
+
+<h5 id="Streams-powered-Node-js-APIs"><a href="#Streams-powered-Node-js-APIs" class="headerlink" title="Streams-powered Node.js APIs"></a>Streams-powered Node.js APIs</h5><p>很多nodejs核心模块提供了流的处理功能，最值得关注的有</p>
+<ul>
+<li>process.stdin：返回连接到stdin的流</li>
+<li>process.stdout：返回连接到stdout的流</li>
+<li>process.stderr：返回连接到stderr的流</li>
+<li>fs.createReadStream()：创建文件可读流</li>
+<li>fs.createWriteStream()：创建文件可写流</li>
+<li>net.connect()：启动基于流的连接</li>
+<li>http.request()：返回http.ClientRequest类的实例，该实例是可写流</li>
+<li>zlib.createGzip()：使用gzip将数据压缩到流中</li>
+<li>zlib.Gunzip()：解压缩gzip流</li>
+<li>zlib.createDeflate()：使用deflate将数据压缩到流中</li>
+<li>zlib.createInflate()：解压缩deflate流</li>
+</ul>
+<h5 id="流的类型"><a href="#流的类型" class="headerlink" title="流的类型"></a>流的类型</h5><ul>
+<li>可读：可接受数据，但不能发送数据</li>
+<li>可写：可发送数据，但不能从中接收数据</li>
+<li>双工：可读流和可写流的组合，可同时输入、输出</li>
+<li>转换：转换流类似于双工，但是输入和输出的转换</li>
+</ul>
+<h5 id="创建一个可读流"><a href="#创建一个可读流" class="headerlink" title="创建一个可读流"></a>创建一个可读流</h5><p>从stream模块获取可读流，并对其进行初始化实现read._read()方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个流对象</span></span><br><span class="line"><span class="keyword">const</span> Stream = <span class="built_in">require</span>(<span class="string">'stream'</span>)</span><br><span class="line"><span class="keyword">const</span> readableStream = <span class="keyword">new</span> Stream.Readable()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 然后执行_read</span></span><br><span class="line">readableStream._read = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在初始化后</span></span><br><span class="line">readableStream.push(<span class="string">'hi!'</span>)</span><br><span class="line">readableStream.push(<span class="string">'ho!'</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="创建一个可写流"><a href="#创建一个可写流" class="headerlink" title="创建一个可写流"></a>创建一个可写流</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Stream = <span class="built_in">require</span>(<span class="string">'stream'</span>)</span><br><span class="line"><span class="keyword">const</span> WritableStream = <span class="keyword">new</span> Stream.Writable()</span><br><span class="line"></span><br><span class="line">writableStream._write = <span class="function">(<span class="params">chunk, encoding, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(chunk.toString())</span><br><span class="line">  next()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">process.stdin.pipe(writableStream)</span><br></pre></td></tr></table></figure>
+
+<h5 id="从可读流中得到数据"><a href="#从可读流中得到数据" class="headerlink" title="从可读流中得到数据"></a>从可读流中得到数据</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Stream = <span class="built_in">require</span>(<span class="string">'stream'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> readableStream = <span class="keyword">new</span> Stream.Readable(&#123;</span><br><span class="line">    read() &#123;&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> writableStream = <span class="keyword">new</span> Stream.Writable()</span><br><span class="line"></span><br><span class="line">writableStream._write = <span class="function">(<span class="params">chunk, encoding, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(chunk.toString())</span><br><span class="line">    next()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">readableStream.pipe(writableStream)</span><br><span class="line"></span><br><span class="line">readableStream.push(<span class="string">'hi'</span>)</span><br><span class="line">readableStream.push(<span class="string">'ho'</span>)</span><br></pre></td></tr></table></figure>
+
+<h5 id="向可写流写入数据"><a href="#向可写流写入数据" class="headerlink" title="向可写流写入数据"></a>向可写流写入数据</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">writableStream.write(<span class="string">'hey!\n'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结束</span></span><br><span class="line">writableStream.end()</span><br></pre></td></tr></table></figure>
+
+<h3 id="nodejs开发环境和生产环境区别"><a href="#nodejs开发环境和生产环境区别" class="headerlink" title="nodejs开发环境和生产环境区别"></a>nodejs开发环境和生产环境区别</h3><p>可以为生产和开发环境使用不同的配置。</p>
+<p>nodejs假定始终在开发环境中运行。可以通过设置NODE_ENV = production环境变量来向nodejs发出生产中运行的信号</p>
+<p>使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export NODE_ENV = production</span><br></pre></td></tr></table></figure>
+
+<p>设置生产环境通常可以确保</p>
+<ul>
+<li>日志记录保持在最低水平</li>
+<li>发生更多的缓存级别以优化性能</li>
+</ul>
+<p>可以使用条件语句在不同环境下执行不同代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(process.env.NODE_ENV === <span class="string">"development"</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(process.env.NODE_ENV === <span class="string">"production"</span>) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>([<span class="string">'production'</span>, <span class="string">'staging'</span>].indexOf(process.env.NODE_ENV) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>例如，在express应用中，可以使用它在每个环境中设置不同的错误处理程序</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(process.env.NODE_ENV === <span class="string">"development"</span>) &#123;</span><br><span class="line">    app.use(express.errorHandler(&#123; <span class="attr">dumpExceptions</span>: <span class="literal">true</span>, <span class="attr">showStack</span>: <span class="literal">true</span> &#125;))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">"production"</span>) &#123;</span><br><span class="line">  app.use(express.errorHandler())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="nodejs中错误处理"><a href="#nodejs中错误处理" class="headerlink" title="nodejs中错误处理"></a>nodejs中错误处理</h3><h5 id="creating-exception"><a href="#creating-exception" class="headerlink" title="creating exception"></a>creating exception</h5><p>通过throw关键字抛出异常</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">throw</span> value</span><br></pre></td></tr></table></figure>
+
+<p>JavaScript一旦执行throw，就会停止正常程序流，并将控件保留到最近的异常处理程序</p>
+<p>通常在客户端代码中，value可以是任何JavaScript值，包括字符串、数字或对象</p>
+<p>而在nodejs中，不抛出字符串，而只是抛出Error对象</p>
+<h5 id="Error对象"><a href="#Error对象" class="headerlink" title="Error对象"></a>Error对象</h5><p>一个错误对象是Error对象的实例，或者是Error核心模块中提供的扩展Error类的对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Ran  out of coffee'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> NotEnoughCoffeeError extends <span class="built_in">Error</span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">throw</span> <span class="keyword">new</span> NotEnoughCoffeeError()</span><br></pre></td></tr></table></figure>
+
+<h5 id="处理异常"><a href="#处理异常" class="headerlink" title="处理异常"></a>处理异常</h5><p>使用try/catch语句处理异常。try中包含的代码引发任何异常都在相应的catch块中处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="捕获未捕获的异常"><a href="#捕获未捕获的异常" class="headerlink" title="捕获未捕获的异常"></a>捕获未捕获的异常</h5><p>如果在程序执行过程中引发未捕获的异常，则程序将崩溃。解决此问题，侦听process对象上uncaughtException事件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">process.on(<span class="string">'uncaughtException'</span>, err =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(<span class="string">'there was an uncaught error'</span>, err)</span><br><span class="line">    process.exit(<span class="number">1</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="promise的异常"><a href="#promise的异常" class="headerlink" title="promise的异常"></a>promise的异常</h5><p>使用promise可以链接不同的操作，并在最后处理错误</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">doSomthing1()</span><br><span class="line">  .then(doSomething2)</span><br><span class="line">  .then(doSomething3)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.error(err))</span><br></pre></td></tr></table></figure>
+
+<p>我们不知道错误发生在哪里，但是可以处理调用的每个函数（doSomethingX）中的错误，并在错误处理程序内部抛出一个新错误，这将调用外部catch处理程序：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> doSomething1 = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="comment">//... handle it locally</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(err.message)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了可以在本地处理错误而不在调用的函数中处理错误，可以中断链，在每个then中创建一个函数处理异常</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">doSomething1()</span><br><span class="line">  .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> doSomething2().catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">throw</span> err  <span class="comment">// break the chain</span></span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> doSomething3().catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">throw</span> err</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> <span class="built_in">console</span>.log(err))</span><br></pre></td></tr></table></figure>
+
+<h5 id="async-await的错误处理"><a href="#async-await的错误处理" class="headerlink" title="async/await的错误处理"></a>async/await的错误处理</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">await</span> someOtherFunction()</span><br><span class="line">    &#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(err.message)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="nodejs中如何记录对象"><a href="#nodejs中如何记录对象" class="headerlink" title="nodejs中如何记录对象"></a>nodejs中如何记录对象</h3><p>在控制台中打印console.log()时，在达到一定嵌套级别之前一切都好，但是经过两个级别的嵌套后，nodejs放弃，并打印[Object]作为占位符</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  name: <span class="string">'joe'</span>,</span><br><span class="line">  age: <span class="number">35</span>,</span><br><span class="line">  person1: &#123;</span><br><span class="line">    name: <span class="string">'Tony'</span>,</span><br><span class="line">    age: <span class="number">50</span>,</span><br><span class="line">    person2: &#123;</span><br><span class="line">      name: <span class="string">'Albert'</span>,</span><br><span class="line">      age: <span class="number">21</span>,</span><br><span class="line">      person3: &#123;</span><br><span class="line">        name: <span class="string">'Peter'</span>,</span><br><span class="line">        age: <span class="number">23</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(obj)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  name: <span class="string">'joe'</span>,</span><br><span class="line">  age: <span class="number">35</span>,</span><br><span class="line">  person1: &#123;</span><br><span class="line">    name: <span class="string">'Tony'</span>,</span><br><span class="line">    age: <span class="number">50</span>,</span><br><span class="line">    person2: &#123;</span><br><span class="line">      name: <span class="string">'Albert'</span>,</span><br><span class="line">      age: <span class="number">21</span>,</span><br><span class="line">      person3: [<span class="built_in">Object</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如何打印整个对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">JSON</span>.stringify(obj, <span class="literal">null</span>, <span class="number">2</span>))  <span class="comment">// 2是用于缩进的空格数</span></span><br></pre></td></tr></table></figure>
+
+<p>另一种：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'util'</span>).inspect.defaultOptions.depth = <span class="literal">null</span></span><br><span class="line"><span class="built_in">console</span>.log(obj)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/vue/MarkDown基本语法/" rel="next" title="MarkDown基本语法">
+                <i class="fa fa-chevron-left"></i> MarkDown基本语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/web全栈/nodejs相关笔记/" rel="prev" title="nodejs相关笔记">
+                nodejs相关笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs简介"><span class="nav-number">1.</span> <span class="nav-text">nodejs简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#大量的库"><span class="nav-number">1.1.</span> <span class="nav-text">大量的库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nodejs与浏览器区别"><span class="nav-number">1.2.</span> <span class="nav-text">nodejs与浏览器区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#V8-JavaScript引擎"><span class="nav-number">1.3.</span> <span class="nav-text">V8 JavaScript引擎</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nodejs程序退出"><span class="nav-number">1.4.</span> <span class="nav-text">nodejs程序退出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从nodejs读取环境变量"><span class="nav-number">1.5.</span> <span class="nav-text">从nodejs读取环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令行接收参数"><span class="nav-number">1.6.</span> <span class="nav-text">命令行接收参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用exports从nodejs文件中公开功能"><span class="nav-number">1.7.</span> <span class="nav-text">使用exports从nodejs文件中公开功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#npm包管理器"><span class="nav-number">1.8.</span> <span class="nav-text">npm包管理器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#package-json详解"><span class="nav-number">1.9.</span> <span class="nav-text">package.json详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#package-lock-json文件"><span class="nav-number">1.10.</span> <span class="nav-text">package-lock.json文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用npm的语义版本控制"><span class="nav-number">1.11.</span> <span class="nav-text">使用npm的语义版本控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#卸载npm软件包"><span class="nav-number">1.12.</span> <span class="nav-text">卸载npm软件包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nodejs包运行器npx"><span class="nav-number">1.13.</span> <span class="nav-text">nodejs包运行器npx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nodejs事件循环"><span class="nav-number">1.14.</span> <span class="nav-text">nodejs事件循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#了解process-nextTick"><span class="nav-number">1.15.</span> <span class="nav-text">了解process.nextTick()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#了解setImmediate"><span class="nav-number">1.16.</span> <span class="nav-text">了解setImmediate()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nodejs事件触发器"><span class="nav-number">1.17.</span> <span class="nav-text">nodejs事件触发器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搭建http服务器"><span class="nav-number">1.18.</span> <span class="nav-text">搭建http服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用nodejs发送HTTP请求"><span class="nav-number">1.19.</span> <span class="nav-text">使用nodejs发送HTTP请求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用nodejs发送HTTP-post请求"><span class="nav-number">2.</span> <span class="nav-text">使用nodejs发送HTTP post请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用nodejs获取HTTP请求的正文数据"><span class="nav-number">3.</span> <span class="nav-text">使用nodejs获取HTTP请求的正文数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在nodejs中使用文件描述符"><span class="nav-number">4.</span> <span class="nav-text">在nodejs中使用文件描述符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs文件属性"><span class="nav-number">5.</span> <span class="nav-text">nodejs文件属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs文件路径"><span class="nav-number">6.</span> <span class="nav-text">nodejs文件路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#path的一些方法"><span class="nav-number">6.1.</span> <span class="nav-text">path的一些方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs读文件"><span class="nav-number">7.</span> <span class="nav-text">nodejs读文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs写文件"><span class="nav-number">8.</span> <span class="nav-text">nodejs写文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs中使用文件夹"><span class="nav-number">9.</span> <span class="nav-text">nodejs中使用文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs文件系统模块"><span class="nav-number">10.</span> <span class="nav-text">nodejs文件系统模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs路径模块"><span class="nav-number">11.</span> <span class="nav-text">nodejs路径模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs操作系统模块"><span class="nav-number">12.</span> <span class="nav-text">nodejs操作系统模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs事件模块"><span class="nav-number">13.</span> <span class="nav-text">nodejs事件模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs-http模块"><span class="nav-number">14.</span> <span class="nav-text">nodejs http模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Properties"><span class="nav-number">14.1.</span> <span class="nav-text">Properties</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Methods"><span class="nav-number">14.2.</span> <span class="nav-text">Methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Classes"><span class="nav-number">14.3.</span> <span class="nav-text">Classes</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs-Buffer"><span class="nav-number">15.</span> <span class="nav-text">nodejs Buffer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#create-a-buffer"><span class="nav-number">15.0.1.</span> <span class="nav-text">create a buffer</span></a></li></ol></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#using-a-buffer"><span class="nav-number">16.</span> <span class="nav-text">using a buffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs-流"><span class="nav-number">17.</span> <span class="nav-text">nodejs 流</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#An-example-of-a-stream"><span class="nav-number">17.0.1.</span> <span class="nav-text">An example of a stream</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#pipe"><span class="nav-number">17.0.2.</span> <span class="nav-text">pipe()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Streams-powered-Node-js-APIs"><span class="nav-number">17.0.3.</span> <span class="nav-text">Streams-powered Node.js APIs</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#流的类型"><span class="nav-number">17.0.4.</span> <span class="nav-text">流的类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建一个可读流"><span class="nav-number">17.0.5.</span> <span class="nav-text">创建一个可读流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建一个可写流"><span class="nav-number">17.0.6.</span> <span class="nav-text">创建一个可写流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从可读流中得到数据"><span class="nav-number">17.0.7.</span> <span class="nav-text">从可读流中得到数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#向可写流写入数据"><span class="nav-number">17.0.8.</span> <span class="nav-text">向可写流写入数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs开发环境和生产环境区别"><span class="nav-number">18.</span> <span class="nav-text">nodejs开发环境和生产环境区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs中错误处理"><span class="nav-number">19.</span> <span class="nav-text">nodejs中错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#creating-exception"><span class="nav-number">19.0.1.</span> <span class="nav-text">creating exception</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Error对象"><span class="nav-number">19.0.2.</span> <span class="nav-text">Error对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理异常"><span class="nav-number">19.0.3.</span> <span class="nav-text">处理异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#捕获未捕获的异常"><span class="nav-number">19.0.4.</span> <span class="nav-text">捕获未捕获的异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#promise的异常"><span class="nav-number">19.0.5.</span> <span class="nav-text">promise的异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#async-await的错误处理"><span class="nav-number">19.0.6.</span> <span class="nav-text">async/await的错误处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodejs中如何记录对象"><span class="nav-number">20.</span> <span class="nav-text">nodejs中如何记录对象</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

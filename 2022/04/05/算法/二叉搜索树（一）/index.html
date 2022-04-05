@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="二叉搜索树（一）二叉搜索树（Binary Search Tree） ，简称  BST 。 BST 的特性：  对于 BST 每一个节点 node ，左子树节点的值都比 node 的值要小，右子树节点的值都比 node 的值大。 对于 BST 每一个节点 node，它的左侧子树和右侧子树都是 BST。  二叉搜索树并不复杂，但是很多数据结构都是基于 BST 的。比如 AVL 树，红黑树等等。拥有自平">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉搜索树（一）">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/算法/二叉搜索树（一）/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="二叉搜索树（一）二叉搜索树（Binary Search Tree） ，简称  BST 。 BST 的特性：  对于 BST 每一个节点 node ，左子树节点的值都比 node 的值要小，右子树节点的值都比 node 的值大。 对于 BST 每一个节点 node，它的左侧子树和右侧子树都是 BST。  二叉搜索树并不复杂，但是很多数据结构都是基于 BST 的。比如 AVL 树，红黑树等等。拥有自平">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-04-05T14:28:51.776Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉搜索树（一）">
+<meta name="twitter:description" content="二叉搜索树（一）二叉搜索树（Binary Search Tree） ，简称  BST 。 BST 的特性：  对于 BST 每一个节点 node ，左子树节点的值都比 node 的值要小，右子树节点的值都比 node 的值大。 对于 BST 每一个节点 node，它的左侧子树和右侧子树都是 BST。  二叉搜索树并不复杂，但是很多数据结构都是基于 BST 的。比如 AVL 树，红黑树等等。拥有自平">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/算法/二叉搜索树（一）/">
+
+
+
+
+
+  <title>二叉搜索树（一） | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/算法/二叉搜索树（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">二叉搜索树（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T22:23:39+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="二叉搜索树（一）"><a href="#二叉搜索树（一）" class="headerlink" title="二叉搜索树（一）"></a>二叉搜索树（一）</h2><p>二叉搜索树（Binary Search Tree） ，简称  BST 。</p>
+<p>BST 的特性：</p>
+<ol>
+<li>对于 BST 每一个节点 node ，左子树节点的值都比 node 的值要小，右子树节点的值都比 node 的值大。</li>
+<li>对于 BST 每一个节点 node，它的左侧子树和右侧子树都是 BST。</li>
+</ol>
+<p>二叉搜索树并不复杂，但是很多数据结构都是基于 BST 的。比如 AVL 树，红黑树等等。拥有自平衡性质，可以提供您 log N 级别的增删改查效率；还有 B+ 树，线段树等结构都是基于 BST 的思想来设计的。</p>
+<p><b>从做算法题的角度来看 BST ，除了它的定义，还有一个重要的性质：BST 的中序遍历结果是有序的（升序）</b></p>
+<p>也就是说，如果输入一棵 BST ，以下代码可以将 BST 中每个节点的值升序打印出来</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">	traverse(root.left);</span><br><span class="line">	<span class="comment">// 中序遍历代码位置</span></span><br><span class="line">	print(root.val);</span><br><span class="line">	traverse(root.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据这个性质，我们可以做两道算法题</p>
+<h4 id="1-寻找第-K-小的元素"><a href="#1-寻找第-K-小的元素" class="headerlink" title="1. 寻找第 K 小的元素"></a>1. 寻找第 K 小的元素</h4><p>leetcode 230题：</p>
+<p>给定一个二叉搜索树，编写一个函数来查找其中第 k 个最小的元素。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [5,3,6,2,4,null,null,1], k=3</span><br><span class="line">		5</span><br><span class="line">	   / \</span><br><span class="line">	  3   6</span><br><span class="line">	 / \</span><br><span class="line">	2   4</span><br><span class="line">   /</span><br><span class="line">  1</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+
+<p>思路就是利用 BST 的中序遍历是一个升序的过程来找到第 k 个元素。可以直接写出代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> result;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">kthSmallest</span><span class="params">(TreeNode root, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        kthSmallest(root.left, k);</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">if</span> (count == k) &#123;</span><br><span class="line">            result = root.val;</span><br><span class="line">        &#125;</span><br><span class="line">        kthSmallest(root.right, k);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然，这个解法并不是最高效的解法，仅仅只是适用于这道题。</p>
+<p>每次寻找第 k 小的元素都要中序遍历一次，最坏的时间复杂度是 O(N)，N 是 BST 的节点个数。</p>
+<p>BST 的性质很强，像红黑树这种改良的自平衡 BST ，增删改查都是 O(log N) 的复杂度，算一个第 k 小元素，时间复杂度竟然要 O(N)，这就有些低效了。</p>
+<p>所以说，计算第 k 小元素，最好的算法肯定也是对数级别的复杂度，不过这个依赖 BST 节点记录的信息有多少。</p>
+<p>BST 高效的原因是：<strong>所有节点都可以通过对比自身的值判断去左子树还是右子树搜索目标值，从而避免全树的遍历，达到对数级复杂度</strong>。</p>
+<p>回到这个问题，想找到第 k 小的元素，如果想达到对数级复杂度，关键也在于每个节点得知道他自己排第几。</p>
+<p>比如，当前节点知道自己排名 m ，我们可以比较 m 和 k 的大小：</p>
+<ul>
+<li>如果 m == k，显然就是找到了第 k 个元素，返回当前节点就行了；</li>
+<li>如果 k &lt; m，说明排名第 k 的元素在左子树，去左子树搜索；</li>
+<li>如果 k &gt; m，说明排名第 k 的元素在右子树，去右子树搜索；</li>
+</ul>
+<p>这样就可以将时间复杂度降到 O(log N) 了。</p>
+<p>如何让每个节点知道自己的排名呢？</p>
+<p>这就需要在二叉树节点中维护额外信息。<strong>每个节点需要记录，以自己为根的这颗二叉树有多少个节点</strong>。</p>
+<p>TreeNode 中的字段应该如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> val;</span><br><span class="line">	<span class="comment">// 以该节点为根的树的节点总数</span></span><br><span class="line">	<span class="keyword">int</span> size;</span><br><span class="line">	TreeNode left;</span><br><span class="line">	TreeNode right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有了 size 字段，外加 BST 左小右大的性质，对每个节点 node 可以通过 <code>node.left.size</code> 得到 node 的排名，从而做到对数级算法。</p>
+<h4 id="2-BST-转换累加树"><a href="#2-BST-转换累加树" class="headerlink" title="2. BST 转换累加树"></a>2. BST 转换累加树</h4><p>leetcode 538 和 1038 题：</p>
+<p>给出二叉搜索树的根节点，该树的节点值各不相同，将其转换为累加树，使每个节点 node 的新值等于原树中大于或等于 <code>node.val</code> 的值之和。</p>
+<p>即：累加树的每个节点值为所有值中大于等于该点值得总和。</p>
+<p>签名函数如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TreeNode convertBST(TreeNode root);</span><br></pre></td></tr></table></figure>
+
+<p>按照二叉树得通用思路，需要考虑每个节点应该做什么，但是这道题很难想到什么思路。</p>
+<p>BST 是左小右大的，既然累加和是计算大于等于当前值的所有元素之和，那么每个节点都去计算右子树的和，不就行了。但是这是不行的，因为父节点也可能比他大。</p>
+<p>利用 BST 的中序遍历特性。BST 的中序遍历代码可以升序打印节点的值。如果想降序，只需要将递归的顺序改一下即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="comment">// 先递归遍历右子树</span></span><br><span class="line">	traverse(root.right);</span><br><span class="line">	<span class="comment">// 中序遍历代码位置</span></span><br><span class="line">	print(root.val);</span><br><span class="line">	<span class="comment">// 后递归遍历左子树</span></span><br><span class="line">	traverse(root.left);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>这段代码可以从大到小降序打印 BST 节点的值，如果维护一个外部变量 sum，然后将 sum 赋值给 BST 中的每一个节点，就将 BSt 转化成累加树了</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记录累加和</span></span><br><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> TreeNode <span class="title">convertBST</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    traverse(root);</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    traverse(root.right);</span><br><span class="line">    sum += root.val;</span><br><span class="line">    root.val = sum;</span><br><span class="line">    traverse(root.left);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>核心还是 BST 的中序遍历特性，只不过修改了递归的顺序，降序遍历 BST 的元素值，从而契合题目累加树的要求。</p>
+<p><strong>总结：</strong>BST 相关的问题，要么利用 BST 左小右大的特性提升算法效率，要么利用中序遍历的特性满足题目的要求。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/算法/二叉搜索树（三）/" rel="next" title="二叉搜索树（三）">
+                <i class="fa fa-chevron-left"></i> 二叉搜索树（三）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/算法/二分查找详解/" rel="prev" title="二分查找详解">
+                二分查找详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉搜索树（一）"><span class="nav-number">1.</span> <span class="nav-text">二叉搜索树（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-寻找第-K-小的元素"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 寻找第 K 小的元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-BST-转换累加树"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. BST 转换累加树</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

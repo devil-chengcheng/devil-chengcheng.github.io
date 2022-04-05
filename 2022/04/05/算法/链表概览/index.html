@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="链表系列用一组任意存储线性表的数据元素。一个对象存储着本身的值和下一个元素的地址。  需要遍历才能查询到元素，查询慢 插入元素只需要断开连接重新赋值，插入快  基本应用主要是对链表基本概念和特性的应用，如果基础概念掌握牢靠，此类问题即可解决。  从尾到头打印链表 删除链表中的节点 反转链表 复杂链表的复制  环类题目环类链表即从判断一个单链表是否存在循环而扩展衍生的问题  环形链表 链表环的入口节">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链表概览">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/算法/链表概览/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="链表系列用一组任意存储线性表的数据元素。一个对象存储着本身的值和下一个元素的地址。  需要遍历才能查询到元素，查询慢 插入元素只需要断开连接重新赋值，插入快  基本应用主要是对链表基本概念和特性的应用，如果基础概念掌握牢靠，此类问题即可解决。  从尾到头打印链表 删除链表中的节点 反转链表 复杂链表的复制  环类题目环类链表即从判断一个单链表是否存在循环而扩展衍生的问题  环形链表 链表环的入口节">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2022-04-05T14:30:50.661Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="链表概览">
+<meta name="twitter:description" content="链表系列用一组任意存储线性表的数据元素。一个对象存储着本身的值和下一个元素的地址。  需要遍历才能查询到元素，查询慢 插入元素只需要断开连接重新赋值，插入快  基本应用主要是对链表基本概念和特性的应用，如果基础概念掌握牢靠，此类问题即可解决。  从尾到头打印链表 删除链表中的节点 反转链表 复杂链表的复制  环类题目环类链表即从判断一个单链表是否存在循环而扩展衍生的问题  环形链表 链表环的入口节">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/算法/链表概览/">
+
+
+
+
+
+  <title>链表概览 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/算法/链表概览/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">链表概览</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T22:23:39+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="链表系列"><a href="#链表系列" class="headerlink" title="链表系列"></a>链表系列</h2><p>用一组任意存储线性表的数据元素。一个对象存储着本身的值和下一个元素的地址。</p>
+<ul>
+<li>需要遍历才能查询到元素，查询慢</li>
+<li>插入元素只需要断开连接重新赋值，插入快</li>
+</ul>
+<h3 id="基本应用"><a href="#基本应用" class="headerlink" title="基本应用"></a>基本应用</h3><p>主要是对链表基本概念和特性的应用，如果基础概念掌握牢靠，此类问题即可解决。</p>
+<ul>
+<li>从尾到头打印链表</li>
+<li>删除链表中的节点</li>
+<li>反转链表</li>
+<li>复杂链表的复制</li>
+</ul>
+<h3 id="环类题目"><a href="#环类题目" class="headerlink" title="环类题目"></a>环类题目</h3><p>环类链表即从判断一个单链表是否存在循环而扩展衍生的问题</p>
+<ul>
+<li>环形链表</li>
+<li>链表环的入口节点</li>
+<li>约瑟夫环</li>
+</ul>
+<h3 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h3><p>双指针的思想在链表和数组中的题目都会经常用到，主要是利用两个或多个不同位置的指针，通过速度和方向的变换解决问题。比如快慢指针和左右指针。</p>
+<ul>
+<li>左右指针：两个指针从不同位置出发，一个从始端开始，一个从末端开始</li>
+<li>快慢指针：两个指针以不同速度移动，一个指针快一些，一个指针慢一些。</li>
+</ul>
+<p>对于单链表，因为只能在一个方向上遍历链表，所以左右指针很难实施，但快慢指针是非常适用的。</p>
+<ul>
+<li>两个链表的公共节点</li>
+<li>链表的倒数第 k 个节点</li>
+<li>相交链表</li>
+</ul>
+<h3 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h3><p>双链还有一个引用字段，称为 <code>prev</code> 字段，有了这个额外的字段，就可以知道当前节点的前一个结点</p>
+<ul>
+<li>扁平化多级双向链表</li>
+</ul>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><h4 id="1-从尾到头打印链表"><a href="#1-从尾到头打印链表" class="headerlink" title="1. 从尾到头打印链表"></a>1. 从尾到头打印链表</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printListFromTailToHead</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> arr = [];</span><br><span class="line">    <span class="keyword">while</span>(head != <span class="literal">null</span>) &#123;</span><br><span class="line">        arr.unshift(head.val);</span><br><span class="line">        head = head.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-删除链表中的结点"><a href="#2-删除链表中的结点" class="headerlink" title="2. 删除链表中的结点"></a>2. 删除链表中的结点</h4><ul>
+<li>删除的结点不是尾部结点：next 结点覆盖当前结点</li>
+<li>删除的结点是尾部结点且等于头结点，只剩一个结点：将头结点置为 <code>null</code></li>
+<li>删除的结点是尾结点且前面还有结点：遍历到末尾的前一个结点删除</li>
+</ul>
+<p>只有第三种情况的时间复杂度是 <code>O(n)</code>，且这种情况只会出现 <code>1/n</code> 次，所以算法的时间复杂度是 <code>O(1)</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> deleteNode = <span class="function"><span class="keyword">function</span>(<span class="params">head, val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (head.val == val) <span class="keyword">return</span> head.next;</span><br><span class="line">    <span class="keyword">let</span> cur = head;</span><br><span class="line">    <span class="keyword">while</span>(cur.next) &#123;</span><br><span class="line">        <span class="keyword">if</span>(cur.next.val == val) &#123;</span><br><span class="line">            cur.next = cur.next.next;</span><br><span class="line">            <span class="keyword">return</span> head;</span><br><span class="line">        &#125;</span><br><span class="line">        cur = cur.next;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除表中重复的结点</strong></p>
+<p>可以存储链表中元素出现的次数，用一个 map 存储每个结点出现的次数，删除出现次数大于 1 的结点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteDuplication</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">if</span> (!head || !head.next) <span class="keyword">return</span> head;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> cur = head;</span><br><span class="line">    map.set(cur.val, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">while</span>(cur.next) &#123;</span><br><span class="line">        map.set(cur.next.val, map.has(cur.next.val) ? map.get(cur.next.val) + <span class="number">1</span> : <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (map.get(cur.next.val) &gt; <span class="number">1</span>) &#123;</span><br><span class="line">            cur.next = cur.next.next;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cur = cur.next</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-反转链表"><a href="#3-反转链表" class="headerlink" title="3. 反转链表"></a>3. 反转链表</h4><p>输入一个链表，反转链表后，输出新链表的表头</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reverseList = <span class="function"><span class="keyword">function</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> prev = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">let</span> curr = head;</span><br><span class="line">    <span class="keyword">while</span> (curr) &#123;</span><br><span class="line">        <span class="keyword">const</span> next = curr.next;</span><br><span class="line">        curr.next = prev;</span><br><span class="line">        prev = curr;</span><br><span class="line">        curr = next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> prev;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>递归实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reverseList = <span class="function"><span class="params">head</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (head.next == <span class="literal">null</span>) <span class="keyword">return</span> head;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">const</span> last = reverseList(head.next);</span><br><span class="line">    head.next.next = head;</span><br><span class="line">    head.next = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> last;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-复杂链表的复制"><a href="#4-复杂链表的复制" class="headerlink" title="4. 复杂链表的复制"></a>4. 复杂链表的复制</h4><p>输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的 head。</p>
+<h4 id="5-环形链表"><a href="#5-环形链表" class="headerlink" title="5. 环形链表"></a>5. 环形链表</h4><p>给定一个链表，判断链表中是否有环</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasCycle = <span class="function"><span class="keyword">function</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fast,slow;</span><br><span class="line">    fast = slow = head;</span><br><span class="line">    <span class="keyword">while</span>(fast &amp;&amp; fast.next) &#123;</span><br><span class="line">        fast = fast.next.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">        <span class="keyword">if</span> (fast == slow) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-环形链表入口节点"><a href="#6-环形链表入口节点" class="headerlink" title="6. 环形链表入口节点"></a>6. 环形链表入口节点</h4><p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 <code>null</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> detectCycle = <span class="function"><span class="keyword">function</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fast, slow;</span><br><span class="line">    fast = slow = head;</span><br><span class="line">    <span class="keyword">while</span>(fast &amp;&amp; fast.next) &#123;</span><br><span class="line">        fast = fast.next.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (fast == slow)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!fast || !fast.next) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    </span><br><span class="line">    slow = head;</span><br><span class="line">    <span class="keyword">while</span>(fast != slow) &#123;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-约瑟夫环"><a href="#7-约瑟夫环" class="headerlink" title="7. 约瑟夫环"></a>7. 约瑟夫环</h4><p><code>0,1,...,n-1</code> 这 n 个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第 m 个数字。求出这个圆圈里剩下的最后一个数字。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">LastRemaining_Solution</span>(<span class="params">n, m</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n&lt;<span class="number">1</span> || m&lt;<span class="number">1</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 首先用链表模拟环</span></span><br><span class="line">    <span class="keyword">const</span> head = &#123; <span class="attr">val</span>:<span class="number">0</span> &#125;</span><br><span class="line">    <span class="keyword">let</span> current = head;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">1</span>; i&lt;n; i++) &#123;</span><br><span class="line">        curren.next = &#123;<span class="attr">val</span> : i&#125;;</span><br><span class="line">        current = current.next;</span><br><span class="line">    &#125;</span><br><span class="line">    current.next = head;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(current.next != current) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;m<span class="number">-1</span>; i++) &#123;</span><br><span class="line">            current = current.next;</span><br><span class="line">        &#125;</span><br><span class="line">        current.next = current.next.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> current.val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-两个链表的第一个公共节点"><a href="#8-两个链表的第一个公共节点" class="headerlink" title="8. 两个链表的第一个公共节点"></a>8. 两个链表的第一个公共节点</h4><p>输入两个链表，找出它们的第一个公共节点</p>
+<ul>
+<li>先找到两个链表的长度</li>
+<li>让长一点的链表先走，让长链表和短链表起点相同</li>
+<li>两个链表一起前进，比较获得第一个相等的节点</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindFirstCommonNode</span>(<span class="params">headA, headB</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!headA || !headB) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取链表长度</span></span><br><span class="line">    <span class="keyword">let</span> lengthA = getLength(headA);</span><br><span class="line">    <span class="keyword">let</span> lengthB = getLength(headB);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (lengthA &gt; lengthB) &#123;</span><br><span class="line">        <span class="keyword">let</span> interver = lengthA - lengthB;</span><br><span class="line">        <span class="keyword">while</span>(interver) &#123;</span><br><span class="line">            headA = headA.next;</span><br><span class="line">            interver--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> interver = lengthB - lengthA;</span><br><span class="line">        <span class="keyword">while</span>(interver) &#123;</span><br><span class="line">            headB = headB.next;</span><br><span class="line">            interver--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(headA) &#123;</span><br><span class="line">        <span class="keyword">if</span> (headA == headB) &#123;</span><br><span class="line">            <span class="keyword">return</span> headA;</span><br><span class="line">        &#125;</span><br><span class="line">        headA = headA.next;</span><br><span class="line">        headB = headB.next;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getLength</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> current = head;</span><br><span class="line">    <span class="keyword">while</span>(current) &#123;</span><br><span class="line">        res++;</span><br><span class="line">        current = current.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-链表的倒数第-k-个节点"><a href="#9-链表的倒数第-k-个节点" class="headerlink" title="9. 链表的倒数第 k 个节点"></a>9. 链表的倒数第 k 个节点</h4><p>输入一个链表，输出链表中倒数第 k 个节点。</p>
+<p>使用快慢指针，让快指针先走 k 步，然后同速前进，快指针到达终点时慢指针指向倒数第 k 个节点</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findKthToTail</span>(<span class="params">head, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> fast,slow;</span><br><span class="line">    fast = slow = head;</span><br><span class="line">    <span class="keyword">while</span>(k) &#123;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">        k--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 如果此时走到头了，则说明倒数第 k 个节点就是第一个节点</span></span><br><span class="line">    <span class="keyword">if</span> (!fast) <span class="keyword">return</span> head;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(fast) &#123;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="连续数组"><a href="#连续数组" class="headerlink" title="连续数组"></a>连续数组</h4><p>给定一个二进制数组 <code>nums</code> , 找到含有相同数量的 <code>0</code> 和 <code>1</code> 的最长连续子数组，并返回该子数组的长度</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> findMaxLength = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> maxLength = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="keyword">let</span> counter = <span class="number">0</span>;</span><br><span class="line">    map.set(counter, <span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">const</span> n = nums.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">const</span> num = nums[i];</span><br><span class="line">        <span class="keyword">if</span> (num == <span class="number">1</span>) &#123;</span><br><span class="line">            counter++;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            counter--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (map.has(counter)) &#123;</span><br><span class="line">            <span class="keyword">const</span> prevIndex = map.get(counter);</span><br><span class="line">            maxLength = <span class="built_in">Math</span>.max(maxLength, i - prevIndex);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.set(counter, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLength;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/算法/解决 nSum 问题/" rel="next" title="解决nSum问题">
+                <i class="fa fa-chevron-left"></i> 解决nSum问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/算法/十大经典排序算法/" rel="prev" title="十大经典排序算法">
+                十大经典排序算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#链表系列"><span class="nav-number">1.</span> <span class="nav-text">链表系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本应用"><span class="nav-number">1.1.</span> <span class="nav-text">基本应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环类题目"><span class="nav-number">1.2.</span> <span class="nav-text">环类题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双指针"><span class="nav-number">1.3.</span> <span class="nav-text">双指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双向链表"><span class="nav-number">1.4.</span> <span class="nav-text">双向链表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.5.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-从尾到头打印链表"><span class="nav-number">1.5.1.</span> <span class="nav-text">1. 从尾到头打印链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-删除链表中的结点"><span class="nav-number">1.5.2.</span> <span class="nav-text">2. 删除链表中的结点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-反转链表"><span class="nav-number">1.5.3.</span> <span class="nav-text">3. 反转链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-复杂链表的复制"><span class="nav-number">1.5.4.</span> <span class="nav-text">4. 复杂链表的复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-环形链表"><span class="nav-number">1.5.5.</span> <span class="nav-text">5. 环形链表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-环形链表入口节点"><span class="nav-number">1.5.6.</span> <span class="nav-text">6. 环形链表入口节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-约瑟夫环"><span class="nav-number">1.5.7.</span> <span class="nav-text">7. 约瑟夫环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-两个链表的第一个公共节点"><span class="nav-number">1.5.8.</span> <span class="nav-text">8. 两个链表的第一个公共节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-链表的倒数第-k-个节点"><span class="nav-number">1.5.9.</span> <span class="nav-text">9. 链表的倒数第 k 个节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连续数组"><span class="nav-number">1.5.10.</span> <span class="nav-text">连续数组</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

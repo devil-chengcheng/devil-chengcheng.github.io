@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="vuex官方文档 背景引言1、vuex是什么vuex是一个专门为Vuejs应用程序开发的==状态管理模式==。它采用集中式存储应用的所有组件状态，并以相应规则保证状态以一种可预测的方式发生变化。chrome安装调试工具 devtools extension 2、单向数据流状态自管理应用应包括以下部分;  State：驱动应用的数据源（单向数据流） View：以声明的方式将state映射到视图（静态">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vuex笔记">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/vue/vuex/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="vuex官方文档 背景引言1、vuex是什么vuex是一个专门为Vuejs应用程序开发的==状态管理模式==。它采用集中式存储应用的所有组件状态，并以相应规则保证状态以一种可预测的方式发生变化。chrome安装调试工具 devtools extension 2、单向数据流状态自管理应用应包括以下部分;  State：驱动应用的数据源（单向数据流） View：以声明的方式将state映射到视图（静态">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3245814561,4149362989&fm=26&gp=0.jpg">
+<meta property="og:image" content="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4137621942,3154892314&fm=26&gp=0.jpg">
+<meta property="og:updated_time" content="2020-06-27T14:51:35.561Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vuex笔记">
+<meta name="twitter:description" content="vuex官方文档 背景引言1、vuex是什么vuex是一个专门为Vuejs应用程序开发的==状态管理模式==。它采用集中式存储应用的所有组件状态，并以相应规则保证状态以一种可预测的方式发生变化。chrome安装调试工具 devtools extension 2、单向数据流状态自管理应用应包括以下部分;  State：驱动应用的数据源（单向数据流） View：以声明的方式将state映射到视图（静态">
+<meta name="twitter:image" content="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3245814561,4149362989&fm=26&gp=0.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/vue/vuex/">
+
+
+
+
+
+  <title>vuex笔记 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/vue/vuex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vuex笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T17:38:14+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://vuex.vuejs.org/zh/" target="_blank" rel="noopener">vuex官方文档</a></p>
+<h2 id="背景引言"><a href="#背景引言" class="headerlink" title="背景引言"></a>背景引言</h2><h3 id="1、vuex是什么"><a href="#1、vuex是什么" class="headerlink" title="1、vuex是什么"></a>1、vuex是什么</h3><p>vuex是一个专门为Vuejs应用程序开发的==状态管理模式==。它采用集中式存储应用的所有组件状态，并以相应规则保证状态以一种可预测的方式发生变化。chrome安装调试工具 devtools extension</p>
+<h3 id="2、单向数据流"><a href="#2、单向数据流" class="headerlink" title="2、单向数据流"></a>2、单向数据流</h3><p><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3245814561,4149362989&fm=26&gp=0.jpg" alt="image"><br>状态自管理应用应包括以下部分;</p>
+<ul>
+<li>State：驱动应用的数据源（单向数据流）</li>
+<li>View：以声明的方式将state映射到视图（静态显示出来的数据源）</li>
+<li>Actions：处理用户在view上面操作而导致的状态变化（数据源变化追踪）</li>
+</ul>
+<p>一个简单的计数案例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;!-- view --&gt;</span><br><span class="line">        &lt;div&gt;&#123;&#123; count &#125;&#125;&lt;/div&gt;</span><br><span class="line">        &lt;button @click=&quot;increment&quot;&gt;increment&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    // state</span><br><span class="line">    data () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            count: 0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    // actions</span><br><span class="line">    methods: &#123;</span><br><span class="line">        increment () &#123;</span><br><span class="line">            this.count++</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、vuex解决的问题"><a href="#3、vuex解决的问题" class="headerlink" title="3、vuex解决的问题"></a>3、vuex解决的问题</h3><ul>
+<li>多个视图组件，包括父子组件、兄弟组件之间的状态共享</li>
+<li>不同视图组件的行为需要变更同一个状态</li>
+</ul>
+<h3 id="4、vuex使用场景"><a href="#4、vuex使用场景" class="headerlink" title="4、vuex使用场景"></a>4、vuex使用场景</h3><p>中大型单页面应用，需要考虑如何更好的在组件外部管理状态，简单应用不建议使用</p>
+<h3 id="5、vuex与全局变量的区别"><a href="#5、vuex与全局变量的区别" class="headerlink" title="5、vuex与全局变量的区别"></a>5、vuex与全局变量的区别</h3><ul>
+<li>响应式：vuex的状态存储是响应式的，当Vue组件从store中读取状态的时候，若store的状态发生变化，那么相应的组件也会得到高效更新。</li>
+<li>不能直接改变store：不能直接改变store的变化，改变store中状态的唯一途径是commit mutation，方便与追踪每一个状态的变化。</li>
+</ul>
+<h3 id="6、vuex核心流程"><a href="#6、vuex核心流程" class="headerlink" title="6、vuex核心流程"></a>6、vuex核心流程</h3><p><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=4137621942,3154892314&fm=26&gp=0.jpg" alt="image"><br>示意图说明：  </p>
+<ol>
+<li>Vue Components：vue组件。HTML页面上，负责接收用户操作等行为，执行dispatch方法触发对应action进行回应</li>
+<li>Dispatch：操作行为触发方法，是唯一能执行action的方法</li>
+<li>Actions：操作行为处理模块。负责处理Vue Components接收到的所有交互行为。包含同步/一步操作，支持多个同名方法，按照注册的顺序依次触发。向后台API请求的操作就在这个模块中进行，包括触发其他action以及提交mutation的操作。该模块提供了Promise的封装，以支持action的链式触发</li>
+<li>Commit：状态改变提交操作方法。对mutation进行提交，是唯一能执行mutation的方法。</li>
+<li>Mutations：状态改变操作方法。是Vuex修改state的唯一推荐方法，其他修改方式在严格模式下将会报错。该方法只能进行同步操作，且方法名只能全局唯一。操作之中会有一些hook暴露出来，以进行state的监控等</li>
+<li>State：页面状态管理容器对象。集中存储Vue components中data对象的零散数据，全局唯一，以进行统一的状态管理。页面显示所需的数据从该对象中进行读取，利用Vue的细粒度数据响应机制来进行高效的状态更新</li>
+<li>Getters：state对象读取方法。图中没有单独列出该模块，应该被包含在了render中，Vue Components通过该方法读取全局state对象</li>
+</ol>
+<p>总结说明：<br>Vue组件接收交互行为，调用dispatch方法触发action相关处理，若页面状态需要改变，则调用commit方法提交mutation修改state，通过getter获取到state新值，重新渲染Vue Component，界面随之更新。</p>
+<h2 id="入门示例"><a href="#入门示例" class="headerlink" title="入门示例"></a>入门示例</h2><h3 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、简单示例"><a href="#2、简单示例" class="headerlink" title="2、简单示例"></a>2、简单示例</h3><p>（1）src/vuex/store.js中写入以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import Vuex from &apos;vuex&apos;</span><br><span class="line"></span><br><span class="line">// 使用vuex</span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line">// 1、state: 创建初始化状态</span><br><span class="line">const state = &#123;</span><br><span class="line">    // 放置初始化状态</span><br><span class="line">    count: 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 2、mutation：创建改变状态的方法</span><br><span class="line">const mutations = &#123;</span><br><span class="line">    // 状态变更函数一般大写</span><br><span class="line">    ADD (state, n) &#123;</span><br><span class="line">        state.count += n</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 3、getters：提供外部获取state</span><br><span class="line">const getters = &#123;</span><br><span class="line">    count: function(state) &#123;</span><br><span class="line">        return state.count</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 4、actions：创建驱动方法改变mutations</span><br><span class="line">const actions = &#123;</span><br><span class="line">    // 触发mutations中相应的方法，一般小写</span><br><span class="line">    add (&#123;commit&#125;, data) &#123;</span><br><span class="line">        cmmit(&apos;ADD&apos;, data)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 5、全部注入Store中</span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">    state,</span><br><span class="line">    mutations,</span><br><span class="line">    getters,</span><br><span class="line">    actions</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 6、输出store</span><br><span class="line">export default store;</span><br></pre></td></tr></table></figure>
+
+<p>代码说明：  </p>
+<ul>
+<li>state-mutations-getters-actions-store，以上写法基本固定</li>
+<li>小型项目用上面的简单管理状态即可</li>
+</ul>
+<p>（2）src/main.js代码中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;</span><br><span class="line">import App from &apos;./App&apos;</span><br><span class="line">import router from &apos;./router&apos;</span><br><span class="line">// 引入store</span><br><span class="line">import store from &apos;./vuex/store&apos;</span><br><span class="line"></span><br><span class="line">Vue.config.productionTip = false</span><br><span class="line"></span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  router,</span><br><span class="line">  store, // 全局注入</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: &apos;&lt;App/&gt;&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>（3）src/compontent/Count.vue页面组件中代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">        &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;</span><br><span class="line">        &lt;h2&gt;&#123;&#123;count&#125;&#125;&lt;/h2&gt;</span><br><span class="line">        &lt;button @click=&quot;clickAdd&quot;&gt;新增&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    data () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            msg: &apos;Hello World&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">        // 获取state值</span><br><span class="line">        count() &#123;</span><br><span class="line">            return this.$store.state.count</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        clickAdd() &#123;</span><br><span class="line">            // 分发action中add方法</span><br><span class="line">            this.$store.dispatch(&apos;add&apos;, 1)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="state-状态对象的获取方法"><a href="#state-状态对象的获取方法" class="headerlink" title="state-状态对象的获取方法"></a>state-状态对象的获取方法</h2><h3 id="1、在组件的template中直接使用"><a href="#1、在组件的template中直接使用" class="headerlink" title="1、在组件的template中直接使用"></a>1、在组件的template中直接使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;&#123;&#123; $store.state.count &#125;&#125;&lt;/h2&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、在计算属性computed中直接赋值"><a href="#2、在计算属性computed中直接赋值" class="headerlink" title="2、在计算属性computed中直接赋值"></a>2、在计算属性computed中直接赋值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 方式1：直接获取</span><br><span class="line">computed: &#123;</span><br><span class="line">    count() &#123;</span><br><span class="line">        // this指的是main.js中的vue实例对象</span><br><span class="line">        return this.$store.state.count</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、通过mapState对象来赋值"><a href="#3、通过mapState对象来赋值" class="headerlink" title="3、通过mapState对象来赋值"></a>3、通过mapState对象来赋值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 方式2：利用mapState</span><br><span class="line">computed: mapState(&#123;</span><br><span class="line">    // es5写法</span><br><span class="line">    count: function(state) &#123;</span><br><span class="line">        return state.count</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // es6写法</span><br><span class="line">    count: state =&gt; state.count</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、通过mapState数组来赋值"><a href="#4、通过mapState数组来赋值" class="headerlink" title="4、通过mapState数组来赋值"></a>4、通过mapState数组来赋值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 方式3：数组获取</span><br><span class="line">computed: mapState([&apos;count&apos;])</span><br></pre></td></tr></table></figure>
+
+<h3 id="5、通过mapState的JSON来赋值"><a href="#5、通过mapState的JSON来赋值" class="headerlink" title="5、通过mapState的JSON来赋值"></a>5、通过mapState的JSON来赋值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 方式4：JSON获取</span><br><span class="line">computed: mapState(&#123;</span><br><span class="line">    count: &apos;count&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>注：一般4和5比较常用</p>
+<h2 id="mutations-getters-actions异步"><a href="#mutations-getters-actions异步" class="headerlink" title="mutations-getters-actions异步"></a>mutations-getters-actions异步</h2><h3 id="1、mutations（修改状态）"><a href="#1、mutations（修改状态）" class="headerlink" title="1、mutations（修改状态）"></a>1、mutations（修改状态）</h3><p>（1）template中直接使用$store.commit()触发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// template</span><br><span class="line">&lt;button @click=&quot;$store.commit(&apos;ADD&apos;)&quot;&gt;+&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// src/vuex/store.js</span><br><span class="line">const mutations = &#123;</span><br><span class="line">    // 状态变更函数</span><br><span class="line">    ADD (state) &#123;</span><br><span class="line">        state.count++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）利用mapMutations引入触发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;hello&quot;&gt;</span><br><span class="line">        &lt;h1&gt;&#123;&#123; msg &#125;&#125;&lt;/h1&gt;</span><br><span class="line">        &lt;h2&gt;&#123;&#123;count&#125;&#125;&lt;/h2&gt;</span><br><span class="line">        &lt;!-- 3、、直接调用相应的方法 --&gt;</span><br><span class="line">        &lt;button @click=&quot;ADD&quot;&gt;+&lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">// 1、引入mapMutations</span><br><span class="line">import &#123;mapState, mapMutations&#125; from &apos;vuex&apos;</span><br><span class="line">export default &#123;</span><br><span class="line">    data () &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            msg: &apos;Vuex test!&apos;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    // 通过mapState的JSON来赋值</span><br><span class="line">    computed: mapState(&#123;</span><br><span class="line">        count: &apos;count&apos;</span><br><span class="line">    &#125;),</span><br><span class="line">    // 2、methods中加入mapMutations</span><br><span class="line">    methods: mapMutations([</span><br><span class="line">        &apos;ADD&apos;</span><br><span class="line">    ])</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、getters（获取state和过滤）"><a href="#2、getters（获取state和过滤）" class="headerlink" title="2、getters（获取state和过滤）"></a>2、getters（获取state和过滤）</h3><p>（1）基本用法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const getters = &#123;</span><br><span class="line">    count: function(state) &#123;</span><br><span class="line">        return state.count + 100</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）常规获取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    // 获取getters</span><br><span class="line">    count()&#123;</span><br><span class="line">        return this.$store.getters.count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（3）mapGetters获取值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 1、引入mapMutations</span><br><span class="line">import &#123;mapState, mapMutations, mapGetters&#125; from &apos;vuex&apos;</span><br><span class="line"></span><br><span class="line">// 2、使用</span><br><span class="line">computed: &#123;</span><br><span class="line">    // 获取getters</span><br><span class="line">    ...mapGetters([&quot;count&quot;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、actions（异步状态修改）"><a href="#3、actions（异步状态修改）" class="headerlink" title="3、actions（异步状态修改）"></a>3、actions（异步状态修改）</h3><p>actions和mutations功能基本一样，不同点是，actions是异步的改变state状态，而mutations是同步改变状态。不过实际项目中一般都是通过actions改变mutations中的值。<br>(1)store.js中增加异步代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// src/vuex/store.js</span><br><span class="line">const actions =&#123;</span><br><span class="line">    // 触发mutations中相应的方法</span><br><span class="line">    add (&#123;commit&#125;) &#123;</span><br><span class="line">        // 增加异步</span><br><span class="line">        setTimeout(()=&gt;&#123;</span><br><span class="line">            commit(&apos;ADD&apos;)</span><br><span class="line">        &#125;,3000);</span><br><span class="line">        console.log(&apos;我比reduce提前执行&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）常规使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// template</span><br><span class="line">&lt;button @click=&quot;add&quot;&gt;+&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// script</span><br><span class="line">methods: &#123;</span><br><span class="line">    add() &#123;</span><br><span class="line">        //分发action</span><br><span class="line">        this.$store.dispatch(&apos;add&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（3）mapActions的使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// template</span><br><span class="line">&lt;button @click=&quot;add&quot;&gt;+&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// script</span><br><span class="line">// 引入mapActions</span><br><span class="line">import &#123;mapState, mapActions&#125; from &apos;vuex&apos;</span><br><span class="line"></span><br><span class="line">// 使用mapActions</span><br><span class="line">methods: &#123;</span><br><span class="line">    ...mapActions([&apos;add&apos;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="传递参数"><a href="#传递参数" class="headerlink" title="传递参数"></a>传递参数</h2><p>在vuex的方法调用传递参数，只需要在mutations和actions相应的地方加上参数，然后调用的时候传入即可。<br>（1）src/vuex/store.js中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// actions中传递参数</span><br><span class="line">const mutations = &#123;</span><br><span class="line">    ADD (state, n) &#123;</span><br><span class="line">        state.count += n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// actions中传递参数</span><br><span class="line">const actions =&#123;</span><br><span class="line">    // 触发mutations中相应的方法</span><br><span class="line">    add (&#123;commit&#125;, n) &#123;</span><br><span class="line">        // 增加异步</span><br><span class="line">        setTimeout(()=&gt;&#123;</span><br><span class="line">            commit(&apos;ADD&apos;, n);</span><br><span class="line">        &#125;,3000);</span><br><span class="line">        console.log(&apos;我比reduce提前执行&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）页面组件常规调用传递</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// template</span><br><span class="line">&lt;button @click=&quot;add&quot;&gt;+&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// script</span><br><span class="line">methods: &#123;</span><br><span class="line">    add() &#123;</span><br><span class="line">        // 分发action</span><br><span class="line">        this.$store.dispatch(&apos;add&apos;, 99);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（3）页面组件使用mapActions调用传递</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// template</span><br><span class="line">&lt;button @click=&quot;add(99)&quot;&gt;+&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">// script</span><br><span class="line">methods: &#123;</span><br><span class="line">    ...mapActions([&apos;add&apos;])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="module-模块组"><a href="#module-模块组" class="headerlink" title="module-模块组"></a>module-模块组</h2><p>当应用非常复杂，状态非常多的时候，需要将store分割成模块（module）。每个模块拥有自己的state、mutation、action、getter、甚至是嵌套子模块，从上至下进行同样方式的分割。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 模块A</span><br><span class="line">const moduleA = &#123;</span><br><span class="line">  state: &#123; ... &#125;,</span><br><span class="line">  mutations: &#123; ... &#125;,</span><br><span class="line">  actions: &#123; ... &#125;,</span><br><span class="line">  getters: &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 模块B</span><br><span class="line">const moduleB = &#123;</span><br><span class="line">  state: &#123; ... &#125;,</span><br><span class="line">  mutations: &#123; ... &#125;,</span><br><span class="line">  actions: &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 组装</span><br><span class="line">const store = new Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    a: moduleA,</span><br><span class="line">    b: moduleB</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">// 取值</span><br><span class="line">store.state.a // -&gt; moduleA 的状态</span><br><span class="line">store.state.b // -&gt; moduleB 的状态</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/vue/vue-router/" rel="next" title="vue-router">
+                <i class="fa fa-chevron-left"></i> vue-router
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/vue/vue一些常用选项/" rel="prev" title="vue一些常用选项">
+                vue一些常用选项 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景引言"><span class="nav-number">1.</span> <span class="nav-text">背景引言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、vuex是什么"><span class="nav-number">1.1.</span> <span class="nav-text">1、vuex是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、单向数据流"><span class="nav-number">1.2.</span> <span class="nav-text">2、单向数据流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、vuex解决的问题"><span class="nav-number">1.3.</span> <span class="nav-text">3、vuex解决的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、vuex使用场景"><span class="nav-number">1.4.</span> <span class="nav-text">4、vuex使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、vuex与全局变量的区别"><span class="nav-number">1.5.</span> <span class="nav-text">5、vuex与全局变量的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、vuex核心流程"><span class="nav-number">1.6.</span> <span class="nav-text">6、vuex核心流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#入门示例"><span class="nav-number">2.</span> <span class="nav-text">入门示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、安装"><span class="nav-number">2.1.</span> <span class="nav-text">1、安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、简单示例"><span class="nav-number">2.2.</span> <span class="nav-text">2、简单示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#state-状态对象的获取方法"><span class="nav-number">3.</span> <span class="nav-text">state-状态对象的获取方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、在组件的template中直接使用"><span class="nav-number">3.1.</span> <span class="nav-text">1、在组件的template中直接使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、在计算属性computed中直接赋值"><span class="nav-number">3.2.</span> <span class="nav-text">2、在计算属性computed中直接赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、通过mapState对象来赋值"><span class="nav-number">3.3.</span> <span class="nav-text">3、通过mapState对象来赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、通过mapState数组来赋值"><span class="nav-number">3.4.</span> <span class="nav-text">4、通过mapState数组来赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、通过mapState的JSON来赋值"><span class="nav-number">3.5.</span> <span class="nav-text">5、通过mapState的JSON来赋值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mutations-getters-actions异步"><span class="nav-number">4.</span> <span class="nav-text">mutations-getters-actions异步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、mutations（修改状态）"><span class="nav-number">4.1.</span> <span class="nav-text">1、mutations（修改状态）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、getters（获取state和过滤）"><span class="nav-number">4.2.</span> <span class="nav-text">2、getters（获取state和过滤）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、actions（异步状态修改）"><span class="nav-number">4.3.</span> <span class="nav-text">3、actions（异步状态修改）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传递参数"><span class="nav-number">5.</span> <span class="nav-text">传递参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#module-模块组"><span class="nav-number">6.</span> <span class="nav-text">module-模块组</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

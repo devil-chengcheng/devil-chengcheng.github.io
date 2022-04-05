@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="二叉树系列树是用来模拟具有树状结构性质的数据集合。根据性质可分为很多种类，只要了解二叉树这种结构就足够了，它是树中最简单、应用最广泛的种类。 二叉树遍历重点中的重点，同时掌握递归和非递归版本。递归版本很容易，但真正考验基本功的是非递归版本  前序遍历 中序遍历 后序遍历  递归遍历框架： 12345678void traverse(TreeNode root) &amp;#123;    if (root">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树概览">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/算法/二叉树-概览/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="二叉树系列树是用来模拟具有树状结构性质的数据集合。根据性质可分为很多种类，只要了解二叉树这种结构就足够了，它是树中最简单、应用最广泛的种类。 二叉树遍历重点中的重点，同时掌握递归和非递归版本。递归版本很容易，但真正考验基本功的是非递归版本  前序遍历 中序遍历 后序遍历  递归遍历框架： 12345678void traverse(TreeNode root) &amp;#123;    if (root">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://uploadfiles.nowcoder.com/files/20201028/2659167_1603849216965_77299a6a0651c7942af18b564e9edc04.png">
+<meta property="og:updated_time" content="2022-04-05T14:27:24.643Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二叉树概览">
+<meta name="twitter:description" content="二叉树系列树是用来模拟具有树状结构性质的数据集合。根据性质可分为很多种类，只要了解二叉树这种结构就足够了，它是树中最简单、应用最广泛的种类。 二叉树遍历重点中的重点，同时掌握递归和非递归版本。递归版本很容易，但真正考验基本功的是非递归版本  前序遍历 中序遍历 后序遍历  递归遍历框架： 12345678void traverse(TreeNode root) &amp;#123;    if (root">
+<meta name="twitter:image" content="https://uploadfiles.nowcoder.com/files/20201028/2659167_1603849216965_77299a6a0651c7942af18b564e9edc04.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/算法/二叉树-概览/">
+
+
+
+
+
+  <title>二叉树概览 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/算法/二叉树-概览/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">二叉树概览</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T22:23:39+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="二叉树系列"><a href="#二叉树系列" class="headerlink" title="二叉树系列"></a>二叉树系列</h2><p>树是用来模拟具有树状结构性质的数据集合。根据性质可分为很多种类，只要了解二叉树这种结构就足够了，它是树中最简单、应用最广泛的种类。</p>
+<h3 id="二叉树遍历"><a href="#二叉树遍历" class="headerlink" title="二叉树遍历"></a>二叉树遍历</h3><p>重点中的重点，同时掌握递归和非递归版本。递归版本很容易，但真正考验基本功的是非递归版本</p>
+<ul>
+<li>前序遍历</li>
+<li>中序遍历</li>
+<li>后序遍历</li>
+</ul>
+<p>递归遍历框架：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">traverse</span><span class="params">(TreeNode root)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">// 前序遍历代码</span></span><br><span class="line">    traverse(root.left);</span><br><span class="line">    <span class="comment">// 中序遍历代码</span></span><br><span class="line">    traverse(root.right);</span><br><span class="line">    <span class="comment">// 后序遍历代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="前序遍历代码"><a href="#前序遍历代码" class="headerlink" title="前序遍历代码"></a>前序遍历代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> preorderTraversal = <span class="function">(<span class="params">root, array=[]</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> array;</span><br><span class="line">    array.push(root.val);</span><br><span class="line">    preorderTraversal(root.left);</span><br><span class="line">    preorderTraversal(root.right);</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>非递归实现：</p>
+<ul>
+<li><p>取根节点为目标节点，开始遍历</p>
+</li>
+<li><p>访问目标节点</p>
+</li>
+<li><p>左孩子入栈，直至左孩子为空的节点</p>
+</li>
+<li><p>节点出栈，以右孩子为目标节点，再次执行2，3，4</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> preorderTraversal = <span class="function"><span class="params">root</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line">    <span class="keyword">const</span> stack = [];</span><br><span class="line">    <span class="keyword">let</span> current = root;</span><br><span class="line">    <span class="keyword">while</span>(current || stack.length&gt;<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(current) &#123;</span><br><span class="line">            result.push(current.val);</span><br><span class="line">            stack.push(current);</span><br><span class="line">            current = current.left;</span><br><span class="line">        &#125;</span><br><span class="line">        current = stack.pop();</span><br><span class="line">        current = current.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="中序遍历代码"><a href="#中序遍历代码" class="headerlink" title="中序遍历代码"></a>中序遍历代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> inorderTraversal = (root, array=[]) &#123;</span><br><span class="line">    <span class="keyword">if</span> (root) &#123;</span><br><span class="line">        inorderTraversal(root.left, array);</span><br><span class="line">        array.push(root.val);</span><br><span class="line">        inorderTraversal(root.right, array);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>非递归实现：</p>
+<ul>
+<li><p>取根节点为目标节点，开始遍历</p>
+</li>
+<li><p>左孩子入栈，直至左孩子为空</p>
+</li>
+<li><p>节点出栈，访问该节点</p>
+</li>
+<li><p>以右孩子为目标节点，再次执行 2，3，4</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> inorderTraversal = <span class="function"><span class="params">root</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line">    <span class="keyword">const</span> stack = [];</span><br><span class="line">    <span class="keyword">let</span> current = root;</span><br><span class="line">    <span class="keyword">while</span>(current || stack.length&gt;<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(current) &#123;</span><br><span class="line">            stack.push(current);</span><br><span class="line">            current = current.left;</span><br><span class="line">        &#125;</span><br><span class="line">        current = stack.pop();</span><br><span class="line">        result.push(current.val);</span><br><span class="line">        current = current.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h4 id="后序遍历代码"><a href="#后序遍历代码" class="headerlink" title="后序遍历代码"></a>后序遍历代码</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> postorderTraversal = (root, array=[]) &#123;</span><br><span class="line">    <span class="keyword">if</span> (root) &#123;</span><br><span class="line">        postorderTraversal(root.left, array);</span><br><span class="line">        postorderTraversal(root.right, array);</span><br><span class="line">        array.push(root.val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>非递归遍历：</p>
+<ul>
+<li><p>以根节点为目标节点，开始遍历</p>
+</li>
+<li><p>左孩子入栈，直至左孩子为空的节点</p>
+</li>
+<li><p>栈顶节点的右孩子为空或被访问过，则节点出栈并访问，将节点标记为已访问</p>
+</li>
+<li><p>栈节点的右孩子不为空且未被访问，以右孩子为目标节点再执行2，3，4</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> postorderTraversal = <span class="function"><span class="params">root</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line">    <span class="keyword">const</span> stack = [];</span><br><span class="line">    <span class="keyword">let</span> last = <span class="literal">null</span>; <span class="comment">// 标记上一个访问的节点</span></span><br><span class="line">    <span class="keyword">let</span> current = root;</span><br><span class="line">    <span class="keyword">while</span>(current || stack.length&gt;<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span>(current) &#123;</span><br><span class="line">            stack.push(current);</span><br><span class="line">            current = current.left;</span><br><span class="line">        &#125;</span><br><span class="line">        current = stack[stack.length<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">if</span> (!current.right || current.right == last) &#123;</span><br><span class="line">            current = stack.pop();</span><br><span class="line">            result.push(current.val);</span><br><span class="line">            last = current;</span><br><span class="line">            current = <span class="literal">null</span>; <span class="comment">// 继续弹栈</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            current = current.right;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h4><p>给一个二叉树，返回其按 <strong>层序遍历</strong> 得到的节点值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> leverOrder = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> res = [];</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> queue = [];</span><br><span class="line">    queue.push(root);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(queue.length !== <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> currentLevelLength = queue.length;</span><br><span class="line">        <span class="keyword">const</span> level = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;currentLevelLength; i++) &#123;</span><br><span class="line">            <span class="keyword">const</span> node = q.shift();</span><br><span class="line">            level.push(node.val);</span><br><span class="line">            <span class="keyword">if</span>(node.left) queue.push(node.left);</span><br><span class="line">            <span class="keyword">if</span>(node.right) queue.push(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">        res.push(level.slice())</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> levelOrder = <span class="function"><span class="keyword">function</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> ret = [];</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> q = [];</span><br><span class="line">    q.push(root);</span><br><span class="line">    <span class="keyword">while</span> (q.length !== <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> currentLevelSize = q.length;</span><br><span class="line">        ret.push([]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= currentLevelSize; ++i) &#123;</span><br><span class="line">            <span class="keyword">const</span> node = q.shift();</span><br><span class="line">            ret[ret.length - <span class="number">1</span>].push(node.val);</span><br><span class="line">            <span class="keyword">if</span> (node.left) q.push(node.left);</span><br><span class="line">            <span class="keyword">if</span> (node.right) q.push(node.right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h4><p>根据前序遍历和中序遍历或者中序遍历和后序遍历的特点重建二叉树</p>
+<p><strong>思路：</strong></p>
+<ul>
+<li>前序遍历：根节点 + 左子树前序遍历 + 右子树前序遍历</li>
+<li>中序遍历： 左子树中序遍历 + 根节点 + 右子树中序遍历</li>
+<li>后序遍历：左子树后序遍历 + 右子树后序遍历 + 根节点</li>
+</ul>
+<p>根据以上规律，通过前序遍历和中序遍历构造二叉树：</p>
+<ul>
+<li>前序遍历找到根节点 root</li>
+<li>找到 root 在中序遍历中的位置，从而得到左子树和右子树长度</li>
+<li>截取左子树的中序遍历、右子树的中序遍历</li>
+<li>截取左子树的前序遍历、右子树的前序遍历</li>
+<li>递归重建二叉树</li>
+</ul>
+<p>根据前序和中序构建二叉树</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buildBinaryTree = <span class="function">(<span class="params">pre, vin</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (pre === <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (pre === <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">new</span> TreeNode(pre[<span class="number">0</span>]);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> index;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i=<span class="number">0</span>; i&lt;vin.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (pre[<span class="number">0</span>] === vin[i]) &#123;</span><br><span class="line">            index = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> pre_left = pre.slice(<span class="number">1</span>, index+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> pre_right = pre.slice(index+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> in_left = vin.slice(<span class="number">0</span>, index);</span><br><span class="line">    <span class="keyword">const</span> in_right = vin.slice(index+<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> node = <span class="keyword">new</span> TreeNode(pre[<span class="number">0</span>]);</span><br><span class="line">    </span><br><span class="line">    node.left = buildBinaryTree(pre_left, in_left);</span><br><span class="line">    node.right = buildBinaryTree(pre_right, in_right);</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二叉树的对称性"><a href="#二叉树的对称性" class="headerlink" title="二叉树的对称性"></a>二叉树的对称性</h3><h4 id="对称的二叉树"><a href="#对称的二叉树" class="headerlink" title="对称的二叉树"></a>对称的二叉树</h4><p>实现一个函数判断二叉树是不是对称的。</p>
+<p>借助辅助函数，将根结点传递</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isSymmetrical = <span class="function"><span class="params">root</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> isSymmetricalTree(root, root);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> isSymmetricalTree = <span class="function">(<span class="params">node1, node2</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!node1 &amp;&amp; !node2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!node1 || !node2) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (node1.val != node2.val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> isSymmetricalTree(node1.left, node2.right) &amp;&amp; isSymmetricalTree(node1.right, node2.left);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="二叉树镜像"><a href="#二叉树镜像" class="headerlink" title="二叉树镜像"></a>二叉树镜像</h4><p>操作给定的二叉树，将其变换为源二叉树的镜像</p>
+<p>递归交换所有节点左右节点的位置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mirror = <span class="function"><span class="params">root</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (root) &#123;</span><br><span class="line">        <span class="keyword">const</span> temp = root.left;</span><br><span class="line">        root.left = root.right;</span><br><span class="line">        root.right = temp;</span><br><span class="line">        mirror(root.left);</span><br><span class="line">        mirror(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h3><p>二叉搜索树是特殊的二叉树，考察二叉搜索树的题目一般都是考察二叉搜索树的特性。</p>
+<ul>
+<li>任意节点的左子树不为空，则它的左子树上所有的结点的值均小于它的根结点的值。</li>
+<li>任意节点的右子树不为空，则它的右子树上所有的结点的值均大于它的根节点的值。</li>
+<li>任意结点的左右子树也是一颗二叉搜索树。</li>
+</ul>
+<p>二叉搜索树的中序遍历是一个排序后的结点</p>
+<h4 id="二叉搜索树的第-k-个结点"><a href="#二叉搜索树的第-k-个结点" class="headerlink" title="二叉搜索树的第 k 个结点"></a>二叉搜索树的第 k 个结点</h4><p>给定一颗二叉搜索树，请找出其中第 k 小的结点。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">let</span> result;</span><br><span class="line"><span class="keyword">const</span> kthNode = <span class="function">(<span class="params">root, k</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    kthNode(root.left, k);</span><br><span class="line">    count++;</span><br><span class="line">    <span class="keyword">if</span> (count === k) &#123;</span><br><span class="line">        result = root.val;</span><br><span class="line">    &#125;</span><br><span class="line">    kthNode(root.right, k);</span><br><span class="line">    <span class="keyword">return</span> resultl</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二叉树的深度"><a href="#二叉树的深度" class="headerlink" title="二叉树的深度"></a>二叉树的深度</h3><p>二叉树的深度为根节点到最远叶子结点的最长路径上的结点数。</p>
+<p><strong>平衡二叉树：左右子树深度之差大于1</strong></p>
+<h4 id="二叉树的最大深度"><a href="#二叉树的最大深度" class="headerlink" title="二叉树的最大深度"></a>二叉树的最大深度</h4><p>最大深度就是从根节点到最远叶子结点的最长路径上的结点数量。</p>
+<p>思路：深度优先遍历 + 分治；<strong>一颗二叉树的最大深度等于左子树深度和右子树深度最大值 + 1</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> treeDepth = <span class="function"><span class="params">root</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max(treeDepth(root.left), treeDepth(root.right)) + <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="二叉树的最小深度"><a href="#二叉树的最小深度" class="headerlink" title="二叉树的最小深度"></a>二叉树的最小深度</h4><p>最小深度是从根节点到最近叶子节点的最短路径上的节点</p>
+<p>思路：</p>
+<ul>
+<li>左右子树都不为空：左子树深度和右子树最小深度的最小值 + 1</li>
+<li>左树为空：右子树最小深度的最小值 + 1</li>
+<li>右树为空：左子树最小深度的最小值 + 1</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> minDepth = <span class="function"><span class="params">root</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (!root.left) <span class="keyword">return</span> <span class="number">1</span> + minDepth(root.right);</span><br><span class="line">    <span class="keyword">if</span> (!root.right) <span class="keyword">return</span> <span class="number">1</span> + minDepth(root.left);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.min(minDepth(root.left), minDepth(root.right))+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="平衡二叉树"><a href="#平衡二叉树" class="headerlink" title="平衡二叉树"></a>平衡二叉树</h4><p>输入一颗二叉树，判断该二叉树是否是平衡二叉树</p>
+<p><strong>平衡二叉树的每个子树的深度之差不超过1</strong></p>
+<p>思路：</p>
+<p>后序遍历二叉树，在遍历二叉树每个节点前都会遍历其左右子树。比较左右子树的深度，若差值大于1则返回一个标记 -1，表示当前子树不平衡。</p>
+<p>左右子树有一个不是平衡的，或左右子树差值大于1，则整棵树不平衡</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isBalanced = <span class="function"><span class="params">root</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.abs(height(root.left) - height(root.right)) &lt;= <span class="number">1</span> &amp;&amp; isBalanced(root.left) &amp;&amp; isBalanced(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> height = <span class="function"><span class="params">root</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        reutrn <span class="built_in">Math</span>.max(height(root.left), height(root.right)) +<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二叉树中和为某一值的路径"><a href="#二叉树中和为某一值的路径" class="headerlink" title="二叉树中和为某一值的路径"></a>二叉树中和为某一值的路径</h3><p>输入一颗二叉树的根节点和一个整数，打印出二叉树中结点值得和为输入整数的所有路径。路径定义为从树的根节点开始往下一直到叶节点所经过的结点形成一条路径。</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>套用回溯算法的思路</p>
+<p>设定一个结果数组 result 来存储所有符合条件的路径</p>
+<p>设定一个栈 stack 来存储当前路径中的结点</p>
+<p>设定一个和 sum 来标识当前路径之和</p>
+<ul>
+<li>从根节点开始深度优先遍历，每经过一个节点，将节点入栈</li>
+<li>到达叶子节点，且当前路径的和等于目标值，则找到一个可行的解决方案，将其加入到结果数组中</li>
+<li>遍历到二叉树的某个节点时有 2 个可能的选项，选择前往左子树或右子树</li>
+<li>若存在左子树，继续向左子树递归</li>
+<li>若存在右子树，继续向右子树递归</li>
+<li>若上述条件均不满足，或已经遍历过，将当前节点出栈，向上回溯</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindPath</span>(<span class="params">root, data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = [];</span><br><span class="line">    <span class="keyword">if</span> (root) &#123;</span><br><span class="line">        FindPathCore(root, data, [], <span class="number">0</span>, result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindPathCore</span>(<span class="params">node, data, stack, sum, result</span>) </span>&#123;</span><br><span class="line">    stack.push(node.val);</span><br><span class="line">    sum += node.val;</span><br><span class="line">    <span class="keyword">if</span>(!node.left &amp;&amp; !node.right &amp;&amp; sum === data) &#123;</span><br><span class="line">        result.push(stack.slice());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(node.left) &#123;</span><br><span class="line">        FindPathCore(node.left, data, stack, sum, result);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(node.right) &#123;</span><br><span class="line">        FindPathCore(node.right, data, stack, sum, result);</span><br><span class="line">    &#125;</span><br><span class="line">    stack.pop()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二叉搜索树与双向链表"><a href="#二叉搜索树与双向链表" class="headerlink" title="二叉搜索树与双向链表"></a>二叉搜索树与双向链表</h3><p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。</p>
+<h4 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h4><p>二叉搜索树的中序遍历即排序后的序列</p>
+<ul>
+<li>递归左子树，找到左子树的最后一个节点，根节点左侧连接到左子树的最后一个节点。</li>
+<li>当前节点变为已经转换完成的链表的最后一个节点</li>
+<li>递归右子树，找到当前树的最后一个节点</li>
+<li>回溯到上一层，进行链接</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Convert</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ConvertCore(root);</span><br><span class="line">    <span class="keyword">while</span>(root.left) &#123;</span><br><span class="line">        root = root.left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ConvertCore</span>(<span class="params">node, last</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node.left) &#123;</span><br><span class="line">        last = ConvertCore(node.left, last);</span><br><span class="line">    &#125;</span><br><span class="line">    node.left = last;</span><br><span class="line">    <span class="keyword">if</span> (last) &#123;</span><br><span class="line">        last.right = node;</span><br><span class="line">    &#125;</span><br><span class="line">    last = node;</span><br><span class="line">    <span class="keyword">if</span> (node.right) &#123;</span><br><span class="line">        last = ConvertCore(node.right, last);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> last;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Java 代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    Node head, pre;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Node <span class="title">treeToDoublyList</span><span class="params">(Node root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(root);</span><br><span class="line">        head.left = pre;</span><br><span class="line">        pre.right = head;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line">        dfs(root.left);</span><br><span class="line">        <span class="keyword">if</span> (pre == <span class="keyword">null</span>) &#123;</span><br><span class="line">            head = root;</span><br><span class="line">            pre = head;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            pre.right = root;</span><br><span class="line">            root.left = pre;</span><br><span class="line">            pre = root;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(root.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="序列化二叉树"><a href="#序列化二叉树" class="headerlink" title="序列化二叉树"></a>序列化二叉树</h3><p>实现两个函数，分别实现序列化和反序列化二叉树</p>
+<h4 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h4><ul>
+<li>若一棵二叉树是不完全的，至少需要两个遍历才能将其重建。但是这种方式有一定的局限性，比如二叉树中不能出现重复节点。</li>
+<li>如果二叉树是一棵完全二叉树，只需要知道前序遍历即可将它重建</li>
+<li>在序列化二叉树时，可以将空节点使用特殊符号存储起来，这样就可以模拟一棵完全二叉树的前序遍历</li>
+<li>在重建二叉树时，当遇到特殊符号当空节点进行处理</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Serialize</span>(<span class="params">root, arr = []</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) &#123;</span><br><span class="line">        arr.push(<span class="string">'#'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="keyword">else</span> &#123;</span><br><span class="line">         arr.push(root.val);</span><br><span class="line">         Serialize(root.left);</span><br><span class="line">         Serialize(root.right);</span><br><span class="line">     &#125;</span><br><span class="line">    <span class="keyword">return</span> arr.join(<span class="string">','</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Deserialize</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!s) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> deserialize(s.split(<span class="string">','</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deserialize</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> node = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">const</span> current = arr.shift();</span><br><span class="line">    <span class="keyword">if</span> (current !== <span class="string">'#'</span>) &#123;</span><br><span class="line">        node = &#123; <span class="attr">val</span>: current &#125;;</span><br><span class="line">        node.left = deserialize(arr);</span><br><span class="line">        node.right = deserialize(arr);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二叉树的下一个节点"><a href="#二叉树的下一个节点" class="headerlink" title="二叉树的下一个节点"></a>二叉树的下一个节点</h3><p>给定一个二叉树和其中的一个结点，找出中序遍历的下一个结点并返回。注意，树中的结点不仅包含左右子节点，同时包含指向父节点的指针。</p>
+<h4 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h4><ul>
+<li>右节点不为空：去右节点的最左侧节点</li>
+<li>右节点为空：如果节点是父节点的左节点，取父节点</li>
+<li>右节点为空：如果节点是父节点的右节点，父节点已经被遍历过，再往上层寻找…</li>
+<li>左节点一定在当前节点之前被遍历过</li>
+</ul>
+<p>如下图的二叉树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    A</span><br><span class="line">   / \</span><br><span class="line">  B   E</span><br><span class="line"> / \   \</span><br><span class="line">C   D   F</span><br></pre></td></tr></table></figure>
+
+<p>中序遍历：<code>CBEDAEF</code></p>
+<ul>
+<li>B：右节点不为空，下一个节点为右节点 D</li>
+<li>C：右节点为空，C 是父节点的左节点，取父节点 B</li>
+<li>D：右节点为空，D 是父节点的右节点，再往上层分析，B 是其父节点的左节点，取 B 的父节点 A</li>
+<li>F：右节点为空，F 是父节点的右节点，没有符合条件的节点，F 为遍历的最后一个节点，返回 null</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> flag = <span class="literal">false</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNext</span>(<span class="params">root, node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    getNext(root.left);</span><br><span class="line">    <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root.val == node.val) &#123;</span><br><span class="line">        flag = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    getNext(root.right);</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNext</span>(<span class="params">root</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!root) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (root.right) &#123;</span><br><span class="line">        root = root.right;</span><br><span class="line">        <span class="keyword">while</span>(root.left) &#123;</span><br><span class="line">            root = root.left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">while</span>(root) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!root.next) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (root == root.next.left) &#123;</span><br><span class="line">                <span class="keyword">return</span> root.next;</span><br><span class="line">            &#125;</span><br><span class="line">            root = root.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="树的子结构"><a href="#树的子结构" class="headerlink" title="树的子结构"></a>树的子结构</h3><p>输入两棵二叉树 A、B，判断 B 是不是 A 的子结构（空树不是任意一个树的子结构）</p>
+<h4 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h4><p>首先找到 A 树中和 B 树根节点相同的节点。从此节点开始，从此节点开始递归 AB 树比较是否有不同节点</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">HasSubtree</span>(<span class="params">root1, root2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (root1 &amp;&amp; root2) &#123;</span><br><span class="line">        <span class="keyword">if</span> (root1.val === root2.val) &#123;</span><br><span class="line">            result = compare(root1, root2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!result) &#123;</span><br><span class="line">            result = HasSubtree(root1.left, root2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!result) &#123;</span><br><span class="line">            result = HasSubtree(root1.right, root2);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compare</span>(<span class="params">root1, root2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (root2 === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root1 === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (root1.val !== root2.val) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> compare(root1.left, root2.left) &amp;&amp; compare(root1.right, root2.right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="二叉树中寻找两个节点的最近公共祖先节点"><a href="#二叉树中寻找两个节点的最近公共祖先节点" class="headerlink" title="二叉树中寻找两个节点的最近公共祖先节点"></a>二叉树中寻找两个节点的最近公共祖先节点</h3><p>利用递归来做</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> lowestCommonAncestor = (root, v1, v2) &#123;</span><br><span class="line">    <span class="keyword">if</span>(!root || root.val ==== v1 || root.val === v2) &#123;</span><br><span class="line">        <span class="keyword">return</span> root;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> left = lowestCommonAncestor(root.left, v1, v2);</span><br><span class="line">    <span class="keyword">const</span> right = lowestCommonAncestor(root.right, v1, v2);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!left) &#123;</span><br><span class="line">        <span class="keyword">return</span> right;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(!right) &#123;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://uploadfiles.nowcoder.com/files/20201028/2659167_1603849216965_77299a6a0651c7942af18b564e9edc04.png" alt="img"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/算法/动态规划之01背包问题/" rel="next" title="01背包问题">
+                <i class="fa fa-chevron-left"></i> 01背包问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/算法/二叉树基本操作/" rel="prev" title="二叉树基本操作">
+                二叉树基本操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树系列"><span class="nav-number">1.</span> <span class="nav-text">二叉树系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树遍历"><span class="nav-number">1.1.</span> <span class="nav-text">二叉树遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前序遍历代码"><span class="nav-number">1.1.1.</span> <span class="nav-text">前序遍历代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中序遍历代码"><span class="nav-number">1.1.2.</span> <span class="nav-text">中序遍历代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后序遍历代码"><span class="nav-number">1.1.3.</span> <span class="nav-text">后序遍历代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#层序遍历"><span class="nav-number">1.1.4.</span> <span class="nav-text">层序遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重建二叉树"><span class="nav-number">1.1.5.</span> <span class="nav-text">重建二叉树</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的对称性"><span class="nav-number">1.2.</span> <span class="nav-text">二叉树的对称性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对称的二叉树"><span class="nav-number">1.2.1.</span> <span class="nav-text">对称的二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树镜像"><span class="nav-number">1.2.2.</span> <span class="nav-text">二叉树镜像</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉搜索树"><span class="nav-number">1.3.</span> <span class="nav-text">二叉搜索树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉搜索树的第-k-个结点"><span class="nav-number">1.3.1.</span> <span class="nav-text">二叉搜索树的第 k 个结点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的深度"><span class="nav-number">1.4.</span> <span class="nav-text">二叉树的深度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树的最大深度"><span class="nav-number">1.4.1.</span> <span class="nav-text">二叉树的最大深度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树的最小深度"><span class="nav-number">1.4.2.</span> <span class="nav-text">二叉树的最小深度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#平衡二叉树"><span class="nav-number">1.4.3.</span> <span class="nav-text">平衡二叉树</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树中和为某一值的路径"><span class="nav-number">1.5.</span> <span class="nav-text">二叉树中和为某一值的路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路"><span class="nav-number">1.5.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉搜索树与双向链表"><span class="nav-number">1.6.</span> <span class="nav-text">二叉搜索树与双向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路-1"><span class="nav-number">1.6.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#序列化二叉树"><span class="nav-number">1.7.</span> <span class="nav-text">序列化二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路-2"><span class="nav-number">1.7.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的下一个节点"><span class="nav-number">1.8.</span> <span class="nav-text">二叉树的下一个节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路-3"><span class="nav-number">1.8.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树的子结构"><span class="nav-number">1.9.</span> <span class="nav-text">树的子结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路-4"><span class="nav-number">1.9.1.</span> <span class="nav-text">思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树中寻找两个节点的最近公共祖先节点"><span class="nav-number">1.10.</span> <span class="nav-text">二叉树中寻找两个节点的最近公共祖先节点</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

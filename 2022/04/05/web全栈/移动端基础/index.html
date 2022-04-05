@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="移动端开发：  移动端布局 touch 库 响应式  移动端适配 viewport：可视区最早手机要照顾PC端  盒模型box-sizing普通盒子.width = width + padding + border盒模型:盒子总的大小不变，不再向外部扩展，仅内部 1box-sizing: border-box;  flex-弹性盒模型    具备border-box的能力 对border、padd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动端基础">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/web全栈/移动端基础/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="移动端开发：  移动端布局 touch 库 响应式  移动端适配 viewport：可视区最早手机要照顾PC端  盒模型box-sizing普通盒子.width = width + padding + border盒模型:盒子总的大小不变，不再向外部扩展，仅内部 1box-sizing: border-box;  flex-弹性盒模型    具备border-box的能力 对border、padd">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-09-23T15:29:38.570Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动端基础">
+<meta name="twitter:description" content="移动端开发：  移动端布局 touch 库 响应式  移动端适配 viewport：可视区最早手机要照顾PC端  盒模型box-sizing普通盒子.width = width + padding + border盒模型:盒子总的大小不变，不再向外部扩展，仅内部 1box-sizing: border-box;  flex-弹性盒模型    具备border-box的能力 对border、padd">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/web全栈/移动端基础/">
+
+
+
+
+
+  <title>移动端基础 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/web全栈/移动端基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">移动端基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T17:38:14+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web全栈/" itemprop="url" rel="index">
+                    <span itemprop="name">web全栈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>移动端开发：</p>
+<ol>
+<li>移动端布局</li>
+<li>touch</li>
+<li>库</li>
+<li>响应式</li>
+</ol>
+<h4 id="移动端适配"><a href="#移动端适配" class="headerlink" title="移动端适配"></a>移动端适配</h4><ol>
+<li><p>viewport：可视区<br>最早手机要照顾PC端</p>
+</li>
+<li><p>盒模型box-sizing<br>普通盒子.width = width + padding + border<br>盒模型:盒子总的大小不变，不再向外部扩展，仅内部</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">box-sizing: border-box;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>flex-弹性盒模型  </p>
+<ul>
+<li>具备border-box的能力</li>
+<li>对border、padding和margin都好用</li>
+<li>跟max-width、min-width配合使用</li>
+</ul>
+</li>
+<li><p>rem</p>
+<ul>
+<li>em：相对单位，相对自身字体大小，配合字体大小使用</li>
+<li>rem：相对单位，相对root字体大小<br>相对于html的font-zize。<br>总结：在不同的屏幕尺寸下，只需调整HTML元素的font-size，方便、性能高</li>
+</ul>
+</li>
+</ol>
+<h4 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h4><p>所有DOM3事件都应该绑定<br>touch单点事件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> oBox = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'box'</span>)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">  oBox.addEventListener(<span class="string">'touchstart'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(oBox.offsetLeft, <span class="string">'offset'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(ev.targetTouches[<span class="number">0</span>].clientX);</span><br><span class="line">    <span class="keyword">let</span> disX = ev.targetTouches[<span class="number">0</span>].clientX - oBox.offsetLeft;</span><br><span class="line">    <span class="keyword">let</span> disY = ev.targetTouches[<span class="number">0</span>].clientY - oBox.offsetTop;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// oBox.addEventListener('touchmove', function(ev) &#123;</span></span><br><span class="line">    <span class="comment">//   oBox.style.left = ev.targetTouches[0].clientX - disX +'px';</span></span><br><span class="line">    <span class="comment">//   oBox.style.top = ev.targetTouches[0].clientY - disY + 'px';</span></span><br><span class="line">    <span class="comment">// &#125;, false)</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fnMove</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">      oBox.style.left = ev.targetTouches[<span class="number">0</span>].clientX - disX + <span class="string">'px'</span>;</span><br><span class="line">      oBox.style.top = ev.targetTouches[<span class="number">0</span>].clientY - disY + <span class="string">'px'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fnEnd</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">      oBox.removeEventListener(<span class="string">'touchmove'</span>, fnMove, <span class="literal">false</span>);</span><br><span class="line">      oBox.removeEventListener(<span class="string">'touchend'</span>, fnEnd, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    oBox.addEventListener(<span class="string">'touchmove'</span>, fnMove, <span class="literal">false</span>);</span><br><span class="line">    oBox.addEventListener(<span class="string">'touchend'</span>, fnEnd, <span class="literal">false</span>);</span><br><span class="line">  &#125;, <span class="literal">false</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方向锁定：<br>跟按下的位置进行比较，如果横向移动超过5px，锁定为水平；如果纵向移动超过5px，锁定为垂直。<br>阶段一：方向确定之前不动<br>阶段二：方向已经确定了再动</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> oBox = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'box'</span>)[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">let</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  oBox.addEventListener(<span class="string">'touchstart'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> dir = <span class="string">''</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> disX = ev.targetTouches[<span class="number">0</span>].clientX - x;</span><br><span class="line">    <span class="keyword">let</span> disY = ev.targetTouches[<span class="number">0</span>].clientY - y;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> startX = ev.targetTouches[<span class="number">0</span>].clientX;</span><br><span class="line">    <span class="keyword">let</span> startY = ev.targetTouches[<span class="number">0</span>].clientY;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fnMove</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(dir == <span class="string">''</span>) &#123;</span><br><span class="line">        <span class="comment">// 等待方向确定，用户超出5px</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">Math</span>.abs(ev.targetTouches[<span class="number">0</span>].clientX - startX) &gt;= <span class="number">5</span>) &#123;</span><br><span class="line">          dir = <span class="string">'x'</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">Math</span>.abs(ev.targetTouches[<span class="number">0</span>].clientY - startY) &gt;= <span class="number">5</span>) &#123;</span><br><span class="line">          dir = <span class="string">'y'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 方向确定</span></span><br><span class="line">        <span class="keyword">if</span>(dir == <span class="string">'x'</span>) &#123;</span><br><span class="line">          x = ev.targetTouches[<span class="number">0</span>].clientX - disX;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (dir == <span class="string">'y'</span>) &#123;</span><br><span class="line">          y = ev.targetTouches[<span class="number">0</span>].clientY - disY;</span><br><span class="line">        &#125;                        </span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      oBox.style.transform = <span class="string">`translate(<span class="subst">$&#123;x&#125;</span>px, <span class="subst">$&#123;y&#125;</span>px)`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fnEnd</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">      oBox.removeEventListener(<span class="string">'touchmove'</span>, fnMove, <span class="literal">false</span>);</span><br><span class="line">      oBox.removeEventListener(<span class="string">'touchend'</span>, fnEnd, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    oBox.addEventListener(<span class="string">'touchmove'</span>, fnMove, <span class="literal">false</span>);</span><br><span class="line">    oBox.addEventListener(<span class="string">'touchend'</span>, fnEnd, <span class="literal">false</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>多点：<br>touches：整个屏幕上的手指<br>targetTouches：当前物体上的手指数组（不同物体之上的手指不会互相干扰）  </p>
+<p>不需要做多点触摸的时候选取平均位置<br>x = 所有手指x / n<br>y = 所有手指y / n</p>
+<p>手势识别：  </p>
+<ul>
+<li>旋转：旋转后的角度 - 旋转前的角度</li>
+<li>缩放：缩放后的距离 / 缩放前的距离</li>
+</ul>
+<p>多点触摸：  </p>
+<ol>
+<li>避免影响——消除干扰：平均坐标</li>
+<li>需要多点——手势：旋转、缩放</li>
+</ol>
+<p>旋转<br>n弧度 = n*180/PI角度</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">calcAng</span>(<span class="params">touch1, touch2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> x = <span class="built_in">Math</span>.abs(touch1.clientX - touch2.clientX);</span><br><span class="line">    <span class="keyword">let</span> y = <span class="built_in">Math</span>.abs(touch1.clientY - touch2.clientY);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.atan2(y, x) * <span class="number">180</span> / <span class="built_in">Math</span>.PI;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> oBox = <span class="built_in">document</span>.getElementsByClassName(<span class="string">'box'</span>)[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">let</span> ang1,ang2;</span><br><span class="line">    <span class="keyword">let</span> ang = <span class="number">0</span>, old_ang;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'touchstart'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(ev.targetTouches.length &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">        ang1 = calcAng(ev.targetTouches[<span class="number">0</span>], ev.targetTouches[<span class="number">1</span>]);</span><br><span class="line">        ang = old_ang;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, <span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">      ang2 = calcAng(ev.targetTouches[<span class="number">0</span>], ev.targetTouches[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">      ang = old_ang + ang2 - ang1;</span><br><span class="line"></span><br><span class="line">      oBox.style.transform = <span class="string">`rotate(<span class="subst">$&#123;ang&#125;</span>deg)`</span>;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>缩放：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function calcDistance(touch1, touch2) &#123;</span><br><span class="line">    return Math.sqrt(Math.pow(touch1.clientX - touch2.clientX, 2) + Math.pow(touch1.clientY - touch2.clientY, 2))</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  window.onload = function() &#123;</span><br><span class="line">    let oBox = document.getElementsByClassName(&apos;box&apos;)[0];</span><br><span class="line">    let dis1,dis2;</span><br><span class="line">    let scale = 0, old_scale;</span><br><span class="line"></span><br><span class="line">    document.addEventListener(&apos;touchstart&apos;, function(ev) &#123;</span><br><span class="line">      if(ev.targetTouches.length &gt;= 2) &#123;</span><br><span class="line">        dis1 = calcDistance(ev.targetTouches[0], ev.targetTouches[1])</span><br><span class="line">        old_scale = scale</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, false)</span><br><span class="line"></span><br><span class="line">    document.addEventListener(&apos;touchmove&apos;, function(ev) &#123;</span><br><span class="line">      if(ev.targetTouches.length &gt;= 2) &#123;</span><br><span class="line">        dis2 = calcDistance(ev.targetTouches[0], ev.targetTouches[1])</span><br><span class="line"></span><br><span class="line">        scale = old_scale * dis2 / dis1</span><br><span class="line"></span><br><span class="line">        oBox.style.transform = `scale($&#123;scale&#125;)`</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, false)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="移动端测试"><a href="#移动端测试" class="headerlink" title="移动端测试"></a>移动端测试</h4><ol>
+<li>Chrome——简单：布局、简单JS</li>
+<li>模拟器</li>
+<li>真机测试</li>
+</ol>
+<h5 id="browser-sync"><a href="#browser-sync" class="headerlink" title="browser-sync"></a>browser-sync</h5><ol>
+<li>安装：cnpm i -g browser-sync</li>
+<li>运行：在文件夹目录中，browser-sync start –save</li>
+</ol>
+<h4 id="移动端库：iscroll、hammer"><a href="#移动端库：iscroll、hammer" class="headerlink" title="移动端库：iscroll、hammer"></a>移动端库：iscroll、hammer</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/技术/电脑连上网却上不了网问题/" rel="next" title="电脑连上网却上不了网问题">
+                <i class="fa fa-chevron-left"></i> 电脑连上网却上不了网问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/算法/动态规划之01背包问题/" rel="prev" title="01背包问题">
+                01背包问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#移动端适配"><span class="nav-number">1.</span> <span class="nav-text">移动端适配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#touch"><span class="nav-number">2.</span> <span class="nav-text">touch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#移动端测试"><span class="nav-number">3.</span> <span class="nav-text">移动端测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#browser-sync"><span class="nav-number">3.1.</span> <span class="nav-text">browser-sync</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#移动端库：iscroll、hammer"><span class="nav-number">4.</span> <span class="nav-text">移动端库：iscroll、hammer</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小二、上酒" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="WebSocket 双向通信 自动跨域 性能高  WebSocket不能单独使用。WebSocket是一种全新的协议。它将TCP的Socket（套接字）应用在了web page上，从而使通信双方建立起一个保持在活动状态连接通道，并且属于全双工（双方同时进行双向通信）。 WebSocket协议是借用HTTP协议的101 switch protocol来达到协议转换的，从HTTP协议切换到WebSoc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebSocket相关笔记">
+<meta property="og:url" content="http://yoursite.com/2022/04/05/web全栈/WebSocket相关笔记/index.html">
+<meta property="og:site_name" content="小二、上酒">
+<meta property="og:description" content="WebSocket 双向通信 自动跨域 性能高  WebSocket不能单独使用。WebSocket是一种全新的协议。它将TCP的Socket（套接字）应用在了web page上，从而使通信双方建立起一个保持在活动状态连接通道，并且属于全双工（双方同时进行双向通信）。 WebSocket协议是借用HTTP协议的101 switch protocol来达到协议转换的，从HTTP协议切换到WebSoc">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-09-17T15:31:24.741Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WebSocket相关笔记">
+<meta name="twitter:description" content="WebSocket 双向通信 自动跨域 性能高  WebSocket不能单独使用。WebSocket是一种全新的协议。它将TCP的Socket（套接字）应用在了web page上，从而使通信双方建立起一个保持在活动状态连接通道，并且属于全双工（双方同时进行双向通信）。 WebSocket协议是借用HTTP协议的101 switch protocol来达到协议转换的，从HTTP协议切换到WebSoc">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/04/05/web全栈/WebSocket相关笔记/">
+
+
+
+
+
+  <title>WebSocket相关笔记 | 小二、上酒</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二、上酒</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/04/05/web全栈/WebSocket相关笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="朱程程">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/first.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二、上酒">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">WebSocket相关笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-04-05T17:38:14+08:00">
+                2022-04-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web全栈/" itemprop="url" rel="index">
+                    <span itemprop="name">web全栈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><ol>
+<li>双向通信</li>
+<li>自动跨域</li>
+<li>性能高</li>
+</ol>
+<p>WebSocket不能单独使用。WebSocket是一种全新的协议。它将TCP的Socket（套接字）应用在了web page上，从而使通信双方建立起一个保持在活动状态连接通道，并且属于全双工（双方同时进行双向通信）。</p>
+<p>WebSocket协议是借用HTTP协议的101 switch protocol来达到协议转换的，从HTTP协议切换到WebSocket通信协议。</p>
+<p>它最大的特点是服务器可以主动向客户端推送消息，客户端也可以主动向服务器发送消息，是真正的双向平等对话，属==于服务器推送技术==的一种。</p>
+<p>使用socket.io库  </p>
+<p>安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install socket.io --save-dev</span><br></pre></td></tr></table></figure>
+
+<p>node中使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> io = <span class="built_in">require</span>(<span class="string">'socket.io'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> httpServer = http.createServer();</span><br><span class="line">httpServer.listen(<span class="number">8089</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> wsServer = io.listen(httpServer);</span><br><span class="line">wsServer.on(<span class="string">'connection'</span>, sock =&gt; &#123;</span><br><span class="line">  sock.emit <span class="comment">// 发送</span></span><br><span class="line">  sock.on <span class="comment">// 接受</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>工作中使用好socket.io就够了，原生socket用来了解原理。</p>
+<h3 id="websocket原理"><a href="#websocket原理" class="headerlink" title="websocket原理"></a>websocket原理</h3><p>服务端：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sock.on(<span class="string">'connection'</span>);</span><br><span class="line">sock.on(<span class="string">'disconnect'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sock.on(<span class="string">'connect'</span>);</span><br><span class="line">sock.on(<span class="string">'disconnect'</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="原生websocket"><a href="#原生websocket" class="headerlink" title="原生websocket"></a>原生websocket</h4><p>websocket是前台的东西，是HTML5带的一种东西。后台没有websocket，只有原生的socket。  </p>
+<p>首先接受一个http数据，然后和密钥升级之后数据为websocket数据。</p>
+<p>原生websocket步骤：<br>前端：</p>
+<ol>
+<li><p>首先new一个WebSocket对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">'ws://localhost:8080/'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发送数据</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.emit = <span class="function"><span class="keyword">function</span>(<span class="params">name, ...args</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连接上了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.onopen = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>有数据过来</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>连接关闭</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.onclose = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>后端：</p>
+<ol>
+<li><p>引用支持TCP操作的库net模块，原生的socket</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用net创建一个server<br>let server = net.createServer(sock =&gt; {</p>
+</li>
+</ol>
+<p>}).listen(‘8080’)</p>
+<ol start="3">
+<li><p>握手一次</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sock.once(<span class="string">'data'</span>, data =&gt; &#123;&#125;) <span class="comment">//主要进行握手</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对协议进行验证，是否是websocket协议</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(header[<span class="string">'upgrade'</span>] == <span class="string">'websocket'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证websocket版本</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(header[<span class="string">'sec-websocket-version'</span>] == <span class="number">13</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>得到key并进行加密</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> key = headers[<span class="string">'sec-websocket-key'</span>];</span><br><span class="line"><span class="keyword">let</span> mask = <span class="string">'258EAFA5-E914-47DA-95CA-C5AB0DC85B11'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> hash = crypto.createHash(<span class="string">'sha1'</span>);</span><br><span class="line">hash.update(key + mask);</span><br><span class="line"><span class="keyword">let</span> key2 = hash.digest(<span class="string">'base64'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回给客户端通信升级:sec-websocket-accept</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sock.write(<span class="string">`HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: <span class="subst">$&#123;key2&#125;</span>\r\n\r\n`</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>真正数据传输</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.on(<span class="string">'data'</span>, data =&gt; &#123;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结束</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socket.on(<span class="string">'end'</span>, () =&gt; &#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>raw_html代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> sock = <span class="keyword">new</span> WebSocket(<span class="string">'ws://localhost:8080/'</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    sock.emit = <span class="function"><span class="keyword">function</span>(<span class="params">name, ...args</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">      sock.send(<span class="built_in">JSON</span>.stringify(&#123;name, <span class="attr">data</span>: [...args]&#125;));</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// 连上了</span></span></span><br><span class="line"><span class="javascript">    sock.onopen = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// 有数据过来</span></span></span><br><span class="line"><span class="javascript">    sock.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span></span><br><span class="line">    </span><br><span class="line"><span class="javascript">    <span class="comment">// 断开</span></span></span><br><span class="line"><span class="javascript">    sock.onclose = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>raw_server.js代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);  <span class="comment">// nodejs中用来提供TCP操作的库， 原生socket</span></span><br><span class="line"><span class="keyword">const</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// http默认只能处理http协议，不能用来处理ws请求</span></span><br><span class="line"><span class="comment">// let httpServer = http.createServer((err, data) =&gt; &#123;&#125;);</span></span><br><span class="line"><span class="comment">// httpServer.listen(8089);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> server = net.createServer(<span class="function"><span class="params">sock</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'连接'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 有数据过来  注意：once，握手只有一次</span></span><br><span class="line">  sock.once(<span class="string">'data'</span>, data =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hand shake start'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> str = data.toString();</span><br><span class="line">    <span class="keyword">let</span> lines = str.split(<span class="string">'\r\n'</span>);</span><br><span class="line">    <span class="comment">// 舍弃第一行和最后两行</span></span><br><span class="line">    lines = lines.splice(<span class="number">1</span>, lines.length<span class="number">-2</span>);</span><br><span class="line">    <span class="comment">// 切开</span></span><br><span class="line">    <span class="keyword">let</span> headers = &#123;&#125;;</span><br><span class="line">    lines.forEach(<span class="function"><span class="params">line</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> [key, value] = line.split(<span class="string">': '</span>);</span><br><span class="line">      headers[key.toLowerCase()] = value;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(headers[<span class="string">'upgrade'</span>] != <span class="string">'websocket'</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'其他协议'</span>, headers[<span class="string">'upgrade'</span>]);</span><br><span class="line">      sock.end();</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (headers[<span class="string">'sec-websocket-version'</span>]!=<span class="number">13</span>) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'版本不对'</span>, headers[<span class="string">'sec-websocket-version'</span>]);</span><br><span class="line">      sock.end();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> key = headers[<span class="string">'sec-websocket-key'</span>];</span><br><span class="line">      <span class="keyword">let</span> mask = <span class="string">'258EAFA5-E914-47DA-95CA-C5AB0DC85B11'</span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// sha1(key + mask) -&gt; base64 =&gt; client</span></span><br><span class="line">      <span class="keyword">let</span> hash = crypto.createHash(<span class="string">'sha1'</span>);</span><br><span class="line">      hash.update(key + mask);</span><br><span class="line">      <span class="keyword">let</span> key2 = hash.digest(<span class="string">'base64'</span>);</span><br><span class="line"></span><br><span class="line">      sock.write(<span class="string">`HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: <span class="subst">$&#123;key2&#125;</span>\r\n\r\n`</span>);</span><br><span class="line"></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'hand shake end'</span>);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 真正的数据</span></span><br><span class="line">      sock.on(<span class="string">'data'</span>, data =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'有数据了'</span>);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 断开了</span></span><br><span class="line">  sock.on(<span class="string">'end'</span>, () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'客户端已断开'</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">server.listen(<span class="string">'8089'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>数据帧：包、报、块…<br>结构化</p>
+<ol>
+<li>net模块</li>
+<li>流程<ul>
+<li>握手<ul>
+<li>C：version 13、sec-websocket-key：XXXX、sha1(key + mask)=&gt;base64</li>
+<li>S: 101 switching protocols(协议升级)、sec-websocket-accept：base64</li>
+<li>C: &lt;-&gt; S</li>
+<li>Client: onopen,onmessage,onclose</li>
+<li>Server:net.createServer(sock=&gt;{}),sock.once(‘data’,握手), sock.on(‘data’,数据请求),sock.on(‘end’)</li>
+</ul>
+</li>
+<li>数据帧解析</li>
+</ul>
+</li>
+</ol>
+<h4 id="数据传递"><a href="#数据传递" class="headerlink" title="数据传递"></a>数据传递</h4><p>一旦WebSocket客户端、服务端建立连接后，后续的操作都是基于数据帧</p>
+<p>WebSocket 根据 opcode 来区分操作的类型。比如0x8表示断开连接，0x0-0x2 表示数据交互。</p>
+<h4 id="数据分片"><a href="#数据分片" class="headerlink" title="数据分片"></a>数据分片</h4><p>WebSocket的每条信息可能被切分成多个数据帧。当WebSocket的接受方收到一个数据帧时，会根据FIN值来判断是否已经收到消息的最后一个数据帧。</p>
+<p>FIN=1 表示当前数据帧为消息的最后一个数据帧，此时接收方已经收到完整的消息，可以对消息进行处理。FIN=0，则接收方还需要继续监听接收其余的数据帧。</p>
+<p>opcode 在数据交换的场景下，表示的是数据的类型。</p>
+<h4 id="连接保持-心跳"><a href="#连接保持-心跳" class="headerlink" title="连接保持+心跳"></a>连接保持+心跳</h4><p>WebSocket为了保持客户端、服务端的实时双向通信，需要确保客户端、服务端之间的TCP通道保持连接没有断开。然而对于长时间没有数据往来的连接，如果依旧长时间保持着，可能会浪费包括的连接资源。</p>
+<p>但有些场景，客户端、服务端虽然长时间没有数据往来，但仍需要保持连接。这个时候可以用心跳来实现。</p>
+<ul>
+<li>发送方 -&gt; 接收方：ping</li>
+<li>接收方 -&gt; 发送方：pong<br>ping、pong 的操作，对应的是 WebSocket 的两个控制帧，opcode分别是 0x9、0xA。</li>
+</ul>
+<h4 id="关闭连接"><a href="#关闭连接" class="headerlink" title="关闭连接"></a>关闭连接</h4><p>一旦发送或接受到一个close帧，这就是说，_WebSocket 关闭阶段握手已启动，且 WebSocket 连接处于 CLOSING 状态。</p>
+<p>当底层TCP连接已关闭，也就是说WebSocket连接已关闭且WebSocket连接处于CLOSED状态。如果 TCP 连接在 WebSocket 关闭阶段已经完成后被关闭，WebSocket连接被说成已经完全地关闭了。</p>
+<p>如果WebSocket连接不能被建立，这就是说，WebSocket连接关闭，但不是完全的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/04/05/vue/vue自定义指令/" rel="next" title="vue自定义指令">
+                <i class="fa fa-chevron-left"></i> vue自定义指令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/04/05/web全栈/web全栈工具类/" rel="prev" title="web全栈工具类">
+                web全栈工具类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/first.jpg" alt="朱程程">
+            
+              <p class="site-author-name" itemprop="name">朱程程</p>
+              <p class="site-description motion-element" itemprop="description">人生当苦无妨，良人当归即好</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/devil-chengcheng" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket"><span class="nav-number">1.</span> <span class="nav-text">WebSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#websocket原理"><span class="nav-number">2.</span> <span class="nav-text">websocket原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原生websocket"><span class="nav-number">2.1.</span> <span class="nav-text">原生websocket</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据传递"><span class="nav-number">2.2.</span> <span class="nav-text">数据传递</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据分片"><span class="nav-number">2.3.</span> <span class="nav-text">数据分片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连接保持-心跳"><span class="nav-number">2.4.</span> <span class="nav-text">连接保持+心跳</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关闭连接"><span class="nav-number">2.5.</span> <span class="nav-text">关闭连接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱程程</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
